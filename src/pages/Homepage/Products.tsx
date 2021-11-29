@@ -13,27 +13,29 @@ export default function Products() {
 	}, []);
 	console.log(products);
 	return (
-		<div>
-			<h1>Hello World</h1>
-			{products.map((product) => (
-				<div className="card" key={product["id"]}>
-					<div className="img_container">
-						<img
-							src={product["image"]["url"]}
-							alt="image"
-						/>
+		<>
+			<h1>clothes for women</h1>
+			<div className="products_card">
+				{products.map((product) => (
+					<div className="card" key={product["id"]}>
+						<div className="img_container">
+							<img
+								src={product["image"]["url"]}
+								alt="image"
+							/>
+						</div>
+						<div className="card_txt">
+							<p className="brand">
+								{product["categories"][1]["name"]}
+							</p>
+							<p>{product["name"]}</p>
+							<p className="price">
+								{product["price"]["formatted_with_code"]}
+							</p>
+						</div>
 					</div>
-					<div className="card_txt">
-						<p className="brand">
-							{product["categories"][1]["name"]}
-						</p>
-						<p>{product["name"]}</p>
-						<p className="proce">
-							{product["price"]["formatted_with_code"]}
-						</p>
-					</div>
-				</div>
-			))}
-		</div>
+				))}
+			</div>
+		</>
 	);
 }
