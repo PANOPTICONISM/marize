@@ -1,0 +1,34 @@
+h1 {
+	text-align: center;
+	text-transform: uppercase;
+}
+.products_card {
+	display: grid;
+	max-width: 80%;
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(350px, 1fr)
+	);
+	grid-gap: 1rem;
+	margin: 5rem auto;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: left;
+	border: none;
+}
+
+.img_container img {
+	width: 270px;
+	height: 270px;
+	object-fit: cover;
+}
+.brand {
+	text-transform: uppercase;
+}
+.price {
+	font-weight: bold;
+}
