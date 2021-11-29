@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { commerce } from "../../lib/Commerce";
+import { MdFavoriteBorder } from "react-icons/md";
+
 export default function Products() {
 	const [products, setProducts] = useState([]);
 	//commerce.products.list() is build in method from commerce
@@ -19,6 +21,9 @@ export default function Products() {
 				{products.map((product) => (
 					<div className="card" key={product["id"]}>
 						<div className="img_container">
+							<div className="blue_heart">
+								<MdFavoriteBorder />
+							</div>
 							<img
 								src={product["image"]["url"]}
 								alt="image"
