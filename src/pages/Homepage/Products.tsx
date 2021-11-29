@@ -7,7 +7,9 @@ export default function Products() {
 	const [products, setProducts] = useState([]);
 	//commerce.products.list() is build in method from commerce
 	const fetchProducts = async () => {
-		const data = await commerce.products.list();
+		const data = await commerce.products.list({
+			limit: 40,
+		});
 		setProducts(data.data);
 	};
 	useEffect(() => {
@@ -26,7 +28,7 @@ export default function Products() {
 							</div>
 							<img
 								src={product["image"]["url"]}
-								alt="image"
+								alt="products"
 							/>
 						</div>
 						<div className="card_txt">
