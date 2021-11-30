@@ -2,9 +2,9 @@ import React from "react";
 import Main from "../../containers/Main/Main";
 
 export default function Homepage() {
-  return (
-    <>
-      <Main>"This is the homepage"</Main>
-    </>
-  );
+	return (
+		<>
+			<Main>"This is the homepage"</Main>
+		</>
+	);
 }
