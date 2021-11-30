@@ -1,0 +1,53 @@
+:root {
+    --background-colour-h1: rgba(70, 98, 137, 0.9);
+    --color-h1: #fff;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.homepageHero .heading {
+    padding: 40px;
+    background: var(--background-colour-h1);
+    color: var(--color-h1);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.homepageHero {
+    position: relative;
+    text-align: center;
+}
+
+.homepageHero img {
+    height: 500px;
+    object-fit: cover;
+}
+
+@media screen and (min-width: 700px) {
+    .homepageHero .heading {
+        width: min-content;
+        min-width: 450px;
+    }
+
+    .homepageHero img {
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .homepageHero {
+        text-align: right;
+    }
+
+    .homepageHero .heading {
+        text-align: left;
+        left: 0;
+        transform: translateX(0);
+    }
+}
