@@ -4,7 +4,7 @@ import Main from "../../containers/Main/Main";
 export default function Homepage() {
 	return (
 		<>
-			<Main>"dfgdfg"</Main>
+			<Main>"This is the homepage"</Main>
 		</>
 	);
 }
