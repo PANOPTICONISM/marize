@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { commerce } from "../../lib/Commerce";
 import { MdFavoriteBorder } from "react-icons/md";
-
+import style from "./products.module.css";
 export default function Products() {
 	const [products, setProducts] = useState([]);
 	//commerce.products.list() is build in method from commerce
@@ -21,9 +21,9 @@ export default function Products() {
 			<h1>clothes for women</h1>
 			<div className="products_card">
 				{products.map((product) => (
-					<div className="card" key={product["id"]}>
-						<div className="img_container">
-							<div className="blue_heart">
+					<div className={style.card} key={product["id"]}>
+						<div className={style.img_container}>
+							<div className={style.blue_heart}>
 								<MdFavoriteBorder />
 							</div>
 							<img
@@ -32,11 +32,11 @@ export default function Products() {
 							/>
 						</div>
 						<div className="card_txt">
-							<p className="brand">
+							<p className={style.brand}>
 								{product["categories"][1]["name"]}
 							</p>
 							<p>{product["name"]}</p>
-							<p className="price">
+							<p className={style.price}>
 								{product["price"]["formatted_with_code"]}
 							</p>
 						</div>
