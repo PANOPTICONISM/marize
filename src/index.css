@@ -6,11 +6,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
-  max-width: 1300px;
-  margin: auto;
+  margin: 0 30px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media screen and (min-width: 1400px) {
+  body {
+    max-width: 1300px;
+    margin: auto;
+  }
 }
