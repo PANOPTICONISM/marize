@@ -7,6 +7,7 @@ import caminatta from "../../assets/caminatta.svg";
 import atlanta from "../../assets/atlanta_mocassin.svg";
 import moda from "../../assets/moda_ana.svg";
 import love from "../../assets/love_m.svg";
+import NewArrivals from "../../components/NewArrivals/NewArrivals";
 
 export default function Homepage() {
     return (
@@ -24,6 +25,7 @@ export default function Homepage() {
                 <img src={moda} alt="moda-ana" />
                 <img src={love} alt="love-m" />
             </section>
+            <NewArrivals />
         </Main>
     );
 }

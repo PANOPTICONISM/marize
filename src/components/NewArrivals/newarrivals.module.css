@@ -1,0 +1,10 @@
+/* THIS SHOULD BE THE SAME AS FOR PRODUCTS */
+.articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,
+            minmax(300px, 1fr));
+}
+
+.articles img {
+    max-width: 300px;
+}
