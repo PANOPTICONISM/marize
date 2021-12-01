@@ -1,14 +1,14 @@
 import { MdFavoriteBorder } from "react-icons/md";
 import style from "./products.module.css";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
-
+import Main from "../../containers/Main/Main";
 export default function Products() {
     const { products } = useCommerceCMS();
-    console.log(products);
+    // console.log(products);
 
     return (
-        <>
-            <h1>clothes for women</h1>
+        <Main>
+            <h1 className={style.products_title}>clothes for women</h1>
             <div className={style.products_card}>
                 {products?.map((product) => (
                     <div className={style.card} key={product["id"]}>
@@ -30,6 +30,6 @@ export default function Products() {
                     </div>
                 ))}
             </div>
-        </>
+        </Main>
     );
 }
