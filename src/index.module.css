@@ -1,0 +1,21 @@
+:root {
+  --h1-size: 48px;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  margin: 0 15px;
+}
+
+h1 {
+  font-size: var(--h1-size);
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 1400px) {
+  body {
+    max-width: 1300px;
+    margin: auto;
+  }
+}

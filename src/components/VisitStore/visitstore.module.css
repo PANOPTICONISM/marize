@@ -1,0 +1,13 @@
+.visitStore {
+    background-image: url("../../assets/client-image.svg");
+    padding: 100px;
+    margin: 50px 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.visitStore h1 {
+    color: #fff;
+    text-align: center;
+}
