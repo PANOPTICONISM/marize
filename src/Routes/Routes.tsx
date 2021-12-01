@@ -4,12 +4,12 @@ import Homepage from "../pages/Homepage/Homepage";
 import Products from "../pages/Products/Products";
 
 function Paths() {
-	return (
-		<Routes>
-			<Route path="/" element={<Homepage />} />
-			<Route path="products" element={<Products />} />
-		</Routes>
-	);
+    return (
+        <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="products" element={<Products />} />
+        </Routes>
+    );
 }
 
 export default Paths;
