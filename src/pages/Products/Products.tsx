@@ -6,6 +6,7 @@ import {
 import style from "./products.module.css";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
+import SidebarFilters from "../../components/SidebarFilters/SidebarFilters";
 export default function Products() {
     const { products } = useCommerceCMS();
     // console.log(products);
@@ -34,68 +35,7 @@ export default function Products() {
                 </ul>
 
                 <div className={style.mid_section_wrapper}>
-                    <form className={style.sidebar_filters}>
-                        <div className={style.new_arrivals}>
-                            <h4>New Arrivals</h4>
-                            <label>
-                                show all
-                                <input
-                                    type="checkbox"
-                                    name="name"
-                                    value="value"
-                                />
-                            </label>
-                            <br />
-                            <label>
-                                show all
-                                <input
-                                    type="checkbox"
-                                    name="name"
-                                    value="value"
-                                />
-                            </label>
-                            <br />
-                            <label>
-                                show all
-                                <input
-                                    type="checkbox"
-                                    name="name"
-                                    value="value"
-                                />
-                            </label>
-                            <br />
-                        </div>
-                        <div className={style.brands}>
-                            <h4>Brands</h4>
-                            <label>
-                                show all
-                                <input
-                                    type="checkbox"
-                                    name="name"
-                                    value="value"
-                                />
-                            </label>
-                            <br />
-                            <label>
-                                show all
-                                <input
-                                    type="checkbox"
-                                    name="name"
-                                    value="value"
-                                />
-                            </label>
-                            <br />
-                            <label>
-                                show all
-                                <input
-                                    type="checkbox"
-                                    name="name"
-                                    value="value"
-                                />
-                            </label>
-                            <br />
-                        </div>
-                    </form>
+                    <SidebarFilters></SidebarFilters>
                     <div className={style.products_card}>
                         {products?.map((product) => (
                             <div className={style.card} key={product["id"]}>
