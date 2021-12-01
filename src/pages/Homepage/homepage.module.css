@@ -28,6 +28,26 @@ img {
     object-fit: cover;
 }
 
+/* SECOND SECTION */
+.brands {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.brands img:nth-child(1),
+.brands img:nth-child(3),
+.brands img:nth-child(5) {
+    max-height: 60px;
+}
+
+.brands img:nth-child(2),
+.brands img:nth-child(4) {
+    max-height: 100px;
+}
+
 @media screen and (min-width: 700px) {
     .homepageHero .heading {
         width: min-content;
@@ -49,5 +69,9 @@ img {
         text-align: left;
         left: 0;
         transform: translateX(0);
+    }
+
+    .brands {
+        padding: 100px 0;
     }
 }
