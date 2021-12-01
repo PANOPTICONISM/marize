@@ -1,6 +1,36 @@
+/* same as nav wrapper */
+
+.products_container {
+    display: grid;
+    grid-template-columns: repeat(12, 12fr);
+    grid-template-rows: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+    gap: 2em 18px;
+}
+.products_hero {
+    position: relative;
+    text-align: center;
+}
+/* same as home hero */
 .products_title {
     text-align: center;
     text-transform: uppercase;
+}
+.sort_filter p {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-transform: uppercase;
+}
+.sort_filter .sort {
+    margin-left: auto;
+}
+.sort_filter .sort,
+.sort_filter .filter {
+    text-transform: none;
 }
 
 .products_card {
@@ -29,7 +59,7 @@
 
 .blue_heart {
     position: absolute;
-    right: 55px;
+    right: 35px;
     width: 40px;
     height: 40px;
     font-size: 2rem;
