@@ -1,8 +1,13 @@
 /* THIS SHOULD BE THE SAME AS FOR PRODUCTS */
+.newArrivals h1 {
+    text-align: center;
+}
+
 .articles {
     display: grid;
     grid-template-columns: repeat(auto-fit,
-            minmax(300px, 1fr));
+            minmax(250px, 1fr));
+    justify-items: center;
 }
 
 .articles img {
