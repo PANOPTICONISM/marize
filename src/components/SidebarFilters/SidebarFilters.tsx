@@ -10,10 +10,11 @@ export default function SidebarFilters() {
     const brands = products?.map((brand) => {
         return brand["categories"][1]["slug"];
     });
+    //remove all double values form sidebar
     const category = uniqueCategories(categories);
     const brand = uniqueCategories(brands);
 
-    //THIS IS FOR FILTERING LATER
+    //THIS IS FOR FILTERING LATER MAYBE
     //const sweaters = commerce.categories;
     // .retrieve("dresses", { type: "slug" })
     // .then((cat: { name: any }) => console.log(cat.name));
@@ -25,28 +26,29 @@ export default function SidebarFilters() {
                 <label>
                     show all
                     <input type="checkbox" name="name" value="value" />
+                    {/* <span className={style.checkmark}></span> */}
                 </label>
                 <br />
-                {category?.map((cat) => (
-                    <>
-                        <label htmlFor="cat">
+                {category?.map((cat, i) => (
+                    <div key={i}>
+                        <label>
                             {cat}
                             <input type="checkbox" name="" value="" />
                         </label>
                         <br />
-                    </>
+                    </div>
                 ))}
             </div>
             <div className={style.brands}>
                 <h4>Brands</h4>
-                {brand?.map((b) => (
-                    <>
+                {brand?.map((b, i) => (
+                    <div key={i}>
                         <label htmlFor="b">
                             {b}
                             <input type="checkbox" name="" value="" />
                         </label>
                         <br />
-                    </>
+                    </div>
                 ))}
             </div>
         </form>
