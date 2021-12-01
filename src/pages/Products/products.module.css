@@ -1,14 +1,13 @@
-h1 {
+.products_card h1 {
 	text-align: center;
 	text-transform: uppercase;
 }
+
 .products_card {
 	display: grid;
 	max-width: 80%;
-	grid-template-columns: repeat(
-		auto-fit,
-		minmax(300px, 1fr)
-	);
+	grid-template-columns: repeat(auto-fit,
+			minmax(300px, 1fr));
 	grid-gap: 1rem;
 	margin: 5rem auto;
 }
@@ -28,6 +27,7 @@ h1 {
 	height: 300px;
 	object-fit: cover;
 }
+
 .blue_heart {
 	position: absolute;
 	right: 55px;
@@ -35,9 +35,11 @@ h1 {
 	height: 40px;
 	font-size: 2rem;
 }
+
 .brand {
 	text-transform: uppercase;
 }
+
 .price {
 	font-weight: bold;
 }
