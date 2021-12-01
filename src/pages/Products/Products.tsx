@@ -17,42 +17,113 @@ export default function Products() {
                     <img src="" alt="products_hero" />
                 </header>
                 <h1 className={style.products_title}>clothes for women</h1>
-                <div className={style.sort_filter}>
-                    <p>
-                        women's clothing / brands / flex moda
-                        <p className={style.sort}>
-                            Sort by
+                <ul className={style.sort_filter}>
+                    women's clothing / brands / flex moda
+                    <li className={style.sort}>
+                        Sort by
+                        <span>
                             <MdKeyboardArrowDown />
-                        </p>
-                        <p className={style.filter}>
-                            <MdOutlineFilterAlt /> All filters
-                        </p>
-                    </p>
-                </div>
+                        </span>
+                    </li>
+                    <li className={style.filter}>
+                        <span>
+                            <MdOutlineFilterAlt />
+                        </span>
+                        All filters
+                    </li>
+                </ul>
 
-                <div className={style.products_card}>
-                    {products?.map((product) => (
-                        <div className={style.card} key={product["id"]}>
-                            <div className={style.img_container}>
-                                <div className={style.blue_heart}>
-                                    <MdFavoriteBorder />
-                                </div>
-                                <img
-                                    src={product["image"]["url"]}
-                                    alt="products"
+                <div className={style.mid_section_wrapper}>
+                    <form className={style.sidebar_filters}>
+                        <div className={style.new_arrivals}>
+                            <h4>New Arrivals</h4>
+                            <label>
+                                show all
+                                <input
+                                    type="checkbox"
+                                    name="name"
+                                    value="value"
                                 />
-                            </div>
-                            <div className={style.card_txt}>
-                                <p className={style.brand}>
-                                    {product["categories"][1]["name"]}
-                                </p>
-                                <p>{product["name"]}</p>
-                                <p className={style.price}>
-                                    {product["price"]["formatted_with_code"]}
-                                </p>
-                            </div>
+                            </label>
+                            <br />
+                            <label>
+                                show all
+                                <input
+                                    type="checkbox"
+                                    name="name"
+                                    value="value"
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                show all
+                                <input
+                                    type="checkbox"
+                                    name="name"
+                                    value="value"
+                                />
+                            </label>
+                            <br />
                         </div>
-                    ))}
+                        <div className={style.brands}>
+                            <h4>Brands</h4>
+                            <label>
+                                show all
+                                <input
+                                    type="checkbox"
+                                    name="name"
+                                    value="value"
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                show all
+                                <input
+                                    type="checkbox"
+                                    name="name"
+                                    value="value"
+                                />
+                            </label>
+                            <br />
+                            <label>
+                                show all
+                                <input
+                                    type="checkbox"
+                                    name="name"
+                                    value="value"
+                                />
+                            </label>
+                            <br />
+                        </div>
+                    </form>
+                    <div className={style.products_card}>
+                        {products?.map((product) => (
+                            <div className={style.card} key={product["id"]}>
+                                <div className={style.img_container}>
+                                    <div className={style.blue_heart}>
+                                        <MdFavoriteBorder />
+                                    </div>
+                                    <img
+                                        src={product["image"]["url"]}
+                                        alt="products"
+                                    />
+                                </div>
+                                <div className={style.card_txt}>
+                                    <p className={style.brand}>
+                                        {product["categories"][1]["name"]}
+                                    </p>
+                                    <p>{product["name"]}</p>
+                                    <p className={style.price}>
+                                        {
+                                            product["price"][
+                                                "formatted_with_code"
+                                            ]
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </Main>
