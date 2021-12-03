@@ -1,9 +1,10 @@
 .sidebar_filters {
     grid-column: 1/4;
-    grid-row: 1;
+    grid-row: auto;
     margin: 3rem 0;
     position: relative;
 }
+
 label {
     text-transform: capitalize;
     font-size: 18px;
@@ -39,11 +40,11 @@ label {
     border: 1px solid black;
 }
 
-.container_checkbox:hover input ~ .checkmark {
+.container_checkbox:hover input~.checkmark {
     background-color: rgb(243, 242, 242);
 }
 
-.container_checkbox input:checked ~ .checkmark {
+.container_checkbox input:checked~.checkmark {
     background-color: var(--color-orange);
     border: 1px solid var(--color-orange);
 }
@@ -54,7 +55,7 @@ label {
     display: none;
 }
 
-.container_checkbox input:checked ~ .checkmark:after {
+.container_checkbox input:checked~.checkmark:after {
     display: block;
 }
 

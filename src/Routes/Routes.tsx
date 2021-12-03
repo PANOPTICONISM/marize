@@ -7,7 +7,7 @@ function Paths() {
     return (
         <Routes>
             <Route path="/" element={<Homepage />} />
-            <Route path="products" element={<Products />} />
+            <Route path="/products" element={<Products />} />
         </Routes>
     );
 }
