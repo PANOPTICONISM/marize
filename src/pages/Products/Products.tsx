@@ -24,7 +24,6 @@ export default function Products() {
     };
     useEffect(() => {
         if (filters.length > 0) {
-            console.log("hi");
             const filtered = products?.filter((product) => {
                 return filters?.some((c: string) =>
                     product.categories[1].name.includes(c)
@@ -33,7 +32,6 @@ export default function Products() {
             console.log(filtered);
             setFilteredArticles(filtered);
         } else {
-            console.log("by");
             setFilteredArticles(products);
         }
     }, [filters, products]);
