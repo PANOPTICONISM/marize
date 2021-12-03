@@ -12,15 +12,44 @@ import { useState, useEffect } from "react";
 
 export default function Products() {
     const { products, categories } = useCommerceCMS();
+
     const [filteredArticles, setFilteredArticles] = useState<any>(products);
-    const [filters, setFilters] = useState(categories);
+    //what we check
+    const [filters, setFilters] = useState([]);
 
-    console.log(products, categories, "pro");
+    //console.log(products, categories, "pro");
+    const handleChecked = (e: { target: { value: any; checked: any } }) => {
+        const value = e.target.value;
+        setFilters((previous: any) =>
+            !e.target.checked
+                ? previous.filter((prev: any) => prev !== value)
+                : [...previous, value]
+        );
+    };
+    useEffect(() => {
+        if (!filters.length) {
+            console.log("hi");
+        } else {
+            console.log("buy");
+            setFilteredArticles(
+                products?.filter(
+                    (product) => console.log(product)
+                    // {
+                    //     return filteredArticles?.some(
+                    //         (c: string) => console.log(c)
+                    //[categories["categories"][0]["slug"]].flat().includes(c)
+                    //);
+                    // }
+                )
+            );
+        }
+    }, [filteredArticles]);
 
+    console.log(filters);
     useEffect(() => {
         setFilteredArticles(products);
-        setFilters(categories);
-    }, [products, categories]);
+        //setFilters(categories);
+    }, [products]);
 
     const articlesUI = filteredArticles?.map((article: any) => (
         <div className={style.card} key={article.id}>
@@ -75,10 +104,27 @@ export default function Products() {
                     <FilterComponent
                         className={style.filter}
                         filters={filters}
+                        onChange={handleChecked}
+                        categories={categories}
                     />
                     <div className={style.products_card}>{articlesUI}</div>
                 </div>
             </div>
         </Main>
     );
+}
+function previous(previous: any, any: any) {
+    throw new Error("Function not implemented.");
+}
+
+function setFilteredArticles(products: any) {
+    throw new Error("Function not implemented.");
+}
+
+function setFilters(categories: any) {
+    throw new Error("Function not implemented.");
+}
+
+function categories(categories: any) {
+    throw new Error("Function not implemented.");
 }
