@@ -59,8 +59,8 @@ label {
 }
 
 .container_checkbox .checkmark:after {
-    left: 7px;
-    top: 3px;
+    left: 6px;
+    top: 2px;
     width: 5px;
     height: 10px;
     border: solid var(--color-h1);
