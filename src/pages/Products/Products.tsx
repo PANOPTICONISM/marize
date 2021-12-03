@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 export default function Products() {
     const { products, categories } = useCommerceCMS();
 
-    const [filteredArticles, setFilteredArticles] = useState<any>(products);
+    const [filteredArticles, setFilteredArticles] = useState<any>([]);
     //what we check
     const [filters, setFilters] = useState([]);
 
@@ -27,29 +27,26 @@ export default function Products() {
         );
     };
     useEffect(() => {
-        if (!filters.length) {
+        if (filters.length > 0) {
             console.log("hi");
+            const filtered = products?.filter((product) => {
+                return filters?.some((c: string) =>
+                    product.categories[1].name.includes(c)
+                );
+            });
+            console.log(filtered);
+            setFilteredArticles(filtered);
         } else {
-            console.log("buy");
-            setFilteredArticles(
-                products?.filter(
-                    (product) => console.log(product)
-                    // {
-                    //     return filteredArticles?.some(
-                    //         (c: string) => console.log(c)
-                    //[categories["categories"][0]["slug"]].flat().includes(c)
-                    //);
-                    // }
-                )
-            );
+            console.log("by");
+            setFilteredArticles(products);
         }
-    }, [filteredArticles]);
+    }, [filters, products]);
 
-    console.log(filters);
-    useEffect(() => {
-        setFilteredArticles(products);
-        //setFilters(categories);
-    }, [products]);
+    //console.log(filters);
+    // useEffect(() => {
+    //     setFilteredArticles(products);
+    //     //setFilters(categories);
+    // }, [products]);
 
     const articlesUI = filteredArticles?.map((article: any) => (
         <div className={style.card} key={article.id}>
