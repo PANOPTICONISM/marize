@@ -52,21 +52,17 @@ export default function Products() {
                                             <MdFavoriteBorder />
                                         </div>
                                         <img
-                                            src={product["image"]["url"]}
+                                            src={product.image.url}
                                             alt="products"
                                         />
                                     </div>
                                     <div className={style.card_txt}>
                                         <p className={style.brand}>
-                                            {product["categories"][1]["name"]}
+                                            {product.categories[1].name}
                                         </p>
                                         <p>{product["name"]}</p>
                                         <p className={style.price}>
-                                            {
-                                                product["price"][
-                                                    "formatted_with_code"
-                                                ]
-                                            }
+                                            {product.price.formatted_with_code}
                                         </p>
                                     </div>
                                 </div>
