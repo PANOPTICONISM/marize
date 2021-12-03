@@ -19,10 +19,8 @@ export default function CommerceProvider({
         products?: any[];
         categories?: any[];
     }>({});
-    const [loading, setLoading] = useState(false);
 
     const getData = async () => {
-        setLoading(true);
         const dataProducts = await commerce.products.list();
         const dataCategories = await commerce.categories.list();
 
@@ -30,20 +28,15 @@ export default function CommerceProvider({
         const categories = dataCategories.data;
 
         setContent({ products, categories });
-        setLoading(false);
     };
 
     useEffect(() => {
         getData();
     }, []);
 
-    if (loading === false) {
-        return (
-            <CommerceContext.Provider value={content}>
-                {children}
-            </CommerceContext.Provider>
-        );
-    } else {
-        return null;
-    }
+    return (
+        <CommerceContext.Provider value={content}>
+            {children}
+        </CommerceContext.Provider>
+    );
 }
