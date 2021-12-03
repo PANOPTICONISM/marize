@@ -6,8 +6,6 @@ export default function uniqueCategories(
         return;
     }
     let cat = new Set(category);
-    console.log(cat);
     const categories = Array.from(cat);
-    console.log(categories);
     return categories;
 }

@@ -7,10 +7,9 @@ import style from "./products.module.css";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
 import SidebarFilters from "../../components/SidebarFilters/SidebarFilters";
+import { ReactChild, ReactFragment, ReactPortal, useState } from "react";
 export default function Products() {
     const { products } = useCommerceCMS();
-    // console.log(products);
-
     return (
         <Main>
             <div className="products_container">
@@ -35,37 +34,42 @@ export default function Products() {
                 </ul>
 
                 <div className={style.mid_section_wrapper}>
-                    <SidebarFilters></SidebarFilters>
+                    <SidebarFilters />
                     <div className={style.products_card}>
-                        {products?.map((product) => (
-                            <div className={style.card} key={product["id"]}>
-                                <div className={style.img_container}>
-                                    <div className={style.blue_heart}>
-                                        <MdFavoriteBorder />
+                        {products?.map((product) => {
+                            return (
+                                <div className={style.card} key={product["id"]}>
+                                    <div className={style.img_container}>
+                                        <div className={style.blue_heart}>
+                                            <MdFavoriteBorder />
+                                        </div>
+                                        <img
+                                            src={product["image"]["url"]}
+                                            alt="products"
+                                        />
                                     </div>
-                                    <img
-                                        src={product["image"]["url"]}
-                                        alt="products"
-                                    />
+                                    <div className={style.card_txt}>
+                                        <p className={style.brand}>
+                                            {product["categories"][1]["name"]}
+                                        </p>
+                                        <p>{product["name"]}</p>
+                                        <p className={style.price}>
+                                            {
+                                                product["price"][
+                                                    "formatted_with_code"
+                                                ]
+                                            }
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className={style.card_txt}>
-                                    <p className={style.brand}>
-                                        {product["categories"][1]["name"]}
-                                    </p>
-                                    <p>{product["name"]}</p>
-                                    <p className={style.price}>
-                                        {
-                                            product["price"][
-                                                "formatted_with_code"
-                                            ]
-                                        }
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </div>
         </Main>
     );
+}
+function allCategories(allCategories: any) {
+    throw new Error("Function not implemented.");
 }
