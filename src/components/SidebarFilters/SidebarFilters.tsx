@@ -1,9 +1,9 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import uniqueCategories from "../../config/filtersConfig";
 //import style from "../../pages/Products/products.module.css";
-import style from "./sidebarfilters.module.css";
+import style from "../SidebarFilters/sidebarfilters.module.css";
 
 export default function SidebarFilters() {
     const { products } = useCommerceCMS();
@@ -39,13 +39,13 @@ export default function SidebarFilters() {
         } else {
             setCats(
                 defaultProducts.filter((categories: any) => {
-                    return categoryFilter.some((c: string) =>
+                    return categoryFilter?.some((c: string) =>
                         [categories["categories"][0]["slug"]].flat().includes(c)
                     );
                 })
             );
         }
-    }, [categoryFilter]);
+    }, [categoryFilter, defaultProducts]);
     console.log(cats);
 
     return (
@@ -96,14 +96,4 @@ export default function SidebarFilters() {
             </div>
         </form>
     );
-}
-function obj(obj: any) {
-    throw new Error("Function not implemented.");
-}
-
-function current(products: any, current: any) {
-    throw new Error("Function not implemented.");
-}
-function defaultFilter(categoryFilter: string[], defaultFilter: any) {
-    throw new Error("Function not implemented.");
 }

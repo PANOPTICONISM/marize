@@ -8,7 +8,6 @@ import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
 import SidebarFilters from "../../components/SidebarFilters/SidebarFilters";
 import heroproducts from "../../assets/heroproducts.png";
-import { ReactChild, ReactFragment, ReactPortal, useState } from "react";
 export default function Products() {
     const { products } = useCommerceCMS();
     return (
@@ -27,6 +26,12 @@ export default function Products() {
                         <span>
                             <MdKeyboardArrowDown />
                         </span>
+                        <div className={style.sort_dropdown}>
+                            <p>Recommended</p>
+                            <p>Newest</p>
+                            <p>Highest price</p>
+                            <p>Lowest price</p>
+                        </div>
                     </li>
                     <li className={style.filter}>
                         <span>
@@ -72,7 +77,4 @@ export default function Products() {
             </div>
         </Main>
     );
-}
-function allCategories(allCategories: any) {
-    throw new Error("Function not implemented.");
 }
