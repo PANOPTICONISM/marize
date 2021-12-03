@@ -7,6 +7,7 @@ import style from "./products.module.css";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
 import SidebarFilters from "../../components/SidebarFilters/SidebarFilters";
+import heroproducts from "../../assets/heroproducts.png";
 import { ReactChild, ReactFragment, ReactPortal, useState } from "react";
 export default function Products() {
     const { products } = useCommerceCMS();
@@ -14,7 +15,7 @@ export default function Products() {
         <Main>
             <div className="products_container">
                 <header className={style.products_hero}>
-                    <img src="" alt="products_hero" />
+                    <img src={heroproducts} alt="products_hero" />
                 </header>
                 <h1 className={style.products_title}>clothes for women</h1>
                 <ul className={style.sort_filter}>
