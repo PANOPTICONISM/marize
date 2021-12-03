@@ -1,26 +1,28 @@
 .products_container {
     display: grid;
 }
+/* same as home home hero */
 .products_hero {
     position: relative;
     text-align: center;
 }
-/* same as home hero */
 .products_title {
     text-align: center;
     text-transform: uppercase;
 }
+/* ends here */
+
 .sort_filter {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: flex-end;
+    gap: 25px;
     text-transform: uppercase;
     list-style-type: none;
+    padding: 0;
 }
-.sort_filter .sort {
-    margin-left: auto;
-    padding: 15px;
+.ul_title {
+    margin-right: auto;
 }
 .sort,
 .filter {

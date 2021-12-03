@@ -19,7 +19,9 @@ export default function Products() {
                 </header>
                 <h1 className={style.products_title}>clothes for women</h1>
                 <ul className={style.sort_filter}>
-                    women's clothing / brands / flex moda
+                    <li className={style.ul_title}>
+                        women's clothing / brands / flex moda
+                    </li>
                     <li className={style.sort}>
                         Sort by
                         <span>
