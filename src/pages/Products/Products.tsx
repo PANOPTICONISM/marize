@@ -12,12 +12,8 @@ import { useState, useEffect } from "react";
 
 export default function Products() {
     const { products, categories } = useCommerceCMS();
-
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
-    //what we check
     const [filters, setFilters] = useState([]);
-
-    //console.log(products, categories, "pro");
     const handleChecked = (e: { target: { value: any; checked: any } }) => {
         const value = e.target.value;
         setFilters((previous: any) =>
@@ -41,12 +37,6 @@ export default function Products() {
             setFilteredArticles(products);
         }
     }, [filters, products]);
-
-    //console.log(filters);
-    // useEffect(() => {
-    //     setFilteredArticles(products);
-    //     //setFilters(categories);
-    // }, [products]);
 
     const articlesUI = filteredArticles?.map((article: any) => (
         <div className={style.card} key={article.id}>
@@ -109,19 +99,4 @@ export default function Products() {
             </div>
         </Main>
     );
-}
-function previous(previous: any, any: any) {
-    throw new Error("Function not implemented.");
-}
-
-function setFilteredArticles(products: any) {
-    throw new Error("Function not implemented.");
-}
-
-function setFilters(categories: any) {
-    throw new Error("Function not implemented.");
-}
-
-function categories(categories: any) {
-    throw new Error("Function not implemented.");
 }

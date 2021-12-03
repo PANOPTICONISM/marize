@@ -1,8 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useCommerceCMS } from "../../contexts/CommerceContext";
-import uniqueCategories from "../../config/filtersConfig";
-//import style from "../../pages/Products/products.module.css";
+import { useState } from "react";
 import style from "../SidebarFilters/sidebarfilters.module.css";
 
 export function Filters({
