@@ -15,6 +15,8 @@ export default function Products() {
     const [filteredArticles, setFilteredArticles] = useState<any>(products);
     const [filters, setFilters] = useState(categories);
 
+    console.log(products, categories, "pro");
+
     useEffect(() => {
         setFilteredArticles(products);
         setFilters(categories);
