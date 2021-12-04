@@ -7,24 +7,24 @@ import { BsHandbag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 export default function Navigation() {
-  const [input, setInput] = useState("");
+    const [input, setInput] = useState("");
 
-  return (
-    <nav className={style.wrapper}>
-      <div className={style.left_nav}>
-        <Hamburger />
-        <div className={style.search_bar_wrapper}>
-          <SearchBar className={style.search_bar} />
-        </div>
-      </div>
-      <div className={style.logo}>
-        <Logo />
-      </div>
-      <div className={style.right_nav}>
-        <AiOutlineUser />
-        <AiOutlineHeart />
-        <BsHandbag />
-      </div>
-    </nav>
-  );
+    return (
+        <nav className={style.wrapper}>
+            <div className={style.left_nav}>
+                <Hamburger />
+                <div className={style.search_bar_wrapper}>
+                    <SearchBar className={style.search_bar} />
+                </div>
+            </div>
+            <div className={style.logo}>
+                <Logo />
+            </div>
+            <div className={style.right_nav}>
+                <AiOutlineUser />
+                <AiOutlineHeart />
+                <BsHandbag />
+            </div>
+        </nav>
+    );
 }

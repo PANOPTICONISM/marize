@@ -1,45 +1,100 @@
-.products_card h1 {
-	text-align: center;
-	text-transform: uppercase;
+.products_container {
+    display: grid;
+}
+/* same as home home hero */
+.products_hero {
+    position: relative;
+    text-align: center;
+}
+.products_title {
+    text-align: center;
+    text-transform: uppercase;
+}
+/* ends here */
+
+.sort_filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 65px;
+    text-transform: uppercase;
+    list-style-type: none;
+    padding: 0;
+}
+.ul_title {
+    margin-right: auto;
+}
+.sort,
+.filter {
+    text-transform: none;
+    cursor: pointer;
+}
+
+.sort_dropdown {
+    position: absolute;
+    z-index: 100;
+    background-color: var(--color-h1);
+    display: none;
+}
+.sort_dropdown p {
+    position: relative;
+    padding: 10px 5px;
+    display: block;
+    cursor: pointer;
+}
+.sort:hover .sort_dropdown {
+    display: block;
+}
+
+.mid_section_wrapper {
+    display: grid;
+    grid-template-columns: repeat(12, 12fr);
+    grid-template-rows: auto;
+    grid-area: 1/1/-1/-1;
+    justify-content: center;
+    padding: 30px 0;
+    gap: 2em 18px;
 }
 
 .products_card {
-	display: grid;
-	max-width: 80%;
-	grid-template-columns: repeat(auto-fit,
-			minmax(300px, 1fr));
-	grid-gap: 1rem;
-	margin: 5rem auto;
+    grid-area: 1/4/-1/-1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-gap: 3rem;
+    margin: 3rem 0;
 }
 
 .card {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	align-items: left;
-	border: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: left;
+    border: none;
 }
 
 .img_container img {
-	display: block;
-	width: 300px;
-	height: 300px;
-	object-fit: cover;
+    display: block;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
 }
 
-.blue_heart {
-	position: absolute;
-	right: 55px;
-	width: 40px;
-	height: 40px;
-	font-size: 2rem;
+.blue_heart svg {
+    position: absolute;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+    background-color: var(--background-colour-h1);
+    color: var(--color-h1);
+    padding: 3px;
 }
 
 .brand {
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 .price {
-	font-weight: bold;
+    font-weight: bold;
 }

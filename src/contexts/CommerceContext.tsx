@@ -13,29 +13,25 @@ export function useCommerceCMS() {
 export default function CommerceProvider({
     children,
 }: {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }) {
     const [content, setContent] = useState<{
         products?: any[];
         categories?: any[];
     }>({});
 
-    useEffect(() => {
-        commerce.products
-            .list()
-            .then((data: any) => {
-                const products = data.data;
-                setContent({ products });
-            })
-            .catch();
+    const getData = async () => {
+        const dataProducts = await commerce.products.list();
+        const dataCategories = await commerce.categories.list();
 
-        commerce.categories
-            .list()
-            .then((data: any) => {
-                const categories = data.data;
-                setContent({ categories });
-            })
-            .catch();
+        const products = dataProducts.data;
+        const categories = dataCategories.data;
+
+        setContent({ products, categories });
+    };
+
+    useEffect(() => {
+        getData();
     }, []);
 
     return (
