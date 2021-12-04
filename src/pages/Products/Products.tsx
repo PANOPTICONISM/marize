@@ -58,11 +58,11 @@ export default function Products() {
 
     return (
         <Main>
-            <div className="products_container">
+            <div className={style.products_container}>
                 <header className={style.products_hero}>
                     <img src={heroproducts} alt="products_hero" />
+                    <h1 className={style.products_title}>clothes for women</h1>
                 </header>
-                <h1 className={style.products_title}>clothes for women</h1>
                 <ul className={style.sort_filter}>
                     <li className={style.ul_title}>
                         women's clothing / brands / flex moda
@@ -87,12 +87,12 @@ export default function Products() {
                     </li>
                 </ul>
 
-                <div className={style.mid_section_wrapper}>
+                <div className={style.containerProductSection}>
                     <FilterComponent
                         onChange={handleChecked}
                         categories={categories}
                     />
-                    <div className={style.products_card}>{articlesUI}</div>
+                    <div className={style.products_wrapper}>{articlesUI}</div>
                 </div>
             </div>
         </Main>
