@@ -7,14 +7,17 @@ import style from "./products.module.css";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
 import heroproducts from "../../assets/heroproducts.png";
-import FilterComponent from "../../components/SidebarFilters/SidebarFilters";
+import FilterComponent from "../../components/Filters/Filters";
 import { useState, useEffect } from "react";
 
 export default function Products() {
     const { products, categories } = useCommerceCMS();
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
     const [filters, setFilters] = useState([]);
-    const handleChecked = (e: { target: { value: any; checked: any } }) => {
+
+    const handleChecked = (e: {
+        target: { value: number; checked: boolean };
+    }) => {
         const value = e.target.value;
         setFilters((previous: any) =>
             !e.target.checked
@@ -29,7 +32,6 @@ export default function Products() {
                     product.categories[1].name.includes(c)
                 );
             });
-            console.log(filtered);
             setFilteredArticles(filtered);
         } else {
             setFilteredArticles(products);
@@ -88,7 +90,6 @@ export default function Products() {
                 <div className={style.mid_section_wrapper}>
                     <FilterComponent
                         className={style.filter}
-                        filters={filters}
                         onChange={handleChecked}
                         categories={categories}
                     />
