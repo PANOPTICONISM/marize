@@ -89,7 +89,6 @@ export default function Products() {
 
                 <div className={style.mid_section_wrapper}>
                     <FilterComponent
-                        className={style.filter}
                         onChange={handleChecked}
                         categories={categories}
                     />

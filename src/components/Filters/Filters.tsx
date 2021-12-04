@@ -13,7 +13,7 @@ export function Filters({
         <>
             {categories?.map(
                 (filter: { name: string; children: any[] }, index: number) => (
-                    <div className={className} key={index}>
+                    <div className={style.filters_products} key={index}>
                         <h4>{filter.name}</h4>
                         {filter.children.map(
                             (innerFilter: { name: string }, index: number) => (
@@ -40,21 +40,15 @@ export function Filters({
 }
 
 export default function FilterComponent({
-    className,
     onChange,
     categories,
 }: {
-    className?: string;
     onChange?: (e: any) => void | undefined;
     categories?: any;
 }) {
     return (
         <div>
-            <Filters
-                className={className}
-                onChange={onChange}
-                categories={categories}
-            />
+            <Filters onChange={onChange} categories={categories} />
         </div>
     );
 }
