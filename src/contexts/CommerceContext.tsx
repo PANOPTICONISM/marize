@@ -21,7 +21,9 @@ export default function CommerceProvider({
     }>({});
 
     const getData = async () => {
-        const dataProducts = await commerce.products.list();
+        const dataProducts = await commerce.products.list({
+            limit: 40,
+        });
         const dataCategories = await commerce.categories.list();
 
         const products = dataProducts.data;

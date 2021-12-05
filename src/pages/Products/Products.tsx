@@ -14,7 +14,7 @@ export default function Products() {
     const { products, categories } = useCommerceCMS();
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
     const [filters, setFilters] = useState([]);
-
+    console.log(products);
     const handleChecked = (e: {
         target: { value: number; checked: boolean };
     }) => {
@@ -28,8 +28,10 @@ export default function Products() {
     useEffect(() => {
         if (filters.length > 0) {
             const filtered = products?.filter((product) => {
-                return filters?.some((c: string) =>
-                    product.categories[1].name.includes(c)
+                return filters?.some(
+                    (c: string) =>
+                        product.categories[1].name.includes(c) ||
+                        product.categories[0].name.includes(c)
                 );
             });
             setFilteredArticles(filtered);
