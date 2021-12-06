@@ -1,10 +1,10 @@
 :root {
-  --h1-size: 2em;
+  --h1-size: 2.4em;
   --primary-colour: #FA6121;
   --white-colour: #fff;
   --background-colour-h1: rgba(70, 98, 137, 0.9);
   --color-h1: #fff;
-  --body-font-size: 16px;
+  --body-font-size: 14px;
 }
 
 body {
@@ -20,9 +20,15 @@ h1 {
   text-align: center;
 }
 
+p,
+span,
+a {
+  line-height: 22px;
+}
+
 @media screen and (min-width: 1400px) {
   body {
-    max-width: 1300px;
+    max-width: 1200px;
     margin: auto;
   }
 }

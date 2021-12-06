@@ -11,7 +11,9 @@ function CategorySections() {
         <section className={style.homepageCategories}>
             {clothingAndAcessories?.map((category) => (
                 <div key={category.id}>
-                    <img src={category.assets[0].url} alt={category.slug} />
+                    <div className={style.homepageWrapper}>
+                        <img src={category.assets[0].url} alt={category.slug} />
+                    </div>
                     <PrimaryButton path="/">
                         Explore {category?.slug}
                     </PrimaryButton>

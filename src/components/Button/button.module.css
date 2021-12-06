@@ -9,6 +9,7 @@
     margin: 18px auto;
     text-decoration: none;
     display: block;
+    font-size: var(--body-font-size);
 }
 
 .primaryButton:hover {

@@ -1,6 +1,6 @@
 .visitStore {
     background-image: url("../../assets/client-image.svg");
-    padding: 100px;
+    padding: 50px;
     margin: 50px 0;
     background-size: cover;
     background-repeat: no-repeat;
@@ -10,4 +10,11 @@
 .visitStore h1 {
     color: #fff;
     text-align: center;
+}
+
+@media screen and (min-width: 700px) {
+    .visitStore {
+        padding: 100px;
+        margin: 100px 0;
+    }
 }
