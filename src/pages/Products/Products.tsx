@@ -56,6 +56,7 @@ export default function Products() {
             }
         };
         sortArray(sortType);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortType]);
 
     const articlesUI = filteredArticles?.map((article: any) => (
