@@ -13,6 +13,12 @@ img {
     transform: translate(-50%, -50%);
 }
 
+.homepageHero .heading span {
+    font-family: 'Mr Dafoe', cursive;
+    font-weight: 100;
+    margin-right: 6px;
+}
+
 .homepageHero {
     position: relative;
     text-align: center;
