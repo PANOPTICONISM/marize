@@ -4,17 +4,20 @@
   --white-colour: #fff;
   --background-colour-h1: rgba(70, 98, 137, 0.9);
   --color-h1: #fff;
+  --body-font-size: 16px;
 }
 
 body {
   box-sizing: border-box;
   margin: 0 15px;
   font-family: Tahoma, sans-serif;
+  font-size: var(--body-font-size);
 }
 
 h1 {
   font-size: var(--h1-size);
   text-transform: uppercase;
+  text-align: center;
 }
 
 @media screen and (min-width: 1400px) {
