@@ -9,13 +9,10 @@ import Main from "../../containers/Main/Main";
 import heroproducts from "../../assets/heroproducts.png";
 import FilterComponent from "../../components/Filters/Filters";
 import { useState, useEffect } from "react";
-
 export default function Products() {
     const { products, categories } = useCommerceCMS();
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
-    //console.log(filteredArticles);
     const [filters, setFilters] = useState([]);
-    //sorting hooks
     const [sortType, setSortType] = useState(null);
     const handleChecked = (e: {
         target: { value: number; checked: boolean };
@@ -42,8 +39,6 @@ export default function Products() {
             setFilteredArticles(products);
         }
     }, [filters, products]);
-
-    //sorting
     useEffect(() => {
         const sortArray = (type: any) => {
             let sorted: any;
@@ -60,7 +55,6 @@ export default function Products() {
                 setFilteredArticles(sorted);
             }
         };
-
         sortArray(sortType);
     }, [sortType]);
 
