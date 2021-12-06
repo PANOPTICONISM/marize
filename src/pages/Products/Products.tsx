@@ -13,8 +13,10 @@ import { useState, useEffect } from "react";
 export default function Products() {
     const { products, categories } = useCommerceCMS();
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
+    //console.log(filteredArticles);
     const [filters, setFilters] = useState([]);
-    console.log(products);
+    //sorting hooks
+    const [sortType, setSortType] = useState(null);
     const handleChecked = (e: {
         target: { value: number; checked: boolean };
     }) => {
@@ -24,6 +26,7 @@ export default function Products() {
                 ? previous.filter((prev: any) => prev !== value)
                 : [...previous, value]
         );
+        setSortType(null);
     };
     useEffect(() => {
         if (filters.length > 0) {
@@ -39,6 +42,27 @@ export default function Products() {
             setFilteredArticles(products);
         }
     }, [filters, products]);
+
+    //sorting
+    useEffect(() => {
+        const sortArray = (type: any) => {
+            let sorted: any;
+            if (sortType === "Highest price") {
+                sorted = [...filteredArticles].sort((a: any, b: any) =>
+                    a.price.raw < b.price.raw ? 1 : -1
+                );
+                setFilteredArticles(sorted);
+            }
+            if (sortType === "Lowest price") {
+                sorted = [...filteredArticles].sort((a: any, b: any) =>
+                    a.price.raw > b.price.raw ? 1 : -1
+                );
+                setFilteredArticles(sorted);
+            }
+        };
+
+        sortArray(sortType);
+    }, [sortType]);
 
     const articlesUI = filteredArticles?.map((article: any) => (
         <div className={style.card} key={article.id}>
@@ -75,10 +99,20 @@ export default function Products() {
                             <MdKeyboardArrowDown />
                         </span>
                         <div className={style.sort_dropdown}>
-                            <p>Recommended</p>
-                            <p>Newest</p>
-                            <p>Highest price</p>
-                            <p>Lowest price</p>
+                            <p
+                                onClick={(e: any) =>
+                                    setSortType(e.target.innerText)
+                                }
+                            >
+                                Highest price
+                            </p>
+                            <p
+                                onClick={(e: any) =>
+                                    setSortType(e.target.innerText)
+                                }
+                            >
+                                Lowest price
+                            </p>
                         </div>
                     </li>
                     <li className={style.filter}>
