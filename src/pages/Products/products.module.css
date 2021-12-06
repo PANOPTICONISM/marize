@@ -3,6 +3,9 @@
     position: relative;
     text-align: center;
 }
+.products_hero img {
+    opacity: 75%;
+}
 
 .products_title {
     text-align: center;

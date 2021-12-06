@@ -9,12 +9,11 @@ import Main from "../../containers/Main/Main";
 import heroproducts from "../../assets/heroproducts.png";
 import FilterComponent from "../../components/Filters/Filters";
 import { useState, useEffect } from "react";
-
 export default function Products() {
     const { products, categories } = useCommerceCMS();
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
     const [filters, setFilters] = useState([]);
-
+    const [sortType, setSortType] = useState(null);
     const handleChecked = (e: {
         target: { value: number; checked: boolean };
     }) => {
@@ -24,12 +23,15 @@ export default function Products() {
                 ? previous.filter((prev: any) => prev !== value)
                 : [...previous, value]
         );
+        setSortType(null);
     };
     useEffect(() => {
         if (filters.length > 0) {
             const filtered = products?.filter((product) => {
-                return filters?.some((c: string) =>
-                    product.categories[1].name.includes(c)
+                return filters?.some(
+                    (c: string) =>
+                        product.categories[1].name.includes(c) ||
+                        product.categories[0].name.includes(c)
                 );
             });
             setFilteredArticles(filtered);
@@ -37,6 +39,24 @@ export default function Products() {
             setFilteredArticles(products);
         }
     }, [filters, products]);
+    useEffect(() => {
+        const sortArray = (type: any) => {
+            let sorted: any;
+            if (sortType === "Highest price") {
+                sorted = [...filteredArticles].sort((a: any, b: any) =>
+                    a.price.raw < b.price.raw ? 1 : -1
+                );
+                setFilteredArticles(sorted);
+            }
+            if (sortType === "Lowest price") {
+                sorted = [...filteredArticles].sort((a: any, b: any) =>
+                    a.price.raw > b.price.raw ? 1 : -1
+                );
+                setFilteredArticles(sorted);
+            }
+        };
+        sortArray(sortType);
+    }, [sortType]);
 
     const articlesUI = filteredArticles?.map((article: any) => (
         <div className={style.card} key={article.id}>
@@ -61,7 +81,9 @@ export default function Products() {
             <div className={style.products_container}>
                 <header className={style.products_hero}>
                     <img src={heroproducts} alt="products_hero" />
-                    <h1 className={style.products_title}>clothes for women</h1>
+                    <h1 className={style.products_title}>
+                        20% discount on gift cards
+                    </h1>
                 </header>
                 <ul className={style.sort_filter}>
                     <li className={style.ul_title}>
@@ -73,10 +95,20 @@ export default function Products() {
                             <MdKeyboardArrowDown />
                         </span>
                         <div className={style.sort_dropdown}>
-                            <p>Recommended</p>
-                            <p>Newest</p>
-                            <p>Highest price</p>
-                            <p>Lowest price</p>
+                            <p
+                                onClick={(e: any) =>
+                                    setSortType(e.target.innerText)
+                                }
+                            >
+                                Highest price
+                            </p>
+                            <p
+                                onClick={(e: any) =>
+                                    setSortType(e.target.innerText)
+                                }
+                            >
+                                Lowest price
+                            </p>
                         </div>
                     </li>
                     <li className={style.filter}>
