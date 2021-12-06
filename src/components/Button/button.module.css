@@ -1,13 +1,9 @@
-:root {
-    --primary-colour: #FA6121;
-}
-
 .primaryButton {
     padding: 18px;
     background-color: var(--primary-colour);
     border: 2px solid var(--primary-colour);
     max-width: max-content;
-    color: #fff;
+    color: var(--white-colour);
     text-transform: uppercase;
     font-weight: 700;
     margin: 18px auto;
@@ -16,6 +12,6 @@
 }
 
 .primaryButton:hover {
-    background-color: #fff;
+    background-color: var(--white-colour);
     color: var(--primary-colour);
 }

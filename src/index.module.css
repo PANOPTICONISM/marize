@@ -1,11 +1,15 @@
 :root {
-  --h1-size: 48px;
+  --h1-size: 2em;
+  --primary-colour: #FA6121;
+  --white-colour: #fff;
+  --background-colour-h1: rgba(70, 98, 137, 0.9);
+  --color-h1: #fff;
 }
 
 body {
-  margin: 0;
   box-sizing: border-box;
   margin: 0 15px;
+  font-family: Tahoma, sans-serif;
 }
 
 h1 {
