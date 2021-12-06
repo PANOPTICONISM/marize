@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import style from "./navigation.module.css";
 import Hamburger from "hamburger-react";
 import SearchBar from "../SearchBar/SearchBar";
@@ -7,7 +6,7 @@ import { BsHandbag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 export default function Navigation() {
-    const [input, setInput] = useState("");
+    // const [input, setInput] = useState("");
 
     return (
         <nav className={style.wrapper}>

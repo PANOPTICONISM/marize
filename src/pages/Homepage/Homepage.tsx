@@ -9,6 +9,7 @@ import moda from "../../assets/moda_ana.svg";
 import love from "../../assets/love_m.svg";
 import NewArrivals from "../../components/NewArrivals/NewArrivals";
 import VisitStore from "../../components/VisitStore/VisitStore";
+import CategorySections from "../../components/CategorySections/CategorySections";
 
 export default function Homepage() {
     return (
@@ -28,6 +29,7 @@ export default function Homepage() {
             </section>
             <NewArrivals />
             <VisitStore />
+            <CategorySections />
         </Main>
     );
 }

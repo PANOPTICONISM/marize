@@ -1,0 +1,25 @@
+.homepageCategories {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    justify-content: center;
+    justify-items: center;
+    gap: 60px;
+}
+
+.homepageCategories img {
+    width: 500px;
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.homepageCategories>div {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 700px) {
+    .homepageCategories {
+        grid-template-columns: auto auto;
+    }
+}
