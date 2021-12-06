@@ -87,7 +87,9 @@ export default function Products() {
             <div className={style.products_container}>
                 <header className={style.products_hero}>
                     <img src={heroproducts} alt="products_hero" />
-                    <h1 className={style.products_title}>clothes for women</h1>
+                    <h1 className={style.products_title}>
+                        20% discount on gift cards
+                    </h1>
                 </header>
                 <ul className={style.sort_filter}>
                     <li className={style.ul_title}>
