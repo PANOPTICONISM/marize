@@ -1,12 +1,14 @@
 import style from "./searchdropdown.module.css";
 export default function SearchDropdown({
-    searchArticles,
+    handleSearch,
+    searchedArticles,
 }: {
-    searchArticles?: any;
+    handleSearch?: any;
+    searchedArticles?: any;
 }) {
     return (
         <div className={style.dropdown}>
-            {searchArticles?.map((article: any) => (
+            {searchedArticles?.slice(0, 10).map((article: any) => (
                 <div className={style.items} key={article.id}>
                     <a href="#" target="_blank">
                         <span>
