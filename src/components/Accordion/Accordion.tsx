@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useContentfulCMS } from "../../contexts/ContentfulContext";
 import style from "./accordion.module.css";
 
 export default function Accordion({
