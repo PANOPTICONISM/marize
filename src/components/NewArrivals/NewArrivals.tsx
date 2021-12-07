@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import style from "./newarrivals.module.css";
 
@@ -13,7 +14,9 @@ const NewArrivals = () => {
             <div className={style.articles}>
                 {newArrivals?.map((article) => (
                     <div key={article.id}>
-                        <img src={article.image.url} alt={article.name} />
+                        <Link to={`/products/${article.id}`}>
+                            <img src={article.image.url} alt={article.name} />
+                        </Link>
                         <h2>{article.name}</h2>
                         <span>{article.price.formatted_with_code}</span>
                     </div>
