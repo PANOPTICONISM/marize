@@ -40,6 +40,10 @@ nav.wrapper {
     margin-left: 18px;
 }
 
+.shoppingBag {
+    position: relative;
+}
+
 @media screen and (min-width: 600px) {
     .search_bar {
         width: auto;
