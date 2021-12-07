@@ -9,6 +9,7 @@ import Main from "../../containers/Main/Main";
 import heroproducts from "../../assets/heroproducts.png";
 import FilterComponent from "../../components/Filters/Filters";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 export default function Products() {
     const { products, categories } = useCommerceCMS();
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
@@ -65,7 +66,9 @@ export default function Products() {
                 <div className={style.blue_heart}>
                     <MdFavoriteBorder />
                 </div>
-                <img src={article.image.url} alt="products" />
+                <Link to={`/products/${article.id}`}>
+                    <img src={article.image.url} alt="products" />
+                </Link>
             </div>
             <div className={style.card_txt}>
                 <p className={style.brand}>{article.categories[1].name}</p>

@@ -1,4 +1,3 @@
-/* THIS SHOULD BE THE SAME AS FOR PRODUCTS */
 .newArrivals .articles {
     display: grid;
     grid-template-columns: repeat(auto-fit, 230px);

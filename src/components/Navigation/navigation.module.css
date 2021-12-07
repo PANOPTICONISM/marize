@@ -25,6 +25,7 @@ nav.wrapper {
     grid-column: 1/-1;
     grid-row: 1;
     text-align: center;
+    z-index: 3;
 }
 
 .right_nav {

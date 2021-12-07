@@ -1,13 +1,11 @@
-import PrimaryButton from "../Button/Button";
+import { PrimaryButton } from "../Buttons/Buttons";
 import style from "./visitstore.module.css";
 
 const VisitStore = () => {
     return (
         <section className={style.visitStore}>
             <h1>Visit us at our store</h1>
-            <PrimaryButton path="./about">
-                LEARN MORE ABOUT MARIZÉ
-            </PrimaryButton>
+            <PrimaryButton text="LEARN MORE ABOUT US" path="/about" />
         </section>
     );
 };

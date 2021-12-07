@@ -28,6 +28,10 @@ a {
   line-height: 22px;
 }
 
+a {
+  text-decoration: none;
+}
+
 @media screen and (min-width: 1400px) {
   body {
     max-width: 1200px;
