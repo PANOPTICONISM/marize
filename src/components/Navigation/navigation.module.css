@@ -10,11 +10,12 @@ nav.wrapper {
 
 .search_bar {
     height: 25px;
-    width: 190px;
+    width: 200px;
 }
 
 .search_bar_wrapper {
     z-index: 10;
+    width: 150px;
 }
 input:focus {
     outline: none;
