@@ -9,6 +9,7 @@ import Main from "../../../containers/Main/Main";
 import style from "./product.module.css";
 import { CartButton } from "../../../components/Buttons/Buttons";
 import RelatedProducts from "../../../components/RelatedProducts/RelatedProducts";
+import Accordion from "../../../components/Accordion/Accordion";
 
 export function ProductDetails({ product }: { product?: any }) {
     return (
@@ -66,6 +67,7 @@ export default function Product() {
         <Main>
             <ProductDetails product={product} />
             <RelatedProducts relatedProducts={product?.related_products} />
+            <Accordion />
         </Main>
     );
 }

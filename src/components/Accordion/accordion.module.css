@@ -1,0 +1,25 @@
+.accordion {
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.accordionTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.accordionTitle:hover {
+    background-color: var(--primary-colour);
+    color: var(--white-colour);
+}
+
+.accordionTitle,
+.accordionContent {
+    padding: 1rem;
+}
+
+.accordionItem {
+    border: 1px solid #000;
+}
