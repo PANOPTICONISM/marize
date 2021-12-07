@@ -12,8 +12,8 @@ export default function Navigation() {
 
     console.log("cart", cart);
 
-    // const cartItems =
-    //     cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
+    const cartTotal =
+        cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
 
     return (
         <nav className={style.wrapper}>
@@ -31,9 +31,11 @@ export default function Navigation() {
             </div>
 
             <div className={style.right_nav}>
-                <AiOutlineUser />
                 <AiOutlineHeart />
-                <BsHandbag />
+                <div className={style.shoppingBag}>
+                    <BsHandbag />
+                    {cartTotal}
+                </div>
             </div>
         </nav>
     );

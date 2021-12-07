@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import { commerce } from "../lib/Commerce";
 
 export const ShoppingBagContext = createContext<{
-    cart?: any[];
+    cart?: any;
     setCart?: any;
 }>({});
 
