@@ -10,6 +10,7 @@ import style from "./product.module.css";
 import { CartButton } from "../../../components/Buttons/Buttons";
 import RelatedProducts from "../../../components/RelatedProducts/RelatedProducts";
 import Accordion from "../../../components/Accordion/Accordion";
+import { useContentfulCMS } from "../../../contexts/ContentfulContext";
 
 export function ProductDetails({ product }: { product?: any }) {
     return (
@@ -60,6 +61,7 @@ export function ProductDetails({ product }: { product?: any }) {
 export default function Product() {
     const { productId } = useParams();
     const { products } = useCommerceCMS();
+    const { faq } = useContentfulCMS();
 
     const product = products?.find((prod) => prod.id === productId);
 
@@ -67,7 +69,12 @@ export default function Product() {
         <Main>
             <ProductDetails product={product} />
             <RelatedProducts relatedProducts={product?.related_products} />
-            <Accordion />
+            <div className={style.accordion}>
+                <h1>FAQ</h1>
+                {faq?.map(({ fields }) => (
+                    <Accordion fields={fields} />
+                ))}
+            </div>
         </Main>
     );
 }

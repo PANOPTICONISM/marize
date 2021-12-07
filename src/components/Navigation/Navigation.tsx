@@ -1,5 +1,5 @@
 import style from "./navigation.module.css";
-import Hamburger from "hamburger-react";
+// import Hamburger from "hamburger-react";
 import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
@@ -12,7 +12,7 @@ export default function Navigation() {
     return (
         <nav className={style.wrapper}>
             <div className={style.left_nav}>
-                <Hamburger />
+                {/* <Hamburger /> */}
                 <div className={style.search_bar_wrapper}>
                     <SearchBar className={style.search_bar} />
                 </div>
