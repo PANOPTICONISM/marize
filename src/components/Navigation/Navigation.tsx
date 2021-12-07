@@ -4,6 +4,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 export default function Navigation() {
     // const [input, setInput] = useState("");
@@ -16,9 +17,13 @@ export default function Navigation() {
                     <SearchBar className={style.search_bar} />
                 </div>
             </div>
+
             <div className={style.logo}>
-                <Logo />
+                <Link to="/">
+                    <Logo />
+                </Link>
             </div>
+
             <div className={style.right_nav}>
                 <AiOutlineUser />
                 <AiOutlineHeart />
