@@ -5,9 +5,9 @@ import { GiMailShirt } from "react-icons/gi";
 import { RiRuler2Line } from "react-icons/ri";
 import { MdAvTimer } from "react-icons/md";
 import { AiOutlineHeart } from "react-icons/ai";
-import PrimaryButton from "../../../components/Button/Button";
 import Main from "../../../containers/Main/Main";
 import style from "./product.module.css";
+import { CartButton } from "../../../components/Buttons/Buttons";
 
 export function ProductDetail({ product }: { product?: any }) {
     return (
@@ -37,9 +37,7 @@ export function ProductDetail({ product }: { product?: any }) {
                     </a>
                 </div>
                 <div className={style.shopping}>
-                    <PrimaryButton className={style.button} path="/">
-                        Add to shopping bag
-                    </PrimaryButton>
+                    <CartButton path="/" />
                     <AiOutlineHeart />
                 </div>
                 <div className={style.details}>

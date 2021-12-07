@@ -1,4 +1,4 @@
-.primaryButton {
+.globalButton {
     padding: 18px;
     background-color: var(--primary-colour);
     border: 2px solid var(--primary-colour);
@@ -12,7 +12,7 @@
     font-size: var(--body-font-size);
 }
 
-.primaryButton:hover {
+.globalButton:hover {
     background-color: var(--white-colour);
     color: var(--primary-colour);
 }
