@@ -4,7 +4,8 @@ import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-
+import { useState } from "react";
+import { useCommerceCMS } from "../../contexts/CommerceContext";
 export default function Navigation() {
     // const [input, setInput] = useState("");
 

@@ -1,14 +1,32 @@
 import React from "react";
+import { useState } from "react";
+import { useCommerceCMS } from "../../contexts/CommerceContext";
 
 const SearchBar = ({ className }: { className?: string }) => {
-  return (
-    <input
-      className={className}
-      key="1"
-      value=""
-      placeholder={"search here"}
-      onChange={(e) => console.log(e.target.value)}
-    />
-  );
+    const { products } = useCommerceCMS();
+    const [search, setSearch] = useState("");
+    const searchArticles = products?.filter((p) => {
+        const searchParam = p.categories.map((c: any) => {
+            return c.name;
+        });
+        return (
+            searchParam
+                .flat()
+                .toString()
+                .toLowerCase()
+                .indexOf(search.toLowerCase()) > -1
+        );
+    });
+    console.log(searchArticles);
+    return (
+        <input
+            className={className}
+            type="text"
+            key="1"
+            value={search}
+            placeholder={" search here"}
+            onChange={(e) => setSearch(e.target.value)}
+        />
+    );
 };
 export default SearchBar;
