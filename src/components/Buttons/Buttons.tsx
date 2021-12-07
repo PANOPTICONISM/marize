@@ -30,14 +30,14 @@ export function PrimaryButton({ path, text }: { path: string; text?: string }) {
     );
 }
 
-export function CartButton({ path }: { path: string }) {
+export function CartButton({ onClick }: { onClick?: () => void }) {
     return (
-        <Button
-            path={path}
+        <button
+            onClick={onClick}
             className={`${style.globalButton} ${style.cartButton}`}
         >
             <BsHandbag />
             Add to shopping bag
-        </Button>
+        </button>
     );
 }

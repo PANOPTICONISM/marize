@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useCommerceCMS } from "../../../contexts/CommerceContext";
 import { GiMailShirt } from "react-icons/gi";
@@ -11,8 +11,18 @@ import { CartButton } from "../../../components/Buttons/Buttons";
 import RelatedProducts from "../../../components/RelatedProducts/RelatedProducts";
 import Accordion from "../../../components/Accordion/Accordion";
 import { useContentfulCMS } from "../../../contexts/ContentfulContext";
+import { useShoppingBagCMS } from "../../../contexts/CartContext";
+import { commerce } from "../../../lib/Commerce";
 
 export function ProductDetails({ product }: { product?: any }) {
+    const { setCart } = useShoppingBagCMS();
+
+    const addToCart = () => {
+        commerce.cart
+            .add(product.id)
+            .then(({ cart }: { cart: any }) => setCart(cart));
+    };
+
     return (
         <section className={style.productDetails}>
             <img src={product?.image.url} alt={product?.name} />
@@ -40,7 +50,7 @@ export function ProductDetails({ product }: { product?: any }) {
                     </a>
                 </div>
                 <div className={style.shopping}>
-                    <CartButton path="/" />
+                    <CartButton onClick={addToCart} />
                     <AiOutlineHeart className={style.shoppingSVG} />
                 </div>
                 <div className={style.details}>
