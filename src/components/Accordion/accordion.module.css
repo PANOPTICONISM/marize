@@ -1,6 +1,6 @@
 .accordion {
     max-width: 600px;
-    margin: 2rem auto;
+    margin: 50px auto;
 }
 
 .accordionTitle {
@@ -22,4 +22,10 @@
 
 .accordionItem {
     border: 1px solid #000;
+}
+
+@media screen and (min-width: 700px) {
+    .accordion {
+        margin: 100px auto;
+    }
 }
