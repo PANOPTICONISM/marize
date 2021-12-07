@@ -21,7 +21,10 @@ export default function Button({
 
 export function PrimaryButton({ path, text }: { path: string; text?: string }) {
     return (
-        <Button path={path} className={style.globalButton}>
+        <Button
+            path={path}
+            className={`${style.globalButton} ${style.primaryButton}`}
+        >
             {text}
         </Button>
     );

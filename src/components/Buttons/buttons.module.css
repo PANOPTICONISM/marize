@@ -2,11 +2,9 @@
     padding: 18px;
     background-color: var(--primary-colour);
     border: 2px solid var(--primary-colour);
-    max-width: max-content;
     color: var(--white-colour);
     text-transform: uppercase;
     font-weight: 700;
-    margin: 18px auto;
     text-decoration: none;
     display: block;
     font-size: var(--body-font-size);
@@ -19,9 +17,15 @@
     fill: var(--primary-colour);
 }
 
+.primaryButton {
+    max-width: max-content;
+    margin: 18px auto;
+}
+
 .cartButton {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .cartButton svg {
