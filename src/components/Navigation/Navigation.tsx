@@ -1,14 +1,18 @@
 import style from "./navigation.module.css";
 import Hamburger from "hamburger-react";
 import SearchBar from "../SearchBar/SearchBar";
-import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
+import { useState } from "react";
+import Cart from "../Cart/Cart";
 
 export default function Navigation() {
     const { cart } = useShoppingBagCMS();
+    const [modal, setModal] = useState(false);
+    const toggleModal = () => setModal(!modal);
 
     console.log("cart", cart);
 
@@ -32,9 +36,10 @@ export default function Navigation() {
 
             <div className={style.right_nav}>
                 <AiOutlineHeart />
-                <div className={style.shoppingBag}>
+                <div className={style.shoppingBag} onClick={toggleModal}>
                     <BsHandbag />
                     {cartTotal}
+                    {modal && <Cart />}
                 </div>
             </div>
         </nav>

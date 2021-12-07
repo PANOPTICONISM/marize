@@ -19,7 +19,7 @@ export function ProductDetails({ product }: { product?: any }) {
 
     const addToCart = () => {
         commerce.cart
-            .add(product.id)
+            .add(product.id, 1)
             .then(({ cart }: { cart: any }) => setCart(cart));
     };
 
