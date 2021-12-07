@@ -1,0 +1,20 @@
+.relatedProducts .articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    gap: 30px;
+    justify-content: center;
+}
+
+.relatedProducts .articles img {
+    max-width: 200px;
+}
+
+.relatedProducts h2 {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 6px 0;
+}
+
+.relatedProducts span {
+    font-weight: 800;
+}

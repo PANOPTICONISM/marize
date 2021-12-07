@@ -8,8 +8,9 @@ import { AiOutlineHeart } from "react-icons/ai";
 import Main from "../../../containers/Main/Main";
 import style from "./product.module.css";
 import { CartButton } from "../../../components/Buttons/Buttons";
+import RelatedProducts from "../../../components/RelatedProducts/RelatedProducts";
 
-export function ProductDetail({ product }: { product?: any }) {
+export function ProductDetails({ product }: { product?: any }) {
     return (
         <section className={style.productDetails}>
             <img src={product?.image.url} alt={product?.name} />
@@ -63,7 +64,8 @@ export default function Product() {
 
     return (
         <Main>
-            <ProductDetail product={product} />
+            <ProductDetails product={product} />
+            <RelatedProducts relatedProducts={product?.related_products} />
         </Main>
     );
 }
