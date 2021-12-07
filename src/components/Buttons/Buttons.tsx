@@ -29,7 +29,10 @@ export function PrimaryButton({ path, text }: { path: string; text?: string }) {
 
 export function CartButton({ path }: { path: string }) {
     return (
-        <Button path={path} className={style.globalButton}>
+        <Button
+            path={path}
+            className={`${style.globalButton} ${style.cartButton}`}
+        >
             <BsHandbag />
             Add to shopping bag
         </Button>

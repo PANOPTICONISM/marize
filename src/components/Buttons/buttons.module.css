@@ -12,7 +12,20 @@
     font-size: var(--body-font-size);
 }
 
-.globalButton:hover {
+.globalButton:hover,
+.globalButton:hover svg {
     background-color: var(--white-colour);
     color: var(--primary-colour);
+    fill: var(--primary-colour);
+}
+
+.cartButton {
+    display: flex;
+    align-items: center;
+}
+
+.cartButton svg {
+    font-size: 24px;
+    fill: var(--white-colour);
+    margin-right: 12px;
 }

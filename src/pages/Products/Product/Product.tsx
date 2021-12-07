@@ -38,7 +38,7 @@ export function ProductDetail({ product }: { product?: any }) {
                 </div>
                 <div className={style.shopping}>
                     <CartButton path="/" />
-                    <AiOutlineHeart />
+                    <AiOutlineHeart className={style.shoppingSVG} />
                 </div>
                 <div className={style.details}>
                     <span>
