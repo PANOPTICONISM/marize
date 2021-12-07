@@ -12,6 +12,7 @@ nav.wrapper {
     height: 25px;
     width: 50px;
 }
+
 .search_bar_wrapper {
     z-index: 10;
 }
@@ -19,6 +20,7 @@ input:focus {
     outline: none;
     border-color: var(--primary-colour);
 }
+
 .left_nav {
     grid-row: 2;
     grid-column: 1/2;

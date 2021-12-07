@@ -8,17 +8,8 @@ import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
 import heroproducts from "../../assets/heroproducts.png";
 import FilterComponent from "../../components/Filters/Filters";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import { useState, useEffect } from "react";
-export default function Products({
-    search,
-    searchArticles,
-}: {
-    search?: string;
-    searchArticles?: string[];
-}) {
-    console.log(searchArticles);
-
+export default function Products() {
     const { products, categories } = useCommerceCMS();
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
     const [filters, setFilters] = useState([]);
