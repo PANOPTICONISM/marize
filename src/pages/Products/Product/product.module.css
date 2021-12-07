@@ -1,0 +1,56 @@
+.productDetails {
+    display: grid;
+}
+
+.productDetails img {
+    max-width: 300px;
+    margin: auto;
+}
+
+.productDetails h2,
+.productDetails h3 {
+    font-size: 24px;
+    margin: 6px 0;
+}
+
+.productDetails h3 {
+    font-weight: 300;
+}
+
+.productDetails .sizing,
+.productDetails .shopping {
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    gap: 6px;
+}
+
+.productDetails .sizing svg,
+.productDetails .shopping svg {
+    font-size: 36px;
+    padding: 6px;
+    border: 1px solid black;
+    color: black;
+}
+
+.productDetails .sizing form select {
+    width: 100%;
+    padding: 16px;
+    background-color: transparent;
+    border: 1px solid black;
+}
+
+.productDetails .details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productDetails .details>* {
+    display: flex;
+    align-items: center;
+}
+
+.productDetails .details svg {
+    margin-right: 4px;
+    font-size: 20px;
+}
