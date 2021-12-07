@@ -14,7 +14,7 @@ export function ProductDetail({ product }: { product?: any }) {
         <section className={style.productDetails}>
             <img src={product?.image.url} alt={product?.name} />
             <div className={style.wrapper}>
-                <div>
+                <div className={style.introduction}>
                     <h2>{product?.name}</h2>
                     <h3>{product?.price.formatted_with_code}</h3>
                 </div>

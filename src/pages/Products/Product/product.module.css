@@ -7,6 +7,11 @@
     margin: auto;
 }
 
+.productDetails .introduction {
+    display: flex;
+    justify-content: space-between;
+}
+
 .productDetails h2,
 .productDetails h3 {
     font-size: 24px;
