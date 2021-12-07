@@ -13,7 +13,7 @@ export function ProductDetail({ product }: { product?: any }) {
     return (
         <section className={style.productDetails}>
             <img src={product?.image.url} alt={product?.name} />
-            <div>
+            <div className={style.wrapper}>
                 <div>
                     <h2>{product?.name}</h2>
                     <h3>{product?.price.formatted_with_code}</h3>
