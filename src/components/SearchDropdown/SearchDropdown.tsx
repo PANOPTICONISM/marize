@@ -16,7 +16,7 @@ export default function SearchDropdown({
                             <img
                                 className={style.items}
                                 src={article.image.url}
-                                alt="image"
+                                alt=""
                             />
                         </span>
                         {article.name}
