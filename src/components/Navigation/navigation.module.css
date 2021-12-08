@@ -9,6 +9,10 @@ nav.wrapper {
     gap: 2em 18px;
 }
 
+.search_bar_wrapper {
+    position: relative;
+}
+
 .search_bar {
     height: 30px;
     width: 30px;

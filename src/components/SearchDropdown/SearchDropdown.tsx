@@ -1,28 +1,28 @@
 import style from "./searchdropdown.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function SearchDropdown({
     searchedArticles,
 }: {
     searchedArticles?: any;
 }) {
-    const navigate = useNavigate();
-    return (
-        <div className={style.dropdown}>
-            {searchedArticles?.slice(0, 10).map((article: any) => (
-                <div className={style.items} key={article.id}>
-                    {/* TODO:sent to detsils page */}
-                    <p onClick={() => navigate("/products/:id")}>
-                        <span>
+    if (searchedArticles.length > 0) {
+        return (
+            <div className={style.dropdown}>
+                {searchedArticles?.slice(0, 10).map((article: any) => (
+                    <Link to={`/products/${article.id}`} key={article.id}>
+                        <div className={style.items}>
                             <img
                                 className={style.items}
                                 src={article.image.url}
-                                alt=""
+                                alt={article.name}
                             />
-                        </span>
-                        {article.name}
-                    </p>
-                </div>
-            ))}
-        </div>
-    );
+                            <span>{article.name}</span>
+                        </div>
+                    </Link>
+                ))}
+            </div>
+        );
+    } else {
+        return null;
+    }
 }

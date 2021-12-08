@@ -38,7 +38,9 @@ export default function Navigation() {
                 <AiOutlineHeart />
                 <div className={style.shoppingBag} onClick={toggleModal}>
                     <BsHandbag />
-                    <span className={style.cartTotal}>{cartTotal}</span>
+                    {cartTotal && (
+                        <span className={style.cartTotal}>{cartTotal}</span>
+                    )}
                     {modal && <Cart />}
                 </div>
             </div>
