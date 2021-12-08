@@ -43,6 +43,24 @@ nav.wrapper {
 
 .shoppingBag {
     position: relative;
+    cursor: pointer;
+}
+
+.shoppingBag .cartTotal {
+    position: absolute;
+    bottom: -2px;
+    right: -6px;
+    background-color: var(--primary-colour);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white-colour);
+    z-index: 9;
 }
 
 @media screen and (min-width: 700px) {
