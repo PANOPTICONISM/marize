@@ -21,13 +21,10 @@ export default function CommerceProvider({
     }>({});
 
     const getData = async () => {
-        const dataProducts = await commerce.products.list({
+        const { data: products } = await commerce.products.list({
             limit: 40,
         });
-        const dataCategories = await commerce.categories.list();
-
-        const products = dataProducts.data;
-        const categories = dataCategories.data;
+        const { data: categories } = await commerce.categories.list();
 
         setContent({ products, categories });
     };
