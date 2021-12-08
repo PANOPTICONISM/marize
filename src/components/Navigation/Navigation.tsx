@@ -36,13 +36,15 @@ export default function Navigation() {
 
             <div className={style.right_nav}>
                 <AiOutlineHeart />
-                <div className={style.shoppingBag} onClick={toggleModal}>
-                    <BsHandbag />
-                    {cartTotal && (
-                        <span className={style.cartTotal}>{cartTotal}</span>
-                    )}
-                    {modal && <Cart />}
-                </div>
+                {!window.location.pathname.includes("/checkout/") ? (
+                    <div className={style.shoppingBag} onClick={toggleModal}>
+                        <BsHandbag />
+                        {cartTotal && (
+                            <span className={style.cartTotal}>{cartTotal}</span>
+                        )}
+                        {modal && <Cart />}
+                    </div>
+                ) : null}
             </div>
         </nav>
     );

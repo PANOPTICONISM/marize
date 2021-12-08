@@ -30,14 +30,55 @@ export function PrimaryButton({ path, text }: { path: string; text?: string }) {
     );
 }
 
-export function CartButton({ onClick }: { onClick?: () => void }) {
+export function ReturnButton({
+    onClick,
+    text,
+}: {
+    onClick?: () => void;
+    text?: string;
+}) {
     return (
         <button
             onClick={onClick}
             className={`${style.globalButton} ${style.cartButton}`}
         >
             <BsHandbag />
-            Add to shopping bag
+            {text}
+        </button>
+    );
+}
+
+export function CartButton({
+    onClick,
+    text,
+}: {
+    onClick?: () => void;
+    text?: string;
+}) {
+    return (
+        <button
+            onClick={onClick}
+            className={`${style.globalButton} ${style.cartButton}`}
+        >
+            <BsHandbag />
+            {text}
+        </button>
+    );
+}
+
+export function SubmitButton({
+    onClick,
+    text,
+}: {
+    onClick?: () => void;
+    text?: string;
+}) {
+    return (
+        <button
+            type="submit"
+            className={`${style.globalButton} ${style.cartButton}`}
+        >
+            {text}
         </button>
     );
 }
