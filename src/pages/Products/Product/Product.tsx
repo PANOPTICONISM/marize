@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useCommerceCMS } from "../../../contexts/CommerceContext";
 import { GiMailShirt } from "react-icons/gi";
@@ -19,7 +18,7 @@ export function ProductDetails({ product }: { product?: any }) {
 
     const addToCart = () => {
         commerce.cart
-            .add(product.id)
+            .add(product.id, 1)
             .then(({ cart }: { cart: any }) => setCart(cart));
     };
 
@@ -81,8 +80,8 @@ export default function Product() {
             <RelatedProducts relatedProducts={product?.related_products} />
             <div className={style.accordion}>
                 <h1>FAQ</h1>
-                {faq?.map(({ fields }) => (
-                    <Accordion fields={fields} />
+                {faq?.map(({ fields }, index) => (
+                    <Accordion key={index} fields={fields} />
                 ))}
             </div>
         </Main>
