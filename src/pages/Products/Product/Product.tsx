@@ -80,8 +80,8 @@ export default function Product() {
             <RelatedProducts relatedProducts={product?.related_products} />
             <div className={style.accordion}>
                 <h1>FAQ</h1>
-                {faq?.map(({ fields }) => (
-                    <Accordion fields={fields} />
+                {faq?.map(({ fields }, index) => (
+                    <Accordion key={index} fields={fields} />
                 ))}
             </div>
         </Main>
