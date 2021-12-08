@@ -5,6 +5,7 @@
     position: absolute;
     right: 0;
     background: var(--white-colour);
+    z-index: 2;
 }
 
 .cartWrapper h3 {
