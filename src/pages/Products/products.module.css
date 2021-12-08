@@ -101,3 +101,9 @@
 .price {
     font-weight: bold;
 }
+@media screen and (max-width: 600px) {
+    .products_title {
+        text-align: center;
+        font-size: 18px;
+    }
+}

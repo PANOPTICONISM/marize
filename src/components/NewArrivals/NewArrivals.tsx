@@ -7,7 +7,6 @@ const NewArrivals = () => {
     const reversedArray: any[] = [];
     products?.map((product) => reversedArray.unshift(product));
     const newArrivals = reversedArray?.slice(0, 4);
-
     return (
         <section className={style.newArrivals}>
             <h1>New Arrivals</h1>
