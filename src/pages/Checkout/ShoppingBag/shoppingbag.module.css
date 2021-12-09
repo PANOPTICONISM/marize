@@ -5,7 +5,8 @@
 }
 
 .shoppingArticle p span,
-.priceSummary p span {
+.priceSummary p span,
+.descDetails p:first-child {
     font-weight: 700;
 }
 
@@ -47,6 +48,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    grid-area: b;
 }
 
 .priceSummary h2 {
@@ -58,4 +60,90 @@
     display: flex;
     justify-content: space-between;
     margin: 6px 0;
+}
+
+.shoppingBag {
+    grid-area: a;
+}
+
+.shoppingBag img {
+    width: 230px;
+    height: 300px;
+    object-fit: contain;
+}
+
+@media screen and (min-width: 800px) {
+    .shoppingBagWrapper {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .shoppingArticle {
+        max-width: 800px;
+        margin: 30px;
+        display: flex;
+    }
+
+    .shoppingArticle img {
+        margin-right: 18px;
+    }
+
+    .descDetails,
+    .flex {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .flex {
+        align-items: flex-end;
+    }
+
+    .shoppingArticle div {
+        width: 100%;
+    }
+
+    .shoppingArticle .bagPrice {
+        position: inherit;
+    }
+
+    .shoppingArticle .fullSpace {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .shoppingArticle .moveFromCart {
+        margin: 0;
+        display: flex;
+    }
+
+    .shoppingArticle .moveFromCart span:first-of-type {
+        position: relative;
+        margin-right: 18px;
+    }
+
+    .shoppingArticle .moveFromCart span:first-of-type::after {
+        position: absolute;
+        content: "||";
+        top: 0;
+        right: -15px;
+    }
+
+    .shoppingArticle .bagPrice {
+        background: none;
+        color: var(--black-colour);
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .shoppingBagWrapper {
+        display: grid;
+        justify-content: space-between;
+        grid-template-areas: "a a b";
+        max-width: none;
+    }
+
+    .priceSummary {
+        width: 300px;
+    }
 }

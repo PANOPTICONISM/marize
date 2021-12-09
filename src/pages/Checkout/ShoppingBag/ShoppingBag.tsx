@@ -12,60 +12,69 @@ export default function ShoppingBag({ next }: { next?: any }) {
 
     console.log(cart);
     return (
-        <>
+        <section>
             <h1>My Shopping Bag</h1>
-            <section>
-                {cart?.line_items.map((product: any) => (
-                    <article className={style.shoppingArticle}>
-                        <img src={product.image.url} alt={product.name} />
-                        <div className={style.descDetails}>
-                            <div>
-                                <p>
-                                    <span>Colour:</span> Green
-                                </p>
-                                <p>
-                                    <span>Size:</span> M
-                                </p>
+            <div className={style.shoppingBagWrapper}>
+                <div className={style.shoppingBag}>
+                    {cart?.line_items.map((product: any) => (
+                        <article className={style.shoppingArticle}>
+                            <img src={product.image.url} alt={product.name} />
+                            <div className={style.fullSpace}>
+                                <div className={style.descDetails}>
+                                    <div>
+                                        <p>{product.name}</p>
+                                        <p>
+                                            <span>Colour:</span> Green
+                                        </p>
+                                        <p>
+                                            <span>Size:</span> M
+                                        </p>
+                                    </div>
+                                    <p>2 pieces</p>
+                                </div>
+                                <div className={style.flex}>
+                                    <div className={style.moveFromCart}>
+                                        <span>
+                                            <BsTrash /> Remove from shopping bag
+                                        </span>
+                                        <span>
+                                            <AiOutlineHeart /> Save for later
+                                        </span>
+                                    </div>
+                                    <span className={style.bagPrice}>
+                                        20EUR
+                                    </span>
+                                </div>
                             </div>
-                            <p>2 pieces</p>
-                        </div>
-                        <div>
-                            <div className={style.moveFromCart}>
-                                <span>
-                                    <BsTrash /> Remove from shopping bag
-                                </span>
-                                <span>
-                                    <AiOutlineHeart /> Save for later
-                                </span>
-                            </div>
-                        </div>
-                        <span className={style.bagPrice}>20EUR</span>
-                    </article>
-                ))}
-            </section>
-            <div className={style.priceSummary}>
-                <div>
-                    <h2>Price Summary</h2>
-                    <div>
-                        <p>
-                            Subtotal <span>99kr</span>
-                        </p>
-                        <p>
-                            Shipping <span>39kr</span>
-                        </p>
-                    </div>
+                        </article>
+                    ))}
                 </div>
-                <div>
+                <div className={style.priceSummary}>
                     <div>
-                        <p>
-                            Total <span>120kr</span>
-                        </p>
+                        <h2>Price Summary</h2>
+                        <div>
+                            <p>
+                                Subtotal <span>99kr</span>
+                            </p>
+                            <p>
+                                Shipping <span>39kr</span>
+                            </p>
+                        </div>
                     </div>
-                    <form onSubmit={handleSubmit((data) => next({ ...data }))}>
-                        <SubmitButton text="continue" />
-                    </form>
+                    <div>
+                        <div>
+                            <p>
+                                Total <span>120kr</span>
+                            </p>
+                        </div>
+                        <form
+                            onSubmit={handleSubmit((data) => next({ ...data }))}
+                        >
+                            <SubmitButton text="continue" />
+                        </form>
+                    </div>
                 </div>
             </div>
-        </>
+        </section>
     );
 }
