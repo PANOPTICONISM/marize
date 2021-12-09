@@ -45,5 +45,7 @@
 }
 
 .contact_info {
-    grid-column: 2/8;
+    grid-column: 2/7;
+    border: 1px solid var(--black-colour);
+    padding: 20px;
 }
