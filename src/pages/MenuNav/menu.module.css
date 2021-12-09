@@ -1,0 +1,49 @@
+.menu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: calc(100vh - 200px);
+    background-color: var(--white-colour);
+}
+.close {
+    position: absolute;
+    top: 0;
+    right: 3%;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--black-colour);
+    z-index: 100;
+}
+.nav_wrapper,
+.contact_wrapper {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto;
+    margin-top: 3rem;
+}
+.nav_title {
+    grid-column: 2/3;
+    grid-row: auto;
+    line-height: 0px;
+}
+.menu_sections,
+.contact_info {
+    grid-column: 2/3;
+    grid-row: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.about_section {
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+    background-color: violet;
+}
+
+.contact_info {
+    grid-column: 2/8;
+}
