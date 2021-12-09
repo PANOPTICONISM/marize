@@ -34,3 +34,8 @@
     fill: var(--white-colour);
     margin-right: 12px;
 }
+
+.checkoutButton {
+    width: 100%;
+    margin-top: 16px;
+}

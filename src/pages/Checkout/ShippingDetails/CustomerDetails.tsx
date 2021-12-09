@@ -7,7 +7,7 @@ import {
     Typography,
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import { SubmitButton } from "../../components/Buttons/Buttons";
+import { SubmitButton } from "../../../components/Buttons/Buttons";
 
 type FormValues = {
     firstname: string;

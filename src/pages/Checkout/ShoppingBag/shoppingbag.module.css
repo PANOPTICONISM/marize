@@ -1,0 +1,61 @@
+.shoppingArticle {
+    max-width: 230px;
+    margin: 36px auto;
+    position: relative;
+}
+
+.shoppingArticle p span,
+.priceSummary p span {
+    font-weight: 700;
+}
+
+.shoppingArticle p {
+    margin: 6px 0;
+}
+
+.shoppingArticle .moveFromCart {
+    margin: 18px 0;
+}
+
+.shoppingArticle .moveFromCart span {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+.shoppingArticle .moveFromCart svg {
+    margin-right: 4px;
+    font-size: 16px;
+}
+
+.shoppingArticle .bagPrice {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 6px;
+    background-color: var(--primary-colour);
+    color: var(--white-colour);
+}
+
+.priceSummary {
+    max-width: 230px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid var(--black-colour);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.priceSummary h2 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.priceSummary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px 0;
+}

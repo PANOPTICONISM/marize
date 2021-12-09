@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { commerce } from "../../lib/Commerce";
-import ShoppingBag from "../../pages/Checkout/ShoppingBag";
+import ShoppingBag from "../../pages/Checkout/ShoppingBag/ShoppingBag";
 import Main from "../Main/Main";
 import { Stepper, Step, StepLabel } from "@material-ui/core";
-import CustomerDetails from "../../pages/Checkout/CustomerDetails";
+import CustomerDetails from "../../pages/Checkout/ShippingDetails/CustomerDetails";
 
 function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
     const { cart } = useShoppingBagCMS();

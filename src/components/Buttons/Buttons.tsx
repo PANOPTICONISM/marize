@@ -76,7 +76,7 @@ export function SubmitButton({
     return (
         <button
             type="submit"
-            className={`${style.globalButton} ${style.cartButton}`}
+            className={`${style.globalButton} ${style.checkoutButton}`}
         >
             {text}
         </button>

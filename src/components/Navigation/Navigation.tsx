@@ -14,8 +14,6 @@ export default function Navigation() {
     const [modal, setModal] = useState(false);
     const toggleModal = () => setModal(!modal);
 
-    console.log("cart", cart);
-
     const cartTotal =
         cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
 
