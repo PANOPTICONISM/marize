@@ -11,12 +11,7 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
     const [tokenId, setTokenId] = useState();
     const [liveObject, setLiveObject] = useState();
     const [shipping, setShipping] = useState({});
-    const steps = [
-        "Product Details",
-        "Customer Details",
-        "Payment Details",
-        "Confirmation",
-    ];
+    const steps = ["Shopping Bag", "Shipping Details", "Confirmation"];
     const [activeStep, setActiveStep] = useState(0);
     const nextStep = () =>
         setActiveStep((prevActiveStep) => prevActiveStep + 1);

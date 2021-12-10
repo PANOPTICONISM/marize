@@ -4,6 +4,16 @@
     position: relative;
 }
 
+.shoppingBag h1 {
+    text-transform: capitalize;
+    margin-top: 0;
+}
+
+.shoppingBag h1 span {
+    font-weight: 300;
+    font-size: 26px;
+}
+
 .shoppingArticle p span,
 .priceSummary p span,
 .descDetails p:first-child {
@@ -62,6 +72,12 @@
     margin: 6px 0;
 }
 
+.priceSummary .importDuties {
+    justify-content: flex-end;
+    font-size: 14px;
+    color: #9C9C9C;
+}
+
 .shoppingBag {
     grid-area: a;
 }
@@ -79,7 +95,11 @@
 @media screen and (min-width: 800px) {
     .shoppingBagWrapper {
         max-width: 800px;
-        margin: 0 auto;
+        margin: 30px auto;
+    }
+
+    .shoppingBag h1 {
+        text-align: left;
     }
 
     .shoppingArticle {
@@ -139,7 +159,7 @@
     }
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1200px) {
     .shoppingBagWrapper {
         display: grid;
         justify-content: space-between;
@@ -147,7 +167,14 @@
         max-width: none;
     }
 
+    .shoppingArticle {
+        margin: 30px 0;
+    }
+
     .priceSummary {
+        max-width: none;
         width: 300px;
+        height: 500px;
+        margin-top: 0;
     }
 }

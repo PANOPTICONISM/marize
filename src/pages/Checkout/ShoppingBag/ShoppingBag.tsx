@@ -10,14 +10,19 @@ export default function ShoppingBag({ next }: { next?: any }) {
     const { handleSubmit } = useForm();
     const { cart } = useShoppingBagCMS();
 
-    console.log(cart);
     return (
         <section>
-            <h1>My Shopping Bag</h1>
             <div className={style.shoppingBagWrapper}>
                 <div className={style.shoppingBag}>
+                    <h1>
+                        My Shopping Bag
+                        <span> ({cart?.total_items} articles)</span>
+                    </h1>
                     {cart?.line_items.map((product: any) => (
-                        <article className={style.shoppingArticle}>
+                        <article
+                            key={product.id}
+                            className={style.shoppingArticle}
+                        >
                             <img src={product.image.url} alt={product.name} />
                             <div className={style.fullSpace}>
                                 <div className={style.descDetails}>
@@ -65,6 +70,9 @@ export default function ShoppingBag({ next }: { next?: any }) {
                         <div>
                             <p>
                                 Total <span>120kr</span>
+                            </p>
+                            <p className={style.importDuties}>
+                                (import duties included)
                             </p>
                         </div>
                         <form
