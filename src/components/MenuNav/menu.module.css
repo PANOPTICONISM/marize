@@ -3,11 +3,13 @@
     left: 0;
     top: 0;
     right: 0;
+    bottom: 0;
     width: 100vw;
-    height: 90vw;
+    height: 100vh;
     background-color: var(--white-colour);
-    z-index: 202;
+    z-index: 1000;
 }
+
 .close {
     position: absolute;
     top: 0;
@@ -86,4 +88,14 @@
 }
 .mail a {
     color: var(--black-colour);
+}
+@media screen and (max-width: 699px) {
+    .menu {
+        height: 250vh;
+    }
+}
+@media screen and (min-width: 700px) {
+    .menu {
+        height: 150vh;
+    }
 }
