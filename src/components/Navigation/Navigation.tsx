@@ -23,15 +23,10 @@ export default function Navigation() {
 
     return (
         <nav className={style.wrapper}>
+            {menuOpen && <MenuNav toggleOpen={toggleOpen} />}
             <div className={style.left_nav}>
                 <div onClick={toggleOpen}>
                     <Hamburger />
-                    {menuOpen && (
-                        <MenuNav
-                            setMenuOpen={setMenuOpen}
-                            toggleOpen={toggleOpen}
-                        />
-                    )}
                 </div>
 
                 <div className={style.search_bar_wrapper}>

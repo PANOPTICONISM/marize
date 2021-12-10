@@ -7,13 +7,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineLockClock } from "react-icons/md";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import VisitStore from "../VisitStore/VisitStore";
-export default function MenuNav({
-    toggleOpen,
-    setMenuOpen,
-}: {
-    toggleOpen: any;
-    setMenuOpen: any;
-}) {
+export default function MenuNav({ toggleOpen }: { toggleOpen: any }) {
     const { categories } = useCommerceCMS();
     let navCategories = categories?.filter((cat) => {
         return cat.slug !== "accessories";
