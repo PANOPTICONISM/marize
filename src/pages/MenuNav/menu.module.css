@@ -61,6 +61,12 @@
    margin: 3px;
    text-align: center;
 }
+.facebook a{
+    color: var(--white-colour); 
+}
+.adress a{
+    color: var(--black-colour); 
+}
 .facebook svg, .hours svg, .adress svg, .mail svg, .phone svg{
 position: relative;
 font-size: 1.8rem;

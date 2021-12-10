@@ -16,7 +16,6 @@ export default function MenuNav() {
    }
     )
   navCategories = navCategories?.reverse();
-  console.log(navCategories)
     //toggle on menu
     const [isOpen, setIsOpen] = useState(false);
     return (
@@ -29,7 +28,7 @@ export default function MenuNav() {
               <div key ={i} className={style.menu_sections}>
                   <h4> {cats.name} </h4> 
                    {cats.children.map((c: any)=>(
-                     <span>{c.name}&nbsp;&nbsp; </span>
+                     <span key={c.id}>{c.name}&nbsp;&nbsp; </span>
                           )      
                    )} 
                 
@@ -52,7 +51,8 @@ export default function MenuNav() {
             <div className={style.contact_wrapper}>
                 <div className={style.contact_info}>
                     <div className={style.facebook}>
-                        <h4>Connect with us on <AiOutlineFacebook/></h4>
+                    <h4>Connect with us on <a href="https://www.facebook.com/loja.marize" target="_blank" rel="noreferrer"><AiOutlineFacebook/></a></h4>
+                      
                     </div>
                     <div className={style.phone}>
                         <h4><FiPhoneIncoming/> Phone-number</h4>
@@ -64,7 +64,9 @@ export default function MenuNav() {
                        </p>
                     </div>
                     <div className={style.adress}>
-                        <h4> <IoLocationOutline/> Store's adress</h4>
+                        <h4><a href="https://www.google.fr/maps/place/Rua Mouzinho de Albuquerque 81, 
+                            4930-733 Valença, Portugal" target="_blank" rel="noreferrer"><IoLocationOutline/></a>
+                             Store's adress</h4>
                         <p>Rua Mouzinho de Albuquerque 81, <br/> 
                             4930-733 Valença, Portugal</p>  
                         </div>
