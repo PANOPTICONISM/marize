@@ -1,6 +1,12 @@
 import style from "./menu.module.css";
 import { useState } from "react";
 import { MdHighlightOff } from "react-icons/md";
+import { AiOutlineFacebook} from "react-icons/ai";
+import { FiPhoneIncoming} from "react-icons/fi";
+import { RiMailSendLine} from "react-icons/ri";
+import { IoLocationOutline} from "react-icons/io5";
+import { MdOutlineLockClock} from "react-icons/md";
+
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import VisitStore from "../../components/VisitStore/VisitStore";
 export default function MenuNav() {
@@ -30,14 +36,14 @@ export default function MenuNav() {
                 </div>  
                 )
             )}
-             <div className={style.last_section}>
+             {/* <div className={style.last_section}>
                     <h4>About Marizé</h4>
                     <p>Our Story</p>
                   <div className="returns">
                   <h4>Returns</h4>
                   </div>     
-                </div>
-                 </div>
+                </div>*/}
+                 </div> 
             <div className={style.img_component}>
             <VisitStore />
             </div>
@@ -46,24 +52,24 @@ export default function MenuNav() {
             <div className={style.contact_wrapper}>
                 <div className={style.contact_info}>
                     <div className={style.facebook}>
-                        <h4>Connect with us on </h4>
+                        <h4>Connect with us on <AiOutlineFacebook/></h4>
                     </div>
                     <div className={style.phone}>
-                        <h4>Phone-number</h4>
+                        <h4><FiPhoneIncoming/> Phone-number</h4>
                         <p>+351 251 823 857</p>
                     </div>
                     <div className={style.mail}>
-                    <h4>E-mail</h4>
+                    <h4>< RiMailSendLine/>  E-mail</h4>
                     <p><a href="mailto: hello@marize.pt" > hello@marize.pt</a>
                        </p>
                     </div>
                     <div className={style.adress}>
-                        <h4>Store's adress</h4>
+                        <h4> <IoLocationOutline/> Store's adress</h4>
                         <p>Rua Mouzinho de Albuquerque 81, <br/> 
                             4930-733 Valença, Portugal</p>  
                         </div>
                     <div className={style.hours}>
-                        <h4>Opening hours</h4>
+                        <h4> <MdOutlineLockClock/> Opening hours</h4>
                         <p>Mon - Sat, 10:00 - 19:00 <br/>
                         Sunday, 10:00 - 19:00</p>
                     </div>
