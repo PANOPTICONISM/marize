@@ -4,7 +4,7 @@ import { commerce } from "../../lib/Commerce";
 import ShoppingBag from "../../pages/Checkout/ShoppingBag/ShoppingBag";
 import Main from "../Main/Main";
 import { Stepper, Step, StepLabel, makeStyles } from "@material-ui/core";
-import CustomerDetails from "../../pages/Checkout/ShippingDetails/CustomerDetails";
+import ShippingDetails from "../../pages/Checkout/ShippingDetails/ShippingDetails";
 
 function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
     const { cart } = useShoppingBagCMS();
@@ -80,7 +80,7 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
                 ))}
             </Stepper>
             {activeStep === 0 && <ShoppingBag next={next} />}
-            {activeStep === 1 && <CustomerDetails />}
+            {activeStep === 1 && <ShippingDetails />}
             {/* {activeStep === steps.length && <ConfirmationPage />} */}
         </Main>
     );

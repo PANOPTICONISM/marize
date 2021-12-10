@@ -15,7 +15,7 @@ type FormValues = {
     phonenumber: number;
 };
 
-export default function CustomerDetails() {
+export default function ShippingDetails() {
     const {
         register,
         handleSubmit,
