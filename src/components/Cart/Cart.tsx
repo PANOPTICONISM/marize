@@ -29,8 +29,6 @@ export function ProductCard({ product }: { product: any }) {
             .then(({ cart }: { cart: any }) => setCart(cart));
     };
 
-    console.log(product);
-
     return (
         <div className={style.fullCart}>
             <img src={product.image.url} alt={product.name} />
@@ -40,8 +38,6 @@ export function ProductCard({ product }: { product: any }) {
                         <h4>{product.name}</h4>
                         <h5>{product.price.formatted_with_code}</h5>
                     </div>
-                    <p>Colour</p>
-                    <p>Size</p>
                 </div>
                 <div className={style.bottomProduct}>
                     <div>
@@ -53,10 +49,11 @@ export function ProductCard({ product }: { product: any }) {
                             <AiOutlineHeart />
                         </button>
                     </div>
-                    <div>{product.quantity}</div>
+                    <select name="quantity" id="quantity">
+                        <option value="number">{product.quantity}</option>
+                    </select>
                 </div>
             </div>
-            <div></div>
         </div>
     );
 }

@@ -47,6 +47,9 @@ nav.wrapper {
 
 .shoppingBag {
     position: relative;
+}
+
+.right_nav svg {
     cursor: pointer;
 }
 

@@ -27,12 +27,15 @@
     align-items: center;
     justify-content: center;
     padding: 12px;
+    margin-top: 12px;
+    font-size: 14px;
+    width: 100%;
 }
 
 .cartButton svg {
-    font-size: 24px;
+    font-size: 20px;
     fill: var(--white-colour);
-    margin-right: 12px;
+    margin-right: 6px;
 }
 
 .checkoutButton {
