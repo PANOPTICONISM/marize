@@ -49,7 +49,10 @@ export function ProductDetails({ product }: { product?: any }) {
                     </a>
                 </div>
                 <div className={style.shopping}>
-                    <CartButton onClick={addToCart} />
+                    <CartButton
+                        text="Add to shopping bag"
+                        onClick={addToCart}
+                    />
                     <AiOutlineHeart className={style.shoppingSVG} />
                 </div>
                 <div className={style.details}>

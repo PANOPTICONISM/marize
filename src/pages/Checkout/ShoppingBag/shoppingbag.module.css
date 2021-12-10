@@ -1,0 +1,174 @@
+.finalSummary {
+    max-width: 230px;
+    margin: 36px auto;
+    position: relative;
+}
+
+.shoppingBag h1 {
+    text-transform: capitalize;
+    margin-top: 0;
+}
+
+.shoppingBag h1 span {
+    font-weight: 300;
+    font-size: 26px;
+}
+
+.shoppingArticle p span,
+.priceSummary p span,
+.descDetails p:first-child {
+    font-weight: 700;
+}
+
+.shoppingArticle p {
+    margin: 6px 0;
+}
+
+.shoppingArticle .moveFromCart {
+    margin: 18px 0;
+}
+
+.shoppingArticle .moveFromCart span {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    margin: 4px 0;
+}
+
+.shoppingArticle .moveFromCart svg {
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+.shoppingArticle .bagPrice {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 6px;
+    background-color: var(--primary-colour);
+    color: var(--white-colour);
+}
+
+.priceSummary {
+    max-width: 230px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid var(--black-colour);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.priceSummary h2 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.priceSummary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px 0;
+}
+
+.priceSummary .importDuties {
+    justify-content: flex-end;
+    font-size: 14px;
+    color: #9C9C9C;
+}
+
+.priceSummary .submitButton {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.shoppingBag img {
+    width: 230px;
+    height: 300px;
+    object-fit: contain;
+}
+
+.descDetails div p:first-child {
+    margin-bottom: 18px;
+}
+
+@media screen and (min-width: 800px) {
+    .shoppingBagWrapper {
+        max-width: 800px;
+        margin: 30px auto;
+    }
+
+    .shoppingBag h1 {
+        text-align: left;
+    }
+
+    .shoppingBag {
+        max-width: 800px;
+        margin: 30px;
+        margin-top: 0;
+    }
+
+    .shoppingArticle {
+        display: flex;
+    }
+
+    .shoppingArticle img {
+        margin-right: 18px;
+    }
+
+    .descDetails,
+    .flex {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .flex {
+        align-items: flex-end;
+    }
+
+    .shoppingArticle div {
+        width: 100%;
+    }
+
+    .shoppingArticle .bagPrice {
+        position: inherit;
+    }
+
+    .shoppingArticle .fullSpace {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .shoppingArticle .moveFromCart {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .shoppingArticle .bagPrice {
+        background: none;
+        color: var(--black-colour);
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .shoppingBagWrapper {
+        display: grid;
+        justify-content: space-between;
+        grid-template-columns: 2fr 1fr;
+        gap: 30px;
+        max-width: none;
+    }
+
+    .shoppingArticle {
+        margin: 30px 0;
+    }
+
+    .priceSummary {
+        max-width: none;
+        width: 240px;
+        height: 500px;
+        margin-top: 0;
+    }
+}

@@ -1,0 +1,150 @@
+.shoppingArticle {
+    max-width: 230px;
+    margin: 36px auto;
+    position: relative;
+}
+
+.shoppingBag h1 {
+    text-transform: capitalize;
+    margin-top: 0;
+}
+
+.shoppingBag h1 span {
+    font-weight: 300;
+    font-size: 26px;
+}
+
+.shoppingArticle p span,
+.priceSummary p span,
+.descDetails p:first-child {
+    font-weight: 700;
+}
+
+.shoppingArticle p {
+    margin: 6px 0;
+}
+
+.shoppingArticle .bagPrice {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 6px;
+    background-color: var(--primary-colour);
+    color: var(--white-colour);
+}
+
+.shoppingBag img {
+    width: 230px;
+    height: 300px;
+    object-fit: contain;
+}
+
+/* SIDEBAR */
+.confirmOrder aside table {
+    width: 100%;
+}
+
+.confirmOrder aside table tr td:last-of-type {
+    text-align: right;
+}
+
+.confirmOrder aside {
+    padding: 30px;
+    border: 1px solid var(--black-colour);
+    max-width: 300px;
+    margin: auto;
+}
+
+.confirmOrder h2 {
+    margin-top: 0;
+}
+
+.confirmOrder table {
+    margin-bottom: 30px;
+}
+
+.descDetails>p {
+    white-space: nowrap;
+}
+
+.confirmOrder .confirmButton {
+    max-width: 100%;
+    margin: 18px 0;
+    text-align: center;
+}
+
+@media screen and (min-width: 800px) {
+    .confirmOrder {
+        max-width: 800px;
+        margin: 30px auto;
+    }
+
+    .shoppingBag h1 {
+        text-align: left;
+    }
+
+    .confirmOrder aside {
+        margin-top: 0;
+    }
+
+    .shoppingArticle {
+        max-width: 800px;
+        margin: 0px;
+        display: flex;
+    }
+
+    .shoppingArticle img {
+        margin-right: 18px;
+    }
+
+    .descDetails {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .flex {
+        text-align: right;
+    }
+
+    .shoppingArticle div {
+        width: 100%;
+    }
+
+    .shoppingArticle .bagPrice {
+        position: inherit;
+    }
+
+    .shoppingArticle .fullSpace {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .shoppingArticle .bagPrice {
+        background: none;
+        color: var(--black-colour);
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .confirmOrder {
+        display: grid;
+        justify-content: space-between;
+        grid-template-columns: 2fr 1fr;
+        gap: 60px;
+        max-width: none;
+    }
+
+    .shoppingArticle {
+        margin: 30px 0;
+    }
+
+    .confirmOrder aside {
+        width: 280px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+}
