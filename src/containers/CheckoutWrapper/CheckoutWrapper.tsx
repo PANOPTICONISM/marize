@@ -5,18 +5,14 @@ import ShoppingBag from "../../pages/Checkout/ShoppingBag/ShoppingBag";
 import Main from "../Main/Main";
 import { Stepper, Step, StepLabel, makeStyles } from "@material-ui/core";
 import ShippingDetails from "../../pages/Checkout/ShippingDetails/ShippingDetails";
+import Confirmation from "../../pages/Checkout/Confirmation/Confirmation";
 
 function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
     const { cart } = useShoppingBagCMS();
     const [checkoutTokenId, setCheckoutTokenId] = useState();
     const [liveObject, setLiveObject] = useState();
-    const [shipping, setShipping] = useState({});
+    const [shippingData, setShippingData] = useState({});
     const steps = ["Shopping Bag", "Shipping Details", "Confirmation"];
-    const [activeStep, setActiveStep] = useState(0);
-    const nextStep = () =>
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    const backStep = () =>
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
     useEffect(() => {
         if (cart?.id) {
@@ -39,9 +35,15 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
         }
     }, [cart]);
 
+    const [activeStep, setActiveStep] = useState(0);
+    const nextStep = () =>
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    const backStep = () =>
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+
     const next = (data: any) => {
-        setShipping(data);
-        console.log(data);
+        setShippingData(data);
+        console.log(data, "shipping data");
 
         nextStep();
     };
@@ -81,9 +83,14 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
             </Stepper>
             {activeStep === 0 && <ShoppingBag next={next} />}
             {activeStep === 1 && (
-                <ShippingDetails checkoutTokenId={checkoutTokenId} />
+                <ShippingDetails
+                    checkoutTokenId={checkoutTokenId}
+                    next={next}
+                />
             )}
-            {/* {activeStep === steps.length && <ConfirmationPage />} */}
+            {activeStep === steps.length && (
+                <Confirmation shippingData={shippingData} />
+            )}
         </Main>
     );
 }

@@ -19,21 +19,20 @@ type FormValues = {
     phonenumber: number;
     address: string;
     zip: string;
-    city: string;
-    country: string;
 };
 
 export default function ShippingDetails({
     checkoutTokenId,
+    next,
 }: {
     checkoutTokenId?: any;
+    next?: any;
 }) {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<FormValues>();
-    console.log(checkoutTokenId, "token");
 
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState("");
@@ -81,13 +80,48 @@ export default function ShippingDetails({
         label: name,
     }));
 
+    const fetchShippingOptions = async (
+        checkoutTokenId: any,
+        country: any,
+        region: any
+    ) => {
+        const options = await commerce.checkout.getShippingOptions(
+            checkoutTokenId,
+            { country, region }
+        );
+
+        setShippingOptions(options);
+        setShippingOption(options[0].id);
+    };
+
+    useEffect(() => {
+        if (shippingCity) {
+            fetchShippingOptions(
+                checkoutTokenId.id,
+                shippingCountry,
+                shippingCity
+            );
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [shippingCity]);
+
+    const options = shippingOptions.map((option: any) => ({
+        id: option.id,
+        label: `${option.description} - (${option.price.formatted_with_symbol})`,
+    }));
+
     return (
         <section className={style.shippingDetails}>
             <h1>Shipping Details</h1>
             <form
-                onSubmit={handleSubmit((data) => {
-                    console.log(data);
-                })}
+                onSubmit={handleSubmit((data) =>
+                    next({
+                        ...data,
+                        shippingCountry,
+                        shippingCity,
+                        shippingOption,
+                    })
+                )}
             >
                 <div>
                     <label htmlFor="firstname">First name</label>
@@ -97,12 +131,6 @@ export default function ShippingDetails({
                     />
                     {errors.firstname && <p>This is required</p>}
                 </div>
-
-                <div>
-                    <label htmlFor="lastname">Last name</label>
-                    <input {...register("lastname")} id="lastname" />
-                </div>
-
                 <div>
                     <label htmlFor="lastname">Last name</label>
                     <input {...register("lastname")} id="lastname" />
@@ -132,10 +160,6 @@ export default function ShippingDetails({
                 <div>
                     <label htmlFor="zip">Zip code</label>
                     <input {...register("zip")} id="zip" />
-                </div>
-                <div>
-                    <label htmlFor="city">City</label>
-                    <input {...register("city")} id="city" />
                 </div>
                 <Grid item xs={12} sm={6}>
                     <InputLabel>Country</InputLabel>
@@ -167,14 +191,20 @@ export default function ShippingDetails({
                         ))}
                     </Select>
                 </Grid>
-                {/* <Grid item xs={12} sm={6}>
-                    <InputLabel>Options</InputLabel>
-                    <Select value={} fullWidth onChange={}>
-                        <MenuItem key={} value={}>
-                            Me
-                        </MenuItem>
+                <Grid item xs={12} sm={6}>
+                    <InputLabel>Shipping Options</InputLabel>
+                    <Select
+                        value={shippingOption}
+                        fullWidth
+                        onChange={(e: any) => setShippingOption(e.target.value)}
+                    >
+                        {options.map((option) => (
+                            <MenuItem key={option.id} value={option.id}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
                     </Select>
-                </Grid> */}
+                </Grid>
                 <SubmitButton text="continue" />
             </form>
         </section>
