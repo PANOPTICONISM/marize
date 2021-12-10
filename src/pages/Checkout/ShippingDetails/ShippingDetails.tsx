@@ -197,7 +197,7 @@ export default function ShippingDetails({
                             ))}
                         </Select>
                     </div>
-                    <div className={style.input}>
+                    <div>
                         <div>
                             <InputLabel>City</InputLabel>
                             <Select
@@ -216,7 +216,7 @@ export default function ShippingDetails({
                         </div>
                     </div>
                 </div>
-                <div className={`${style.input} ${style.options}`}>
+                <div className={style.options}>
                     <InputLabel>Shipping Options</InputLabel>
                     <Select
                         value={shippingOption}

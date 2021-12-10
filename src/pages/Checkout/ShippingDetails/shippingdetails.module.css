@@ -13,6 +13,10 @@
     margin-top: 12px;
 }
 
+.shippingDetails section input {
+    padding: 6px;
+}
+
 .shippingDetails section div {
     display: flex;
     flex-direction: column;
@@ -27,6 +31,11 @@
     color: var(--black-colour);
     font-size: 14px;
     font-family: Tahoma;
+}
+
+.shippingDetails .input>div,
+.shippingDetails .options {
+    margin-top: 12px;
 }
 
 .shippingDetails ::placeholder {
@@ -51,19 +60,19 @@
     }
 
     .shippingDetails form section,
-    .shippingDetails .input:not(:last-of-type) {
+    .shippingDetails .input:not(.options) {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 0 12px;
         align-items: baseline;
     }
 
-    .shippingDetails .input {
-        margin-top: 6px;
-    }
-
     .shippingDetails .options {
         margin-top: 12px;
+    }
+
+    .shippingDetails .input {
+        margin-top: 0;
     }
 
     .shippingDetails .buttons {
