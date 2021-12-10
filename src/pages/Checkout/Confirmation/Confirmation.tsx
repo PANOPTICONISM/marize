@@ -1,10 +1,15 @@
-import { CartButton, PrimaryButton } from "../../../components/Buttons/Buttons";
+import { ContinueButton } from "../../../components/Buttons/Buttons";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./confirmation.module.css";
 
-function Confirmation({ shippingData }: { shippingData?: any }) {
+function Confirmation({
+    shippingData,
+    next,
+}: {
+    shippingData?: any;
+    next?: any;
+}) {
     const { cart } = useShoppingBagCMS();
-    console.log(shippingData, cart);
     const totalPrice = shippingData.shippingPrice + cart.subtotal.raw;
     return (
         <div className={style.confirmOrder}>
@@ -93,7 +98,7 @@ function Confirmation({ shippingData }: { shippingData?: any }) {
                         </tr>
                     </tbody>
                 </table>
-                <CartButton text="Confirm Order" />
+                <ContinueButton onClick={next} text="Confirm Order" />
             </aside>
         </div>
     );

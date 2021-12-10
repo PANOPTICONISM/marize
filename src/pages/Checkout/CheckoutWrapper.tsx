@@ -6,6 +6,7 @@ import { Stepper, Step, StepLabel, makeStyles } from "@material-ui/core";
 import ShippingDetails from "./ShippingDetails/ShippingDetails";
 import Confirmation from "./Confirmation/Confirmation";
 import Main from "../../containers/Main/Main";
+import OrderProcessed from "./OrderProcessed/OrderProcessed";
 
 function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
     const { cart } = useShoppingBagCMS();
@@ -42,7 +43,6 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
 
     const next = (data: any) => {
         setShippingData(data);
-        console.log(data, "shipping data");
 
         nextStep();
     };
@@ -67,21 +67,21 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
 
     const mui = useStyles();
 
-    console.log(steps.length, activeStep);
-
     return (
         <Main>
-            <Stepper
-                className={mui.root}
-                activeStep={activeStep}
-                alternativeLabel
-            >
-                {steps.map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
+            {activeStep !== steps.length && (
+                <Stepper
+                    className={mui.root}
+                    activeStep={activeStep}
+                    alternativeLabel
+                >
+                    {steps.map((label) => (
+                        <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+            )}
             {activeStep === 0 && <ShoppingBag next={next} />}
             {activeStep === 1 && (
                 <ShippingDetails
@@ -90,7 +90,12 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
                     next={next}
                 />
             )}
-            {activeStep === 2 && <Confirmation shippingData={shippingData} />}
+            {activeStep === 2 && (
+                <Confirmation next={next} shippingData={shippingData} />
+            )}
+            {activeStep === steps.length && (
+                <OrderProcessed shippingData={shippingData} />
+            )}
         </Main>
     );
 }
