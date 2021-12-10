@@ -74,6 +74,23 @@ export function CartButton({
     );
 }
 
+export function ContinueButton({
+    onClick,
+    text,
+}: {
+    onClick?: () => void;
+    text?: string;
+}) {
+    return (
+        <button
+            onClick={onClick}
+            className={`${style.globalButton} ${style.cartButton}`}
+        >
+            {text}
+        </button>
+    );
+}
+
 export function SubmitButton({
     className,
     text,

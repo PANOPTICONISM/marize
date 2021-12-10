@@ -3,7 +3,6 @@ import Homepage from "../pages/Homepage/Homepage";
 import Product from "../pages/Products/Product/Product";
 import Products from "../pages/Products/Products";
 import CheckoutWrapper from "../pages/Checkout/CheckoutWrapper";
-import OrderProcessed from "../pages/Checkout/OrderProcessed/OrderProcessed";
 
 function Paths() {
     return (
@@ -12,10 +11,6 @@ function Paths() {
             <Route path="/products" element={<Products />} />
             <Route path="/products/:productId" element={<Product />} />
             <Route path="/checkout/:cartId" element={<CheckoutWrapper />} />
-            <Route
-                path="/thank-you-for-your-purchase"
-                element={<OrderProcessed />}
-            />
         </Routes>
     );
 }

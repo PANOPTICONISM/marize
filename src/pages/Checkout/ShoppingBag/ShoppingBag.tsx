@@ -1,5 +1,9 @@
 import React from "react";
-import { SubmitButton } from "../../../components/Buttons/Buttons";
+import {
+    CartButton,
+    ContinueButton,
+    SubmitButton,
+} from "../../../components/Buttons/Buttons";
 import { useForm } from "react-hook-form";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./shoppingbag.module.css";
@@ -75,14 +79,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                                 (import duties included)
                             </p>
                         </div>
-                        <form
-                            onSubmit={handleSubmit((data) => next({ ...data }))}
-                        >
-                            <SubmitButton
-                                className={style.submitButton}
-                                text="continue"
-                            />
-                        </form>
+                        <ContinueButton onClick={next} text="continue" />
                     </div>
                 </div>
             </div>
