@@ -24,7 +24,7 @@ export default function Navigation() {
     return (
         <nav className={style.wrapper}>
             <div className={style.left_nav}>
-                <div onClick={() => setMenuOpen(true)}>
+                <div onClick={toggleOpen}>
                     <Hamburger />
                     {menuOpen && (
                         <MenuNav
