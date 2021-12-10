@@ -1,4 +1,4 @@
-import { CartButton } from "../../../components/Buttons/Buttons";
+import { PrimaryButton } from "../../../components/Buttons/Buttons";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./confirmation.module.css";
 
@@ -93,7 +93,11 @@ function Confirmation({ shippingData }: { shippingData?: any }) {
                         </tr>
                     </tbody>
                 </table>
-                <CartButton text="Confirm Order" />
+                <PrimaryButton
+                    path="/thank-you-for-your-purchase"
+                    text="Confirm Order"
+                    className={style.confirmButton}
+                />
             </aside>
         </div>
     );

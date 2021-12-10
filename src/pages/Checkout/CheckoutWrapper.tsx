@@ -67,6 +67,8 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
 
     const mui = useStyles();
 
+    console.log(steps.length, activeStep);
+
     return (
         <Main>
             <Stepper
