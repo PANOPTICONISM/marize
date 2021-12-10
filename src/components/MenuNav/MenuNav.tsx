@@ -7,7 +7,13 @@ import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineLockClock } from "react-icons/md";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import VisitStore from "../VisitStore/VisitStore";
-export default function MenuNav({ setMenuOpen }: { setMenuOpen: any }) {
+export default function MenuNav({
+    toggleOpen,
+    setMenuOpen,
+}: {
+    toggleOpen: any;
+    setMenuOpen: any;
+}) {
     const { categories } = useCommerceCMS();
     let navCategories = categories?.filter((cat) => {
         return cat.slug !== "accessories";
@@ -16,9 +22,10 @@ export default function MenuNav({ setMenuOpen }: { setMenuOpen: any }) {
 
     return (
         <div className={style.menu}>
-            <p className={style.close}>
-                <MdHighlightOff onClick={() => setMenuOpen(false)} />
-            </p>
+            <div className={style.close} onClick={toggleOpen}>
+                <MdHighlightOff />
+            </div>
+
             <div className={style.nav_wrapper}>
                 {navCategories?.map(
                     (cats: { name: string; children: any[] }, i: number) => (
@@ -41,7 +48,6 @@ export default function MenuNav({ setMenuOpen }: { setMenuOpen: any }) {
             <div className={style.img_component}>
                 <VisitStore />
             </div>
-
             <div className={style.contact_wrapper}>
                 <div className={style.contact_info}>
                     <div className={style.facebook}>

@@ -7,17 +7,16 @@
     width: 100vw;
     height: 100vh;
     background-color: var(--white-colour);
-    z-index: 1000;
+    z-index: 900;
 }
 
 .close {
     position: absolute;
-    top: 0;
+    top: 1%;
     right: 4%;
     font-size: 2rem;
     cursor: pointer;
     color: var(--black-colour);
-    z-index: 100;
 }
 .nav_wrapper,
 .contact_wrapper {
@@ -92,6 +91,10 @@
 @media screen and (max-width: 699px) {
     .menu {
         height: 250vh;
+    }
+    .nav_wrapper,
+    .contact_wrapper {
+        margin-top: 8rem;
     }
 }
 @media screen and (min-width: 700px) {
