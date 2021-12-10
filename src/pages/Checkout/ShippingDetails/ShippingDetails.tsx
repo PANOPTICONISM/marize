@@ -61,6 +61,26 @@ export default function ShippingDetails({
         label: name,
     }));
 
+    const fetchCities = async (countryCode: any) => {
+        const { subdivisions } = await commerce.services.localeListSubdivisions(
+            countryCode
+        );
+
+        setShippingCities(subdivisions);
+        setShippingCity(Object.keys(subdivisions)[0]);
+    };
+
+    useEffect(() => {
+        if (shippingCountry) {
+            fetchCities(shippingCountry);
+        }
+    }, [shippingCountry]);
+
+    const cities = Object.entries(shippingCities).map(([code, name]) => ({
+        id: code,
+        label: name,
+    }));
+
     return (
         <section className={style.shippingDetails}>
             <h1>Shipping Details</h1>
@@ -133,15 +153,21 @@ export default function ShippingDetails({
                         ))}
                     </Select>
                 </Grid>
-                {/* <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6}>
                     <InputLabel>City</InputLabel>
-                    <Select value={} fullWidth onChange={}>
-                        <MenuItem key={} value={}>
-                            Me
-                        </MenuItem>
+                    <Select
+                        value={shippingCity}
+                        fullWidth
+                        onChange={(e: any) => setShippingCity(e.target.value)}
+                    >
+                        {cities.map((city) => (
+                            <MenuItem key={city.id} value={city.id}>
+                                {city.label}
+                            </MenuItem>
+                        ))}
                     </Select>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                {/* <Grid item xs={12} sm={6}>
                     <InputLabel>Options</InputLabel>
                     <Select value={} fullWidth onChange={}>
                         <MenuItem key={} value={}>
