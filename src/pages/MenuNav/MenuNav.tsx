@@ -13,54 +13,61 @@ export default function MenuNav() {
     //toggle on menu
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className={style.menu}>
+         <div className={style.menu}>
             <p className={style.close} onClick={() => setIsOpen(false)}>
                 <MdHighlightOff />
-            </p>
-            <div className={style.nav_wrapper}>
-                {navCategories?.map((cats,i)=>
-                  ( <div className={style.nav_title}
-                    key ={i}>
-                        <h5>{cats.name}</h5>
-                    </div>)
-                    
-                )}
-                 </div>
-                {/* <div className={style.menu_sections}>
-                    <p>abc</p>
-                    <p>abc</p>
-                    <p>abc</p>
-                    <p>abc</p>
-                    <p>abc</p>
-                    <p>abc</p>
-                    <p>abc</p>
-                </div> */}
+             </p>
+           <div className={style.nav_wrapper}> 
+            {navCategories?.map((cats: { name: string; children: any[] }, i: number)=> (
+              <div key ={i} className={style.menu_sections}>
+                  <h4> {cats.name} </h4> 
+                   {cats.children.map((c: any)=>(
+                     <span>{c.name}&nbsp;&nbsp; </span>
+                          )      
+                   )} 
+                
+                </div>  
+                )
+            )}
+             <div className={style.last_section}>
+                    <h4>About Marizé</h4>
+                    <p>Our Story</p>
+                  <div className="returns">
+                  <h4>Returns</h4>
+                  </div>     
+                </div>
+            </div>   
            
-            {/* <div className={style.nav_wrapper}>
-                <div className={style.nav_title}>
-                    <h5>TITLE</h5>
-                </div>
-                <div className={style.about_section}>
-                    <p>abc</p>
-                    <p>abc</p>
-                </div>
-            </div> */}
+              
+               
+          
             {/* TODO: COMPONENT IMG HERE */}
             <div className={style.contact_wrapper}>
                 <div className={style.contact_info}>
-                    <div className="facebook">
-                        <p>FB</p>
+                    <div className={style.facebook}>
+                        <p>Connect with us on </p>
                     </div>
-                    <div className="phone">
-                        <p>123</p>
-                        <p>123</p>
-                        <p>123</p>
+                    <div className={style.phone}>
+                        <p>Phone-number</p>
+                        <p>+351 251 823 857</p>
                     </div>
-                    <div className="mail">mail</div>
-                    <div className="adress">adress</div>
-                    <div className="hours">hours</div>
+                    <div className={style.mail}>
+                    <p>E-mail</p>
+                    <p>hello@marize.pt</p>
+                    </div>
+                    <div className={style.adress}>
+                        <p>Store's adress</p>
+                        <p>Rua Mouzinho de Albuquerque 81, <br/> 
+                            4930-733 Valença, Portugal</p>  
+                        </div>
+                    <div className={style.hours}>
+                        <p>Opening hours</p>
+                        <p>Mon - Sat, 10:00 - 19:00 <br/>
+                        Sunday, 10:00 - 19:00</p>
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
+
