@@ -1,0 +1,22 @@
+.confirmOrder aside table {
+    width: 100%;
+}
+
+.confirmOrder aside table tr td:last-of-type {
+    text-align: right;
+}
+
+.confirmOrder aside {
+    padding: 30px;
+    border: 1px solid var(--black-colour);
+    max-width: 300px;
+    margin: auto;
+}
+
+.confirmOrder h2 {
+    margin-top: 0;
+}
+
+.confirmOrder table {
+    margin-bottom: 30px;
+}

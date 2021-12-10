@@ -88,9 +88,7 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
                     next={next}
                 />
             )}
-            {activeStep === steps.length && (
-                <Confirmation shippingData={shippingData} />
-            )}
+            {activeStep === 2 && <Confirmation shippingData={shippingData} />}
         </Main>
     );
 }

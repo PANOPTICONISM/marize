@@ -35,6 +35,7 @@ export default function ShippingDetails({
     const [shippingCity, setShippingCity] = useState("");
     const [shippingOptions, setShippingOptions] = useState([]);
     const [shippingOption, setShippingOption] = useState("");
+    const [shippingPrice, setShippingPrice] = useState("");
 
     const fetchShippingCountries = async (checkoutTokenId: any) => {
         const { countries } =
@@ -89,6 +90,12 @@ export default function ShippingDetails({
         setShippingOption(options[0].id);
     };
 
+    const options = shippingOptions.map((option: any) => ({
+        id: option.id,
+        label: `${option.description} - (${option.price.formatted_with_symbol})`,
+        price: option.price.raw,
+    }));
+
     useEffect(() => {
         if (shippingCity) {
             fetchShippingOptions(
@@ -96,14 +103,11 @@ export default function ShippingDetails({
                 shippingCountry,
                 shippingCity
             );
+
+            setShippingPrice(options[0]?.price);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [shippingCity]);
-
-    const options = shippingOptions.map((option: any) => ({
-        id: option.id,
-        label: `${option.description} - (${option.price.formatted_with_symbol})`,
-    }));
+    }, [shippingCity, options[0]?.id]);
 
     return (
         <section className={style.shippingDetails}>
@@ -115,6 +119,7 @@ export default function ShippingDetails({
                         shippingCountry,
                         shippingCity,
                         shippingOption,
+                        shippingPrice,
                     })
                 )}
             >
