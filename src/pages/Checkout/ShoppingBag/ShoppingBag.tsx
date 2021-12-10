@@ -1,17 +1,11 @@
 import React from "react";
-import {
-    CartButton,
-    ContinueButton,
-    SubmitButton,
-} from "../../../components/Buttons/Buttons";
-import { useForm } from "react-hook-form";
+import { ContinueButton } from "../../../components/Buttons/Buttons";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./shoppingbag.module.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 
 export default function ShoppingBag({ next }: { next?: any }) {
-    const { handleSubmit } = useForm();
     const { cart } = useShoppingBagCMS();
 
     return (
