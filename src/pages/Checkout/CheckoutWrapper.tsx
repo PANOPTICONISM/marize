@@ -10,7 +10,6 @@ import Main from "../../containers/Main/Main";
 function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
     const { cart } = useShoppingBagCMS();
     const [checkoutTokenId, setCheckoutTokenId] = useState();
-    const [liveObject, setLiveObject] = useState();
     const [shippingData, setShippingData] = useState({});
     const steps = ["Shopping Bag", "Shipping Details", "Confirmation"];
 
@@ -85,6 +84,7 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
             {activeStep === 1 && (
                 <ShippingDetails
                     checkoutTokenId={checkoutTokenId}
+                    back={backStep}
                     next={next}
                 />
             )}

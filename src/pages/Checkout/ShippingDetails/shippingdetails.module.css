@@ -35,9 +35,14 @@
     color: #D4D4D4;
 }
 
-.shippingDetails .submitButton {
-    margin: auto;
+.shippingDetails .buttons {
+    display: grid;
+    gap: 6px;
     margin-top: 12px;
+}
+
+.shippingDetails .buttons .submitButton {
+    grid-row: 1;
 }
 
 @media screen and (min-width: 700px) {
@@ -59,5 +64,13 @@
 
     .shippingDetails .options {
         margin-top: 12px;
+    }
+
+    .shippingDetails .buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .shippingDetails .submitButton {
+        grid-column: 2;
     }
 }

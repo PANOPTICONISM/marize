@@ -68,6 +68,20 @@ export function CartButton({
 
 export function SubmitButton({
     className,
+    text,
+}: {
+    className?: string;
+    text?: string;
+}) {
+    return (
+        <button type="submit" className={`${style.globalButton} ${className}`}>
+            {text}
+        </button>
+    );
+}
+
+export function BackButton({
+    className,
     onClick,
     text,
 }: {
@@ -76,7 +90,10 @@ export function SubmitButton({
     text?: string;
 }) {
     return (
-        <button type="submit" className={`${style.globalButton} ${className}`}>
+        <button
+            onClick={onClick}
+            className={`${style.backButton} ${className}`}
+        >
             {text}
         </button>
     );

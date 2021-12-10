@@ -1,14 +1,7 @@
 import { useForm } from "react-hook-form";
-import { SubmitButton } from "../../../components/Buttons/Buttons";
+import { BackButton, SubmitButton } from "../../../components/Buttons/Buttons";
 import style from "./shippingdetails.module.css";
-import {
-    InputLabel,
-    Select,
-    MenuItem,
-    Button,
-    Grid,
-    Typography,
-} from "@material-ui/core";
+import { InputLabel, Select, MenuItem } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { commerce } from "../../../lib/Commerce";
 
@@ -24,9 +17,11 @@ type FormValues = {
 export default function ShippingDetails({
     checkoutTokenId,
     next,
+    back,
 }: {
     checkoutTokenId?: any;
     next?: any;
+    back?: any;
 }) {
     const {
         register,
@@ -235,7 +230,13 @@ export default function ShippingDetails({
                         ))}
                     </Select>
                 </div>
-                <SubmitButton className={style.submitButton} text="continue" />
+                <div className={style.buttons}>
+                    <BackButton text="Return" onClick={back} />
+                    <SubmitButton
+                        className={style.submitButton}
+                        text="Next step"
+                    />
+                </div>
             </form>
         </section>
     );
