@@ -9,7 +9,39 @@ function Confirmation({ shippingData }: { shippingData?: any }) {
     return (
         <div className={style.confirmOrder}>
             <main>
-                <h1>My order</h1>
+                <div className={style.shoppingBag}>
+                    <h1>
+                        My Shopping Bag
+                        <span> ({cart?.total_items} articles)</span>
+                    </h1>
+                    {cart?.line_items.map((product: any) => (
+                        <article
+                            key={product.id}
+                            className={style.shoppingArticle}
+                        >
+                            <img src={product.image.url} alt={product.name} />
+                            <div className={style.fullSpace}>
+                                <div className={style.descDetails}>
+                                    <div>
+                                        <p>{product.name}</p>
+                                        <p>
+                                            <span>Colour:</span> Green
+                                        </p>
+                                        <p>
+                                            <span>Size:</span> M
+                                        </p>
+                                    </div>
+                                    <p>2 pieces</p>
+                                </div>
+                                <div className={style.flex}>
+                                    <span className={style.bagPrice}>
+                                        20EUR
+                                    </span>
+                                </div>
+                            </div>
+                        </article>
+                    ))}
+                </div>
             </main>
             <aside>
                 <h2>Order details</h2>

@@ -31,13 +31,13 @@
 .shoppingArticle .moveFromCart span {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 12px;
     margin: 4px 0;
 }
 
 .shoppingArticle .moveFromCart svg {
     margin-right: 4px;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .shoppingArticle .bagPrice {
@@ -58,7 +58,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    grid-area: b;
 }
 
 .priceSummary h2 {
@@ -81,10 +80,6 @@
 .priceSummary .submitButton {
     width: 100%;
     margin-top: 12px;
-}
-
-.shoppingBag {
-    grid-area: a;
 }
 
 .shoppingBag img {
@@ -144,18 +139,7 @@
     .shoppingArticle .moveFromCart {
         margin: 0;
         display: flex;
-    }
-
-    .shoppingArticle .moveFromCart span:first-of-type {
-        position: relative;
-        margin-right: 18px;
-    }
-
-    .shoppingArticle .moveFromCart span:first-of-type::after {
-        position: absolute;
-        content: "||";
-        top: 0;
-        right: -15px;
+        flex-direction: column;
     }
 
     .shoppingArticle .bagPrice {
@@ -164,11 +148,12 @@
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1000px) {
     .shoppingBagWrapper {
         display: grid;
         justify-content: space-between;
-        grid-template-areas: "a a b";
+        grid-template-columns: 2fr 1fr;
+        gap: 30px;
         max-width: none;
     }
 
@@ -178,7 +163,7 @@
 
     .priceSummary {
         max-width: none;
-        width: 300px;
+        width: 240px;
         height: 500px;
         margin-top: 0;
     }
