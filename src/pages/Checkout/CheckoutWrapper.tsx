@@ -47,6 +47,8 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
         nextStep();
     };
 
+    console.log(shippingData);
+
     const useStyles = makeStyles(() => ({
         root: {
             "& .MuiStepIcon-active": {
@@ -91,7 +93,7 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
                 />
             )}
             {activeStep === 2 && (
-                <Confirmation next={next} shippingData={shippingData} />
+                <Confirmation next={nextStep} shippingData={shippingData} />
             )}
             {activeStep === steps.length && (
                 <OrderProcessed shippingData={shippingData} />

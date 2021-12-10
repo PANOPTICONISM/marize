@@ -1,4 +1,4 @@
-.shoppingArticle {
+.finalSummary {
     max-width: 230px;
     margin: 36px auto;
     position: relative;
@@ -102,9 +102,13 @@
         text-align: left;
     }
 
-    .shoppingArticle {
+    .shoppingBag {
         max-width: 800px;
         margin: 30px;
+        margin-top: 0;
+    }
+
+    .shoppingArticle {
         display: flex;
     }
 

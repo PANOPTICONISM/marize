@@ -83,9 +83,13 @@
         text-align: left;
     }
 
+    .confirmOrder aside {
+        margin-top: 0;
+    }
+
     .shoppingArticle {
         max-width: 800px;
-        margin: 30px;
+        margin: 0px;
         display: flex;
     }
 
@@ -127,7 +131,7 @@
         display: grid;
         justify-content: space-between;
         grid-template-columns: 2fr 1fr;
-        gap: 30px;
+        gap: 60px;
         max-width: none;
     }
 
