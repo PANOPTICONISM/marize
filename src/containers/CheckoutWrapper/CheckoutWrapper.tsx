@@ -8,7 +8,7 @@ import ShippingDetails from "../../pages/Checkout/ShippingDetails/ShippingDetail
 
 function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
     const { cart } = useShoppingBagCMS();
-    const [tokenId, setTokenId] = useState();
+    const [checkoutTokenId, setCheckoutTokenId] = useState();
     const [liveObject, setLiveObject] = useState();
     const [shipping, setShipping] = useState({});
     const steps = ["Shopping Bag", "Shipping Details", "Confirmation"];
@@ -29,7 +29,7 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
                         }
                     );
 
-                    setTokenId(token);
+                    setCheckoutTokenId(token);
                 } catch {
                     console.log("wrong");
                 }
@@ -80,7 +80,9 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
                 ))}
             </Stepper>
             {activeStep === 0 && <ShoppingBag next={next} />}
-            {activeStep === 1 && <ShippingDetails />}
+            {activeStep === 1 && (
+                <ShippingDetails checkoutTokenId={checkoutTokenId} />
+            )}
             {/* {activeStep === steps.length && <ConfirmationPage />} */}
         </Main>
     );
