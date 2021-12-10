@@ -1,4 +1,63 @@
-.shippingDetails form>div {
+.shippingDetails form {
+    max-width: 600px;
+    margin: auto;
+}
+
+.shippingDetails form {
+    max-width: 200px;
+    margin: auto;
+}
+
+.shippingDetails section label {
+    margin-bottom: 4px;
+    margin-top: 12px;
+}
+
+.shippingDetails section div {
     display: flex;
     flex-direction: column;
+}
+
+.shippingDetails .input {
+    margin-top: 12px;
+}
+
+.shippingDetails label {
+    font-weight: bold;
+    color: var(--black-colour);
+    font-size: 14px;
+    font-family: Tahoma;
+}
+
+.shippingDetails ::placeholder {
+    font-size: 10px;
+    padding-left: 2px;
+    color: #D4D4D4;
+}
+
+.shippingDetails .submitButton {
+    margin: auto;
+    margin-top: 12px;
+}
+
+@media screen and (min-width: 700px) {
+    .shippingDetails form {
+        max-width: 500px;
+    }
+
+    .shippingDetails form section,
+    .shippingDetails .input:not(:last-of-type) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 12px;
+        align-items: baseline;
+    }
+
+    .shippingDetails .input {
+        margin-top: 6px;
+    }
+
+    .shippingDetails .options {
+        margin-top: 12px;
+    }
 }

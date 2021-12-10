@@ -78,6 +78,11 @@
     color: #9C9C9C;
 }
 
+.priceSummary .submitButton {
+    width: 100%;
+    margin-top: 12px;
+}
+
 .shoppingBag {
     grid-area: a;
 }

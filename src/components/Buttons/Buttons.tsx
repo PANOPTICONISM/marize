@@ -67,17 +67,16 @@ export function CartButton({
 }
 
 export function SubmitButton({
+    className,
     onClick,
     text,
 }: {
+    className?: string;
     onClick?: () => void;
     text?: string;
 }) {
     return (
-        <button
-            type="submit"
-            className={`${style.globalButton} ${style.checkoutButton}`}
-        >
+        <button type="submit" className={`${style.globalButton} ${className}`}>
             {text}
         </button>
     );

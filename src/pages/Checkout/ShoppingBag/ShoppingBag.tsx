@@ -78,7 +78,10 @@ export default function ShoppingBag({ next }: { next?: any }) {
                         <form
                             onSubmit={handleSubmit((data) => next({ ...data }))}
                         >
-                            <SubmitButton text="continue" />
+                            <SubmitButton
+                                className={style.submitButton}
+                                text="continue"
+                            />
                         </form>
                     </div>
                 </div>

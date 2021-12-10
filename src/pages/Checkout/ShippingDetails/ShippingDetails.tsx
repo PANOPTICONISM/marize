@@ -53,7 +53,7 @@ export default function ShippingDetails({
 
     useEffect(() => {
         fetchShippingCountries(checkoutTokenId?.id);
-    }, [checkoutTokenId.id]);
+    }, [checkoutTokenId?.id]);
 
     const countries = Object.entries(shippingCountries).map(([code, name]) => ({
         id: code,
@@ -123,75 +123,105 @@ export default function ShippingDetails({
                     })
                 )}
             >
-                <div>
-                    <label htmlFor="firstname">First name</label>
-                    <input
-                        {...register("firstname", { required: true })}
-                        id="firstname"
-                    />
-                    {errors.firstname && <p>This is required</p>}
+                <section>
+                    <div>
+                        <label htmlFor="firstname">First name</label>
+                        <input
+                            placeholder="John"
+                            {...register("firstname", { required: true })}
+                            id="firstname"
+                        />
+                        {errors.firstname && <p>This is required</p>}
+                    </div>
+                    <div>
+                        <label htmlFor="lastname">Last name</label>
+                        <input
+                            placeholder="Smith"
+                            {...register("lastname")}
+                            id="lastname"
+                        />
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <label htmlFor="email">E-mail</label>
+                        <input
+                            placeholder="john@mail.pt"
+                            {...register("email")}
+                            id="email"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="phonenumber">Phone number</label>
+                        <input
+                            placeholder="+45 00 00 00"
+                            {...register("phonenumber", {
+                                valueAsNumber: true,
+                                maxLength: {
+                                    value: 4,
+                                    message: "Too many numbers",
+                                },
+                            })}
+                            id="phonenumber"
+                        />
+                        {errors.phonenumber?.message}
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <label htmlFor="address">Address</label>
+                        <input
+                            placeholder="Street's name"
+                            {...register("address")}
+                            id="address"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="zip">ZIP code</label>
+                        <input
+                            placeholder="Street's ZIP code"
+                            {...register("zip")}
+                            id="zip"
+                        />
+                    </div>
+                </section>
+                <div className={style.input}>
+                    <div>
+                        <InputLabel>Country</InputLabel>
+                        <Select
+                            value={shippingCountry}
+                            fullWidth
+                            onChange={(e: any) =>
+                                setShippingCountry(e.target.value)
+                            }
+                        >
+                            {countries.map((country) => (
+                                <MenuItem key={country.id} value={country.id}>
+                                    {country.label}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </div>
+                    <div className={style.input}>
+                        <div>
+                            <InputLabel>City</InputLabel>
+                            <Select
+                                value={shippingCity}
+                                fullWidth
+                                onChange={(e: any) =>
+                                    setShippingCity(e.target.value)
+                                }
+                            >
+                                {cities.map((city) => (
+                                    <MenuItem key={city.id} value={city.id}>
+                                        {city.label}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="lastname">Last name</label>
-                    <input {...register("lastname")} id="lastname" />
-                </div>
-                <div>
-                    <label htmlFor="email">E-mail</label>
-                    <input {...register("email")} id="email" />
-                </div>
-                <div>
-                    <label htmlFor="phonenumber">Phone number</label>
-                    <input
-                        {...register("phonenumber", {
-                            valueAsNumber: true,
-                            maxLength: {
-                                value: 4,
-                                message: "Too many numbers",
-                            },
-                        })}
-                        id="phonenumber"
-                    />
-                    {errors.phonenumber?.message}
-                </div>
-                <div>
-                    <label htmlFor="address">Address</label>
-                    <input {...register("address")} id="address" />
-                </div>
-                <div>
-                    <label htmlFor="zip">Zip code</label>
-                    <input {...register("zip")} id="zip" />
-                </div>
-                <Grid item xs={12} sm={6}>
-                    <InputLabel>Country</InputLabel>
-                    <Select
-                        value={shippingCountry}
-                        fullWidth
-                        onChange={(e: any) =>
-                            setShippingCountry(e.target.value)
-                        }
-                    >
-                        {countries.map((country) => (
-                            <MenuItem key={country.id} value={country.id}>
-                                {country.label}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <InputLabel>City</InputLabel>
-                    <Select
-                        value={shippingCity}
-                        fullWidth
-                        onChange={(e: any) => setShippingCity(e.target.value)}
-                    >
-                        {cities.map((city) => (
-                            <MenuItem key={city.id} value={city.id}>
-                                {city.label}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </Grid>
-                <Grid item xs={12} sm={6}>
+                <div className={`${style.input} ${style.options}`}>
                     <InputLabel>Shipping Options</InputLabel>
                     <Select
                         value={shippingOption}
@@ -204,8 +234,8 @@ export default function ShippingDetails({
                             </MenuItem>
                         ))}
                     </Select>
-                </Grid>
-                <SubmitButton text="continue" />
+                </div>
+                <SubmitButton className={style.submitButton} text="continue" />
             </form>
         </section>
     );
