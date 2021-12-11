@@ -5,12 +5,13 @@ import { RiMailSendLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineLockClock } from "react-icons/md";
 import logo from "../../assets/logo.svg";
-export default function StoreInfo() {
+export default function StoreInfo({ isFooter }: { isFooter?: boolean }) {
     return (
         <div className={style.contact_info}>
             <div className={style.contact_wrapper}>
                 <div className={style.facebook}>
-                    <img src={logo} alt="logo" />
+                    {isFooter && <img src={logo} alt="logo" />}
+
                     <h4>
                         Connect with us on
                         <a
@@ -22,15 +23,18 @@ export default function StoreInfo() {
                         </a>
                     </h4>
                 </div>
-                <div className={style.about_footer}>
-                    <h4>About Marizé</h4>
-                    <ul>
-                        <li>Terms &amp; Conditions</li>
-                        <li>Privacy policy</li>
-                        <li>FAQ &amp; Returns</li>
-                        <li>Our story</li>
-                    </ul>
-                </div>
+                {isFooter && (
+                    <div className={style.about_footer}>
+                        <h4>About Marizé</h4>
+                        <ul>
+                            <li>Terms &amp; Conditions</li>
+                            <li>Privacy policy</li>
+                            <li>FAQ &amp; Returns</li>
+                            <li>Our story</li>
+                        </ul>
+                    </div>
+                )}
+
                 <div className={style.phone}>
                     <h4>
                         <FiPhoneIncoming /> Phone-number
