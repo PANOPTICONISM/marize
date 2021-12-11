@@ -35,63 +35,12 @@
     padding-bottom: -100px;
 }
 
-/* .contact_info {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    border: 1px solid var(--black-colour);
-    padding: 20px;
-}
-.nav_wrapper p,
-.nav_wrapper span,
-.nav_wrapper h4 {
-    flex-wrap: wrap;
-    cursor: pointer;
-}
-.facebook {
-    width: 220px;
-    height: 50px;
-    background-color: var(--background-colour-h1);
-    margin-top: 1.5rem;
-    padding: 5px;
-    color: var(--white-colour);
-}
-.facebook h4 {
-    margin: 3px;
-    text-align: center;
-}
-.facebook a {
-    color: var(--white-colour);
-}
-.adress a {
-    color: var(--black-colour);
-}
-.facebook svg,
-.hours svg,
-.adress svg,
-.mail svg,
-.phone svg {
-    position: relative;
-    font-size: 1.8rem;
-    top: 8px;
-}
-.hours svg,
-.adress svg,
-.mail svg,
-.phone svg {
-    font-size: 1.4rem;
-}
-.mail a {
-    color: var(--black-colour); 
-}*/
 @media screen and (max-width: 699px) {
     .menu {
         height: 250vh;
     }
     .nav_wrapper,
-    .contact_wrapper {
+    .contact_info {
         margin-top: 5rem;
     }
 }

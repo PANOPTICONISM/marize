@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-auto-rows: auto;
-    margin-top: 4rem;
+    margin-top: 0rem;
 }
 
 .contact_wrapper {
@@ -10,27 +10,33 @@
     grid-row: auto;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
     border: 1px solid var(--black-colour);
-    padding: 20px;
+    padding: 0 10px;
 }
-
+.facebook {
+    margin-top: 20px;
+}
 .facebook h4 {
     width: max-content;
-    height: 50px;
     background-color: var(--background-colour-h1);
-    padding: 5px;
+    padding: 0 5px 9px 5px;
     color: var(--white-colour);
     text-align: center;
+}
+.facebook img {
+    margin-top: 0.5rem;
+}
+.about_footer h4 {
+    margin-top: 2.1rem;
 }
 .about_footer ul {
     list-style: none;
     padding: 0;
 }
 .about_footer li {
-    padding: 5px 0;
+    padding: 3px 0;
 }
 .facebook a {
     color: var(--white-colour);
@@ -39,19 +45,17 @@
     color: var(--black-colour);
 }
 .facebook svg,
+.phone svg,
+.mail svg,
 .hours svg,
 .adress svg,
-.mail svg,
-.phone svg {
+.mail svg {
     position: relative;
     font-size: 1.8rem;
     top: 8px;
 }
-.hours svg,
-.adress svg,
-.mail svg,
-.phone svg {
-    font-size: 1.4rem;
+.adress svg {
+    font-size: 1.7rem;
 }
 .mail a {
     color: var(--black-colour);
