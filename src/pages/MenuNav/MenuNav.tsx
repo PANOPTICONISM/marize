@@ -1,8 +1,8 @@
 import style from "./menu.module.css";
 import { MdHighlightOff } from "react-icons/md";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
-import VisitStore from "../VisitStore/VisitStore";
-import StoreInfo from "../StoreInfo/StoreInfo";
+import VisitStore from "../../components/VisitStore/VisitStore";
+import StoreInfo from "../../components/StoreInfo/StoreInfo";
 
 export default function MenuNav({ toggleOpen }: { toggleOpen: any }) {
     const { categories } = useCommerceCMS();

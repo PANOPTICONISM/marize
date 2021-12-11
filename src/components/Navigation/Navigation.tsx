@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { useState } from "react";
 import Cart from "../Cart/Cart";
-import MenuNav from "../MenuNav/MenuNav";
+import MenuNav from "../../pages/MenuNav/MenuNav";
 
 export default function Navigation() {
     const { cart } = useShoppingBagCMS();
