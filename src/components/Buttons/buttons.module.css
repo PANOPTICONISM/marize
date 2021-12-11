@@ -27,10 +27,31 @@
     align-items: center;
     justify-content: center;
     padding: 12px;
+    margin-top: 12px;
+    font-size: 14px;
+    width: 100%;
 }
 
 .cartButton svg {
-    font-size: 24px;
+    font-size: 20px;
     fill: var(--white-colour);
-    margin-right: 12px;
+    margin-right: 6px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.backButton {
+    padding: 12px;
+    border: 1px solid var(--black-colour);
+    background-color: transparent;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.backButton:hover {
+    background-color: var(--black-colour);
+    color: var(--white-colour);
 }

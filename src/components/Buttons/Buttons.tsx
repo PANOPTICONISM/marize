@@ -19,25 +19,107 @@ export default function Button({
     );
 }
 
-export function PrimaryButton({ path, text }: { path: string; text?: string }) {
+export function PrimaryButton({
+    path,
+    text,
+    className,
+}: {
+    path: string;
+    text?: string;
+    className?: string;
+}) {
     return (
         <Button
             path={path}
-            className={`${style.globalButton} ${style.primaryButton}`}
+            className={`${style.globalButton} ${style.primaryButton} ${className}`}
         >
             {text}
         </Button>
     );
 }
 
-export function CartButton({ onClick }: { onClick?: () => void }) {
+export function ReturnButton({
+    onClick,
+    text,
+}: {
+    onClick?: () => void;
+    text?: string;
+}) {
     return (
         <button
             onClick={onClick}
             className={`${style.globalButton} ${style.cartButton}`}
         >
             <BsHandbag />
-            Add to shopping bag
+            {text}
+        </button>
+    );
+}
+
+export function CartButton({
+    onClick,
+    text,
+}: {
+    onClick?: () => void;
+    text?: string;
+}) {
+    return (
+        <button
+            onClick={onClick}
+            className={`${style.globalButton} ${style.cartButton}`}
+        >
+            <BsHandbag />
+            {text}
+        </button>
+    );
+}
+
+export function ContinueButton({
+    onClick,
+    text,
+}: {
+    onClick?: () => void;
+    text?: string;
+}) {
+    return (
+        <button
+            onClick={onClick}
+            className={`${style.globalButton} ${style.cartButton}`}
+        >
+            {text}
+        </button>
+    );
+}
+
+export function SubmitButton({
+    className,
+    text,
+}: {
+    className?: string;
+    text?: string;
+}) {
+    return (
+        <button type="submit" className={`${style.globalButton} ${className}`}>
+            {text}
+        </button>
+    );
+}
+
+export function BackButton({
+    className,
+    onClick,
+    text,
+}: {
+    className?: string;
+    onClick?: () => void;
+    text?: string;
+}) {
+    return (
+        <button
+            onClick={onClick}
+            className={`${style.backButton} ${className}`}
+        >
+            {text}
         </button>
     );
 }
