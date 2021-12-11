@@ -4,7 +4,7 @@ import StoreInfo from "../StoreInfo/StoreInfo";
 function Footer() {
     return (
         <footer>
-            <StoreInfo isFooter={true} />
+            <StoreInfo isFooter />
         </footer>
     );
 }
