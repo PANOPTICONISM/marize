@@ -1,11 +1,12 @@
-.menu {
+body .menu {
     position: absolute;
+    overflow: scroll;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
     width: 100vw;
-    height: 100vh;
+    height: auto;
     background-color: var(--white-colour);
     z-index: 900;
 }

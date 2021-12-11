@@ -16,8 +16,14 @@ export default function Navigation() {
     const toggleModal = () => setModal(!modal);
     //toggle on menu
     const [menuOpen, setMenuOpen] = useState(false);
-    const toggleOpen = () => setMenuOpen(!menuOpen);
-    console.log(menuOpen);
+    const toggleOpen = () => {
+        setMenuOpen(!menuOpen);
+        if (!menuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "scroll";
+        }
+    };
     const cartTotal =
         cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
 
@@ -25,7 +31,7 @@ export default function Navigation() {
         <nav className={style.wrapper}>
             {menuOpen && <MenuNav toggleOpen={toggleOpen} />}
             <div className={style.left_nav}>
-                <Hamburger toggled={menuOpen} toggle={setMenuOpen} />
+                <Hamburger toggle={toggleOpen} toggled={menuOpen} />
 
                 <div className={style.search_bar_wrapper}>
                     <SearchBar className={style.search_bar} />
