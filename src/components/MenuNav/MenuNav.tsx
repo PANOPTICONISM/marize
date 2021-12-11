@@ -19,7 +19,6 @@ export default function MenuNav({ toggleOpen }: { toggleOpen: any }) {
             <div className={style.close} onClick={toggleOpen}>
                 <MdHighlightOff />
             </div>
-
             <div className={style.nav_wrapper}>
                 {navCategories?.map(
                     (cats: { name: string; children: any[] }, i: number) => (
@@ -31,13 +30,6 @@ export default function MenuNav({ toggleOpen }: { toggleOpen: any }) {
                         </div>
                     )
                 )}
-                {/* <div className={style.last_section}>
-                    <h4>About Marizé</h4>
-                    <p>Our Story</p>
-                  <div className="returns">
-                  <h4>Returns</h4>
-                  </div>     
-                </div>*/}
             </div>
             <div className={style.img_component}>
                 <VisitStore />
