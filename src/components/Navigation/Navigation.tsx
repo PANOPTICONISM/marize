@@ -17,7 +17,7 @@ export default function Navigation() {
     //toggle on menu
     const [menuOpen, setMenuOpen] = useState(false);
     const toggleOpen = () => setMenuOpen(!menuOpen);
-
+    console.log(menuOpen);
     const cartTotal =
         cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
 
@@ -25,9 +25,7 @@ export default function Navigation() {
         <nav className={style.wrapper}>
             {menuOpen && <MenuNav toggleOpen={toggleOpen} />}
             <div className={style.left_nav}>
-                <div onClick={toggleOpen}>
-                    <Hamburger />
-                </div>
+                <Hamburger toggled={menuOpen} toggle={setMenuOpen} />
 
                 <div className={style.search_bar_wrapper}>
                     <SearchBar className={style.search_bar} />
