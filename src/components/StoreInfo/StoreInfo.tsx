@@ -4,13 +4,13 @@ import { FiPhoneIncoming } from "react-icons/fi";
 import { RiMailSendLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineLockClock } from "react-icons/md";
-import logo from "../../assets/logo.svg";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 export default function StoreInfo({ isFooter }: { isFooter?: boolean }) {
     return (
         <div className={style.contact_info}>
             <div className={style.contact_wrapper}>
                 <div className={style.facebook}>
-                    {isFooter && <img src={logo} alt="logo" />}
+                    {isFooter && <Logo />}
 
                     <h4>
                         Connect with us on
