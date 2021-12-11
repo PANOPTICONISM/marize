@@ -17,6 +17,7 @@
 }
 .facebook {
     margin-top: 20px;
+    cursor: pointer;
 }
 .facebook h4 {
     width: max-content;
@@ -53,6 +54,15 @@
     position: relative;
     font-size: 1.8rem;
     top: 8px;
+}
+.facebook h4,
+.phone h4,
+.mail h4,
+.hours h4,
+.adress h4,
+.mail h4,
+.about_footer li {
+    cursor: pointer;
 }
 .adress svg {
     font-size: 1.7rem;
