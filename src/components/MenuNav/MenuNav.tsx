@@ -1,12 +1,9 @@
 import style from "./menu.module.css";
 import { MdHighlightOff } from "react-icons/md";
-import { AiOutlineFacebook } from "react-icons/ai";
-import { FiPhoneIncoming } from "react-icons/fi";
-import { RiMailSendLine } from "react-icons/ri";
-import { IoLocationOutline } from "react-icons/io5";
-import { MdOutlineLockClock } from "react-icons/md";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import VisitStore from "../VisitStore/VisitStore";
+import StoreInfo from "../StoreInfo/StoreInfo";
+
 export default function MenuNav({ toggleOpen }: { toggleOpen: any }) {
     const { categories } = useCommerceCMS();
     let navCategories = categories?.filter((cat) => {
@@ -33,64 +30,7 @@ export default function MenuNav({ toggleOpen }: { toggleOpen: any }) {
             </div>
             <div className={style.img_component}>
                 <VisitStore />
-            </div>
-            <div className={style.contact_wrapper}>
-                <div className={style.contact_info}>
-                    <div className={style.facebook}>
-                        <h4>
-                            Connect with us on
-                            <a
-                                href="https://www.facebook.com/loja.marize"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <AiOutlineFacebook />
-                            </a>
-                        </h4>
-                    </div>
-                    <div className={style.phone}>
-                        <h4>
-                            <FiPhoneIncoming /> Phone-number
-                        </h4>
-                        <p>+351 251 823 857</p>
-                    </div>
-                    <div className={style.mail}>
-                        <h4>
-                            <RiMailSendLine /> E-mail
-                        </h4>
-                        <p>
-                            <a href="mailto: hello@marize.pt">
-                                hello@marize.pt
-                            </a>
-                        </p>
-                    </div>
-                    <div className={style.adress}>
-                        <h4>
-                            <a
-                                href="https://www.google.fr/maps/place/Rua Mouzinho de Albuquerque 81, 
-                            4930-733 Valença, Portugal"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <IoLocationOutline />
-                            </a>
-                            Store's adress
-                        </h4>
-                        <p>
-                            Rua Mouzinho de Albuquerque 81, <br />
-                            4930-733 Valença, Portugal
-                        </p>
-                    </div>
-                    <div className={style.hours}>
-                        <h4>
-                            <MdOutlineLockClock /> Opening hours
-                        </h4>
-                        <p>
-                            Mon - Sat, 10:00 - 19:00 <br />
-                            Sunday, 10:00 - 19:00
-                        </p>
-                    </div>
-                </div>
+                <StoreInfo />
             </div>
         </div>
     );
