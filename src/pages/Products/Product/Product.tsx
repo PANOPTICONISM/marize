@@ -12,6 +12,7 @@ import Accordion from "../../../components/Accordion/Accordion";
 import { useContentfulCMS } from "../../../contexts/ContentfulContext";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import { commerce } from "../../../lib/Commerce";
+import sizeChart from "../../../assets/sizing-chart.jpg";
 
 export function ProductDetails({ product }: { product?: any }) {
     const { setCart } = useShoppingBagCMS();
@@ -44,7 +45,7 @@ export function ProductDetails({ product }: { product?: any }) {
                             <option value="M">M</option>
                         </select>
                     </form>
-                    <a href="/pdf link">
+                    <a href={sizeChart} target="_blank" rel="noreferrer">
                         <RiRuler2Line />
                     </a>
                 </div>

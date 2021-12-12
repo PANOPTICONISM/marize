@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import style from "./accordion.module.css";
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 
 export default function Accordion({
     fields,
@@ -16,7 +17,13 @@ export default function Accordion({
                     onClick={() => setIsActive(!isActive)}
                 >
                     <div>{fields?.question}</div>
-                    <div>{isActive ? "-" : "+"}</div>
+                    <div>
+                        {isActive ? (
+                            <AiOutlineMinusCircle />
+                        ) : (
+                            <AiOutlinePlusCircle />
+                        )}
+                    </div>
                 </div>
                 {isActive && (
                     <div className={style.accordionContent}>
