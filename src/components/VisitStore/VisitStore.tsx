@@ -5,7 +5,11 @@ const VisitStore = ({ className }: { className?: string }) => {
     return (
         <section className={`${style.visitStore} ${className}`}>
             <h1>Visit us at our store</h1>
-            <PrimaryButton text="LEARN MORE ABOUT US" path="/about" />
+            <PrimaryButton
+                className={style.learnMoreBtn}
+                text="LEARN MORE ABOUT US"
+                path="/about"
+            />
         </section>
     );
 };

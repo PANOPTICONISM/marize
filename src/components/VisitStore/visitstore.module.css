@@ -11,6 +11,11 @@
     text-align: center;
 }
 
+.learnMoreBtn {
+    max-width: max-content;
+    margin: 18px auto;
+}
+
 @media screen and (min-width: 700px) {
     .visitStore {
         padding: 100px;

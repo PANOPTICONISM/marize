@@ -38,25 +38,7 @@ export function PrimaryButton({
     );
 }
 
-export function ReturnButton({
-    onClick,
-    text,
-}: {
-    onClick?: () => void;
-    text?: string;
-}) {
-    return (
-        <button
-            onClick={onClick}
-            className={`${style.globalButton} ${style.cartButton}`}
-        >
-            <BsHandbag />
-            {text}
-        </button>
-    );
-}
-
-export function CartButton({
+export function PrimaryIconButton({
     onClick,
     text,
 }: {

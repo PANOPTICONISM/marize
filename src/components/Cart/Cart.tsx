@@ -5,7 +5,7 @@ import { commerce } from "../../lib/Commerce";
 import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
-import { PrimaryButton, CartButton } from "../Buttons/Buttons";
+import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
 
 export function CartResumeContainer({
     children,
@@ -79,7 +79,7 @@ export default function Cart() {
                     <span>Total</span>
                     <span>{cart.subtotal.formatted_with_code}</span>
                 </div>
-                <CartButton
+                <PrimaryIconButton
                     text="Go to your shopping bag"
                     onClick={goToCheckout}
                 />
