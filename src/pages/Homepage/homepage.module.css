@@ -49,10 +49,18 @@
     max-height: 100px;
 }
 
+.visitHomepage {
+    margin: 50px 0;
+}
+
 @media screen and (min-width: 700px) {
     .homepageHero .heading {
         width: min-content;
         min-width: 450px;
+    }
+
+    .visitHomepage {
+        margin: 100px 0;
     }
 }
 

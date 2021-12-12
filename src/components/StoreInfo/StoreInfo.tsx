@@ -7,9 +7,11 @@ import { MdOutlineLockClock } from "react-icons/md";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 export default function StoreInfo({
     className,
+    undoFlex,
     isFooter,
 }: {
     className?: string;
+    undoFlex?: string;
     isFooter?: boolean;
 }) {
     return (
@@ -40,7 +42,7 @@ export default function StoreInfo({
                 </div>
             )}
 
-            <div className={style.flex}>
+            <div className={`${style.flex} ${undoFlex}`}>
                 <div className={style.phone}>
                     <FiPhoneIncoming />
                     <div>
@@ -61,7 +63,7 @@ export default function StoreInfo({
                     </div>
                 </div>
             </div>
-            <div className={style.flex}>
+            <div className={`${style.flex} ${undoFlex}`}>
                 <div className={style.address}>
                     <a
                         href="https://www.google.fr/maps/place/Rua Mouzinho de Albuquerque 81, 

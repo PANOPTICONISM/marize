@@ -1,6 +1,5 @@
 .contact_wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 220px);
     justify-content: center;
     gap: 20px;
 }
@@ -84,10 +83,8 @@
     color: var(--black-colour);
 }
 
-
 @media screen and (min-width: 800px) {
     .contact_wrapper {
         justify-content: space-between;
-        gap: 30px;
     }
 }
