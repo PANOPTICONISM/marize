@@ -71,9 +71,9 @@ export default function Cart() {
         return (
             <CartResumeContainer>
                 {cart.line_items?.map((product: any) => (
-                    <>
+                    <div key={product.id}>
                         <ProductCard product={product} />
-                    </>
+                    </div>
                 ))}
                 <div className={style.totalCosts}>
                     <span>Total</span>
