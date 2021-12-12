@@ -8,9 +8,10 @@ function Paths() {
     return (
         <Routes>
             <Route path="/" element={<Homepage />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:productId" element={<Product />} />
-            <Route path="/checkout/:cartId" element={<CheckoutWrapper />} />
+            <Route path="products" element={<Products />}>
+                <Route path=":productId" element={<Product />} />
+            </Route>
+            <Route path="checkout/:cartId" element={<CheckoutWrapper />} />
         </Routes>
     );
 }
