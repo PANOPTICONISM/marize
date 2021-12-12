@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Mr+Dafoe&family=Tangerine:wght@400;700&display=swap');
 
 :root {
-  --h1-size: 2em;
+  --h1-size: 1.8em;
   --primary-colour: #FA6121;
   --white-colour: #fff;
   --black-colour: #000;
@@ -28,6 +28,10 @@ h1 {
   text-align: center;
 }
 
+h1 span {
+  font-size: 30px;
+}
+
 p,
 span,
 a {
@@ -38,9 +42,14 @@ a {
   text-decoration: none;
 }
 
-@media screen and (min-width: 1000px) {
+img {
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (min-width: 1200px) {
   body {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: auto;
   }
 
