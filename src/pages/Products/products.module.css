@@ -1,10 +1,11 @@
-/* same as home home hero */
 .products_hero {
     position: relative;
     text-align: center;
+    margin-bottom: 30px;
 }
-.products_hero img {
-    opacity: 75%;
+
+.products_hero h1 {
+    color: var(--white-colour);
 }
 
 .products_title {
@@ -28,9 +29,8 @@
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     grid-template-rows: auto;
     gap: 18px;
+    justify-items: center;
 }
-
-/* ends here */
 
 .sort_filter {
     display: flex;
@@ -52,8 +52,28 @@
     cursor: pointer;
 }
 
+.sort span {
+    font-weight: 800;
+    display: flex;
+}
+
+.sort span svg {
+    font-size: 20px;
+}
+
+.sort_filter:hover .sort_dropdown {
+    border: 1px solid black;
+    padding: 10px;
+    min-width: 140px;
+}
+
+.sort_dropdown p {
+    margin: 4px 0;
+}
+
 .sort_dropdown {
     position: absolute;
+    right: 0;
     z-index: 100;
     background-color: var(--color-h1);
     display: none;
@@ -101,6 +121,7 @@
 .price {
     font-weight: bold;
 }
+
 @media screen and (max-width: 600px) {
     .products_title {
         text-align: center;

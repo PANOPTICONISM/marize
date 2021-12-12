@@ -1,5 +1,11 @@
 .footer {
     grid-template-columns: repeat(auto-fit, 220px);
-    padding-bottom: 80px;
+    padding: 40px 0;
     gap: 30px;
+}
+
+@media screen and (min-width: 800px) {
+    .footer {
+        padding: 80px;
+    }
 }

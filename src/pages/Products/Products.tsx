@@ -1,8 +1,4 @@
-import {
-    MdFavoriteBorder,
-    MdKeyboardArrowDown,
-    MdOutlineFilterAlt,
-} from "react-icons/md";
+import { MdFavoriteBorder, MdKeyboardArrowDown } from "react-icons/md";
 import style from "./products.module.css";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
@@ -15,6 +11,7 @@ export default function Products() {
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
     const [filters, setFilters] = useState([]);
     const [sortType, setSortType] = useState(null);
+
     const handleChecked = (e: {
         target: { value: number; checked: boolean };
     }) => {
@@ -40,6 +37,7 @@ export default function Products() {
             setFilteredArticles(products);
         }
     }, [filters, products]);
+
     useEffect(() => {
         const sortArray = (type: any) => {
             let sorted: any;
@@ -86,16 +84,14 @@ export default function Products() {
                 <header className={style.products_hero}>
                     <img src={heroproducts} alt="products_hero" />
                     <h1 className={style.products_title}>
-                        20% discount on gift cards
+                        20% discount on all Christmas gifts
                     </h1>
                 </header>
+                <h1>WOMEN'S CLOTHES</h1>
                 <ul className={style.sort_filter}>
-                    <li className={style.ul_title}>
-                        women's clothing / brands / flex moda
-                    </li>
                     <li className={style.sort}>
-                        Sort by
                         <span>
+                            Sort by
                             <MdKeyboardArrowDown />
                         </span>
                         <div className={style.sort_dropdown}>
@@ -114,12 +110,6 @@ export default function Products() {
                                 Lowest price
                             </p>
                         </div>
-                    </li>
-                    <li className={style.filter}>
-                        <span>
-                            <MdOutlineFilterAlt />
-                        </span>
-                        All filters
                     </li>
                 </ul>
 
