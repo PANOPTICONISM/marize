@@ -1,7 +1,12 @@
 import React from "react";
+import StoreInfo from "../StoreInfo/StoreInfo";
 
 function Footer() {
-  return <div></div>;
+    return (
+        <footer>
+            <StoreInfo isFooter />
+        </footer>
+    );
 }
 
 export default Footer;

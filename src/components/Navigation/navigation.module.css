@@ -41,7 +41,7 @@ nav.wrapper {
     align-items: center;
 }
 
-.right_nav>* {
+.right_nav > * {
     margin-left: 18px;
 }
 
@@ -76,8 +76,7 @@ nav.wrapper {
     }
 
     nav.wrapper {
-        grid-template-areas:
-            "a b c";
+        grid-template-areas: "a b c";
     }
 
     .left_nav,
