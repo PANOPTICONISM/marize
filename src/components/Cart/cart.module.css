@@ -30,6 +30,10 @@
     text-align: center;
 }
 
+.cartWrapper .shopBagBtn {
+    margin-top: 12px;
+}
+
 .fullCart {
     display: grid;
     grid-template-columns: 100px auto;

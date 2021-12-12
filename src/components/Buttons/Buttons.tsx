@@ -39,16 +39,18 @@ export function PrimaryButton({
 }
 
 export function PrimaryIconButton({
+    className,
     onClick,
     text,
 }: {
+    className?: string;
     onClick?: () => void;
     text?: string;
 }) {
     return (
         <button
             onClick={onClick}
-            className={`${style.globalButton} ${style.cartButton}`}
+            className={`${style.globalButton} ${style.cartButton} ${className}`}
         >
             <BsHandbag />
             {text}

@@ -18,17 +18,16 @@ export default function StoreInfo({
         <div className={`${style.contact_wrapper} ${className}`}>
             <div className={style.facebook}>
                 {isFooter && <Logo />}
-
-                <h4>
-                    Connect with us on
-                    <a
-                        href="https://www.facebook.com/loja.marize"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
+                <a
+                    href="https://www.facebook.com/loja.marize"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <h4>
+                        Connect with us on
                         <AiOutlineFacebook />
-                    </a>
-                </h4>
+                    </h4>
+                </a>
             </div>
             {isFooter && (
                 <div className={style.about_footer}>

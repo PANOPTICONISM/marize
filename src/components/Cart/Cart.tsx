@@ -80,6 +80,7 @@ export default function Cart() {
                     <span>{cart.subtotal.formatted_with_code}</span>
                 </div>
                 <PrimaryIconButton
+                    className={style.shopBagBtn}
                     text="Go to your shopping bag"
                     onClick={goToCheckout}
                 />
