@@ -3,8 +3,8 @@ import style from "./relatedproducts.module.css";
 
 const RelatedProducts = ({ relatedProducts }: { relatedProducts?: any }) => {
     const returnMax5Products = relatedProducts?.slice(0, 5);
-    console.log(returnMax5Products);
-    if (relatedProducts.length > 0) {
+
+    if (relatedProducts?.length > 0) {
         return (
             <section className={style.relatedProducts}>
                 <h1>Related Products</h1>

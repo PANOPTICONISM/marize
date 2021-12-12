@@ -28,7 +28,7 @@ export default function Homepage() {
                 <img src={love} alt="love-m" />
             </section>
             <NewArrivals />
-            <VisitStore />
+            <VisitStore className={style.visitHomepage} />
             <CategorySections />
         </Main>
     );

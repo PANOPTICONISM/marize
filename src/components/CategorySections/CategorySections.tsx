@@ -15,6 +15,7 @@ function CategorySections() {
                         <img src={category.assets[0].url} alt={category.slug} />
                     </div>
                     <PrimaryButton
+                        className={style.categoryBtns}
                         text={`Explore ${category?.slug}`}
                         path="/"
                     />

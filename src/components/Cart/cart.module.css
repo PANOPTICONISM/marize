@@ -7,7 +7,7 @@
     right: 0;
     background: var(--white-colour);
     z-index: 2;
-    height: 300px;
+    max-height: 300px;
     overflow: auto;
 }
 
@@ -28,6 +28,10 @@
 
 .emptyCart {
     text-align: center;
+}
+
+.cartWrapper .shopBagBtn {
+    margin-top: 12px;
 }
 
 .fullCart {

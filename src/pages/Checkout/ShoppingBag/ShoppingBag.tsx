@@ -33,7 +33,11 @@ export default function ShoppingBag({ next }: { next?: any }) {
                                             <span>Size:</span> M
                                         </p>
                                     </div>
-                                    <p>2 pieces</p>
+                                    <select name="quantity" id="quantity">
+                                        <option value="number">
+                                            {product.quantity} pieces
+                                        </option>
+                                    </select>
                                 </div>
                                 <div className={style.flex}>
                                     <div className={style.moveFromCart}>

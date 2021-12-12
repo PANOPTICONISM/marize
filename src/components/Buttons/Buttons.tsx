@@ -38,35 +38,19 @@ export function PrimaryButton({
     );
 }
 
-export function ReturnButton({
+export function PrimaryIconButton({
+    className,
     onClick,
     text,
 }: {
+    className?: string;
     onClick?: () => void;
     text?: string;
 }) {
     return (
         <button
             onClick={onClick}
-            className={`${style.globalButton} ${style.cartButton}`}
-        >
-            <BsHandbag />
-            {text}
-        </button>
-    );
-}
-
-export function CartButton({
-    onClick,
-    text,
-}: {
-    onClick?: () => void;
-    text?: string;
-}) {
-    return (
-        <button
-            onClick={onClick}
-            className={`${style.globalButton} ${style.cartButton}`}
+            className={`${style.globalButton} ${style.cartButton} ${className}`}
         >
             <BsHandbag />
             {text}

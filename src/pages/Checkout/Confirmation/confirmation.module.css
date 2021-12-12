@@ -110,6 +110,10 @@
         width: 100%;
     }
 
+    .shoppingArticle {
+        margin: 30px 0;
+    }
+
     .shoppingArticle .bagPrice {
         position: inherit;
     }
@@ -135,8 +139,8 @@
         max-width: none;
     }
 
-    .shoppingArticle {
-        margin: 30px 0;
+    .shoppingBag {
+        margin-bottom: 30px;
     }
 
     .confirmOrder aside {

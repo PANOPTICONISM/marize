@@ -6,14 +6,22 @@ import { MdAvTimer } from "react-icons/md";
 import { AiOutlineHeart } from "react-icons/ai";
 import Main from "../../../containers/Main/Main";
 import style from "./product.module.css";
-import { CartButton } from "../../../components/Buttons/Buttons";
+import { PrimaryIconButton } from "../../../components/Buttons/Buttons";
 import RelatedProducts from "../../../components/RelatedProducts/RelatedProducts";
 import Accordion from "../../../components/Accordion/Accordion";
 import { useContentfulCMS } from "../../../contexts/ContentfulContext";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import { commerce } from "../../../lib/Commerce";
+import sizeChart from "../../../assets/sizing-chart.jpg";
+import { useRef } from "react";
 
-export function ProductDetails({ product }: { product?: any }) {
+export function ProductDetails({
+    product,
+    isScroll,
+}: {
+    product?: any;
+    isScroll?: any;
+}) {
     const { setCart } = useShoppingBagCMS();
 
     const addToCart = () => {
@@ -44,12 +52,12 @@ export function ProductDetails({ product }: { product?: any }) {
                             <option value="M">M</option>
                         </select>
                     </form>
-                    <a href="/pdf link">
+                    <a href={sizeChart} target="_blank" rel="noreferrer">
                         <RiRuler2Line />
                     </a>
                 </div>
                 <div className={style.shopping}>
-                    <CartButton
+                    <PrimaryIconButton
                         text="Add to shopping bag"
                         onClick={addToCart}
                     />
@@ -60,7 +68,7 @@ export function ProductDetails({ product }: { product?: any }) {
                         <GiMailShirt />
                         Product details
                     </span>
-                    <span>
+                    <span onClick={isScroll}>
                         <MdAvTimer />
                         Delivery and Returns
                     </span>
@@ -77,11 +85,19 @@ export default function Product() {
 
     const product = products?.find((prod) => prod.id === productId);
 
+    const scrollToComponent = (ref: any) =>
+        window.scrollTo({
+            top: ref.current.offsetTop,
+            behavior: "smooth",
+        });
+    const ref = useRef(null);
+    const isScroll = () => scrollToComponent(ref);
+
     return (
         <Main>
-            <ProductDetails product={product} />
+            <ProductDetails isScroll={isScroll} product={product} />
             <RelatedProducts relatedProducts={product?.related_products} />
-            <div className={style.accordion}>
+            <div className={style.accordion} ref={ref}>
                 <h1>FAQ</h1>
                 {faq?.map(({ fields }, index) => (
                     <Accordion key={index} fields={fields} />

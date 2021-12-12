@@ -8,6 +8,7 @@
     text-decoration: none;
     display: block;
     font-size: var(--body-font-size);
+    text-align: center;
 }
 
 .globalButton:hover,
@@ -17,17 +18,11 @@
     fill: var(--primary-colour);
 }
 
-.primaryButton {
-    max-width: max-content;
-    margin: 18px auto;
-}
-
 .cartButton {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 12px;
-    margin-top: 12px;
     font-size: 14px;
     width: 100%;
 }
