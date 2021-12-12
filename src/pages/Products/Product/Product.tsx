@@ -13,8 +13,15 @@ import { useContentfulCMS } from "../../../contexts/ContentfulContext";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import { commerce } from "../../../lib/Commerce";
 import sizeChart from "../../../assets/sizing-chart.jpg";
+import { useRef } from "react";
 
-export function ProductDetails({ product }: { product?: any }) {
+export function ProductDetails({
+    product,
+    isScroll,
+}: {
+    product?: any;
+    isScroll?: any;
+}) {
     const { setCart } = useShoppingBagCMS();
 
     const addToCart = () => {
@@ -61,7 +68,7 @@ export function ProductDetails({ product }: { product?: any }) {
                         <GiMailShirt />
                         Product details
                     </span>
-                    <span>
+                    <span onClick={isScroll}>
                         <MdAvTimer />
                         Delivery and Returns
                     </span>
@@ -78,11 +85,19 @@ export default function Product() {
 
     const product = products?.find((prod) => prod.id === productId);
 
+    const scrollToComponent = (ref: any) =>
+        window.scrollTo({
+            top: ref.current.offsetTop,
+            behavior: "smooth",
+        });
+    const ref = useRef(null);
+    const isScroll = () => scrollToComponent(ref);
+
     return (
         <Main>
-            <ProductDetails product={product} />
+            <ProductDetails isScroll={isScroll} product={product} />
             <RelatedProducts relatedProducts={product?.related_products} />
-            <div className={style.accordion}>
+            <div className={style.accordion} ref={ref}>
                 <h1>FAQ</h1>
                 {faq?.map(({ fields }, index) => (
                     <Accordion key={index} fields={fields} />
