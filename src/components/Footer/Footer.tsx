@@ -1,10 +1,11 @@
+import style from "./footer.module.css";
 import React from "react";
 import StoreInfo from "../StoreInfo/StoreInfo";
 
 function Footer() {
     return (
         <footer>
-            <StoreInfo isFooter />
+            <StoreInfo className={style.footer} isFooter />
         </footer>
     );
 }
