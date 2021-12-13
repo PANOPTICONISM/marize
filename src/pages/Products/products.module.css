@@ -122,22 +122,31 @@
     font-weight: bold;
 }
 
+.mobile_filters {
+    margin-right: auto;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-weight: 800;
+    display: none;
+}
 @media screen and (max-width: 600px) {
     .products_title {
         text-align: center;
         font-size: 18px;
     }
     .containerProductSection {
-        display: flex;
-        grid-template-columns: 1fr 11fr;
-        gap: 2em;
+        grid-template-columns: 1fr;
     }
+
     .img_container img {
-        width: 250px;
-        height: 250px;
+        width: 270px;
+        height: 270px;
     }
     .blue_heart svg {
         width: 25px;
         height: 25px;
+    }
+    .mobile_filters {
+        display: flex;
     }
 }

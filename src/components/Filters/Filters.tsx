@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import style from "./filters.module.css";
 
 export function Filters({
@@ -13,7 +13,7 @@ export function Filters({
     mobileFilters: boolean;
 }) {
     return (
-        <>
+        <div className={style.filters_container}>
             {categories?.map(
                 (filter: { name: string; children: any[] }, index: number) => (
                     <div
@@ -42,7 +42,7 @@ export function Filters({
                     </div>
                 )
             )}
-        </>
+        </div>
     );
 }
 
