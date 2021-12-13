@@ -73,7 +73,7 @@
 
 .sort_dropdown {
     position: absolute;
-    right: 0;
+    right: 12%;
     z-index: 100;
     background-color: var(--color-h1);
     display: none;
@@ -122,9 +122,37 @@
     font-weight: bold;
 }
 
+.mobile_filters {
+    margin-right: auto;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-weight: 800;
+    display: none;
+}
 @media screen and (max-width: 600px) {
     .products_title {
         text-align: center;
         font-size: 18px;
+    }
+    .containerProductSection {
+        grid-template-columns: 1fr;
+    }
+
+    .img_container img {
+        width: 270px;
+        height: 270px;
+    }
+    .blue_heart svg {
+        width: 25px;
+        height: 25px;
+    }
+    .mobile_filters {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .sort_dropdown {
+        right: 0%;
     }
 }

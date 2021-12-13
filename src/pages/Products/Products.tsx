@@ -1,4 +1,8 @@
-import { MdFavoriteBorder, MdKeyboardArrowDown } from "react-icons/md";
+import {
+    MdFavoriteBorder,
+    MdKeyboardArrowDown,
+    MdOutlineFilterAlt,
+} from "react-icons/md";
 import style from "./products.module.css";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
@@ -11,7 +15,7 @@ export default function Products() {
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
     const [filters, setFilters] = useState([]);
     const [sortType, setSortType] = useState(null);
-
+    const [mobileFilters, setMobileFilters] = useState(true);
     const handleChecked = (e: {
         target: { value: number; checked: boolean };
     }) => {
@@ -88,35 +92,48 @@ export default function Products() {
                     </h1>
                 </header>
                 <h1>WOMEN'S CLOTHES</h1>
-                <ul className={style.sort_filter}>
-                    <li className={style.sort}>
-                        <span>
-                            Sort by
-                            <MdKeyboardArrowDown />
-                        </span>
-                        <div className={style.sort_dropdown}>
-                            <p
-                                onClick={(e: any) =>
-                                    setSortType(e.target.innerText)
-                                }
-                            >
-                                Highest price
-                            </p>
-                            <p
-                                onClick={(e: any) =>
-                                    setSortType(e.target.innerText)
-                                }
-                            >
-                                Lowest price
-                            </p>
-                        </div>
-                    </li>
-                </ul>
+
+                <div>
+                    <ul className={style.sort_filter}>
+                        <li
+                            className={style.mobile_filters}
+                            onClick={() => setMobileFilters(!mobileFilters)}
+                        >
+                            <span>
+                                <MdOutlineFilterAlt />
+                            </span>
+                            All filters
+                        </li>
+                        <li className={style.sort}>
+                            <span>
+                                Sort by
+                                <MdKeyboardArrowDown />
+                            </span>
+                            <div className={style.sort_dropdown}>
+                                <p
+                                    onClick={(e: any) =>
+                                        setSortType(e.target.innerText)
+                                    }
+                                >
+                                    Highest price
+                                </p>
+                                <p
+                                    onClick={(e: any) =>
+                                        setSortType(e.target.innerText)
+                                    }
+                                >
+                                    Lowest price
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
                 <div className={style.containerProductSection}>
                     <FilterComponent
                         onChange={handleChecked}
                         categories={categories}
+                        mobileFilters={mobileFilters}
                     />
                     <div className={style.products_wrapper}>{articlesUI}</div>
                 </div>
