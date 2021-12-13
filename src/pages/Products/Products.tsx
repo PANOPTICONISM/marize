@@ -16,7 +16,6 @@ export default function Products() {
     const [filters, setFilters] = useState([]);
     const [sortType, setSortType] = useState(null);
     const [mobileFilters, setMobileFilters] = useState(true);
-    console.log(mobileFilters);
     const handleChecked = (e: {
         target: { value: number; checked: boolean };
     }) => {

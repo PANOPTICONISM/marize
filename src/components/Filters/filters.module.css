@@ -85,7 +85,6 @@ label {
     .filters_container {
         position: absolute;
         background-color: var(--white-colour);
-        opacity: 90%;
         width: max-content;
         padding: 0 10px;
         z-index: 1000;
