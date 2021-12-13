@@ -5,20 +5,15 @@ export function Filters({
     className,
     onChange,
     categories,
+    mobileFilters,
 }: {
     className?: string;
     onChange: any;
     categories: any[];
+    mobileFilters: boolean;
 }) {
-    const [mobileFilters, setMobileFilters] = useState(true);
-    console.log(mobileFilters);
     return (
         <>
-            <div className="filter_button">
-                <button onClick={() => setMobileFilters(!mobileFilters)}>
-                    button
-                </button>
-            </div>
             {categories?.map(
                 (filter: { name: string; children: any[] }, index: number) => (
                     <div
@@ -54,13 +49,21 @@ export function Filters({
 export default function FilterComponent({
     onChange,
     categories,
+    mobileFilters,
+    setMobileFilters,
 }: {
     onChange?: (e: any) => void | undefined;
     categories?: any;
+    mobileFilters?: any;
+    setMobileFilters?: boolean;
 }) {
     return (
         <div>
-            <Filters onChange={onChange} categories={categories} />
+            <Filters
+                onChange={onChange}
+                categories={categories}
+                mobileFilters={mobileFilters}
+            />
         </div>
     );
 }

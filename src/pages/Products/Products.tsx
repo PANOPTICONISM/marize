@@ -11,7 +11,7 @@ export default function Products() {
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
     const [filters, setFilters] = useState([]);
     const [sortType, setSortType] = useState(null);
-
+    const [mobileFilters, setMobileFilters] = useState(true);
     const handleChecked = (e: {
         target: { value: number; checked: boolean };
     }) => {
@@ -88,6 +88,12 @@ export default function Products() {
                     </h1>
                 </header>
                 <h1>WOMEN'S CLOTHES</h1>
+                <div className="filter_button">
+                    {/* //TODO: */}
+                    <button onClick={() => setMobileFilters(!mobileFilters)}>
+                        button
+                    </button>
+                </div>
                 <ul className={style.sort_filter}>
                     <li className={style.sort}>
                         <span>
@@ -117,6 +123,7 @@ export default function Products() {
                     <FilterComponent
                         onChange={handleChecked}
                         categories={categories}
+                        mobileFilters={mobileFilters}
                     />
                     <div className={style.products_wrapper}>{articlesUI}</div>
                 </div>

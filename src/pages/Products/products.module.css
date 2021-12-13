@@ -127,4 +127,17 @@
         text-align: center;
         font-size: 18px;
     }
+    .containerProductSection {
+        display: flex;
+        grid-template-columns: 1fr 11fr;
+        gap: 2em;
+    }
+    .img_container img {
+        width: 250px;
+        height: 250px;
+    }
+    .blue_heart svg {
+        width: 25px;
+        height: 25px;
+    }
 }
