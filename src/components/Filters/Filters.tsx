@@ -17,9 +17,10 @@ export function Filters({
             {categories?.map(
                 (filter: { name: string; children: any[] }, index: number) => (
                     <div
-                        className={style.filters_products}
+                        className={`${style.filters_products} ${
+                            mobileFilters && style.mobile
+                        }`}
                         key={index}
-                        id={mobileFilters ? style.mobile : ""}
                     >
                         <h4>{filter.name}</h4>
                         {filter.children.map(

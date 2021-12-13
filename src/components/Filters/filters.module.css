@@ -1,5 +1,5 @@
 .filters_products,
-#mobile {
+.mobile {
     display: grid;
     gap: 6px;
 }
@@ -80,7 +80,7 @@ label {
 }
 
 @media screen and (max-width: 600px) {
-    #mobile {
+    .mobile {
         display: none;
     }
     .filters_container {

@@ -16,6 +16,7 @@ export default function Products() {
     const [filters, setFilters] = useState([]);
     const [sortType, setSortType] = useState(null);
     const [mobileFilters, setMobileFilters] = useState(true);
+    console.log(mobileFilters);
     const handleChecked = (e: {
         target: { value: number; checked: boolean };
     }) => {
@@ -92,8 +93,6 @@ export default function Products() {
                     </h1>
                 </header>
                 <h1>WOMEN'S CLOTHES</h1>
-
-                {/* //TODO: */}
 
                 <div>
                     <ul className={style.sort_filter}>
