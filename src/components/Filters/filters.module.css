@@ -1,4 +1,5 @@
-.filters_products {
+.filters_products,
+#mobile {
     display: grid;
     gap: 6px;
 }
@@ -47,11 +48,11 @@ label {
     border: 1px solid black;
 }
 
-.container_checkbox:hover input~.checkmark {
+.container_checkbox:hover input ~ .checkmark {
     background-color: rgb(243, 242, 242);
 }
 
-.container_checkbox input:checked~.checkmark {
+.container_checkbox input:checked ~ .checkmark {
     background-color: var(--primary-colour);
     border: 1px solid var(--primary-colour);
 }
@@ -62,7 +63,7 @@ label {
     display: none;
 }
 
-.container_checkbox input:checked~.checkmark:after {
+.container_checkbox input:checked ~ .checkmark:after {
     display: block;
 }
 
@@ -76,4 +77,10 @@ label {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+
+@media screen and (max-width: 600px) {
+    #mobile {
+        display: none;
+    }
 }
