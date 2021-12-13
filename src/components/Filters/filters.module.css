@@ -1,5 +1,4 @@
-.filters_products,
-.mobile {
+.filters_products {
     display: grid;
     gap: 6px;
 }
