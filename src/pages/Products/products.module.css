@@ -73,7 +73,7 @@
 
 .sort_dropdown {
     position: absolute;
-    right: 0;
+    right: 12%;
     z-index: 100;
     background-color: var(--color-h1);
     display: none;
@@ -148,5 +148,11 @@
     }
     .mobile_filters {
         display: flex;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .sort_dropdown {
+        right: 0%;
     }
 }
