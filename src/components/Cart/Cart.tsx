@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
-import { commerce } from "../../lib/Commerce";
+import { removeFromCart } from "../../utils/CartFunctions";
 import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -22,12 +22,7 @@ export function CartResumeContainer({
 
 export function ProductCard({ product }: { product: any }) {
     const { setCart } = useShoppingBagCMS();
-
-    const removeFromCart = () => {
-        commerce.cart
-            .remove(product.id, 1)
-            .then(({ cart }: { cart: any }) => setCart(cart));
-    };
+    console.log(product, "hey");
 
     return (
         <div className={style.fullCart}>
@@ -35,13 +30,18 @@ export function ProductCard({ product }: { product: any }) {
             <div className={style.spaceBetween}>
                 <div>
                     <div className={style.presentation}>
-                        <h4>{product.name}</h4>
-                        <h5>{product.price.formatted_with_code}</h5>
+                        <div>
+                            <h4>{product.name}</h4>
+                            <p>Quantity: {product.quantity} pieces</p>
+                        </div>
+                        <h5>{product.line_total.formatted_with_code}</h5>
                     </div>
                 </div>
                 <div className={style.bottomProduct}>
                     <div>
-                        <button onClick={removeFromCart}>
+                        <button
+                            onClick={() => removeFromCart(product, setCart)}
+                        >
                             <BsTrash />
                         </button>
                         <span>||</span>
@@ -49,9 +49,6 @@ export function ProductCard({ product }: { product: any }) {
                             <AiOutlineHeart />
                         </button>
                     </div>
-                    <select name="quantity" id="quantity">
-                        <option value="number">{product.quantity}</option>
-                    </select>
                 </div>
             </div>
         </div>
@@ -60,6 +57,8 @@ export function ProductCard({ product }: { product: any }) {
 
 export default function Cart() {
     const { cart } = useShoppingBagCMS();
+
+    console.log(cart);
 
     const history = useNavigate();
 

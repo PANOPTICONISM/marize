@@ -1,13 +1,18 @@
-import React from "react";
 import { ContinueButton } from "../../../components/Buttons/Buttons";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./shoppingbag.module.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
+import { updateCart } from "../../../utils/CartFunctions";
+import { removeFromCart } from "../../../utils/CartFunctions";
 
 export default function ShoppingBag({ next }: { next?: any }) {
-    const { cart } = useShoppingBagCMS();
+    const { cart, setCart } = useShoppingBagCMS();
+    const maxItems = {
+        quantity: [1, 2, 3, 4, 5, 6],
+    };
 
+    console.log(cart);
     return (
         <section>
             <div className={style.shoppingBagWrapper}>
@@ -27,21 +32,40 @@ export default function ShoppingBag({ next }: { next?: any }) {
                                     <div>
                                         <p>{product.name}</p>
                                         <p>
-                                            <span>Colour:</span> Green
-                                        </p>
-                                        <p>
                                             <span>Size:</span> M
                                         </p>
                                     </div>
-                                    <select name="quantity" id="quantity">
-                                        <option value="number">
-                                            {product.quantity} pieces
-                                        </option>
+                                    <select
+                                        onChange={(e: any) => {
+                                            updateCart(
+                                                product,
+                                                e.target.value,
+                                                setCart
+                                            );
+                                        }}
+                                        defaultValue={product.quantity}
+                                        name="quantity"
+                                        id="quantity"
+                                    >
+                                        {maxItems.quantity.map(
+                                            (quant, index) => (
+                                                <option
+                                                    key={index}
+                                                    value={quant}
+                                                >
+                                                    {quant} pieces
+                                                </option>
+                                            )
+                                        )}
                                     </select>
                                 </div>
                                 <div className={style.flex}>
                                     <div className={style.moveFromCart}>
-                                        <span>
+                                        <span
+                                            onClick={() =>
+                                                removeFromCart(product, setCart)
+                                            }
+                                        >
                                             <BsTrash /> Remove from shopping bag
                                         </span>
                                         <span>
@@ -49,7 +73,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                                         </span>
                                     </div>
                                     <span className={style.bagPrice}>
-                                        20EUR
+                                        {product.line_total.formatted_with_code}
                                     </span>
                                 </div>
                             </div>
@@ -58,25 +82,11 @@ export default function ShoppingBag({ next }: { next?: any }) {
                 </div>
                 <div className={style.priceSummary}>
                     <div>
-                        <h2>Price Summary</h2>
-                        <div>
-                            <p>
-                                Subtotal <span>99kr</span>
-                            </p>
-                            <p>
-                                Shipping <span>39kr</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>
-                                Total <span>120kr</span>
-                            </p>
-                            <p className={style.importDuties}>
-                                (import duties included)
-                            </p>
-                        </div>
+                        <h2>Does your shopping bag check out?</h2>
+                        <p>
+                            You can pick your preferred shopping option in the
+                            next step.
+                        </p>
                         <ContinueButton onClick={next} text="continue" />
                     </div>
                 </div>
