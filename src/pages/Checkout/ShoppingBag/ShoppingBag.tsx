@@ -12,6 +12,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
         quantity: [1, 2, 3, 4, 5, 6],
     };
 
+    console.log(cart);
     return (
         <section>
             <div className={style.shoppingBagWrapper}>
@@ -72,7 +73,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                                         </span>
                                     </div>
                                     <span className={style.bagPrice}>
-                                        20EUR
+                                        {product.line_total.formatted_with_code}
                                     </span>
                                 </div>
                             </div>
@@ -81,25 +82,11 @@ export default function ShoppingBag({ next }: { next?: any }) {
                 </div>
                 <div className={style.priceSummary}>
                     <div>
-                        <h2>Price Summary</h2>
-                        <div>
-                            <p>
-                                Subtotal <span>99kr</span>
-                            </p>
-                            <p>
-                                Shipping <span>39kr</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>
-                                Total <span>120kr</span>
-                            </p>
-                            <p className={style.importDuties}>
-                                (import duties included)
-                            </p>
-                        </div>
+                        <h2>Does your shopping bag check out?</h2>
+                        <p>
+                            You can pick your preferred shopping option in the
+                            next step.
+                        </p>
                         <ContinueButton onClick={next} text="continue" />
                     </div>
                 </div>

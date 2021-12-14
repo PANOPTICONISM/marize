@@ -22,6 +22,7 @@ export function CartResumeContainer({
 
 export function ProductCard({ product }: { product: any }) {
     const { setCart } = useShoppingBagCMS();
+    console.log(product, "hey");
 
     return (
         <div className={style.fullCart}>
@@ -33,7 +34,7 @@ export function ProductCard({ product }: { product: any }) {
                             <h4>{product.name}</h4>
                             <p>Quantity: {product.quantity} pieces</p>
                         </div>
-                        <h5>{product.price.formatted_with_code}</h5>
+                        <h5>{product.line_total.formatted_with_code}</h5>
                     </div>
                 </div>
                 <div className={style.bottomProduct}>
