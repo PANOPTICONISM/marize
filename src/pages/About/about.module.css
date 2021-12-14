@@ -1,0 +1,88 @@
+.aboutPage {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.aboutPage header,
+.whyVisitUs {
+    position: relative;
+}
+
+.aboutPage header img,
+.aboutPage .whyVisitUs img {
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.aboutPage header h1,
+.aboutPage .whyVisitUs div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--white-colour);
+    margin: 0;
+    width: max-content;
+}
+
+.aboutPage .introduction {
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.aboutPage .whyVisitUs h2 {
+    margin: 0;
+}
+
+.aboutPage .whyVisitUs ul {
+    margin-bottom: 0;
+}
+
+.aboutPage .whyVisitUs div {
+    padding: 20px;
+    background: var(--background-colour-h1);
+}
+
+.aboutPage .storeImages {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 15px;
+}
+
+.aboutPage .storeImages img {
+    max-width: 300px;
+    margin: auto;
+}
+
+.aboutPage .brands {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit,
+            175px);
+    ;
+    margin: 50px auto;
+}
+
+.aboutPage .brands img:nth-child(1),
+.aboutPage .brands img:nth-child(3),
+.aboutPage .brands img:nth-child(5) {
+    max-height: 60px;
+}
+
+.aboutPage .brands img:nth-child(2),
+.aboutPage .brands img:nth-child(4) {
+    max-height: 100px;
+}
+
+@media screen and (min-width: 700px) {
+    .aboutPage .storeImages {
+        gap: 30px;
+    }
+
+    .aboutPage .brands {
+        margin: 100px auto;
+    }
+}

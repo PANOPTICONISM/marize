@@ -3,6 +3,7 @@ import { contentful } from "../lib/Contentful";
 
 export const ContentfulContext = createContext<{
     faq?: any[];
+    aboutPage?: any;
 }>({});
 
 export function useContentfulCMS() {
@@ -16,12 +17,19 @@ export default function ContentfulProvider({
 }) {
     const [content, setContent] = useState<{
         faq?: any;
+        aboutPage?: any;
     }>({});
 
     const getData = async () => {
-        const { items: faq } = await contentful.getEntries();
+        const { items: faq } = await contentful.getEntries({
+            content_type: "faq",
+        });
 
-        setContent({ faq });
+        const { items: aboutPage } = await contentful.getEntries({
+            content_type: "aboutPage",
+        });
+
+        setContent({ faq, aboutPage });
     };
 
     useEffect(() => {
