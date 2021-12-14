@@ -9,7 +9,7 @@ import { removeFromCart } from "../../../utils/CartFunctions";
 export default function ShoppingBag({ next }: { next?: any }) {
     const { cart, setCart } = useShoppingBagCMS();
     const maxItems = {
-        quantity: [1, 2, 3, 4, 5, 6],
+        quantity: [1, 2, 3, 4],
     };
 
     console.log(cart);

@@ -6,6 +6,7 @@ import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
+import { updateCart } from "../../utils/CartFunctions";
 
 export function CartResumeContainer({
     children,
@@ -22,7 +23,9 @@ export function CartResumeContainer({
 
 export function ProductCard({ product }: { product: any }) {
     const { setCart } = useShoppingBagCMS();
-    console.log(product, "hey");
+    const maxItems = {
+        quantity: [1, 2, 3, 4],
+    };
 
     return (
         <div className={style.fullCart}>
@@ -32,7 +35,6 @@ export function ProductCard({ product }: { product: any }) {
                     <div className={style.presentation}>
                         <div>
                             <h4>{product.name}</h4>
-                            <p>Quantity: {product.quantity} pieces</p>
                         </div>
                         <h5>{product.line_total.formatted_with_code}</h5>
                     </div>
@@ -49,6 +51,20 @@ export function ProductCard({ product }: { product: any }) {
                             <AiOutlineHeart />
                         </button>
                     </div>
+                    <select
+                        onChange={(e: any) => {
+                            updateCart(product, e.target.value, setCart);
+                        }}
+                        defaultValue={product.quantity}
+                        name="quantity"
+                        id="quantity"
+                    >
+                        {maxItems.quantity.map((quant, index) => (
+                            <option key={index} value={quant}>
+                                {quant}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </div>
         </div>
