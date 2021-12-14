@@ -51,6 +51,10 @@
     padding: 0;
 }
 
+.about_footer ul a {
+    color: var(--black-colour);
+}
+
 .about_footer li {
     padding: 4px 0;
 }

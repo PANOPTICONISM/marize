@@ -5,6 +5,7 @@ import { RiMailSendLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineLockClock } from "react-icons/md";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
+import { Link } from "react-router-dom";
 export default function StoreInfo({
     className,
     undoFlex,
@@ -33,10 +34,18 @@ export default function StoreInfo({
                 <div className={style.about_footer}>
                     <h4>About Marizé</h4>
                     <ul>
-                        <li>Terms &amp; Conditions</li>
-                        <li>Privacy policy</li>
+                        <li>
+                            <Link to="/terms-and-conditions">
+                                Terms &amp; Conditions
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/privacy-policy">Privacy policy</Link>
+                        </li>
                         <li>FAQ &amp; Returns</li>
-                        <li>Our story</li>
+                        <li>
+                            <Link to="/about">Our story</Link>
+                        </li>
                     </ul>
                 </div>
             )}

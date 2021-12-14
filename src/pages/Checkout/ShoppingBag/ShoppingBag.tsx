@@ -12,7 +12,6 @@ export default function ShoppingBag({ next }: { next?: any }) {
         quantity: [1, 2, 3, 4],
     };
 
-    console.log(cart);
     return (
         <section>
             <div className={style.shoppingBagWrapper}>
