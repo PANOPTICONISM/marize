@@ -3,18 +3,13 @@ import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./shoppingbag.module.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
-import { commerce } from "../../../lib/Commerce";
+import { updateCart } from "../../../utils/CartFunctions";
+import { removeFromCart } from "../../../utils/CartFunctions";
 
 export default function ShoppingBag({ next }: { next?: any }) {
     const { cart, setCart } = useShoppingBagCMS();
     const maxItems = {
         quantity: [1, 2, 3, 4, 5, 6],
-    };
-
-    const updateCart = (product: { id: any }, quantityValue: any) => {
-        commerce.cart
-            .update(product.id, { quantity: quantityValue })
-            .then(({ cart }: { cart: any }) => setCart(cart));
     };
 
     return (
@@ -41,7 +36,11 @@ export default function ShoppingBag({ next }: { next?: any }) {
                                     </div>
                                     <select
                                         onChange={(e: any) => {
-                                            updateCart(product, e.target.value);
+                                            updateCart(
+                                                product,
+                                                e.target.value,
+                                                setCart
+                                            );
                                         }}
                                         defaultValue={product.quantity}
                                         name="quantity"
@@ -61,7 +60,11 @@ export default function ShoppingBag({ next }: { next?: any }) {
                                 </div>
                                 <div className={style.flex}>
                                     <div className={style.moveFromCart}>
-                                        <span>
+                                        <span
+                                            onClick={() =>
+                                                removeFromCart(product, setCart)
+                                            }
+                                        >
                                             <BsTrash /> Remove from shopping bag
                                         </span>
                                         <span>

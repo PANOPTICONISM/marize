@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
-import { commerce } from "../../lib/Commerce";
+import { removeFromCart } from "../../utils/CartFunctions";
 import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -23,12 +23,6 @@ export function CartResumeContainer({
 export function ProductCard({ product }: { product: any }) {
     const { setCart } = useShoppingBagCMS();
 
-    const removeFromCart = () => {
-        commerce.cart
-            .remove(product.id, 1)
-            .then(({ cart }: { cart: any }) => setCart(cart));
-    };
-
     return (
         <div className={style.fullCart}>
             <img src={product.image.url} alt={product.name} />
@@ -44,7 +38,9 @@ export function ProductCard({ product }: { product: any }) {
                 </div>
                 <div className={style.bottomProduct}>
                     <div>
-                        <button onClick={removeFromCart}>
+                        <button
+                            onClick={() => removeFromCart(product, setCart)}
+                        >
                             <BsTrash />
                         </button>
                         <span>||</span>

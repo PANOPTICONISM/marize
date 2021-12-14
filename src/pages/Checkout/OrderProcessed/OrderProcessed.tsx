@@ -35,13 +35,10 @@ export default function OrderProcessed({
                                 <div>
                                     <p>{product.name}</p>
                                     <p>
-                                        <span>Colour:</span> Green
-                                    </p>
-                                    <p>
                                         <span>Size:</span> M
                                     </p>
                                 </div>
-                                <p>2 pieces</p>
+                                <p>{product.quantity} pieces</p>
                             </div>
                             <div className={style.bagPrice}>
                                 <span>20EUR</span>

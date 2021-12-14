@@ -24,8 +24,7 @@ export default function Navigation() {
             document.body.style.overflow = "scroll";
         }
     };
-    const cartTotal =
-        cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
+    const cartTotal = cart && cart?.total_items > 0 ? cart?.total_items : "";
 
     return (
         <nav className={style.wrapper}>

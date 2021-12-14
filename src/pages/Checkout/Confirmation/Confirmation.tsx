@@ -33,7 +33,7 @@ function Confirmation({
                                             <span>Size:</span> M
                                         </p>
                                     </div>
-                                    <p>2 pieces</p>
+                                    <p>{product.quantity} pieces</p>
                                 </div>
                                 <div className={style.flex}>
                                     <span className={style.bagPrice}>
