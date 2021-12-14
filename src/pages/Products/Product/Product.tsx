@@ -13,7 +13,7 @@ import { useContentfulCMS } from "../../../contexts/ContentfulContext";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import { commerce } from "../../../lib/Commerce";
 import sizeChart from "../../../assets/sizing-chart.jpg";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 export function ProductDetails({
     product,
@@ -23,8 +23,6 @@ export function ProductDetails({
     isScroll?: any;
 }) {
     const { setCart } = useShoppingBagCMS();
-    // const variantId = product?.variant_groups[0].id.options;
-    const [sizingValue, setSizingValue] = useState("");
 
     const addToCart = () => {
         commerce.cart
@@ -47,9 +45,6 @@ export function ProductDetails({
                             id="subject"
                             defaultValue=""
                             required
-                            onChange={(e: any) =>
-                                setSizingValue(e.target.value)
-                            }
                         >
                             <option value="" disabled>
                                 Pick your size
