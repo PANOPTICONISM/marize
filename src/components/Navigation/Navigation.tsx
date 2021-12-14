@@ -20,9 +20,9 @@ export default function Navigation() {
         setMenuOpen(!menuOpen);
     };
     if (menuOpen) {
-        document.body.style.overflow = "hidden";
+        document.body.style.overflowY = "hidden";
     } else {
-        document.body.style.overflow = "scroll";
+        document.body.style.overflowY = "scroll";
     }
     const cartTotal =
         cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
