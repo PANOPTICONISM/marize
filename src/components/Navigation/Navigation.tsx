@@ -18,12 +18,12 @@ export default function Navigation() {
     const [menuOpen, setMenuOpen] = useState(false);
     const toggleOpen = () => {
         setMenuOpen(!menuOpen);
-        if (!menuOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "scroll";
-        }
     };
+    if (menuOpen) {
+        document.body.style.overflow = "hidden";
+    } else {
+        document.body.style.overflow = "scroll";
+    }
     const cartTotal =
         cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
 
