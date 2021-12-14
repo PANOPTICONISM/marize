@@ -13,7 +13,7 @@ import { useContentfulCMS } from "../../../contexts/ContentfulContext";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import { commerce } from "../../../lib/Commerce";
 import sizeChart from "../../../assets/sizing-chart.jpg";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export function ProductDetails({
     product,
@@ -23,6 +23,8 @@ export function ProductDetails({
     isScroll?: any;
 }) {
     const { setCart } = useShoppingBagCMS();
+    // const variantId = product?.variant_groups[0].id.options;
+    const [sizingValue, setSizingValue] = useState("");
 
     const addToCart = () => {
         commerce.cart
@@ -45,11 +47,20 @@ export function ProductDetails({
                             id="subject"
                             defaultValue=""
                             required
+                            onChange={(e: any) =>
+                                setSizingValue(e.target.value)
+                            }
                         >
                             <option value="" disabled>
                                 Pick your size
                             </option>
-                            <option value="M">M</option>
+                            {product?.variant_groups[0].options.map(
+                                (size: any, index: any) => (
+                                    <option key={index} value={size.id}>
+                                        {size.name}
+                                    </option>
+                                )
+                            )}
                         </select>
                     </form>
                     <a href={sizeChart} target="_blank" rel="noreferrer">
@@ -84,6 +95,9 @@ export default function Product() {
     const { faq } = useContentfulCMS();
 
     const product = products?.find((prod) => prod.id === productId);
+
+    // const variants = commerce.products.getVariants(product?.id);
+    // console.log(variants);
 
     const scrollToComponent = (ref: any) =>
         window.scrollTo({

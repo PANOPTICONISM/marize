@@ -1,12 +1,21 @@
-import React from "react";
 import { ContinueButton } from "../../../components/Buttons/Buttons";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./shoppingbag.module.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
+import { commerce } from "../../../lib/Commerce";
 
 export default function ShoppingBag({ next }: { next?: any }) {
-    const { cart } = useShoppingBagCMS();
+    const { cart, setCart } = useShoppingBagCMS();
+    const maxItems = {
+        quantity: [1, 2, 3, 4, 5, 6],
+    };
+
+    const updateCart = (product: { id: any }, quantityValue: any) => {
+        commerce.cart
+            .update(product.id, { quantity: quantityValue })
+            .then(({ cart }: { cart: any }) => setCart(cart));
+    };
 
     return (
         <section>
@@ -27,16 +36,27 @@ export default function ShoppingBag({ next }: { next?: any }) {
                                     <div>
                                         <p>{product.name}</p>
                                         <p>
-                                            <span>Colour:</span> Green
-                                        </p>
-                                        <p>
                                             <span>Size:</span> M
                                         </p>
                                     </div>
-                                    <select name="quantity" id="quantity">
-                                        <option value="number">
-                                            {product.quantity} pieces
-                                        </option>
+                                    <select
+                                        onChange={(e: any) => {
+                                            updateCart(product, e.target.value);
+                                        }}
+                                        defaultValue={product.quantity}
+                                        name="quantity"
+                                        id="quantity"
+                                    >
+                                        {maxItems.quantity.map(
+                                            (quant, index) => (
+                                                <option
+                                                    key={index}
+                                                    value={quant}
+                                                >
+                                                    {quant} pieces
+                                                </option>
+                                            )
+                                        )}
                                     </select>
                                 </div>
                                 <div className={style.flex}>

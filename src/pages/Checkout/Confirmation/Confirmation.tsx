@@ -30,9 +30,6 @@ function Confirmation({
                                     <div>
                                         <p>{product.name}</p>
                                         <p>
-                                            <span>Colour:</span> Green
-                                        </p>
-                                        <p>
                                             <span>Size:</span> M
                                         </p>
                                     </div>

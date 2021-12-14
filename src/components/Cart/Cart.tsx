@@ -35,7 +35,10 @@ export function ProductCard({ product }: { product: any }) {
             <div className={style.spaceBetween}>
                 <div>
                     <div className={style.presentation}>
-                        <h4>{product.name}</h4>
+                        <div>
+                            <h4>{product.name}</h4>
+                            <p>Quantity: {product.quantity} pieces</p>
+                        </div>
                         <h5>{product.price.formatted_with_code}</h5>
                     </div>
                 </div>
@@ -49,9 +52,6 @@ export function ProductCard({ product }: { product: any }) {
                             <AiOutlineHeart />
                         </button>
                     </div>
-                    <select name="quantity" id="quantity">
-                        <option value="number">{product.quantity}</option>
-                    </select>
                 </div>
             </div>
         </div>
@@ -60,6 +60,8 @@ export function ProductCard({ product }: { product: any }) {
 
 export default function Cart() {
     const { cart } = useShoppingBagCMS();
+
+    console.log(cart);
 
     const history = useNavigate();
 
