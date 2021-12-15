@@ -3,7 +3,7 @@ import { useCommerceCMS } from "../../../contexts/CommerceContext";
 import { GiMailShirt } from "react-icons/gi";
 import { RiRuler2Line } from "react-icons/ri";
 import { MdAvTimer } from "react-icons/md";
-import { AiFillAccountBook, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Main from "../../../containers/Main/Main";
 import style from "./product.module.css";
 import { PrimaryIconButton } from "../../../components/Buttons/Buttons";
@@ -17,6 +17,10 @@ import { commerce } from "../../../lib/Commerce";
 import sizeChart from "../../../assets/sizing-chart.jpg";
 import { useContext, useRef, useState } from "react";
 import { FavouritesContext } from "../../../contexts/FavouritesContext";
+import {
+    addToFavourites,
+    removeFromFavourites,
+} from "../../../utils/FavouritesFunctions";
 
 export function ProductDetails({
     showDetailsAccordion,
@@ -36,20 +40,7 @@ export function ProductDetails({
     };
 
     const { state, dispatch } = useContext(FavouritesContext);
-    const addToFavourites = () =>
-        dispatch({
-            type: "ADD_FAVOURITES",
-            payload: product,
-        });
 
-    const removeFromFavourites = (id: string) => {
-        dispatch({
-            type: "REMOVE_FAVOURITES",
-            payload: id,
-        });
-    };
-
-    console.log(state.favourites);
     return (
         <section className={style.productDetails}>
             <img src={product?.image.url} alt={product?.name} />
@@ -88,13 +79,15 @@ export function ProductDetails({
                         onClick={addToCart}
                     />
                     {state.favourites.includes(product) ? (
-                        <AiFillAccountBook
-                            onClick={() => removeFromFavourites(product.id)}
+                        <AiFillHeart
+                            onClick={() =>
+                                removeFromFavourites(dispatch, product.id)
+                            }
                             className={style.shoppingSVG}
                         />
                     ) : (
                         <AiOutlineHeart
-                            onClick={addToFavourites}
+                            onClick={() => addToFavourites(dispatch, product)}
                             className={style.shoppingSVG}
                         />
                     )}

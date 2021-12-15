@@ -1,15 +1,17 @@
-import {
-    MdFavoriteBorder,
-    MdKeyboardArrowDown,
-    MdOutlineFilterAlt,
-} from "react-icons/md";
+import { MdKeyboardArrowDown, MdOutlineFilterAlt } from "react-icons/md";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import style from "./products.module.css";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
 import heroproducts from "../../assets/heroproducts.png";
 import FilterComponent from "../../components/Filters/Filters";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { FavouritesContext } from "../../contexts/FavouritesContext";
+import {
+    addToFavourites,
+    removeFromFavourites,
+} from "../../utils/FavouritesFunctions";
 export default function Products() {
     const { products, categories } = useCommerceCMS();
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
@@ -62,11 +64,26 @@ export default function Products() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortType]);
 
+    const { state, dispatch } = useContext(FavouritesContext);
+    console.log(state.favourites);
+
     const articlesUI = filteredArticles?.map((article: any) => (
         <div className={style.card} key={article.id}>
             <div className={style.img_container}>
                 <div className={style.blue_heart}>
-                    <MdFavoriteBorder />
+                    {state.favourites.includes(article) ? (
+                        <AiFillHeart
+                            onClick={() =>
+                                removeFromFavourites(dispatch, article.id)
+                            }
+                            className={style.shoppingSVG}
+                        />
+                    ) : (
+                        <AiOutlineHeart
+                            onClick={() => addToFavourites(dispatch, article)}
+                            className={style.shoppingSVG}
+                        />
+                    )}
                 </div>
                 <Link to={`/products/${article.id}`}>
                     <img src={article.image.url} alt="products" />
