@@ -75,30 +75,20 @@
     align-content: space-between;
 }
 
-.fullCart .bottomProduct,
-.totalCosts {
-    display: flex;
-    justify-content: space-between;
-}
-
-.totalCosts span {
-    font-weight: 700;
-    font-size: 14px;
-}
-
-.fullCart .bottomProduct select {
-    background-color: transparent;
-    outline: none;
-    border: 1px solid var(--black-colour);
-    padding: 6px;
-}
 
 .fullCart .bottomProduct button {
     background-color: transparent;
     border: none;
 }
 
-.fullCart .bottomProduct button,
-.fullCart .bottomProduct span {
+.fullCart .bottomProduct button {
     color: #9C9C9C;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.fullCart .bottomProduct svg {
+    margin-right: 4px;
 }

@@ -29,9 +29,7 @@ export function ProductCard({ product }: { product: any }) {
             <div className={style.spaceBetween}>
                 <div>
                     <div className={style.presentation}>
-                        <div>
-                            <h4>{product.name}</h4>
-                        </div>
+                        <h4>{product.name}</h4>
                         <h5>{product.price.formatted_with_code}</h5>
                     </div>
                 </div>
@@ -54,7 +52,12 @@ export function ProductCard({ product }: { product: any }) {
 export default function FavouritesCart() {
     const { setCart } = useShoppingBagCMS();
 
-    const { state } = useContext(FavouritesContext);
+    const { state, dispatch } = useContext(FavouritesContext);
+
+    const addToCartAndRemove = (product: any) => {
+        removeFromFavourites(dispatch, product.id);
+        addToCart(product, setCart);
+    };
 
     console.log(state.favourites);
     if (state.favourites.length > 0) {
@@ -62,13 +65,13 @@ export default function FavouritesCart() {
             <FavouritesCartResumeContainer>
                 {state.favourites?.map((product: any) => (
                     <>
-                        <div key={product.id}>
+                        <div key={product?.id}>
                             <ProductCard product={product} />
                         </div>
                         <PrimaryIconButton
                             className={style.shopBagBtn}
-                            text="Go to your shopping bag"
-                            onClick={() => addToCart(product, setCart)}
+                            text="Add to cart"
+                            onClick={() => addToCartAndRemove(product)}
                         />
                     </>
                 ))}
