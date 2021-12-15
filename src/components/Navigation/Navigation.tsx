@@ -13,9 +13,8 @@ import FavouritesCart from "../FavouritesCart/FavouritesCart";
 
 export default function Navigation() {
     const { cart } = useShoppingBagCMS();
-    const [modal, setModal] = useState(false);
-    const toggleModal = () => setModal(!modal);
-    //toggle on menu
+    const [openCart, setOpenCart] = useState(false);
+    const [openFavouritesCart, setOpenFavouritesCart] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const toggleOpen = () => {
         setMenuOpen(!menuOpen);
@@ -46,19 +45,25 @@ export default function Navigation() {
             </div>
 
             <div className={style.right_nav}>
-                <div>
-                    <AiOutlineHeart />
-                    {/* <FavouritesCart /> */}
+                <div className={style.favouritesWrapper}>
+                    <div
+                        onClick={() =>
+                            setOpenFavouritesCart(!openFavouritesCart)
+                        }
+                    >
+                        <AiOutlineHeart />
+                    </div>
+                    {openFavouritesCart && <FavouritesCart />}
                 </div>
                 {!window.location.pathname.includes("/checkout/") && (
                     <div className={style.shoppingBag}>
-                        <div onClick={toggleModal}>
+                        <div onClick={() => setOpenCart(!openCart)}>
                             <BsHandbag />
                         </div>
                         {cartTotal && (
                             <span className={style.cartTotal}>{cartTotal}</span>
                         )}
-                        {modal && <Cart />}
+                        {openCart && <Cart />}
                     </div>
                 )}
             </div>

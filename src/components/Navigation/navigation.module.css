@@ -41,11 +41,12 @@ nav.wrapper {
     align-items: center;
 }
 
-.right_nav > * {
+.right_nav>* {
     margin-left: 18px;
 }
 
-.shoppingBag {
+.shoppingBag,
+.favouritesWrapper {
     position: relative;
 }
 

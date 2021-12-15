@@ -69,8 +69,6 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
 
     const mui = useStyles();
 
-    console.log(cart?.line_items.length);
-
     return (
         <Main>
             {activeStep !== steps.length && cart?.line_items.length > 0 && (

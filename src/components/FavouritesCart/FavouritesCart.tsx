@@ -1,17 +1,11 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
-import { addToCart, removeFromCart } from "../../utils/CartFunctions";
-import style from "../Cart/cart.module.css";
+import { addToCart } from "../../utils/CartFunctions";
+import style from "./favouritescart.module.css";
 import { BsTrash } from "react-icons/bs";
-import { AiOutlineHeart } from "react-icons/ai";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
-import { updateCart } from "../../utils/CartFunctions";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
-import {
-    addToFavourites,
-    removeFromFavourites,
-} from "../../utils/FavouritesFunctions";
+import { removeFromFavourites } from "../../utils/FavouritesFunctions";
 
 export function FavouritesCartResumeContainer({
     children,
@@ -19,7 +13,7 @@ export function FavouritesCartResumeContainer({
     children?: React.ReactNode;
 }) {
     return (
-        <div className={style.cartWrapper}>
+        <div className={style.cartFavouritesWrapper}>
             <h3>Favourites Bag</h3>
             {children}
         </div>
@@ -27,18 +21,7 @@ export function FavouritesCartResumeContainer({
 }
 
 export function ProductCard({ product }: { product: any }) {
-    const { state, dispatch } = useContext(FavouritesContext);
-    const { setCart } = useShoppingBagCMS();
-    const maxItems = {
-        quantity: [1, 2, 3, 4],
-    };
-
-    const removeFromCartAndFavourite = (product: any) => {
-        removeFromCart(product, setCart);
-        addToFavourites(dispatch, product);
-    };
-
-    console.log(state.favourites);
+    const { dispatch } = useContext(FavouritesContext);
 
     return (
         <div className={style.fullCart}>
@@ -49,7 +32,7 @@ export function ProductCard({ product }: { product: any }) {
                         <div>
                             <h4>{product.name}</h4>
                         </div>
-                        <h5>{product.line_total.formatted_with_code}</h5>
+                        <h5>{product.price.formatted_with_code}</h5>
                     </div>
                 </div>
                 <div className={style.bottomProduct}>
@@ -69,17 +52,15 @@ export function ProductCard({ product }: { product: any }) {
 }
 
 export default function FavouritesCart() {
-    const { cart, setCart } = useShoppingBagCMS();
-    const history = useNavigate();
+    const { setCart } = useShoppingBagCMS();
 
-    const goToCheckout = () => {
-        history(`/checkout/${cart.id}`);
-    };
+    const { state } = useContext(FavouritesContext);
 
-    if (cart && cart.total_unique_items > 0) {
+    console.log(state.favourites);
+    if (state.favourites.length > 0) {
         return (
             <FavouritesCartResumeContainer>
-                {cart.line_items?.map((product: any) => (
+                {state.favourites?.map((product: any) => (
                     <>
                         <div key={product.id}>
                             <ProductCard product={product} />
@@ -97,11 +78,11 @@ export default function FavouritesCart() {
     return (
         <FavouritesCartResumeContainer>
             <div className={style.emptyCart}>
-                <h4>Your shopping bag is currently empty.</h4>
+                <h4>Your favourites bag is currently empty.</h4>
                 <h5>No idea, how to get started?</h5>
                 <PrimaryButton
                     path="/products"
-                    text="Find out what's new here"
+                    text="Explore all our products"
                 />
             </div>
         </FavouritesCartResumeContainer>

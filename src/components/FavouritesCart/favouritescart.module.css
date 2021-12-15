@@ -1,0 +1,104 @@
+.cartFavouritesWrapper {
+    padding: 30px;
+    width: 300px;
+    border: 1px solid #000;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: var(--white-colour);
+    z-index: 2;
+    max-height: 300px;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.cartFavouritesWrapper h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.emptyCart h4 {
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.emptyCart h5 {
+    font-size: 18px;
+}
+
+.emptyCart {
+    text-align: center;
+}
+
+.cartFavouritesWrapper .shopBagBtn {
+    margin-top: 12px;
+}
+
+.fullCart {
+    display: grid;
+    grid-template-columns: 100px auto;
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.fullCart img {
+    max-width: 100px;
+}
+
+.fullCart .presentation {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fullCart .presentation h4 {
+    width: 15px;
+}
+
+.fullCart .presentation h5 {
+    white-space: nowrap;
+}
+
+.fullCart h4,
+.fullCart h5,
+.fullCart p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.fullCart h5 {
+    font-weight: 300;
+}
+
+.fullCart .spaceBetween {
+    display: grid;
+    align-content: space-between;
+}
+
+.fullCart .bottomProduct,
+.totalCosts {
+    display: flex;
+    justify-content: space-between;
+}
+
+.totalCosts span {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.fullCart .bottomProduct select {
+    background-color: transparent;
+    outline: none;
+    border: 1px solid var(--black-colour);
+    padding: 6px;
+}
+
+.fullCart .bottomProduct button {
+    background-color: transparent;
+    border: none;
+}
+
+.fullCart .bottomProduct button,
+.fullCart .bottomProduct span {
+    color: #9C9C9C;
+}
