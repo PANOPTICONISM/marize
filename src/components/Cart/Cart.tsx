@@ -4,14 +4,11 @@ import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { removeFromCart } from "../../utils/CartFunctions";
 import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
 import { updateCart } from "../../utils/CartFunctions";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
-import {
-    addToFavourites,
-    removeFromFavourites,
-} from "../../utils/FavouritesFunctions";
+import { addToFavourites } from "../../utils/FavouritesFunctions";
 
 export function CartResumeContainer({
     children,
@@ -31,6 +28,11 @@ export function ProductCard({ product }: { product: any }) {
     const { setCart } = useShoppingBagCMS();
     const maxItems = {
         quantity: [1, 2, 3, 4],
+    };
+
+    const removeFromCartAndFavourite = (product: any) => {
+        removeFromCart(product, setCart);
+        addToFavourites(dispatch, product);
     };
 
     console.log(state.favourites);
@@ -55,18 +57,11 @@ export function ProductCard({ product }: { product: any }) {
                             <BsTrash />
                         </button>
                         <span>||</span>
-                        {state.favourites.includes(product) ? (
+                        {!state.favourites.includes(product) && (
                             <button
+                                className={style.favouritesBag}
                                 onClick={() =>
-                                    removeFromFavourites(dispatch, product.id)
-                                }
-                            >
-                                <AiFillHeart className={style.shoppingSVG} />
-                            </button>
-                        ) : (
-                            <button
-                                onClick={() =>
-                                    addToFavourites(dispatch, product)
+                                    removeFromCartAndFavourite(product)
                                 }
                             >
                                 <AiOutlineHeart className={style.shoppingSVG} />
@@ -95,9 +90,6 @@ export function ProductCard({ product }: { product: any }) {
 
 export default function Cart() {
     const { cart } = useShoppingBagCMS();
-
-    console.log(cart);
-
     const history = useNavigate();
 
     const goToCheckout = () => {

@@ -39,7 +39,6 @@ export function AccordionDetails({ fields }: { fields?: any }) {
     const [isActive, setIsActive] = useState(false);
 
     const removeHTMLContent = fields?.description.replace(/(<([^>]+)>)/gi, "");
-    console.log(removeHTMLContent);
 
     return (
         <div className={`${style.accordion} ${style.accordionDetails}`}>

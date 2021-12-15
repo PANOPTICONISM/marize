@@ -65,7 +65,6 @@ export default function Products() {
     }, [sortType]);
 
     const { state, dispatch } = useContext(FavouritesContext);
-    console.log(state.favourites);
 
     const articlesUI = filteredArticles?.map((article: any) => (
         <div className={style.card} key={article.id}>

@@ -5,12 +5,23 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { updateCart } from "../../../utils/CartFunctions";
 import { removeFromCart } from "../../../utils/CartFunctions";
+import { addToFavourites } from "../../../utils/FavouritesFunctions";
+import { useContext } from "react";
+import { FavouritesContext } from "../../../contexts/FavouritesContext";
 
 export default function ShoppingBag({ next }: { next?: any }) {
+    const { state, dispatch } = useContext(FavouritesContext);
     const { cart, setCart } = useShoppingBagCMS();
     const maxItems = {
         quantity: [1, 2, 3, 4],
     };
+
+    const removeFromCartAndFavourite = (product: any) => {
+        addToFavourites(dispatch, product);
+        removeFromCart(product, setCart);
+    };
+
+    console.log(cart);
 
     return (
         <section>
@@ -67,9 +78,25 @@ export default function ShoppingBag({ next }: { next?: any }) {
                                         >
                                             <BsTrash /> Remove from shopping bag
                                         </span>
-                                        <span>
-                                            <AiOutlineHeart /> Save for later
-                                        </span>
+                                        {!state.favourites.includes(
+                                            product
+                                        ) && (
+                                            <button
+                                                className={style.favouritesBag}
+                                                onClick={() =>
+                                                    removeFromCartAndFavourite(
+                                                        product
+                                                    )
+                                                }
+                                            >
+                                                <AiOutlineHeart
+                                                    className={
+                                                        style.shoppingSVG
+                                                    }
+                                                />
+                                                Save to favourites
+                                            </button>
+                                        )}
                                     </div>
                                     <span className={style.bagPrice}>
                                         {product.line_total.formatted_with_code}

@@ -116,15 +116,10 @@ export default function Product() {
     const [showAccordion, setShownAccordion] = useState(false);
 
     const showDetailsAccordion = () => {
-        console.log(showAccordion);
         setShownAccordion(!showAccordion);
     };
 
     const product = products?.find((prod) => prod.id === productId);
-
-    // const variants = commerce.products.getVariants(product?.id);
-    // console.log(variants);
-    console.log(product);
 
     const scrollToComponent = (ref: any) =>
         window.scrollTo({
