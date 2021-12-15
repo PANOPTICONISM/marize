@@ -17,6 +17,18 @@
     font-size: 24px;
     margin-top: 0;
 }
+.cartFavouritesWrapper h4 {
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.cartFavouritesWrapper h5 {
+    font-size: 18px;
+}
+
+.cartFavouritesWrapper {
+    text-align: center;
+}
 
 .cartFavouritesWrapper .shopBagBtn {
     margin-top: 12px;
@@ -63,7 +75,7 @@
 }
 
 .fullCart .bottomProduct button {
-    color: #9C9C9C;
+    color: #9c9c9c;
     font-size: 12px;
     display: flex;
     align-items: center;
