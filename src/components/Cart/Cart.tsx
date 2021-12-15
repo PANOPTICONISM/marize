@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { removeFromCart } from "../../utils/CartFunctions";
@@ -6,6 +6,9 @@ import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
+import { updateCart } from "../../utils/CartFunctions";
+import { FavouritesContext } from "../../contexts/FavouritesContext";
+import { addToFavourites } from "../../utils/FavouritesFunctions";
 
 export function CartResumeContainer({
     children,
@@ -21,8 +24,18 @@ export function CartResumeContainer({
 }
 
 export function ProductCard({ product }: { product: any }) {
+    const { state, dispatch } = useContext(FavouritesContext);
     const { setCart } = useShoppingBagCMS();
-    console.log(product, "hey");
+    const maxItems = {
+        quantity: [1, 2, 3, 4],
+    };
+
+    const removeFromCartAndFavourite = (product: any) => {
+        removeFromCart(product, setCart);
+        addToFavourites(dispatch, product);
+    };
+
+    console.log(state.favourites);
 
     return (
         <div className={style.fullCart}>
@@ -32,7 +45,6 @@ export function ProductCard({ product }: { product: any }) {
                     <div className={style.presentation}>
                         <div>
                             <h4>{product.name}</h4>
-                            <p>Quantity: {product.quantity} pieces</p>
                         </div>
                         <h5>{product.line_total.formatted_with_code}</h5>
                     </div>
@@ -45,10 +57,31 @@ export function ProductCard({ product }: { product: any }) {
                             <BsTrash />
                         </button>
                         <span>||</span>
-                        <button>
-                            <AiOutlineHeart />
-                        </button>
+                        {!state.favourites.includes(product) && (
+                            <button
+                                className={style.favouritesBag}
+                                onClick={() =>
+                                    removeFromCartAndFavourite(product)
+                                }
+                            >
+                                <AiOutlineHeart className={style.shoppingSVG} />
+                            </button>
+                        )}
                     </div>
+                    <select
+                        onChange={(e: any) => {
+                            updateCart(product, e.target.value, setCart);
+                        }}
+                        defaultValue={product.quantity}
+                        name="quantity"
+                        id="quantity"
+                    >
+                        {maxItems.quantity.map((quant, index) => (
+                            <option key={index} value={quant}>
+                                {quant}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </div>
         </div>
@@ -57,9 +90,6 @@ export function ProductCard({ product }: { product: any }) {
 
 export default function Cart() {
     const { cart } = useShoppingBagCMS();
-
-    console.log(cart);
-
     const history = useNavigate();
 
     const goToCheckout = () => {

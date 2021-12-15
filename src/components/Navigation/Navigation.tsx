@@ -6,26 +6,33 @@ import { BsHandbag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Cart from "../Cart/Cart";
 import MenuNav from "../../pages/MenuNav/MenuNav";
+import FavouritesCart from "../FavouritesCart/FavouritesCart";
+import { FavouritesContext } from "../../contexts/FavouritesContext";
 
 export default function Navigation() {
     const { cart } = useShoppingBagCMS();
-    const [modal, setModal] = useState(false);
-    const toggleModal = () => setModal(!modal);
-    //toggle on menu
+    const [openCart, setOpenCart] = useState(false);
+    const { state } = useContext(FavouritesContext);
+    const [openFavouritesCart, setOpenFavouritesCart] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const toggleOpen = () => {
         setMenuOpen(!menuOpen);
     };
     if (menuOpen) {
-        document.body.style.overflow = "hidden";
+        document.body.style.overflowY = "hidden";
     } else {
-        document.body.style.overflow = "scroll";
+        document.body.style.overflowY = "scroll";
     }
     const cartTotal =
         cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
+
+    const favouritesCartTotal =
+        state.favourites.length > 0 ? state.favourites.length : "";
+
+    console.log(state.favourites.length);
 
     return (
         <nav className={style.wrapper}>
@@ -45,16 +52,30 @@ export default function Navigation() {
             </div>
 
             <div className={style.right_nav}>
-                <AiOutlineHeart />
+                <div className={style.favouritesWrapper}>
+                    <div
+                        onClick={() =>
+                            setOpenFavouritesCart(!openFavouritesCart)
+                        }
+                    >
+                        <AiOutlineHeart />
+                    </div>
+                    {favouritesCartTotal && (
+                        <span className={style.cartFavouritesTotal}>
+                            {favouritesCartTotal}
+                        </span>
+                    )}
+                    {openFavouritesCart && <FavouritesCart />}
+                </div>
                 {!window.location.pathname.includes("/checkout/") && (
                     <div className={style.shoppingBag}>
-                        <div onClick={toggleModal}>
+                        <div onClick={() => setOpenCart(!openCart)}>
                             <BsHandbag />
                         </div>
                         {cartTotal && (
                             <span className={style.cartTotal}>{cartTotal}</span>
                         )}
-                        {modal && <Cart />}
+                        {openCart && <Cart />}
                     </div>
                 )}
             </div>

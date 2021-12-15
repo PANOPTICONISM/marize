@@ -2,11 +2,13 @@
     max-width: 230px;
     margin: 36px auto;
     position: relative;
+    white-space: nowrap;
 }
 
 .shoppingArticle {
     max-width: max-content;
     margin: auto;
+    position: relative;
 }
 
 .shoppingBag h1 {
@@ -26,6 +28,21 @@
 
 .shoppingArticle p {
     margin: 6px 0;
+}
+
+.getStarted {
+    max-width: max-content;
+    margin: auto;
+}
+
+.shoppingArticle .favouritesBag {
+    background: transparent;
+    outline: none;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
 }
 
 .shoppingArticle .moveFromCart {

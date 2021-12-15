@@ -1,5 +1,11 @@
 import { commerce } from "../lib/Commerce";
 
+export const addToCart = (product: any, setCart: any) => {
+    commerce.cart
+        .add(product.id, 1)
+        .then(({ cart }: { cart: any }) => setCart(cart));
+};
+
 export const removeFromCart = (product: { id: any }, setCart: any) => {
     commerce.cart
         .remove(product.id, 1)

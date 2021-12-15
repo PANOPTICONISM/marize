@@ -71,7 +71,7 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
 
     return (
         <Main>
-            {activeStep !== steps.length && (
+            {activeStep !== steps.length && cart?.line_items.length > 0 && (
                 <Stepper
                     className={mui.root}
                     activeStep={activeStep}

@@ -26,7 +26,6 @@ export default function ShoppingBagProvider({
     useEffect(() => {
         getCart();
     }, []);
-    console.log(cart);
 
     return (
         <ShoppingBagContext.Provider value={{ cart, setCart }}>

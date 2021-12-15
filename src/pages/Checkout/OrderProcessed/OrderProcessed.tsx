@@ -9,8 +9,6 @@ export default function OrderProcessed({
     shippingData?: any;
 }) {
     const { cart } = useShoppingBagCMS();
-    console.log(cart);
-
     const orderId = cart?.id.slice(5);
     const totalPrice = shippingData.shippingPrice + cart.subtotal.raw;
     return (

@@ -22,13 +22,11 @@ const SearchBar = ({ className }: { className?: string }) => {
                     .indexOf(search.toLowerCase()) > -1
             );
         });
-        console.log(searchArticles, search);
         if (search.length > 1) {
             setSearchedArticles(searchArticles);
         } else {
             setSearchedArticles([]);
         }
-        console.log(search.length);
     };
 
     return (

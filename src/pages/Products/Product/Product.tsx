@@ -3,32 +3,37 @@ import { useCommerceCMS } from "../../../contexts/CommerceContext";
 import { GiMailShirt } from "react-icons/gi";
 import { RiRuler2Line } from "react-icons/ri";
 import { MdAvTimer } from "react-icons/md";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Main from "../../../containers/Main/Main";
 import style from "./product.module.css";
 import { PrimaryIconButton } from "../../../components/Buttons/Buttons";
 import RelatedProducts from "../../../components/RelatedProducts/RelatedProducts";
-import Accordion from "../../../components/Accordion/Accordion";
+import Accordion, {
+    AccordionDetails,
+} from "../../../components/Accordion/Accordion";
 import { useContentfulCMS } from "../../../contexts/ContentfulContext";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
-import { commerce } from "../../../lib/Commerce";
 import sizeChart from "../../../assets/sizing-chart.jpg";
-import { useRef } from "react";
+import { useContext, useRef, useState } from "react";
+import { FavouritesContext } from "../../../contexts/FavouritesContext";
+import {
+    addToFavourites,
+    removeFromFavourites,
+} from "../../../utils/FavouritesFunctions";
+import { addToCart } from "../../../utils/CartFunctions";
 
 export function ProductDetails({
+    showDetailsAccordion,
     product,
     isScroll,
 }: {
+    showDetailsAccordion?: any;
     product?: any;
     isScroll?: any;
 }) {
     const { setCart } = useShoppingBagCMS();
 
-    const addToCart = () => {
-        commerce.cart
-            .add(product.id, 1)
-            .then(({ cart }: { cart: any }) => setCart(cart));
-    };
+    const { state, dispatch } = useContext(FavouritesContext);
 
     return (
         <section className={style.productDetails}>
@@ -65,15 +70,29 @@ export function ProductDetails({
                 <div className={style.shopping}>
                     <PrimaryIconButton
                         text="Add to shopping bag"
-                        onClick={addToCart}
+                        onClick={() => addToCart(product, setCart)}
                     />
-                    <AiOutlineHeart className={style.shoppingSVG} />
+                    {state.favourites.includes(product) ? (
+                        <AiFillHeart
+                            onClick={() =>
+                                removeFromFavourites(dispatch, product.id)
+                            }
+                            className={style.shoppingSVG}
+                        />
+                    ) : (
+                        <AiOutlineHeart
+                            onClick={() => addToFavourites(dispatch, product)}
+                            className={style.shoppingSVG}
+                        />
+                    )}
                 </div>
                 <div className={style.details}>
-                    <span>
-                        <GiMailShirt />
-                        Product details
-                    </span>
+                    {product?.description && (
+                        <span onClick={showDetailsAccordion}>
+                            <GiMailShirt />
+                            Product details
+                        </span>
+                    )}
                     <span onClick={isScroll}>
                         <MdAvTimer />
                         Delivery and Returns
@@ -88,11 +107,13 @@ export default function Product() {
     const { productId } = useParams();
     const { products } = useCommerceCMS();
     const { faq } = useContentfulCMS();
+    const [showAccordion, setShownAccordion] = useState(false);
+
+    const showDetailsAccordion = () => {
+        setShownAccordion(!showAccordion);
+    };
 
     const product = products?.find((prod) => prod.id === productId);
-
-    // const variants = commerce.products.getVariants(product?.id);
-    // console.log(variants);
 
     const scrollToComponent = (ref: any) =>
         window.scrollTo({
@@ -104,7 +125,12 @@ export default function Product() {
 
     return (
         <Main>
-            <ProductDetails isScroll={isScroll} product={product} />
+            <ProductDetails
+                showDetailsAccordion={showDetailsAccordion}
+                isScroll={isScroll}
+                product={product}
+            />
+            {showAccordion && <AccordionDetails fields={product} />}
             <RelatedProducts relatedProducts={product?.related_products} />
             <div className={style.accordion} ref={ref}>
                 <h1>FAQ</h1>
