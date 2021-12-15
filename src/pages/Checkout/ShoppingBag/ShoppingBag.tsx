@@ -1,4 +1,7 @@
-import { ContinueButton } from "../../../components/Buttons/Buttons";
+import {
+    ContinueButton,
+    PrimaryButton,
+} from "../../../components/Buttons/Buttons";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./shoppingbag.module.css";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -21,102 +24,123 @@ export default function ShoppingBag({ next }: { next?: any }) {
         removeFromCart(product, setCart);
     };
 
-    console.log(cart);
-
     return (
         <section>
-            <div className={style.shoppingBagWrapper}>
-                <div className={style.shoppingBag}>
-                    <h1>
-                        My Shopping Bag
-                        <span> ({cart?.total_items} articles)</span>
-                    </h1>
-                    {cart?.line_items.map((product: any) => (
-                        <article
-                            key={product.id}
-                            className={style.shoppingArticle}
-                        >
-                            <img src={product.image.url} alt={product.name} />
-                            <div className={style.fullSpace}>
-                                <div className={style.descDetails}>
-                                    <div>
-                                        <p>{product.name}</p>
-                                        <p>
-                                            <span>Size:</span> M
-                                        </p>
-                                    </div>
-                                    <select
-                                        onChange={(e: any) => {
-                                            updateCart(
-                                                product,
-                                                e.target.value,
-                                                setCart
-                                            );
-                                        }}
-                                        defaultValue={product.quantity}
-                                        name="quantity"
-                                        id="quantity"
-                                    >
-                                        {maxItems.quantity.map(
-                                            (quant, index) => (
-                                                <option
-                                                    key={index}
-                                                    value={quant}
-                                                >
-                                                    {quant} pieces
-                                                </option>
-                                            )
-                                        )}
-                                    </select>
-                                </div>
-                                <div className={style.flex}>
-                                    <div className={style.moveFromCart}>
-                                        <span
-                                            onClick={() =>
-                                                removeFromCart(product, setCart)
-                                            }
+            {cart?.line_items.length > 0 ? (
+                <div className={style.shoppingBagWrapper}>
+                    <div className={style.shoppingBag}>
+                        <h1>
+                            My Shopping Bag
+                            <span> ({cart?.total_items} articles)</span>
+                        </h1>
+                        {cart?.line_items.map((product: any) => (
+                            <article
+                                key={product.id}
+                                className={style.shoppingArticle}
+                            >
+                                <img
+                                    src={product.image.url}
+                                    alt={product.name}
+                                />
+                                <div className={style.fullSpace}>
+                                    <div className={style.descDetails}>
+                                        <div>
+                                            <p>{product.name}</p>
+                                            <p>
+                                                <span>Size:</span> M
+                                            </p>
+                                        </div>
+                                        <select
+                                            onChange={(e: any) => {
+                                                updateCart(
+                                                    product,
+                                                    e.target.value,
+                                                    setCart
+                                                );
+                                            }}
+                                            defaultValue={product.quantity}
+                                            name="quantity"
+                                            id="quantity"
                                         >
-                                            <BsTrash /> Remove from shopping bag
-                                        </span>
-                                        {!state.favourites.includes(
-                                            product
-                                        ) && (
-                                            <button
-                                                className={style.favouritesBag}
+                                            {maxItems.quantity.map(
+                                                (quant, index) => (
+                                                    <option
+                                                        key={index}
+                                                        value={quant}
+                                                    >
+                                                        {quant} pieces
+                                                    </option>
+                                                )
+                                            )}
+                                        </select>
+                                    </div>
+                                    <div className={style.flex}>
+                                        <div className={style.moveFromCart}>
+                                            <span
                                                 onClick={() =>
-                                                    removeFromCartAndFavourite(
-                                                        product
+                                                    removeFromCart(
+                                                        product,
+                                                        setCart
                                                     )
                                                 }
                                             >
-                                                <AiOutlineHeart
+                                                <BsTrash /> Remove from shopping
+                                                bag
+                                            </span>
+                                            {!state.favourites.includes(
+                                                product
+                                            ) && (
+                                                <button
                                                     className={
-                                                        style.shoppingSVG
+                                                        style.favouritesBag
                                                     }
-                                                />
-                                                Save to favourites
-                                            </button>
-                                        )}
+                                                    onClick={() =>
+                                                        removeFromCartAndFavourite(
+                                                            product
+                                                        )
+                                                    }
+                                                >
+                                                    <AiOutlineHeart
+                                                        className={
+                                                            style.shoppingSVG
+                                                        }
+                                                    />
+                                                    Save to favourites
+                                                </button>
+                                            )}
+                                        </div>
+                                        <span className={style.bagPrice}>
+                                            {
+                                                product.line_total
+                                                    .formatted_with_code
+                                            }
+                                        </span>
                                     </div>
-                                    <span className={style.bagPrice}>
-                                        {product.line_total.formatted_with_code}
-                                    </span>
                                 </div>
-                            </div>
-                        </article>
-                    ))}
-                </div>
-                <div className={style.priceSummary}>
-                    <div>
-                        <h2>Does your shopping bag check out?</h2>
-                        <p>
-                            You can pick your preferred shopping option in the
-                            next step.
-                        </p>
-                        <ContinueButton onClick={next} text="continue" />
+                            </article>
+                        ))}
+                    </div>
+                    <div className={style.priceSummary}>
+                        <div>
+                            <h2>Does your shopping bag check out?</h2>
+                            <p>
+                                You can pick your preferred shopping option in
+                                the next step.
+                            </p>
+                            <ContinueButton onClick={next} text="continue" />
+                        </div>
                     </div>
                 </div>
-            </div>
+            ) : (
+                <div>
+                    <h1>Your Shopping Bag is currently empty</h1>
+                    <PrimaryButton
+                        className={style.getStarted}
+                        text="Let's get shopping"
+                        path="/products"
+                    />
+                </div>
+            )}
         </section>
     );
 }

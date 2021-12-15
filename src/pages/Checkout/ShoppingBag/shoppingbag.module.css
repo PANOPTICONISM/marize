@@ -29,6 +29,11 @@
     margin: 6px 0;
 }
 
+.getStarted {
+    max-width: max-content;
+    margin: auto;
+}
+
 .shoppingArticle .favouritesBag {
     background: transparent;
     outline: none;

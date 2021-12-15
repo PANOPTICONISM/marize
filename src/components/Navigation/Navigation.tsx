@@ -9,6 +9,7 @@ import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { useState } from "react";
 import Cart from "../Cart/Cart";
 import MenuNav from "../../pages/MenuNav/MenuNav";
+import FavouritesCart from "../FavouritesCart/FavouritesCart";
 
 export default function Navigation() {
     const { cart } = useShoppingBagCMS();
@@ -45,7 +46,10 @@ export default function Navigation() {
             </div>
 
             <div className={style.right_nav}>
-                <AiOutlineHeart />
+                <div>
+                    <AiOutlineHeart />
+                    {/* <FavouritesCart /> */}
+                </div>
                 {!window.location.pathname.includes("/checkout/") && (
                     <div className={style.shoppingBag}>
                         <div onClick={toggleModal}>

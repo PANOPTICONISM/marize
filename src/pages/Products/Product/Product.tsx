@@ -13,7 +13,6 @@ import Accordion, {
 } from "../../../components/Accordion/Accordion";
 import { useContentfulCMS } from "../../../contexts/ContentfulContext";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
-import { commerce } from "../../../lib/Commerce";
 import sizeChart from "../../../assets/sizing-chart.jpg";
 import { useContext, useRef, useState } from "react";
 import { FavouritesContext } from "../../../contexts/FavouritesContext";
@@ -21,6 +20,7 @@ import {
     addToFavourites,
     removeFromFavourites,
 } from "../../../utils/FavouritesFunctions";
+import { addToCart } from "../../../utils/CartFunctions";
 
 export function ProductDetails({
     showDetailsAccordion,
@@ -32,12 +32,6 @@ export function ProductDetails({
     isScroll?: any;
 }) {
     const { setCart } = useShoppingBagCMS();
-
-    const addToCart = () => {
-        commerce.cart
-            .add(product.id, 1)
-            .then(({ cart }: { cart: any }) => setCart(cart));
-    };
 
     const { state, dispatch } = useContext(FavouritesContext);
 
@@ -76,7 +70,7 @@ export function ProductDetails({
                 <div className={style.shopping}>
                     <PrimaryIconButton
                         text="Add to shopping bag"
-                        onClick={addToCart}
+                        onClick={() => addToCart(product, setCart)}
                     />
                     {state.favourites.includes(product) ? (
                         <AiFillHeart
