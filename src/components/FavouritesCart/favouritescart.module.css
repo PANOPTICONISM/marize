@@ -18,19 +18,6 @@
     margin-top: 0;
 }
 
-.emptyCart h4 {
-    font-weight: 300;
-    font-size: 16px;
-}
-
-.emptyCart h5 {
-    font-size: 18px;
-}
-
-.emptyCart {
-    text-align: center;
-}
-
 .cartFavouritesWrapper .shopBagBtn {
     margin-top: 12px;
 }
@@ -52,7 +39,8 @@
 }
 
 .fullCart .presentation h4 {
-    width: 15px;
+    width: 50px;
+    white-space: normal;
 }
 
 .fullCart .presentation h5 {
@@ -60,8 +48,7 @@
 }
 
 .fullCart h4,
-.fullCart h5,
-.fullCart p {
+.fullCart h5 {
     margin: 0;
     font-size: 12px;
 }
@@ -75,18 +62,14 @@
     align-content: space-between;
 }
 
-
-.fullCart .bottomProduct button {
-    background-color: transparent;
-    border: none;
-}
-
 .fullCart .bottomProduct button {
     color: #9C9C9C;
     font-size: 12px;
     display: flex;
     align-items: center;
     padding: 0;
+    background-color: transparent;
+    border: none;
 }
 
 .fullCart .bottomProduct svg {
