@@ -4,7 +4,7 @@
     border: 1px solid #000;
     position: absolute;
     top: 40px;
-    right: 0;
+    right: -50px;
     background: var(--white-colour);
     z-index: 2;
     max-height: 300px;
@@ -91,4 +91,10 @@
 
 .fullCart .bottomProduct svg {
     margin-right: 4px;
+}
+
+@media screen and (min-width: 600px) {
+    .cartFavouritesWrapper {
+        right: 0;
+    }
 }
