@@ -22,7 +22,7 @@ export default function CommerceProvider({
 
     const getData = async () => {
         const { data: products } = await commerce.products.list({
-            limit: 40,
+            limit: 60,
         });
         const { data: categories } = await commerce.categories.list();
 
