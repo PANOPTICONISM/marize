@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { removeFromCart } from "../../utils/CartFunctions";
 import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
 import { updateCart } from "../../utils/CartFunctions";
+import { FavouritesContext } from "../../contexts/FavouritesContext";
+import {
+    addToFavourites,
+    removeFromFavourites,
+} from "../../utils/FavouritesFunctions";
 
 export function CartResumeContainer({
     children,
@@ -22,10 +27,13 @@ export function CartResumeContainer({
 }
 
 export function ProductCard({ product }: { product: any }) {
+    const { state, dispatch } = useContext(FavouritesContext);
     const { setCart } = useShoppingBagCMS();
     const maxItems = {
         quantity: [1, 2, 3, 4],
     };
+
+    console.log(state.favourites);
 
     return (
         <div className={style.fullCart}>
@@ -47,9 +55,23 @@ export function ProductCard({ product }: { product: any }) {
                             <BsTrash />
                         </button>
                         <span>||</span>
-                        <button>
-                            <AiOutlineHeart />
-                        </button>
+                        {state.favourites.includes(product) ? (
+                            <button
+                                onClick={() =>
+                                    removeFromFavourites(dispatch, product.id)
+                                }
+                            >
+                                <AiFillHeart className={style.shoppingSVG} />
+                            </button>
+                        ) : (
+                            <button
+                                onClick={() =>
+                                    addToFavourites(dispatch, product)
+                                }
+                            >
+                                <AiOutlineHeart className={style.shoppingSVG} />
+                            </button>
+                        )}
                     </div>
                     <select
                         onChange={(e: any) => {

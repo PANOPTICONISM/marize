@@ -42,7 +42,7 @@ export function AccordionDetails({ fields }: { fields?: any }) {
     console.log(removeHTMLContent);
 
     return (
-        <div className={style.accordion}>
+        <div className={`${style.accordion} ${style.accordionDetails}`}>
             <div className={style.accordionItem}>
                 <div
                     className={style.accordionTitle}
