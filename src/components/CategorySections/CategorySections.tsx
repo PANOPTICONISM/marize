@@ -17,7 +17,7 @@ function CategorySections() {
                     <PrimaryButton
                         className={style.categoryBtns}
                         text={`Explore ${category?.slug}`}
-                        path="/"
+                        path="/products"
                     />
                 </div>
             ))}

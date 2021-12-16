@@ -11,6 +11,10 @@ body .menu {
     z-index: 900;
 }
 
+.menu_sections a {
+    color: var(--black-colour);
+}
+
 .close {
     position: absolute;
     top: 15px;

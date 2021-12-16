@@ -3,6 +3,7 @@ import { MdHighlightOff } from "react-icons/md";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import VisitStore from "../../components/VisitStore/VisitStore";
 import StoreInfo from "../../components/StoreInfo/StoreInfo";
+import { Link } from "react-router-dom";
 
 export default function MenuNav({ toggleOpen }: { toggleOpen: any }) {
     const { categories } = useCommerceCMS();
@@ -26,9 +27,9 @@ export default function MenuNav({ toggleOpen }: { toggleOpen: any }) {
                             <div key={i} className={style.menu_sections}>
                                 <h4> {cats.name} </h4>
                                 {cats.children.map((c: any) => (
-                                    <span key={c.id}>
-                                        {c.name}&nbsp;&nbsp;{" "}
-                                    </span>
+                                    <Link to="/products" key={c.id}>
+                                        {c.name}&nbsp;&nbsp;
+                                    </Link>
                                 ))}
                             </div>
                         )
