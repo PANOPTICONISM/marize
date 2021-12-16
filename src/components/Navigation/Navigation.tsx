@@ -38,7 +38,11 @@ export default function Navigation() {
         <nav className={style.wrapper}>
             {menuOpen && <MenuNav toggleOpen={toggleOpen} />}
             <div className={style.left_nav}>
-                <Hamburger toggle={toggleOpen} toggled={menuOpen} />
+                <Hamburger
+                    aria-label="burger-menu"
+                    toggle={toggleOpen}
+                    toggled={menuOpen}
+                />
 
                 <div className={style.search_bar_wrapper}>
                     <SearchBar className={style.search_bar} />
@@ -47,7 +51,7 @@ export default function Navigation() {
 
             <div className={style.logo}>
                 <Link to="/">
-                    <Logo />
+                    <Logo aria-label="logo" />
                 </Link>
             </div>
 
