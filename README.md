@@ -28,4 +28,4 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ### LIVE PREVIEW
 
-<https://thirsty-neumann-4bd9cb.netlify.app/>
+<https://marize.netlify.app/>
