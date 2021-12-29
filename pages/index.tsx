@@ -1,13 +1,13 @@
 import Image from "next/image"
 import { commerce } from "../lib/Commerce.js";
 import Main from "../containers/Main/Main";
-import hero from "../assets/hero-image.png";
+import hero from "../public/assets/hero-image.png";
 import style from "../styles/homepage.module.css";
-import sky from "../assets/sky-cashmere.svg";
-import caminatta from "../assets/caminatta.svg";
-import atlanta from "../assets/atlanta_mocassin.svg";
-import moda from "../assets/moda_ana.svg";
-import love from "../assets/love_m.svg";
+import sky from "../public/assets/sky-cashmere.svg";
+import caminatta from "../public/assets/caminatta.svg";
+import atlanta from "../public/assets/atlanta_mocassin.svg";
+import moda from "../public/assets/moda_ana.svg";
+import love from "../public/assets/love_m.svg";
 import NewArrivals from "../components/NewArrivals/NewArrivals";
 import VisitStore from "../components/VisitStore/VisitStore";
 import CategorySections from "../components/CategorySections/CategorySections";
@@ -35,7 +35,7 @@ export default function Homepage({products}) {
     );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
 const { data: categories } = await commerce.categories.list();
   const { data: products } = await commerce.products.list({
 	limit: 60,

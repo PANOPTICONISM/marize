@@ -49,7 +49,7 @@ export default function Navigation() {
             </div>
 
             <div className={style.logo}>
-                <Image src="/assets/logo.svg" layout="fill"/>
+                <Image src="/assets/logo.svg" width={198} height={38}/>
             </div>
 
             <div className={style.right_nav}>

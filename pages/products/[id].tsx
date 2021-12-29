@@ -6,7 +6,7 @@ import { RiRuler2Line } from "react-icons/ri";
 import { MdAvTimer } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Main from "../../containers/Main/Main";
-import style from "./product.module.css";
+import style from "./Product/product.module.css";
 import { PrimaryIconButton } from "../../components/Buttons/Buttons";
 import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
 import Accordion, {
@@ -22,6 +22,7 @@ import {
     removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
 import { addToCart } from "../../utils/CartFunctions";
+import { commerce } from '../../lib/Commerce';
 
 export function ProductDetails({
     showDetailsAccordion,
@@ -73,7 +74,7 @@ export function ProductDetails({
                         text="Add to shopping bag"
                         onClick={() => addToCart(product, setCart)}
                     />
-                    {state.favourites.includes(product) ? (
+                    {state?.favourites.includes(product) ? (
                         <AiFillHeart
                             onClick={() =>
                                 removeFromFavourites(dispatch, product.id)
@@ -104,11 +105,11 @@ export function ProductDetails({
     );
 }
 
-export default function Product() {
+export default function Product({products}) {
     const router = useRouter();
     const { productId } = router.query
-    const { products } = useCommerceCMS();
-    const { faq } = useContentfulCMS();
+    // const { products } = useCommerceCMS();
+    // const { faq } = useContentfulCMS();
     const [showAccordion, setShownAccordion] = useState(false);
 
     const showDetailsAccordion = () => {
@@ -136,9 +137,9 @@ export default function Product() {
             <RelatedProducts relatedProducts={product?.related_products} />
             <div className={style.accordion} ref={ref}>
                 <h1>FAQ</h1>
-                {faq?.map(({ fields }, index) => (
+                {/* {faq?.map(({ fields }, index) => (
                     <Accordion key={index} fields={fields} />
-                ))}
+                ))} */}
             </div>
         </Main>
     );
