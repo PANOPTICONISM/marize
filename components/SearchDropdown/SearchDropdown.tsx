@@ -5,7 +5,7 @@ export default function SearchDropdown({
 }: {
     searchedArticles?: any;
 }) {
-    if (searchedArticles.length > 0) {
+    if (searchedArticles?.length > 0) {
         return (
             <div className={style.dropdown}>
                 {searchedArticles?.slice(0, 10).map((article: any) => (

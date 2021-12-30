@@ -35,8 +35,6 @@ export function ProductCard({ product }: { product: any }) {
         addToFavourites(dispatch, product);
     };
 
-    console.log(state.favourites);
-
     return (
         <div className={style.fullCart}>
             <img src={product.image.url} alt={product.name} />

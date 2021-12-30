@@ -59,8 +59,7 @@ export default function FavouritesCart() {
         addToCart(product, setCart);
     };
 
-    console.log(state.favourites);
-    if (state.favourites.length > 0) {
+    if (state?.favourites.length > 0) {
         return (
             <FavouritesCartResumeContainer>
                 {state.favourites?.map((product: any) => (

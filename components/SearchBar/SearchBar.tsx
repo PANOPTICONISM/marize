@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { useCommerceCMS } from "../../contexts/CommerceContext";
+import { commerce } from "../../lib/Commerce";
 import SearchDropdown from "../SearchDropdown/SearchDropdown";
 
-const SearchBar = ({ className }: { className?: string }) => {
-    const { products } = useCommerceCMS();
+const SearchBar = ({ className, products }: { className?: string, products?: any }) => {
     const [search, setSearch] = useState("");
     const [searchedArticles, setSearchedArticles] = useState([]);
 
@@ -28,6 +27,8 @@ const SearchBar = ({ className }: { className?: string }) => {
             setSearchedArticles([]);
         }
     };
+
+    console.log(searchedArticles, products)
 
     return (
         <>
