@@ -1,6 +1,4 @@
-import { useRouter } from 'next/router'
 import Link from "next/link";
-import { useCommerceCMS } from "../../contexts/CommerceContext";
 import { GiMailShirt } from "react-icons/gi";
 import { RiRuler2Line } from "react-icons/ri";
 import { MdAvTimer } from "react-icons/md";
@@ -12,9 +10,7 @@ import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
 import Accordion, {
     AccordionDetails,
 } from "../../components/Accordion/Accordion";
-import { useContentfulCMS } from "../../contexts/ContentfulContext";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
-import sizeChart from "../../../assets/sizing-chart.jpg";
 import { useContext, useRef, useState } from "react";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
 import {
@@ -105,18 +101,14 @@ export function ProductDetails({
     );
 }
 
-export default function Product({products}) {
-    const router = useRouter();
-    const { productId } = router.query
-    // const { products } = useCommerceCMS();
-    // const { faq } = useContentfulCMS();
+export default function Product({products, id}) {
     const [showAccordion, setShownAccordion] = useState(false);
 
     const showDetailsAccordion = () => {
         setShownAccordion(!showAccordion);
     };
 
-    const product = products?.find((prod) => prod.id === productId);
+    const product = products?.find((prod) => prod.id === id);
 
     const scrollToComponent = (ref: any) =>
         window.scrollTo({
@@ -143,4 +135,34 @@ export default function Product({products}) {
             </div>
         </Main>
     );
+}
+
+export async function getStaticPaths() {
+    const { data: products } = await commerce.products.list({
+        limit: 60,
+      });
+
+      const paths = products.map((path) => ({
+          params: {
+              id: path.id
+          }
+      }))
+    
+      return {
+          paths,
+          fallback: false
+      }
+}
+
+export async function getStaticProps({params: {id}}) {
+    const { data: products } = await commerce.products.list({
+      limit: 60,
+    });
+  
+    return {
+      props: {
+        products,
+        id
+      },
+    };
 }

@@ -1,5 +1,6 @@
 import style from "./navigation.module.css";
 import Image from "next/image"
+import Link from "next/link"
 import Hamburger from "hamburger-react";
 import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -49,7 +50,9 @@ export default function Navigation() {
             </div>
 
             <div className={style.logo}>
+                <Link href="/">
                 <Image src="/assets/logo.svg" width={198} height={38}/>
+                </Link>
             </div>
 
             <div className={style.right_nav}>

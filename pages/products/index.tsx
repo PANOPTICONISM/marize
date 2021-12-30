@@ -1,10 +1,10 @@
 import { MdKeyboardArrowDown, MdOutlineFilterAlt } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import style from "./products.module.css";
+import style from "../../styles/products.module.css";
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
 import Image from "next/image";
-import heroproducts from "../../assets/heroproducts.png";
+import heroproducts from "../../public/assets/heroproducts.png";
 import FilterComponent from "../../components/Filters/Filters";
 import { useState, useEffect, useContext } from "react";
 import Link from 'next/link'
@@ -13,8 +13,9 @@ import {
     addToFavourites,
     removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
-export default function Products() {
-    const { products, categories } = useCommerceCMS();
+import { commerce } from "../../lib/Commerce";
+
+export default function Products({categories, products}) {
     const [filteredArticles, setFilteredArticles] = useState<any>([]);
     const [filters, setFilters] = useState([]);
     const [sortType, setSortType] = useState(null);
@@ -30,6 +31,7 @@ export default function Products() {
         );
         setSortType(null);
     };
+    console.log("products", products)
     useEffect(() => {
         if (filters.length > 0) {
             const filtered = products?.filter((product) => {
@@ -71,7 +73,7 @@ export default function Products() {
         <div className={style.card} key={article.id}>
             <div className={style.img_container}>
                 <div className={style.blue_heart}>
-                    {state.favourites.includes(article) ? (
+                    {state?.favourites.includes(article) ? (
                         <AiFillHeart
                             onClick={() =>
                                 removeFromFavourites(dispatch, article.id)
@@ -158,3 +160,17 @@ export default function Products() {
         </Main>
     );
 }
+
+export async function getStaticProps() {
+    const { data: categories } = await commerce.categories.list();
+      const { data: products } = await commerce.products.list({
+        limit: 60,
+    });
+    
+      return {
+        props: {
+          categories,
+          products,
+        },
+      };
+    }
