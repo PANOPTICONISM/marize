@@ -18,7 +18,7 @@ import {
     removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
 import { addToCart } from "../../utils/CartFunctions";
-import { commerce } from '../../lib/Commerce';
+import { commerce } from '../api/lib/Commerce';
 
 export function ProductDetails({
     showDetailsAccordion,

@@ -13,7 +13,7 @@ import {
     addToFavourites,
     removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
-import { commerce } from "../../lib/Commerce";
+import { commerce } from "../api/lib/Commerce";
 
 export default function Products({categories, products}) {
     const [filteredArticles, setFilteredArticles] = useState<any>([]);

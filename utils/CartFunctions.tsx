@@ -1,4 +1,4 @@
-import { commerce } from "../lib/Commerce.js";
+import { commerce } from "../pages/api/lib/Commerce.js";
 
 export const addToCart = (product: any, setCart: any) => {
     commerce.cart

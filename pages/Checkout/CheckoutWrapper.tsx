@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
-import { commerce } from "../../lib/Commerce";
+import { commerce } from "../api/lib/Commerce";
 import ShoppingBag from "./ShoppingBag/ShoppingBag";
 import { Stepper, Step, StepLabel, makeStyles } from "@material-ui/core";
 import ShippingDetails from "./ShippingDetails/ShippingDetails";

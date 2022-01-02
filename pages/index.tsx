@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Head from "next/head"
-import { commerce } from "../lib/Commerce.js";
+import { commerce } from "./api/lib/Commerce.js";
 import Main from "../containers/Main/Main";
 import hero from "../public/assets/hero-image.png";
 import style from "../styles/homepage.module.css";

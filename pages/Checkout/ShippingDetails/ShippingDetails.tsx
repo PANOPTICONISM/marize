@@ -3,7 +3,7 @@ import { BackButton, SubmitButton } from "../../../components/Buttons/Buttons";
 import style from "./shippingdetails.module.css";
 import { InputLabel, Select, MenuItem } from "@material-ui/core";
 import { useState, useEffect } from "react";
-import { commerce } from "../../../lib/Commerce";
+import { commerce } from "../../api/lib/Commerce";
 
 type FormValues = {
     firstname: string;

@@ -17,6 +17,10 @@ body {
   font-size: var(--body-font-size);
 }
 
+button {
+  cursor: pointer;
+}
+
 p,
 span {
   font-size: var(--body-font-size);

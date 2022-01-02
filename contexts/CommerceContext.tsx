@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { commerce } from "../lib/Commerce.js";
+import { commerce } from "../pages/api/lib/Commerce.js";
 
 export const CommerceContext = createContext<{
     products?: any[];

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { contentful } from "../lib/Contentful";
+import { contentful } from "../pages/api/lib/Contentful";
 
 export const ContentfulContext = createContext<{
     faq?: any[];
