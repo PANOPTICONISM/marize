@@ -5,7 +5,7 @@ export default {
   fields: [
     {
       name: 'title',
-      title: 'Title',
+      title: 'Nome',
       type: 'string',
     },
     {
@@ -19,13 +19,9 @@ export default {
     },
     {
       name: 'logo',
-      title: 'logo',
+      title: 'Logo',
       type: 'image',
-    },
-    {
-      name: 'description',
-      title: 'Description',
-      type: 'blockContent',
+      description: 'Tem que ser igual aos outros e em .png formato'
     },
   ],
   preview: {

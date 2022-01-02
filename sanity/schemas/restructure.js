@@ -25,9 +25,11 @@ export default () =>
             S.listItem()
               .title('Categories')
               .schemaType('category')
-              // When you open this list item, list out the documents
-              // of the type category"
-              .child(S.documentTypeList('category').title('Categories'))
+              .child(S.documentTypeList('category').title('Categories')),
+            S.listItem()
+              .title('Vendedores')
+              .schemaType('vendor')
+              .child(S.documentTypeList('vendor').title('Vendedor'))
           ])
       ),
       S.listItem()
