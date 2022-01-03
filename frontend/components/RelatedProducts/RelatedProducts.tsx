@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from "next/image"
 import style from "./relatedproducts.module.css";
 
 const RelatedProducts = ({ relatedProducts }: { relatedProducts?: any }) => {
@@ -12,10 +13,10 @@ const RelatedProducts = ({ relatedProducts }: { relatedProducts?: any }) => {
                     {returnMax5Products?.map((article: any) => (
                         <div key={article.id}>
                             <Link href={`/products/${article.id}`}>
-                                <img
+                                <a><Image
                                     src={article.image.url}
                                     alt={article.name}
-                                />
+                                /></a>
                             </Link>
                             <h2>{article.name}</h2>
                             <span>{article.price.formatted_with_code}</span>

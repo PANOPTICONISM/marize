@@ -23,11 +23,11 @@ export default function Homepage({ products }) {
           <Image src={hero} alt="hero" />
         </header>
         <section className={style.brands}>
-          <img src="assets/sky-cashmere.svg" alt="sky cashmere" />
-          <img src="assets/caminatta.svg" alt="caminatta" />
-          <img src="assets/atlanta_mocassin.svg" alt="atlanta-mocassin" />
-          <img src="assets/moda_ana.svg" alt="moda-ana" />
-          <img src="assets/love_m.svg" alt="love-m" />
+          <Image src="assets/sky-cashmere.svg" alt="sky cashmere" />
+          <Image src="assets/caminatta.svg" alt="caminatta" />
+          <Image src="assets/atlanta_mocassin.svg" alt="atlanta-mocassin" />
+          <Image src="assets/moda_ana.svg" alt="moda-ana" />
+          <Image src="assets/love_m.svg" alt="love-m" />
         </section>
         <NewArrivals products={products} />
         <VisitStore className={style.visitHomepage} />

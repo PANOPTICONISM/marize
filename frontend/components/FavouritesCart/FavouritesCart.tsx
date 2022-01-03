@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import Image from "next/image"
 import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { addToCart } from "../../utils/CartFunctions";
 import style from "./favouritescart.module.css";
@@ -25,7 +26,7 @@ export function ProductCard({ product }: { product: any }) {
 
     return (
         <div className={style.fullCart}>
-            <img src={product.image.url} alt={product.name} />
+            <Image src={product.image.url} alt={product.name} />
             <div className={style.spaceBetween}>
                 <div>
                     <div className={style.presentation}>

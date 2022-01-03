@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image"
 import { useCommerceCMS } from "../../contexts/CommerceContext";
 import { PrimaryButton } from "../Buttons/Buttons";
 import style from "./categorysections.module.css";
@@ -12,7 +13,7 @@ function CategorySections() {
             {clothingAndAcessories?.map((category) => (
                 <div key={category.id}>
                     <div className={style.homepageWrapper}>
-                        <img src={category.assets[0].url} alt={category.slug} />
+                        <Image src={category.assets[0].url} alt={category.slug} />
                     </div>
                     <PrimaryButton
                         className={style.categoryBtns}

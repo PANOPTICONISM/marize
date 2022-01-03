@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image"
 import { GiMailShirt } from "react-icons/gi";
 import { RiRuler2Line } from "react-icons/ri";
 import { MdAvTimer } from "react-icons/md";
@@ -33,7 +34,7 @@ export function ProductDetails({
 
     return (
         <section className={style.productDetails}>
-            <img src={product?.image.url} alt={product?.name} />
+            <Image src={product?.image.url} alt={product?.name} />
             <div className={style.wrapper}>
                 <div className={style.introduction}>
                     <h2>{product?.name}</h2>
@@ -60,7 +61,7 @@ export function ProductDetails({
                         </select>
                     </form>
                     <Link href="/assets/sizing-chart.jpg">
-                        <RiRuler2Line />
+                        <a><RiRuler2Line /></a>
                     </Link>
                 </div>
                 <div className={style.shopping}>

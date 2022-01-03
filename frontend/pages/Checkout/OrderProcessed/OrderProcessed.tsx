@@ -1,3 +1,4 @@
+import Image from "next/image"
 import React from "react";
 import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./orderprocessed.module.css";
@@ -27,7 +28,7 @@ export default function OrderProcessed({
                 <h1>Order Summary</h1>
                 {cart?.line_items.map((product: any) => (
                     <article key={product.id} className={style.shoppingArticle}>
-                        <img src={product.image.url} alt={product.name} />
+                        <Image src={product.image.url} alt={product.name} />
                         <div className={style.fullSpace}>
                             <div className={style.descDetails}>
                                 <div>

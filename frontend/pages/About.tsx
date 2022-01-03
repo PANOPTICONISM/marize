@@ -1,3 +1,4 @@
+import Image from "next/image"
 import style from "../styles/about.module.css";
 import Main from "../containers/Main/Main";
 import { useContentfulCMS } from "../contexts/ContentfulContext";
@@ -25,7 +26,7 @@ export default function About() {
             {aboutPage ? (
                 <div className={style.aboutPage}>
                     <header>
-                        <img src={heroImage.fields.file.url} alt="" />
+                        <Image src={heroImage.fields.file.url} alt="" />
                         <h1>{title}</h1>
                     </header>
                     <article>
@@ -39,7 +40,7 @@ export default function About() {
                             )}
                         </section>
                         <section className={style.whyVisitUs}>
-                            <img
+                            <Image
                                 src={secondSectionImage.fields.file.url}
                                 alt=""
                             />
@@ -62,11 +63,11 @@ export default function About() {
                             </div>
                         </section>
                         <section className={style.brands}>
-                            <img src={sky} alt="vera" />
-                            <img src={caminatta} alt="caminatta" />
-                            <img src={atlanta} alt="atlanta-mocassin" />
-                            <img src={moda} alt="moda-ana" />
-                            <img src={love} alt="love-m" />
+                            <Image src={sky} alt="vera" />
+                            <Image src={caminatta} alt="caminatta" />
+                            <Image src={atlanta} alt="atlanta-mocassin" />
+                            <Image src={moda} alt="moda-ana" />
+                            <Image src={love} alt="love-m" />
                         </section>
                         <section>
                             <h1>{lastSectionTitle}</h1>
@@ -79,7 +80,7 @@ export default function About() {
                                         fields?: any;
                                         title?: any;
                                     }) => (
-                                        <img
+                                        <Image
                                             key={fields.title}
                                             src={fields.file.url}
                                             alt={fields.title}

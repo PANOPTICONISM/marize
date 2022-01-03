@@ -1,5 +1,7 @@
 import style from "./searchdropdown.module.css";
 import Link from 'next/link'
+import Image from "next/image"
+
 export default function SearchDropdown({
     searchedArticles,
 }: {
@@ -10,14 +12,15 @@ export default function SearchDropdown({
             <div className={style.dropdown}>
                 {searchedArticles?.slice(0, 10).map((article: any) => (
                     <Link href={`/products/${article.id}`} key={article.id}>
-                        <div className={style.items}>
-                            <img
+                       <a> <div className={style.items}>
+                            <Image
                                 className={style.items}
                                 src={article.image.url}
                                 alt={article.name}
                             />
                             <span>{article.name}</span>
                         </div>
+                        </a>
                     </Link>
                 ))}
             </div>

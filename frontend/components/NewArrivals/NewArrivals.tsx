@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useCommerceCMS } from "../../contexts/CommerceContext";
+import Image from "next/image"
 import style from "./newarrivals.module.css";
 
 const NewArrivals = ({products}) => {
@@ -14,7 +14,7 @@ const NewArrivals = ({products}) => {
                 {newArrivals?.map((article) => (
                     <div key={article.id}>
                         <Link href={`/products/${article.id}`}>
-                            <img src={article.image.url} alt={article.name} />
+                            <a><Image src={article.image.url} alt={article.name} /></a>
                         </Link>
                         <h2>{article.name}</h2>
                         <span>{article.price.formatted_with_code}</span>
