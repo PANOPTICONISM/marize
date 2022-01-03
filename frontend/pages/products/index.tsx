@@ -1,7 +1,6 @@
 import { MdKeyboardArrowDown, MdOutlineFilterAlt } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import style from "../../styles/products.module.css";
-import { useCommerceCMS } from "../../contexts/CommerceContext";
 import Main from "../../containers/Main/Main";
 import Image from "next/image";
 import heroproducts from "../../public/assets/heroproducts.png";

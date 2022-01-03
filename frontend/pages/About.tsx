@@ -1,11 +1,11 @@
-import style from "./about.module.css";
+import style from "../styles/about.module.css";
 import Main from "../containers/Main/Main";
 import { useContentfulCMS } from "../contexts/ContentfulContext";
-import sky from "../../assets/sky-cashmere.svg";
-import caminatta from "../../assets/caminatta.svg";
-import atlanta from "../../assets/atlanta_mocassin.svg";
-import moda from "../../assets/moda_ana.svg";
-import love from "../../assets/love_m.svg";
+import sky from "../public/assets/sky-cashmere.svg";
+import caminatta from "../public/assets/caminatta.svg";
+import atlanta from "../public/assets/atlanta_mocassin.svg";
+import moda from "../public/assets/moda_ana.svg";
+import love from "../public/assets/love_m.svg";
 
 export default function About() {
     const { aboutPage } = useContentfulCMS();

@@ -7,9 +7,7 @@ import Main from "../../containers/Main/Main";
 import style from "./Product/product.module.css";
 import { PrimaryIconButton } from "../../components/Buttons/Buttons";
 import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
-import Accordion, {
-    AccordionDetails,
-} from "../../components/Accordion/Accordion";
+import { AccordionDetails } from "../../components/Accordion/Accordion";
 import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { useContext, useRef, useState } from "react";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
