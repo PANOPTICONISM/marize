@@ -5,7 +5,7 @@ export default {
   fields: [
     {
       name: 'title',
-      title: 'Title',
+      title: 'Nome',
       type: 'string',
     },
     {
@@ -18,13 +18,9 @@ export default {
       },
     },
     {
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    },
-    {
       name: 'parents',
-      title: 'Parent categories',
+      title: 'Categorias relacionadas',
+      description: 'Por exemplo - se "mochilas", aqui tem de se colocar "Caminatta"',
       type: 'array',
       of: [
         {
