@@ -1,4 +1,4 @@
-import { commerce } from "../../lib/Commerce.js";
+import { commerce } from "./lib/Commerce.js";
 
 export async function getStaticProps(context) {
   const id = context.params.id

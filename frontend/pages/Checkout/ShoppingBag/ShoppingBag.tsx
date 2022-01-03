@@ -1,3 +1,4 @@
+import Image from "next/image"
 import {
     ContinueButton,
     PrimaryButton,
@@ -38,7 +39,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                                 key={product.id}
                                 className={style.shoppingArticle}
                             >
-                                <img
+                                <Image
                                     src={product.image.url}
                                     alt={product.name}
                                 />
