@@ -22,7 +22,12 @@ function Confirmation({
           </h1>
           {cart?.line_items.map((product: any) => (
             <article key={product.id} className={style.shoppingArticle}>
-              <Image src={product.image.url} alt={product.name} />
+              <Image
+                src={product.image.url}
+                width={230}
+                height={300}
+                alt={product.name}
+              />
               <div className={style.fullSpace}>
                 <div className={style.descDetails}>
                   <div>

@@ -20,7 +20,7 @@ export default function Homepage({ products }) {
           <h1 className={style.heading}>
             HANDPICKED APPAREL WITH <span>YOU</span> IN MIND
           </h1>
-          <Image src={hero} alt="hero" />
+          <Image src={hero} width={750} height={440} alt="hero" />
         </header>
         <section className={style.brands}>
           <Image

@@ -86,7 +86,12 @@ export default function Products({ categories, products }) {
         </div>
         <Link href={`/products/${article.id}`}>
           <a>
-            <Image src={article.image.url} alt="products" />
+            <Image
+              src={article.image.url}
+              width={300}
+              height={340}
+              alt="products"
+            />
           </a>
         </Link>
       </div>
@@ -102,7 +107,12 @@ export default function Products({ categories, products }) {
     <Main>
       <div className={style.products_container}>
         <header className={style.products_hero}>
-          <Image src={heroproducts} alt="products_hero" />
+          <Image
+            src={heroproducts}
+            width={1140}
+            height={200}
+            alt="products_hero"
+          />
           <h1 className={style.products_title}>
             20% discount on all Christmas gifts
           </h1>
