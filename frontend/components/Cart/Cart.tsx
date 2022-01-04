@@ -38,7 +38,12 @@ export function ProductCard({ product }: { product: any }) {
 
   return (
     <div className={style.fullCart}>
-      <Image src={product.image.url} alt={product.name} />
+      <Image
+        src={product.image.url}
+        width={30}
+        height={30}
+        alt={product.name}
+      />
       <div className={style.spaceBetween}>
         <div>
           <div className={style.presentation}>

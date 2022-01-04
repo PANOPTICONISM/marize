@@ -9,6 +9,7 @@ import VisitStore from "../components/VisitStore/VisitStore";
 import CategorySections from "../components/CategorySections/CategorySections";
 
 export default function Homepage({ products }) {
+  console.log(products);
   return (
     <>
       <Head>
@@ -54,7 +55,7 @@ export default function Homepage({ products }) {
             alt="love-m"
           />
         </section>
-        {/* <NewArrivals products={products} /> */}
+        <NewArrivals products={products} />
         <VisitStore className={style.visitHomepage} />
         <CategorySections />
       </Main>
@@ -62,7 +63,7 @@ export default function Homepage({ products }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const { data: categories } = await commerce.categories.list();
   const { data: products } = await commerce.products.list({
     limit: 60,
