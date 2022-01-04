@@ -1,5 +1,5 @@
-import Image from "next/image"
-import Head from "next/head"
+import Image from "next/image";
+import Head from "next/head";
 import { commerce } from "./api/lib/Commerce.js";
 import Main from "../containers/Main/Main";
 import hero from "../public/assets/hero-image.png";
@@ -23,13 +23,38 @@ export default function Homepage({ products }) {
           <Image src={hero} alt="hero" />
         </header>
         <section className={style.brands}>
-          <Image src="assets/sky-cashmere.svg" alt="sky cashmere" />
-          <Image src="assets/caminatta.svg" alt="caminatta" />
-          <Image src="assets/atlanta_mocassin.svg" alt="atlanta-mocassin" />
-          <Image src="assets/moda_ana.svg" alt="moda-ana" />
-          <Image src="assets/love_m.svg" alt="love-m" />
+          <Image
+            src="/assets/sky-cashmere.svg"
+            width={220}
+            height={60}
+            alt="sky cashmere"
+          />
+          <Image
+            src="/assets/caminatta.svg"
+            width={220}
+            height={100}
+            alt="caminatta"
+          />
+          <Image
+            src="/assets/atlanta_mocassin.svg"
+            width={220}
+            height={60}
+            alt="atlanta-mocassin"
+          />
+          <Image
+            src="/assets/moda_ana.svg"
+            width={220}
+            height={100}
+            alt="moda-ana"
+          />
+          <Image
+            src="/assets/love_m.svg"
+            width={220}
+            height={60}
+            alt="love-m"
+          />
         </section>
-        <NewArrivals products={products} />
+        {/* <NewArrivals products={products} /> */}
         <VisitStore className={style.visitHomepage} />
         <CategorySections />
       </Main>
