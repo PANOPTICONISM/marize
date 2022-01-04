@@ -2,10 +2,12 @@ import Commerce from "@chec/commerce.js";
 
 // this should still happen in the backend, as the keys will be exposed on runtime
 const checPublicKey = process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY;
-const devEnv = process.env.NODE_ENV === 'development';
+const devEnv = process.env.NODE_ENV === "development";
 
-if (devEnv && !checPublicKey) {
-  throw Error('A Chec public API key must be provided as an environment variable named NEXT_PUBLIC_CHEC_PUBLIC_KEY. Retrieve your Chec public key in your Chec Dashboard account by navigating to Setup > Developer, or can be obtained with the Chec CLI via with the command chec whoami');
-}
+// if (devEnv && !checPublicKey) {
+throw Error(
+  "A Chec public API key must be provided as an environment variable named NEXT_PUBLIC_CHEC_PUBLIC_KEY. Retrieve your Chec public key in your Chec Dashboard account by navigating to Setup > Developer, or can be obtained with the Chec CLI via with the command chec whoami"
+);
+// }
 
 export const commerce = new Commerce(checPublicKey, true);
