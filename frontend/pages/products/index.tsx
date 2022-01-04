@@ -30,7 +30,7 @@ export default function Products({ categories, products }) {
     );
     setSortType(null);
   };
-  console.log("products", products);
+
   useEffect(() => {
     if (filters.length > 0) {
       const filtered = products?.filter((product) => {

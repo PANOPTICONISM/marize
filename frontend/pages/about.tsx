@@ -27,8 +27,9 @@ export default function About() {
         <div className={style.aboutPage}>
           <header>
             <Image
-              src={heroImage.fields.file.url}
-              layout="fill"
+              src={`https:${heroImage.fields.file.url}`}
+              width={1000}
+              height={300}
               alt="muralhas"
             />
             <h1>{title}</h1>
@@ -40,7 +41,12 @@ export default function About() {
               ))}
             </section>
             <section className={style.whyVisitUs}>
-              <Image src={secondSectionImage.fields.file.url} alt="" />
+              <Image
+                src={`https:${secondSectionImage.fields.file.url}`}
+                width={1000}
+                height={300}
+                alt="background-image"
+              />
               <div>
                 <h2>{whyVisitUs.content[0].content[0].value}</h2>
                 <ul>
@@ -66,7 +72,9 @@ export default function About() {
                   ({ fields, title }: { fields?: any; title?: any }) => (
                     <Image
                       key={fields.title}
-                      src={fields.file.url}
+                      src={`https:${fields.file.url}`}
+                      width={285}
+                      height={350}
                       alt={fields.title}
                     />
                   )

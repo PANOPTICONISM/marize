@@ -51,7 +51,7 @@ export function ProductDetails({
               <option value="" disabled>
                 Pick your size
               </option>
-              {product?.variant_groups[0].options?.map(
+              {product?.variant_groups[0]?.options?.map(
                 (size: any, index: any) => (
                   <option key={index} value={size.id}>
                     {size.name}

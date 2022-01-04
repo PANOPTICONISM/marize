@@ -40,8 +40,8 @@ export function ProductCard({ product }: { product: any }) {
     <div className={style.fullCart}>
       <Image
         src={product.image.url}
-        width={30}
-        height={30}
+        width={100}
+        height={130}
         alt={product.name}
       />
       <div className={style.spaceBetween}>

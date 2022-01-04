@@ -15,7 +15,8 @@ function CategorySections() {
           <div className={style.homepageWrapper}>
             <Image
               src={category.assets[0].url}
-              layout="fill"
+              width={350}
+              height={350}
               alt={category.slug}
             />
           </div>

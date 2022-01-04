@@ -9,7 +9,6 @@ import VisitStore from "../components/VisitStore/VisitStore";
 import CategorySections from "../components/CategorySections/CategorySections";
 
 export default function Homepage({ products }) {
-  console.log(products);
   return (
     <>
       <Head>
