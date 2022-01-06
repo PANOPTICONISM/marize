@@ -40,12 +40,12 @@ export default () =>
             .items([
               S.listItem()
                 .title("Pagina Principal")
-                .child(S.document().schemaType("About").documentId("ABout")),
-              S.listItem()
-                .title("Sobre Marize")
                 .child(
                   S.document().schemaType("Homepage").documentId("Homepage")
                 ),
+              S.listItem()
+                .title("Sobre Marize")
+                .child(S.document().schemaType("About").documentId("About")),
             ])
         ),
     ]);
