@@ -1,12 +1,12 @@
 # MARIZÉ WEBSHOP
 
-This online shop has been developed using React, TypeScript and Commerce.js
+This online shop has been developed using NextJs, TypeScript and Sanity.io
 
 ## STEPS TO SPIN UP THE PROJECT
 
 ### `npm install`
 
-### `npm start`
+### `npm run dev`
 
 Now the app is running in the development mode.
 Open <http://localhost:3000>
@@ -28,4 +28,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ### LIVE PREVIEW
 
-<https://marize.netlify.app/>
+<https://marize-frontend.vercel.app>
+
+### CHECK FOR ERRORS WITH ESLINT
+
+`next link`
