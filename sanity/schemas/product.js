@@ -1,50 +1,43 @@
 export default {
-  title: 'Product variant',
-  name: 'productVariant',
-  type: 'object',
+  title: "Product variant",
+  name: "productVariant",
+  type: "object",
   fields: [
     {
-      title: 'Title',
-      name: 'title',
-      type: 'string',
+      name: "title",
+      title: "Nome",
+      type: "string",
+      description: "Escolhe uma cor e os tamanhos dessa cor por cada variante",
     },
     {
-      title: 'Weight in grams',
-      name: 'grams',
-      type: 'number',
+      name: "colours",
+      title: "Cor",
+      type: "reference",
+      to: { type: "colour" },
     },
     {
-      title: 'Price',
-      name: 'price',
-      type: 'number',
-    },
-    {
-      title: 'SKU',
-      name: 'sku',
-      type: 'string',
-    },
-    {
-      title: 'Taxable',
-      name: 'taxable',
-      type: 'boolean',
-    },
-    {
-      name: 'images',
-      title: 'Images',
-      type: 'array',
+      name: "sizes",
+      title: "Tamanhos",
+      type: "array",
       of: [
         {
-          type: 'image',
+          type: "reference",
+          to: { type: "size" },
+        },
+      ],
+    },
+    {
+      name: "images",
+      title: "Imagens",
+      type: "array",
+      of: [
+        {
+          type: "image",
           options: {
             hotspot: true,
           },
         },
       ],
     },
-    {
-      title: 'Bar code',
-      name: 'barcode',
-      type: 'barcode',
-    },
   ],
-}
+};

@@ -9,6 +9,8 @@ import category from "./category";
 import products from "./products";
 import vendor from "./vendor";
 import product from "./product";
+import colour from "./colour";
+import size from "./size";
 import homepage from "./homepage";
 import about from "./about";
 
@@ -38,5 +40,7 @@ export default createSchema({
     localeBlockContent,
     localeString,
     product,
+    colour,
+    size,
   ]),
 });

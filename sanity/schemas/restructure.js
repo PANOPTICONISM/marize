@@ -30,6 +30,14 @@ export default () =>
                 .title("Vendedores")
                 .schemaType("vendor")
                 .child(S.documentTypeList("vendor").title("Vendedor")),
+              S.listItem()
+                .title("Tamanhos")
+                .schemaType("size")
+                .child(S.documentTypeList("size").title("Tamanhos")),
+              S.listItem()
+                .title("Cores")
+                .schemaType("colour")
+                .child(S.documentTypeList("colour").title("Cores")),
             ])
         ),
       S.listItem()
