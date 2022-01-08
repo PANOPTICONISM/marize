@@ -12,9 +12,9 @@ import {
   addToFavourites,
   removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
-import { commerce } from "../api/lib/Commerce";
+import { sanity } from "../api/lib/sanity";
 
-export default function Products({ categories, products }) {
+export default function Products({ articles }) {
   const [filteredArticles, setFilteredArticles] = useState<any>([]);
   const [filters, setFilters] = useState([]);
   const [sortType, setSortType] = useState(null);
@@ -31,20 +31,22 @@ export default function Products({ categories, products }) {
     setSortType(null);
   };
 
-  useEffect(() => {
-    if (filters.length > 0) {
-      const filtered = products?.filter((product) => {
-        return filters?.some(
-          (c: string) =>
-            product.categories[1].name.includes(c) ||
-            product.categories[0].name.includes(c)
-        );
-      });
-      setFilteredArticles(filtered);
-    } else {
-      setFilteredArticles(products);
-    }
-  }, [filters, products]);
+  console.log(articles, "hi");
+
+  // useEffect(() => {
+  //   if (filters.length > 0) {
+  //     const filtered = products?.filter((product) => {
+  //       return filters?.some(
+  //         (c: string) =>
+  //           product.categories[1].name.includes(c) ||
+  //           product.categories[0].name.includes(c)
+  //       );
+  //     });
+  //     setFilteredArticles(filtered);
+  //   } else {
+  //     setFilteredArticles(products);
+  //   }
+  // }, [filters, products]);
 
   useEffect(() => {
     const sortArray = (type: any) => {
@@ -150,7 +152,7 @@ export default function Products({ categories, products }) {
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}
-            categories={categories}
+            // categories={categories}
             mobileFilters={mobileFilters}
           />
           <div className={style.products_wrapper}>{articlesUI}</div>
@@ -160,16 +162,29 @@ export default function Products({ categories, products }) {
   );
 }
 
+// export async function getStaticProps() {
+//   const { data: categories } = await commerce.categories.list();
+//   const { data: products } = await commerce.products.list({
+//     limit: 60,
+//   });
+
+//   return {
+//     props: {
+//       categories,
+//       products,
+//     },
+//   };
+// }
+
 export async function getStaticProps() {
-  const { data: categories } = await commerce.categories.list();
-  const { data: products } = await commerce.products.list({
-    limit: 60,
-  });
+  const articles = await sanity.fetch(
+    `{'products': *[_type == "product"], 
+      'vendors': *[_type == "vendor"]{title, _id}}`
+  );
 
   return {
     props: {
-      categories,
-      products,
+      articles,
     },
   };
 }
