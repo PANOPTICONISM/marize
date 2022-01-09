@@ -33,13 +33,13 @@ export default {
       to: { type: "vendor" },
     },
     {
-      name: "categories",
+      name: "category",
       title: "Categorias",
       type: "array",
       of: [
         {
           type: "reference",
-          to: { type: "category" },
+          to: [{ type: "category" }],
         },
       ],
     },

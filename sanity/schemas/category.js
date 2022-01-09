@@ -1,33 +1,34 @@
 export default {
-  name: 'category',
-  title: 'Category',
-  type: 'document',
+  name: "category",
+  title: "Category",
+  type: "document",
   fields: [
     {
-      name: 'title',
-      title: 'Nome',
-      type: 'string',
+      name: "title",
+      title: "Nome",
+      type: "string",
     },
     {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
+      name: "slug",
+      title: "Slug",
+      type: "slug",
       options: {
-        source: 'title',
+        source: "title",
         maxLength: 96,
       },
     },
     {
-      name: 'parents',
-      title: 'Categorias relacionadas',
-      description: 'Por exemplo - se "mochilas", aqui tem de se colocar "Caminatta"',
-      type: 'array',
+      name: "parentVendor",
+      title: "Categorias relacionadas",
+      description:
+        'Por exemplo - se "mochilas", aqui tem de se colocar "Caminatta"',
+      type: "array",
       of: [
         {
-          type: 'reference',
-          to: [{type: 'category'}],
+          type: "reference",
+          to: [{ type: "vendor" }],
         },
       ],
     },
   ],
-}
+};

@@ -39,15 +39,15 @@ export default function Products({ data }) {
   };
 
   // console.log(data, "hi");
-  console.log(products);
+  console.log(data);
 
   useEffect(() => {
     if (filters.length > 0) {
       const filtered = products?.filter((product) => {
         return filters?.some(
           (c: string) =>
-            product.categories[1].name.includes(c) ||
-            product.categories[0].name.includes(c)
+            product.category[0].title.includes(c) ||
+            product.vendor.name.includes(c)
         );
       });
       setFilteredArticles(filtered);
@@ -159,7 +159,7 @@ export default function Products({ data }) {
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}
-            // categories={categories}
+            // categories={vendors}
             mobileFilters={mobileFilters}
           />
           <div className={style.products_wrapper}>{articlesUI}</div>
@@ -171,8 +171,17 @@ export default function Products({ data }) {
 
 export async function getStaticProps() {
   const data = await sanity.fetch(
-    `{'products': *[_type == "product"]{_id, body, categories, images, slug, title, vendor->{_id, title}},
-      'vendors': *[_type == "vendor"]{title, _id}}`
+    `{'products': *[_type == "product"]{
+      _id, 
+      body, 
+      category[]->{_id, title, parentVendor}, 
+      images, 
+      slug, 
+      title, 
+      vendor->{_id, title}},
+      'vendors': *[_type == "vendor"]{title, _id},
+      'categories': *[_type == "category"]
+    }`
   );
 
   return {
