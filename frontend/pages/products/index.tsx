@@ -13,8 +13,15 @@ import {
   removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
+import imageUrlBuilder from "@sanity/image-url";
 
-export default function Products({ articles }) {
+function urlFor(source) {
+  const builder = imageUrlBuilder(sanity);
+  return builder.image(source);
+}
+
+export default function Products({ data }) {
+  const { products, vendors } = data;
   const [filteredArticles, setFilteredArticles] = useState<any>([]);
   const [filters, setFilters] = useState([]);
   const [sortType, setSortType] = useState(null);
@@ -31,42 +38,43 @@ export default function Products({ articles }) {
     setSortType(null);
   };
 
-  console.log(articles, "hi");
-
-  // useEffect(() => {
-  //   if (filters.length > 0) {
-  //     const filtered = products?.filter((product) => {
-  //       return filters?.some(
-  //         (c: string) =>
-  //           product.categories[1].name.includes(c) ||
-  //           product.categories[0].name.includes(c)
-  //       );
-  //     });
-  //     setFilteredArticles(filtered);
-  //   } else {
-  //     setFilteredArticles(products);
-  //   }
-  // }, [filters, products]);
+  // console.log(data, "hi");
+  console.log(products);
 
   useEffect(() => {
-    const sortArray = (type: any) => {
-      let sorted: any;
-      if (sortType === "Highest price") {
-        sorted = [...filteredArticles].sort((a: any, b: any) =>
-          a.price.raw < b.price.raw ? 1 : -1
+    if (filters.length > 0) {
+      const filtered = products?.filter((product) => {
+        return filters?.some(
+          (c: string) =>
+            product.categories[1].name.includes(c) ||
+            product.categories[0].name.includes(c)
         );
-        setFilteredArticles(sorted);
-      }
-      if (sortType === "Lowest price") {
-        sorted = [...filteredArticles].sort((a: any, b: any) =>
-          a.price.raw > b.price.raw ? 1 : -1
-        );
-        setFilteredArticles(sorted);
-      }
-    };
-    sortArray(sortType);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortType]);
+      });
+      setFilteredArticles(filtered);
+    } else {
+      setFilteredArticles(products);
+    }
+  }, [filters, products]);
+
+  // useEffect(() => {
+  //   const sortArray = (type: any) => {
+  //     let sorted: any;
+  //     if (sortType === "Highest price") {
+  //       sorted = [...filteredArticles].sort((a: any, b: any) =>
+  //         a.price.raw < b.price.raw ? 1 : -1
+  //       );
+  //       setFilteredArticles(sorted);
+  //     }
+  //     if (sortType === "Lowest price") {
+  //       sorted = [...filteredArticles].sort((a: any, b: any) =>
+  //         a.price.raw > b.price.raw ? 1 : -1
+  //       );
+  //       setFilteredArticles(sorted);
+  //     }
+  //   };
+  //   sortArray(sortType);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [sortType]);
 
   const { state, dispatch } = useContext(FavouritesContext);
 
@@ -86,10 +94,10 @@ export default function Products({ articles }) {
             />
           )}
         </div>
-        <Link href={`/products/${article.id}`}>
+        <Link href={`/products/${article._id}`}>
           <a>
             <Image
-              src={article.image.url}
+              src={urlFor(article?.images[0].asset._ref).url()}
               width={300}
               height={340}
               alt="products"
@@ -98,9 +106,8 @@ export default function Products({ articles }) {
         </Link>
       </div>
       <div className={style.card_txt}>
-        <p className={style.brand}>{article.categories[1].name}</p>
-        <p>{article.name}</p>
-        <p className={style.price}>{article.price.formatted_with_code}</p>
+        <p className={style.brand}>{article.vendor?.title}</p>
+        <p>{article.title}</p>
       </div>
     </div>
   ));
@@ -132,7 +139,7 @@ export default function Products({ articles }) {
               </span>
               All filters
             </li>
-            <li className={style.sort}>
+            {/* <li className={style.sort}>
               <span>
                 Sort by
                 <MdKeyboardArrowDown />
@@ -145,7 +152,7 @@ export default function Products({ articles }) {
                   Lowest price
                 </p>
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
 
@@ -162,29 +169,15 @@ export default function Products({ articles }) {
   );
 }
 
-// export async function getStaticProps() {
-//   const { data: categories } = await commerce.categories.list();
-//   const { data: products } = await commerce.products.list({
-//     limit: 60,
-//   });
-
-//   return {
-//     props: {
-//       categories,
-//       products,
-//     },
-//   };
-// }
-
 export async function getStaticProps() {
-  const articles = await sanity.fetch(
-    `{'products': *[_type == "product"], 
+  const data = await sanity.fetch(
+    `{'products': *[_type == "product"]{_id, body, categories, images, slug, title, vendor->{_id, title}},
       'vendors': *[_type == "vendor"]{title, _id}}`
   );
 
   return {
     props: {
-      articles,
+      data,
     },
   };
 }

@@ -17,11 +17,8 @@ export default () =>
               S.listItem()
                 .title("Lista de Artigos")
                 // This automatically gives it properties from the project type
-                .schemaType("Products")
-                // When you open this list item, list out the documents
-                // of the type “project"
-                .child(S.documentTypeList("Products").title("Artigo")),
-              // Add a second list item
+                .schemaType("product")
+                .child(S.documentTypeList("product").title("Artigo")),
               S.listItem()
                 .title("Categories")
                 .schemaType("category")
