@@ -7,8 +7,10 @@ import style from "../styles/homepage.module.css";
 import NewArrivals from "../components/NewArrivals/NewArrivals";
 import VisitStore from "../components/VisitStore/VisitStore";
 import CategorySections from "../components/CategorySections/CategorySections";
+import { sanity } from "./api/lib/sanity.js";
 
 export default function Homepage({ products }) {
+  console.log(products);
   return (
     <>
       <Head>
@@ -63,14 +65,20 @@ export default function Homepage({ products }) {
 }
 
 export async function getStaticProps() {
-  const { data: categories } = await commerce.categories.list();
-  const { data: products } = await commerce.products.list({
-    limit: 60,
-  });
+  const products = await sanity.fetch(
+    `*[_type == "product"]{
+      _id, 
+      body, 
+      category[]->{_id, title, parentVendor}, 
+      images, 
+      slug, 
+      title, 
+      vendor->{_id, title}}
+    `
+  );
 
   return {
     props: {
-      categories,
       products,
     },
   };

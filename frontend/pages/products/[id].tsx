@@ -17,7 +17,9 @@ import {
   removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
 import { addToCart } from "../../utils/CartFunctions";
-import { commerce } from "../api/lib/Commerce";
+import { useRouter } from "next/router";
+import { sanity } from "../api/lib/sanity";
+import AbsoluteURLsForSanity from "../../utils/SanityURLs";
 
 export function ProductDetails({
   showDetailsAccordion,
@@ -32,21 +34,22 @@ export function ProductDetails({
 
   const { state, dispatch } = useContext(FavouritesContext);
 
+  console.log(product);
+
   return (
     <section className={style.productDetails}>
       <Image
-        src={product?.image.url}
+        src={AbsoluteURLsForSanity(product?.images[0].asset._ref).url()}
         width={350}
         height={455}
         alt={product?.name}
       />
       <div className={style.wrapper}>
         <div className={style.introduction}>
-          <h2>{product?.name}</h2>
-          <h3>{product?.price.formatted_with_code}</h3>
+          <h2>{product?.title}</h2>
         </div>
         <div className={style.sizing}>
-          <form>
+          {/* <form>
             <select name="subject" id="subject" defaultValue="" required>
               <option value="" disabled>
                 Pick your size
@@ -59,7 +62,7 @@ export function ProductDetails({
                 )
               )}
             </select>
-          </form>
+          </form> */}
           <Link href="/assets/sizing-chart.jpg">
             <a>
               <RiRuler2Line />
@@ -107,7 +110,7 @@ export default function Product({ products, id }) {
     setShownAccordion(!showAccordion);
   };
 
-  const product = products?.find((prod) => prod.id === id);
+  const product = products?.find((prod) => prod._id === id);
 
   const scrollToComponent = (ref: any) =>
     window.scrollTo({
@@ -136,32 +139,47 @@ export default function Product({ products, id }) {
   );
 }
 
-export async function getStaticPaths() {
-  const { data: products } = await commerce.products.list({
-    limit: 60,
-  });
-
-  const paths = products.map((path) => ({
-    params: {
-      id: path.id,
-    },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
 export async function getStaticProps({ params: { id } }) {
-  const { data: products } = await commerce.products.list({
-    limit: 60,
-  });
+  console.log(id);
+  const products = await sanity.fetch(
+    `*[_type == "product"]{
+      _id, 
+      body, 
+      category[]->{_id, title, parentVendor}, 
+      images, 
+      slug, 
+      title, 
+      vendor->{_id, title}}`
+  );
 
   return {
     props: {
       products,
       id,
     },
+  };
+}
+
+export async function getStaticPaths() {
+  const data = await sanity.fetch(
+    `*[_type == "product"]{
+      _id, 
+      body, 
+      category[]->{_id, title, parentVendor}, 
+      images, 
+      slug, 
+      title, 
+      vendor->{_id, title}}`
+  );
+
+  const paths = data.map((path) => ({
+    params: {
+      id: path._id,
+    },
+  }));
+
+  return {
+    paths,
+    fallback: true,
   };
 }
