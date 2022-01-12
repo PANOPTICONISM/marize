@@ -13,7 +13,7 @@ import {
   removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
-import AbsoluteURLsForSanity from "../../utils/SanityURLs";
+import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
 export default function Products({ data }) {
   const { products, vendors } = data;
@@ -92,7 +92,7 @@ export default function Products({ data }) {
         <Link href={`/products/${article._id}`}>
           <a>
             <Image
-              src={AbsoluteURLsForSanity(article?.images[0].asset._ref).url()}
+              src={absoluteURLsForSanity(article?.images[0].asset._ref).url()}
               width={300}
               height={340}
               alt="products"

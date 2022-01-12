@@ -7,56 +7,47 @@ import caminatta from "../public/assets/caminatta.svg";
 import atlanta from "../public/assets/atlanta_mocassin.svg";
 import moda from "../public/assets/moda_ana.svg";
 import love from "../public/assets/love_m.svg";
+import { sanity } from "./api/lib/sanity";
+import { absoluteURLsForSanity } from "../utils/SanityFunctions";
+import { styleSanityBlocks } from "../utils/SanityFunctions";
+import { Key } from "react";
 
-export default function About() {
-  const { aboutPage } = useContentfulCMS();
-
+export default function About({ data }) {
   const {
-    heroImage,
-    title,
-    introduction,
-    secondSectionImage,
-    whyVisitUs,
-    lastSectionTitle,
+    heading,
+    bulletPoints,
+    description,
+    hero,
+    image,
     storeImages,
-  } = aboutPage !== undefined && aboutPage[0]?.fields;
+    subheading,
+  } = data.about[0];
 
   return (
     <Main>
-      {aboutPage ? (
+      {data.about[0] ? (
         <div className={style.aboutPage}>
           <header>
             <Image
-              src={`https:${heroImage.fields.file.url}`}
+              src={absoluteURLsForSanity(hero.asset._ref).url()}
               width={1000}
               height={300}
               alt="muralhas"
             />
-            <h1>{title}</h1>
+            <h1>{heading}</h1>
           </header>
           <article>
             <section className={style.introduction}>
-              {introduction.content.map(({ content }: { content?: any }) => (
-                <p key={content[0].value}>{content[0].value}</p>
-              ))}
+              {styleSanityBlocks(description)}
             </section>
             <section className={style.whyVisitUs}>
               <Image
-                src={`https:${secondSectionImage.fields.file.url}`}
+                src={absoluteURLsForSanity(image.asset._ref).url()}
                 width={1000}
                 height={300}
                 alt="background-image"
               />
-              <div>
-                <h2>{whyVisitUs.content[0].content[0].value}</h2>
-                <ul>
-                  {whyVisitUs.content[1].content.map(
-                    (content: any, index: any) => (
-                      <li key={index}>{content.content[0].content[0].value}</li>
-                    )
-                  )}
-                </ul>
-              </div>
+              <div>{styleSanityBlocks(bulletPoints)}</div>
             </section>
             <section className={style.brands}>
               <Image src={sky} alt="vera" />
@@ -66,16 +57,16 @@ export default function About() {
               <Image src={love} alt="love-m" />
             </section>
             <section>
-              <h1>{lastSectionTitle}</h1>
+              <h1>{subheading}</h1>
               <div className={style.storeImages}>
                 {storeImages.map(
-                  ({ fields, title }: { fields?: any; title?: any }) => (
+                  (image: { _key: Key; asset: { _ref: any } }) => (
                     <Image
-                      key={fields.title}
-                      src={`https:${fields.file.url}`}
+                      key={image._key}
+                      src={absoluteURLsForSanity(image.asset._ref).url()}
                       width={285}
                       height={350}
-                      alt={fields.title}
+                      alt="store"
                     />
                   )
                 )}
@@ -86,4 +77,25 @@ export default function About() {
       ) : null}
     </Main>
   );
+}
+
+export async function getStaticProps() {
+  const data = await sanity.fetch(`{'about': *[_type == "about"]{
+    _id,
+    heading,
+    bulletPoints,
+    description,
+    hero,
+    image,
+    storeImages,
+    subheading,
+    title
+  }
+  }`);
+
+  return {
+    props: {
+      data,
+    },
+  };
 }

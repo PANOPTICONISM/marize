@@ -46,11 +46,11 @@ export default () =>
               S.listItem()
                 .title("Pagina Principal")
                 .child(
-                  S.document().schemaType("Homepage").documentId("Homepage")
+                  S.document().schemaType("homepage").documentId("homepage")
                 ),
               S.listItem()
                 .title("Sobre Marize")
-                .child(S.document().schemaType("About").documentId("About")),
+                .child(S.document().schemaType("about").documentId("about")),
             ])
         ),
     ]);

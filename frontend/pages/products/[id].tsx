@@ -19,7 +19,7 @@ import {
 import { addToCart } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
 import { sanity } from "../api/lib/sanity";
-import AbsoluteURLsForSanity from "../../utils/SanityURLs";
+import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
 export function ProductDetails({
   showDetailsAccordion,
@@ -39,7 +39,7 @@ export function ProductDetails({
   return (
     <section className={style.productDetails}>
       <Image
-        src={AbsoluteURLsForSanity(product?.images[0].asset._ref).url()}
+        src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
         width={350}
         height={455}
         alt={product?.name}

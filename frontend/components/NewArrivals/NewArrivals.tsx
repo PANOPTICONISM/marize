@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import style from "./newarrivals.module.css";
-import AbsoluteURLsForSanity from "../../utils/SanityURLs";
+import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
 const NewArrivals = ({ products }) => {
   const reversedArray: any[] = [];
@@ -17,7 +17,7 @@ const NewArrivals = ({ products }) => {
             <Link href={`/products/${article._id}`}>
               <a>
                 <Image
-                  src={AbsoluteURLsForSanity(
+                  src={absoluteURLsForSanity(
                     article?.images[0].asset._ref
                   ).url()}
                   width={350}
