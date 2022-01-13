@@ -12,6 +12,7 @@
     "@types/jest": "^26.0.24",
     "@types/node": "^12.20.36",
     "contentful": "^9.1.5",
+    "mongodb": "^4.3.0",
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

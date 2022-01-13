@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import Image from "next/image";
-import { useShoppingBagCMS } from "../../contexts/CartContext";
-import { addToCart } from "../../utils/CartFunctions";
 import style from "./favouritescart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
@@ -52,13 +50,13 @@ export function ProductCard({ product }: { product: any }) {
 }
 
 export default function FavouritesCart() {
-  const { setCart } = useShoppingBagCMS();
+  // const { setCart } = useShoppingBagCMS();
 
   const { state, dispatch } = useContext(FavouritesContext);
 
   const addToCartAndRemove = (product: any) => {
     removeFromFavourites(dispatch, product.id);
-    addToCart(product, setCart);
+    // addToCart(product, setCart);
   };
 
   if (state?.favourites.length > 0) {

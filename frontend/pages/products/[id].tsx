@@ -9,14 +9,12 @@ import style from "./Product/product.module.css";
 import { PrimaryIconButton } from "../../components/Buttons/Buttons";
 import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
 import { AccordionDetails } from "../../components/Accordion/Accordion";
-import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { useContext, useRef, useState } from "react";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
 import {
   addToFavourites,
   removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
-import { addToCart } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
@@ -30,7 +28,7 @@ export function ProductDetails({
   product?: any;
   isScroll?: any;
 }) {
-  const { setCart } = useShoppingBagCMS();
+  // const { setCart } = useShoppingBagCMS();
 
   const { state, dispatch } = useContext(FavouritesContext);
 
@@ -72,7 +70,7 @@ export function ProductDetails({
         <div className={style.shopping}>
           <PrimaryIconButton
             text="Add to shopping bag"
-            onClick={() => addToCart(product, setCart)}
+            // onClick={() => addToCart(product, setCart)}
           />
           {state?.favourites.includes(product) ? (
             <AiFillHeart

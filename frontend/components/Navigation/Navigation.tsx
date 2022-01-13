@@ -5,7 +5,6 @@ import Hamburger from "hamburger-react";
 import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
-import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { useContext, useState } from "react";
 import Cart from "../Cart/Cart";
 import MenuNav from "../../pages/MenuNav/MenuNav";
@@ -13,7 +12,7 @@ import FavouritesCart from "../FavouritesCart/FavouritesCart";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
 
 export default function Navigation() {
-  const { cart } = useShoppingBagCMS();
+  // const { cart } = useShoppingBagCMS();
   const [openCart, setOpenCart] = useState(false);
   const { state } = useContext(FavouritesContext);
   const [openFavouritesCart, setOpenFavouritesCart] = useState(false);
@@ -26,8 +25,8 @@ export default function Navigation() {
   // } else {
   //     document.body.style.overflowY = "scroll";
   // }
-  const cartTotal =
-    cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
+  // const cartTotal =
+  //   cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
 
   const favouritesCartTotal =
     state?.favourites?.length > 0 ? state.favourites.length : "";
@@ -74,7 +73,7 @@ export default function Navigation() {
           <div onClick={() => setOpenCart(!openCart)}>
             <BsHandbag />
           </div>
-          {cartTotal && <span className={style.cartTotal}>{cartTotal}</span>}
+          {/* {cartTotal && <span className={style.cartTotal}>{cartTotal}</span>} */}
           {openCart && <Cart />}
         </div>
         {/* // )} */}

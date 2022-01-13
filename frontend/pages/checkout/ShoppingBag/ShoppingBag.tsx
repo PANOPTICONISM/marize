@@ -3,31 +3,28 @@ import {
   ContinueButton,
   PrimaryButton,
 } from "../../../components/Buttons/Buttons";
-import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./shoppingbag.module.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
-import { updateCart } from "../../../utils/CartFunctions";
-import { removeFromCart } from "../../../utils/CartFunctions";
 import { addToFavourites } from "../../../utils/FavouritesFunctions";
 import { useContext } from "react";
 import { FavouritesContext } from "../../../contexts/FavouritesContext";
 
 export default function ShoppingBag({ next }: { next?: any }) {
   const { state, dispatch } = useContext(FavouritesContext);
-  const { cart, setCart } = useShoppingBagCMS();
+  // const { cart, setCart } = useShoppingBagCMS();
   const maxItems = {
     quantity: [1, 2, 3, 4],
   };
 
   const removeFromCartAndFavourite = (product: any) => {
     addToFavourites(dispatch, product);
-    removeFromCart(product, setCart);
+    // removeFromCart(product, setCart);
   };
 
   return (
     <section>
-      {cart?.line_items.length > 0 ? (
+      {/* {cart?.line_items.length > 0 ? (
         <div className={style.shoppingBagWrapper}>
           <div className={style.shoppingBag}>
             <h1>
@@ -107,7 +104,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
             path="/products"
           />
         </div>
-      )}
+      )} */}
     </section>
   );
 }

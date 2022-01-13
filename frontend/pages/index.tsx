@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Head from "next/head";
-import { commerce } from "./api/lib/Commerce.js";
 import Main from "../containers/Main/Main";
 import hero from "../public/assets/hero-image.png";
 import style from "../styles/homepage.module.css";
@@ -9,8 +8,8 @@ import VisitStore from "../components/VisitStore/VisitStore";
 import CategorySections from "../components/CategorySections/CategorySections";
 import { sanity } from "./api/lib/sanity.js";
 
-export default function Homepage({ products }) {
-  console.log(products);
+export default function Homepage({ posts }) {
+  console.log(posts);
   return (
     <>
       <Head>
@@ -56,7 +55,7 @@ export default function Homepage({ products }) {
             alt="love-m"
           />
         </section>
-        <NewArrivals products={products} />
+        {/* <NewArrivals products={products} /> */}
         <VisitStore className={style.visitHomepage} />
         <CategorySections />
       </Main>
@@ -64,22 +63,39 @@ export default function Homepage({ products }) {
   );
 }
 
-export async function getStaticProps() {
-  const products = await sanity.fetch(
-    `*[_type == "product"]{
-      _id, 
-      body, 
-      category[]->{_id, title, parentVendor}, 
-      images, 
-      slug, 
-      title, 
-      vendor->{_id, title}}
-    `
-  );
+// export async function getStaticProps() {
+//   const products = await sanity.fetch(
+//     `*[_type == "product"]{
+//       _id,
+//       body,
+//       category[]->{_id, title, parentVendor},
+//       images,
+//       slug,
+//       title,
+//       vendor->{_id, title}}
+//     `
+//   );
+
+//   return {
+//     props: {
+//       products,
+//     },
+//   };
+// }
+
+export async function getServerSideProps(ctx) {
+  // get the current environment
+  let dev = process.env.NODE_ENV !== "production";
+  let { DEV_URL, PROD_URL } = process.env;
+
+  // request posts from api
+  let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/mongo`);
+  // extract the data
+  let data = await response.json();
 
   return {
     props: {
-      products,
+      posts: data["message"],
     },
   };
 }

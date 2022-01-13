@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useShoppingBagCMS } from "../../contexts/CartContext";
-import { commerce } from "../api/lib/Commerce";
 import ShoppingBag from "./ShoppingBag/ShoppingBag";
 import { Stepper, Step, StepLabel, makeStyles } from "@material-ui/core";
 import ShippingDetails from "./ShippingDetails/ShippingDetails";
@@ -9,28 +7,28 @@ import Main from "../../containers/Main/Main";
 import OrderProcessed from "./OrderProcessed/OrderProcessed";
 
 function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
-  const { cart } = useShoppingBagCMS();
+  // const { cart } = useShoppingBagCMS();
   const [checkoutTokenId, setCheckoutTokenId] = useState();
   const [shippingData, setShippingData] = useState({});
   const steps = ["Shopping Bag", "Shipping Details", "Confirmation"];
 
-  useEffect(() => {
-    if (cart?.id) {
-      const generateToken = async () => {
-        try {
-          const token = await commerce.checkout.generateToken(cart.id, {
-            type: "cart",
-          });
+  // useEffect(() => {
+  //   if (cart?.id) {
+  //     const generateToken = async () => {
+  //       try {
+  //         const token = await commerce.checkout.generateToken(cart.id, {
+  //           type: "cart",
+  //         });
 
-          setCheckoutTokenId(token);
-        } catch {
-          console.log("wrong");
-        }
-      };
+  //         setCheckoutTokenId(token);
+  //       } catch {
+  //         console.log("wrong");
+  //       }
+  //     };
 
-      generateToken();
-    }
-  }, [cart]);
+  //     generateToken();
+  //   }
+  // }, [cart]);
 
   const [activeStep, setActiveStep] = useState(0);
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -66,15 +64,15 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
 
   return (
     <Main>
-      {activeStep !== steps.length && cart?.line_items.length > 0 && (
-        <Stepper className={mui.root} activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      )}
+      {/* {activeStep !== steps.length && cart?.line_items.length > 0 && ( */}
+      <Stepper className={mui.root} activeStep={activeStep} alternativeLabel>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      {/* )} */}
       {activeStep === 0 && <ShoppingBag next={next} />}
       {activeStep === 1 && (
         <ShippingDetails

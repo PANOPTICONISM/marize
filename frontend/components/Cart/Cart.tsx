@@ -1,13 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useContext } from "react";
-import { useShoppingBagCMS } from "../../contexts/CartContext";
-import { removeFromCart } from "../../utils/CartFunctions";
 import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
-import { updateCart } from "../../utils/CartFunctions";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
 import { addToFavourites } from "../../utils/FavouritesFunctions";
 
@@ -26,19 +23,19 @@ export function CartResumeContainer({
 
 export function ProductCard({ product }: { product: any }) {
   const { state, dispatch } = useContext(FavouritesContext);
-  const { setCart } = useShoppingBagCMS();
+  // const { setCart } = useShoppingBagCMS();
   const maxItems = {
     quantity: [1, 2, 3, 4],
   };
 
   const removeFromCartAndFavourite = (product: any) => {
-    removeFromCart(product, setCart);
+    // removeFromCart(product, setCart);
     addToFavourites(dispatch, product);
   };
 
   return (
     <div className={style.fullCart}>
-      <Image
+      {/* <Image
         src={product.image.url}
         width={100}
         height={130}
@@ -83,37 +80,37 @@ export function ProductCard({ product }: { product: any }) {
             ))}
           </select>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
 
 export default function Cart() {
-  const { cart } = useShoppingBagCMS();
+  // const { cart } = useShoppingBagCMS();
 
-  if (cart && cart.total_unique_items > 0) {
-    return (
-      <CartResumeContainer>
-        {cart.line_items?.map((product: any) => (
-          <div key={product.id}>
-            <ProductCard product={product} />
-          </div>
-        ))}
-        <div className={style.totalCosts}>
-          <span>Total</span>
-          <span>{cart.subtotal.formatted_with_code}</span>
-        </div>
-        <Link href={`/checkout/${cart.id}`}>
-          <a>
-            <PrimaryIconButton
-              className={style.shopBagBtn}
-              text="Go to your shopping bag"
-            />
-          </a>
-        </Link>
-      </CartResumeContainer>
-    );
-  }
+  // if (cart && cart.total_unique_items > 0) {
+  //   return (
+  //     <CartResumeContainer>
+  //       {cart.line_items?.map((product: any) => (
+  //         <div key={product.id}>
+  //           <ProductCard product={product} />
+  //         </div>
+  //       ))}
+  //       <div className={style.totalCosts}>
+  //         <span>Total</span>
+  //         <span>{cart.subtotal.formatted_with_code}</span>
+  //       </div>
+  //       <Link href={`/checkout/${cart.id}`}>
+  //         <a>
+  //           <PrimaryIconButton
+  //             className={style.shopBagBtn}
+  //             text="Go to your shopping bag"
+  //           />
+  //         </a>
+  //       </Link>
+  //     </CartResumeContainer>
+  //   );
+  // }
   return (
     <CartResumeContainer>
       <div className={style.emptyCart}>
