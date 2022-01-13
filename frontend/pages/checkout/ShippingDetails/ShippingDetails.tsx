@@ -2,8 +2,6 @@ import { useForm } from "react-hook-form";
 import { BackButton, SubmitButton } from "../../../components/Buttons/Buttons";
 import style from "./shippingdetails.module.css";
 import { InputLabel, Select, MenuItem } from "@material-ui/core";
-import { useState, useEffect } from "react";
-import { commerce } from "../../api/lib/Commerce";
 
 type FormValues = {
   firstname: string;
@@ -101,52 +99,6 @@ export default function ShippingDetails({
             />
           </div>
         </section>
-        <div className={style.input}>
-          <div>
-            <InputLabel>Country</InputLabel>
-            <Select
-              value={shippingCountry}
-              fullWidth
-              onChange={(e: any) => setShippingCountry(e.target.value)}
-            >
-              {countries.map((country) => (
-                <MenuItem key={country.id} value={country.id}>
-                  {country.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </div>
-          <div>
-            <div>
-              <InputLabel>City</InputLabel>
-              <Select
-                value={shippingCity}
-                fullWidth
-                onChange={(e: any) => setShippingCity(e.target.value)}
-              >
-                {cities.map((city) => (
-                  <MenuItem key={city.id} value={city.id}>
-                    {city.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            </div>
-          </div>
-        </div>
-        <div className={style.options}>
-          <InputLabel>Shipping Options</InputLabel>
-          <Select
-            value={shippingOption}
-            fullWidth
-            onChange={(e: any) => setShippingOption(e.target.value)}
-          >
-            {options.map((option) => (
-              <MenuItem key={option.id} value={option.id}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </div>
         <div className={style.buttons}>
           <BackButton text="Return" onClick={back} />
           <SubmitButton className={style.submitButton} text="Next step" />

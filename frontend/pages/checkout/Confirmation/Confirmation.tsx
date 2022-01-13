@@ -17,9 +17,9 @@ function Confirmation({
     e.preventDefault();
 
     let userStructure = {
-      name,
-      email,
-      phoneNumber,
+      // name,
+      // email,
+      // phoneNumber,
       createdAt: new Date().toISOString(),
     };
 

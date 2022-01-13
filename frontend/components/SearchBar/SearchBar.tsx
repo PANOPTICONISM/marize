@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { commerce } from "../../pages/api/lib/Commerce";
 import SearchDropdown from "../SearchDropdown/SearchDropdown";
 
 const SearchBar = ({

@@ -39,12 +39,12 @@ export function ProductDetails({
 
   return (
     <section className={style.productDetails}>
-      <Image
+      {/* <Image
         src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
         width={350}
         height={455}
-        alt={product?.name}
-      />
+        alt={product?.title}
+      /> */}
       <div className={style.wrapper}>
         <div className={style.introduction}>
           <h2>{product?.title}</h2>
@@ -73,7 +73,7 @@ export function ProductDetails({
         <div className={style.shopping}>
           <PrimaryIconButton
             text="Add to shopping bag"
-            onClick={() => addToCart(product, setCart)}
+            // onClick={() => addToCart(product, setCart)}
           />
           {state?.favourites.includes(product) ? (
             <AiFillHeart

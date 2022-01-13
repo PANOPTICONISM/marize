@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 
+export {};
 // export const ShoppingBagContext = createContext<{
 //     cart?: any;
 //     setCart?: any;
@@ -31,4 +32,4 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 //             {children}
 //         </ShoppingBagContext.Provider>
 //     );
-}
+// }
