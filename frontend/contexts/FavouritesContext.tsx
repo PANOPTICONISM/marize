@@ -26,7 +26,7 @@ function reducer(state: IState, action: IAction): IState {
       return {
         ...state,
         favourites: state.favourites.filter(
-          (item) => item.id !== action.payload
+          (item) => item._id !== action.payload
         ),
       };
     default:

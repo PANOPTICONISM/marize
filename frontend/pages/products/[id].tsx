@@ -31,13 +31,11 @@ export function ProductDetails({
   // const { setCart } = useShoppingBagCMS();
 
   const addToCart = (product) => {
-    console.log(product, "product");
+    // console.log(product, "product");
     // setCart(product);
   };
 
   const { state, dispatch } = useContext(FavouritesContext);
-
-  console.log(product);
 
   return (
     <section className={style.productDetails}>
@@ -79,7 +77,7 @@ export function ProductDetails({
           />
           {state?.favourites.includes(product) ? (
             <AiFillHeart
-              onClick={() => removeFromFavourites(dispatch, product.id)}
+              onClick={() => removeFromFavourites(dispatch, product._id)}
               className={style.shoppingSVG}
             />
           ) : (
