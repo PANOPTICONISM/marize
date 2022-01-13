@@ -1,5 +1,5 @@
 export default {
-  name: "Homepage",
+  name: "homepage",
   title: "Homepage",
   type: "document",
   fields: [

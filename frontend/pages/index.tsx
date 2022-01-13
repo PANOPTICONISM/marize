@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Head from "next/head";
-import { commerce } from "./api/lib/Commerce.js";
 import Main from "../containers/Main/Main";
 import hero from "../public/assets/hero-image.png";
 import style from "../styles/homepage.module.css";
 import NewArrivals from "../components/NewArrivals/NewArrivals";
 import VisitStore from "../components/VisitStore/VisitStore";
 import CategorySections from "../components/CategorySections/CategorySections";
+import { sanity } from "./api/lib/sanity.js";
 
 export default function Homepage({ products }) {
   return (
@@ -63,15 +63,38 @@ export default function Homepage({ products }) {
 }
 
 export async function getStaticProps() {
-  const { data: categories } = await commerce.categories.list();
-  const { data: products } = await commerce.products.list({
-    limit: 60,
-  });
+  const products = await sanity.fetch(
+    `*[_type == "product"]{
+      _id,
+      body,
+      category[]->{_id, title, parentVendor},
+      images,
+      slug,
+      title,
+      vendor->{_id, title}}
+    `
+  );
 
   return {
     props: {
-      categories,
       products,
     },
   };
 }
+
+// export async function getServerSideProps(ctx) {
+//   // get the current environment
+//   let dev = process.env.NODE_ENV !== "production";
+//   let { DEV_URL, PROD_URL } = process.env;
+
+//   // request posts from api
+//   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/mongo`);
+//   // extract the data
+//   let data = await response.json();
+
+//   return {
+//     props: {
+//       posts: data["message"],
+//     },
+//   };
+// }

@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import Image from "next/image";
-import { useShoppingBagCMS } from "../../contexts/CartContext";
-import { addToCart } from "../../utils/CartFunctions";
 import style from "./favouritescart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
 import { removeFromFavourites } from "../../utils/FavouritesFunctions";
+import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
 export function FavouritesCartResumeContainer({
   children,
@@ -24,24 +23,25 @@ export function FavouritesCartResumeContainer({
 export function ProductCard({ product }: { product: any }) {
   const { dispatch } = useContext(FavouritesContext);
 
+  console.log(product);
   return (
     <div className={style.fullCart}>
       <Image
-        src={product.image.url}
-        width={30}
-        height={30}
-        alt={product.name}
+        src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
+        width={100}
+        height={130}
+        alt={product.title}
       />
       <div className={style.spaceBetween}>
         <div>
           <div className={style.presentation}>
-            <h4>{product.name}</h4>
-            <h5>{product.price.formatted_with_code}</h5>
+            <h4>{product.vendor?.title}</h4>
+            <h5>{product.title}</h5>
           </div>
         </div>
         <div className={style.bottomProduct}>
           <div>
-            <button onClick={() => removeFromFavourites(dispatch, product.id)}>
+            <button onClick={() => removeFromFavourites(dispatch, product._id)}>
               <BsTrash /> Remove from favourites
             </button>
           </div>
@@ -52,13 +52,13 @@ export function ProductCard({ product }: { product: any }) {
 }
 
 export default function FavouritesCart() {
-  const { setCart } = useShoppingBagCMS();
+  // const { setCart } = useShoppingBagCMS();
 
   const { state, dispatch } = useContext(FavouritesContext);
 
   const addToCartAndRemove = (product: any) => {
-    removeFromFavourites(dispatch, product.id);
-    addToCart(product, setCart);
+    removeFromFavourites(dispatch, product._id);
+    // addToCart(product, setCart);
   };
 
   if (state?.favourites.length > 0) {
@@ -66,7 +66,7 @@ export default function FavouritesCart() {
       <FavouritesCartResumeContainer>
         {state.favourites?.map((product: any) => (
           <>
-            <div key={product?.id}>
+            <div key={product?._id}>
               <ProductCard product={product} />
             </div>
             <PrimaryIconButton

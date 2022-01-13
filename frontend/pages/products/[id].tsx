@@ -5,19 +5,19 @@ import { RiRuler2Line } from "react-icons/ri";
 import { MdAvTimer } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Main from "../../containers/Main/Main";
-import style from "./Product/product.module.css";
+import style from "../../styles/product.module.css";
 import { PrimaryIconButton } from "../../components/Buttons/Buttons";
 import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
 import { AccordionDetails } from "../../components/Accordion/Accordion";
-import { useShoppingBagCMS } from "../../contexts/CartContext";
 import { useContext, useRef, useState } from "react";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
 import {
   addToFavourites,
   removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
-import { addToCart } from "../../utils/CartFunctions";
-import { commerce } from "../api/lib/Commerce";
+import { sanity } from "../api/lib/sanity";
+import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+// import { useShoppingBagCMS } from "../../contexts/CartContext";
 
 export function ProductDetails({
   showDetailsAccordion,
@@ -28,25 +28,29 @@ export function ProductDetails({
   product?: any;
   isScroll?: any;
 }) {
-  const { setCart } = useShoppingBagCMS();
+  // const { setCart } = useShoppingBagCMS();
+
+  const addToCart = (product) => {
+    // console.log(product, "product");
+    // setCart(product);
+  };
 
   const { state, dispatch } = useContext(FavouritesContext);
 
   return (
     <section className={style.productDetails}>
-      <Image
-        src={product?.image.url}
+      {/* <Image
+        src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
         width={350}
         height={455}
-        alt={product?.name}
-      />
+        alt={product?.title}
+      /> */}
       <div className={style.wrapper}>
         <div className={style.introduction}>
-          <h2>{product?.name}</h2>
-          <h3>{product?.price.formatted_with_code}</h3>
+          <h2>{product?.title}</h2>
         </div>
         <div className={style.sizing}>
-          <form>
+          {/* <form>
             <select name="subject" id="subject" defaultValue="" required>
               <option value="" disabled>
                 Pick your size
@@ -59,7 +63,7 @@ export function ProductDetails({
                 )
               )}
             </select>
-          </form>
+          </form> */}
           <Link href="/assets/sizing-chart.jpg">
             <a>
               <RiRuler2Line />
@@ -69,11 +73,11 @@ export function ProductDetails({
         <div className={style.shopping}>
           <PrimaryIconButton
             text="Add to shopping bag"
-            onClick={() => addToCart(product, setCart)}
+            // onClick={() => addToCart(product, setCart)}
           />
           {state?.favourites.includes(product) ? (
             <AiFillHeart
-              onClick={() => removeFromFavourites(dispatch, product.id)}
+              onClick={() => removeFromFavourites(dispatch, product._id)}
               className={style.shoppingSVG}
             />
           ) : (
@@ -107,7 +111,7 @@ export default function Product({ products, id }) {
     setShownAccordion(!showAccordion);
   };
 
-  const product = products?.find((prod) => prod.id === id);
+  const product = products?.find((prod) => prod._id === id);
 
   const scrollToComponent = (ref: any) =>
     window.scrollTo({
@@ -136,32 +140,47 @@ export default function Product({ products, id }) {
   );
 }
 
-export async function getStaticPaths() {
-  const { data: products } = await commerce.products.list({
-    limit: 60,
-  });
-
-  const paths = products.map((path) => ({
-    params: {
-      id: path.id,
-    },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
 export async function getStaticProps({ params: { id } }) {
-  const { data: products } = await commerce.products.list({
-    limit: 60,
-  });
+  console.log(id);
+  const products = await sanity.fetch(
+    `*[_type == "product"]{
+      _id, 
+      body, 
+      category[]->{_id, title, parentVendor}, 
+      images, 
+      slug, 
+      title, 
+      vendor->{_id, title}}`
+  );
 
   return {
     props: {
       products,
       id,
     },
+  };
+}
+
+export async function getStaticPaths() {
+  const data = await sanity.fetch(
+    `*[_type == "product"]{
+      _id, 
+      body, 
+      category[]->{_id, title, parentVendor}, 
+      images, 
+      slug, 
+      title, 
+      vendor->{_id, title}}`
+  );
+
+  const paths = data.map((path) => ({
+    params: {
+      id: path._id,
+    },
+  }));
+
+  return {
+    paths,
+    fallback: true,
   };
 }

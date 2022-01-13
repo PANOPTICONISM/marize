@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import { useShoppingBagCMS } from "../../../contexts/CartContext";
 import style from "./orderprocessed.module.css";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 
@@ -9,9 +8,9 @@ export default function OrderProcessed({
 }: {
   shippingData?: any;
 }) {
-  const { cart } = useShoppingBagCMS();
-  const orderId = cart?.id.slice(5);
-  const totalPrice = shippingData?.shippingPrice + cart?.subtotal.raw;
+  // const { cart } = useShoppingBagCMS();
+  // const orderId = cart?.id.slice(5);
+  // const totalPrice = shippingData?.shippingPrice + cart?.subtotal.raw;
 
   if (shippingData) {
     return (
@@ -19,7 +18,7 @@ export default function OrderProcessed({
         <div className={style.shoppingBag}>
           <p>Hi, {shippingData?.firstname},</p>
           <p>
-            <IoMdCheckmarkCircle /> Your order number #{orderId} has been
+            {/* <IoMdCheckmarkCircle /> Your order number #{orderId} has been */}
             confirmed.
           </p>
           <p>
@@ -28,7 +27,7 @@ export default function OrderProcessed({
             welcome in our store.
           </p>
           <h1>Order Summary</h1>
-          {cart?.line_items.map((product: any) => (
+          {/* {cart?.line_items.map((product: any) => (
             <article key={product.id} className={style.shoppingArticle}>
               <Image
                 src={product.image.url}
@@ -51,7 +50,7 @@ export default function OrderProcessed({
                 </div>
               </div>
             </article>
-          ))}
+          ))} */}
         </div>
         <div className={style.priceWrapper}>
           <div className={style.priceFinalSummary}>
@@ -60,7 +59,7 @@ export default function OrderProcessed({
               <tbody>
                 <tr>
                   <td>Subtotal</td>
-                  <td>{cart.subtotal.formatted_with_code}</td>
+                  {/* <td>{cart.subtotal.formatted_with_code}</td> */}
                 </tr>
                 <tr>
                   <td>Shipping</td>
@@ -72,7 +71,7 @@ export default function OrderProcessed({
               <tbody>
                 <tr>
                   <td>Total</td>
-                  <td>{`${totalPrice} EUR`}</td>
+                  {/* <td>{`${totalPrice} EUR`}</td> */}
                 </tr>
               </tbody>
             </table>

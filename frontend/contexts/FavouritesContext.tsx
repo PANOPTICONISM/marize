@@ -1,49 +1,58 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 
 interface IState {
-    favourites: Array<any>;
+  favourites: Array<any>;
 }
 
 interface IAction {
-    type: string;
-    payload: any;
+  type: string;
+  payload: any;
 }
 
 const initialState: IState = {
-    favourites: [],
+  favourites: [],
 };
 
 export const FavouritesContext = createContext<IState | any>(initialState);
 
 function reducer(state: IState, action: IAction): IState {
-    switch (action.type) {
-        case "ADD_FAVOURITES":
-            return {
-                ...state,
-                favourites: [...state.favourites, action.payload],
-            };
-        case "REMOVE_FAVOURITES":
-            return {
-                ...state,
-                favourites: state.favourites.filter(
-                    (item) => item.id !== action.payload
-                ),
-            };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "ADD_FAVOURITES":
+      return {
+        ...state,
+        favourites: [...state.favourites, action.payload],
+      };
+    case "REMOVE_FAVOURITES":
+      return {
+        ...state,
+        favourites: state.favourites.filter(
+          (item) => item._id !== action.payload
+        ),
+      };
+    default:
+      return state;
+  }
 }
 
 export function FavouritesProvider({
-    children,
+  children,
 }: {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 }) {
-    const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, [], () => {
+    if (typeof window !== "undefined") {
+      const localData = localStorage.getItem("favourites");
+      return localData ? JSON.parse(localData) : initialState;
+    }
+  });
 
-    return (
-        <FavouritesContext.Provider value={{ state, dispatch }}>
-            {children}
-        </FavouritesContext.Provider>
-    );
+  useEffect(() => {
+    localStorage.setItem("favourites", JSON.stringify(state));
+  }, [state]);
+
+  return (
+    <FavouritesContext.Provider value={{ state, dispatch }}>
+      {children}
+    </FavouritesContext.Provider>
+  );
 }

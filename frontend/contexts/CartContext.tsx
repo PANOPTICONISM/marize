@@ -1,35 +1,35 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { commerce } from "../pages/api/lib/Commerce";
 
-export const ShoppingBagContext = createContext<{
-    cart?: any;
-    setCart?: any;
-}>({});
+export {};
+// export const ShoppingBagContext = createContext<{
+//     cart?: any;
+//     setCart?: any;
+// }>({});
 
-export function useShoppingBagCMS() {
-    return useContext(ShoppingBagContext);
-}
+// export function useShoppingBagCMS() {
+//     return useContext(ShoppingBagContext);
+// }
 
-export default function ShoppingBagProvider({
-    children,
-}: {
-    children?: React.ReactNode;
-}) {
-    const [cart, setCart] = useState();
+// export default function ShoppingBagProvider({
+//     children,
+// }: {
+//     children?: React.ReactNode;
+// }) {
+//     const [cart, setCart] = useState();
 
-    const getCart = async () => {
-        const cart = await commerce.cart.retrieve();
+//     const getCart = async () => {
+//         const cart = await commerce.cart.retrieve();
 
-        setCart(cart);
-    };
+//         setCart(cart);
+//     };
 
-    useEffect(() => {
-        getCart();
-    }, []);
+//     useEffect(() => {
+//         getCart();
+//     }, []);
 
-    return (
-        <ShoppingBagContext.Provider value={{ cart, setCart }}>
-            {children}
-        </ShoppingBagContext.Provider>
-    );
-}
+//     return (
+//         <ShoppingBagContext.Provider value={{ cart, setCart }}>
+//             {children}
+//         </ShoppingBagContext.Provider>
+//     );
+// }

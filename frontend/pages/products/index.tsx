@@ -12,9 +12,11 @@ import {
   addToFavourites,
   removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
-import { commerce } from "../api/lib/Commerce";
+import { sanity } from "../api/lib/sanity";
+import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
-export default function Products({ categories, products }) {
+export default function Products({ data }) {
+  const { products, vendors } = data;
   const [filteredArticles, setFilteredArticles] = useState<any>([]);
   const [filters, setFilters] = useState([]);
   const [sortType, setSortType] = useState(null);
@@ -31,13 +33,16 @@ export default function Products({ categories, products }) {
     setSortType(null);
   };
 
+  // console.log(data, "hi");
+  console.log(data);
+
   useEffect(() => {
     if (filters.length > 0) {
       const filtered = products?.filter((product) => {
         return filters?.some(
           (c: string) =>
-            product.categories[1].name.includes(c) ||
-            product.categories[0].name.includes(c)
+            product.category[0].title.includes(c) ||
+            product.vendor.name.includes(c)
         );
       });
       setFilteredArticles(filtered);
@@ -46,59 +51,56 @@ export default function Products({ categories, products }) {
     }
   }, [filters, products]);
 
-  useEffect(() => {
-    const sortArray = (type: any) => {
-      let sorted: any;
-      if (sortType === "Highest price") {
-        sorted = [...filteredArticles].sort((a: any, b: any) =>
-          a.price.raw < b.price.raw ? 1 : -1
-        );
-        setFilteredArticles(sorted);
-      }
-      if (sortType === "Lowest price") {
-        sorted = [...filteredArticles].sort((a: any, b: any) =>
-          a.price.raw > b.price.raw ? 1 : -1
-        );
-        setFilteredArticles(sorted);
-      }
-    };
-    sortArray(sortType);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortType]);
+  // useEffect(() => {
+  //   const sortArray = (type: any) => {
+  //     let sorted: any;
+  //     if (sortType === "Highest price") {
+  //       sorted = [...filteredArticles].sort((a: any, b: any) =>
+  //         a.price.raw < b.price.raw ? 1 : -1
+  //       );
+  //       setFilteredArticles(sorted);
+  //     }
+  //     if (sortType === "Lowest price") {
+  //       sorted = [...filteredArticles].sort((a: any, b: any) =>
+  //         a.price.raw > b.price.raw ? 1 : -1
+  //       );
+  //       setFilteredArticles(sorted);
+  //     }
+  //   };
+  //   sortArray(sortType);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [sortType]);
 
   const { state, dispatch } = useContext(FavouritesContext);
 
   const articlesUI = filteredArticles?.map((article: any) => (
-    <div className={style.card} key={article.id}>
-      <div className={style.Image_container}>
-        <div className={style.blue_heart}>
-          {state?.favourites.includes(article) ? (
-            <AiFillHeart
-              onClick={() => removeFromFavourites(dispatch, article.id)}
-              className={style.shoppingSVG}
-            />
-          ) : (
-            <AiOutlineHeart
-              onClick={() => addToFavourites(dispatch, article)}
-              className={style.shoppingSVG}
-            />
-          )}
-        </div>
-        <Link href={`/products/${article.id}`}>
-          <a>
-            <Image
-              src={article.image.url}
-              width={300}
-              height={340}
-              alt="products"
-            />
-          </a>
-        </Link>
+    <div className={style.card} key={article._id}>
+      <div className={style.blue_heart}>
+        {state?.favourites.includes(article) ? (
+          <AiFillHeart
+            onClick={() => removeFromFavourites(dispatch, article._id)}
+            className={style.shoppingSVG}
+          />
+        ) : (
+          <AiOutlineHeart
+            onClick={() => addToFavourites(dispatch, article)}
+            className={style.shoppingSVG}
+          />
+        )}
       </div>
+      <Link href={`/products/${article._id}`}>
+        <a>
+          <Image
+            src={absoluteURLsForSanity(article?.images[0].asset._ref).url()}
+            width={300}
+            height={340}
+            alt="products"
+          />
+        </a>
+      </Link>
       <div className={style.card_txt}>
-        <p className={style.brand}>{article.categories[1].name}</p>
-        <p>{article.name}</p>
-        <p className={style.price}>{article.price.formatted_with_code}</p>
+        <p className={style.brand}>{article.vendor?.title}</p>
+        <p>{article.title}</p>
       </div>
     </div>
   ));
@@ -130,7 +132,7 @@ export default function Products({ categories, products }) {
               </span>
               All filters
             </li>
-            <li className={style.sort}>
+            {/* <li className={style.sort}>
               <span>
                 Sort by
                 <MdKeyboardArrowDown />
@@ -143,14 +145,14 @@ export default function Products({ categories, products }) {
                   Lowest price
                 </p>
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
 
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}
-            categories={categories}
+            // categories={vendors}
             mobileFilters={mobileFilters}
           />
           <div className={style.products_wrapper}>{articlesUI}</div>
@@ -161,15 +163,23 @@ export default function Products({ categories, products }) {
 }
 
 export async function getStaticProps() {
-  const { data: categories } = await commerce.categories.list();
-  const { data: products } = await commerce.products.list({
-    limit: 60,
-  });
+  const data = await sanity.fetch(
+    `{'products': *[_type == "product"]{
+      _id, 
+      body, 
+      category[]->{_id, title, parentVendor}, 
+      images, 
+      slug, 
+      title, 
+      vendor->{_id, title}},
+      'vendors': *[_type == "vendor"]{title, _id},
+      'categories': *[_type == "category"]
+    }`
+  );
 
   return {
     props: {
-      categories,
-      products,
+      data,
     },
   };
 }

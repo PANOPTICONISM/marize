@@ -1,23 +1,22 @@
 import style from "./menu.module.css";
 import { MdHighlightOff } from "react-icons/md";
-import { useCommerceCMS } from "../../contexts/CommerceContext";
 import VisitStore from "../../components/VisitStore/VisitStore";
 import StoreInfo from "../../components/StoreInfo/StoreInfo";
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function MenuNav({ toggleOpen }: { toggleOpen: any }) {
-    const { categories } = useCommerceCMS();
-    let navCategories = categories?.filter((cat) => {
-        return cat.slug !== "accessories";
-    });
-    navCategories = navCategories?.reverse();
+  // const { categories } = useCommerceCMS();
+  // let navCategories = categories?.filter((cat) => {
+  //     return cat.slug !== "accessories";
+  // });
+  // navCategories = navCategories?.reverse();
 
-    return (
-        <div className={style.menu}>
-            <div className={style.close} onClick={toggleOpen}>
-                <MdHighlightOff />
-            </div>
-            <div className={style.container}>
+  return (
+    <div className={style.menu}>
+      <div className={style.close} onClick={toggleOpen}>
+        <MdHighlightOff />
+      </div>
+      {/* <div className={style.container}>
                 <div className={style.nav_wrapper}>
                     {navCategories?.map(
                         (
@@ -40,7 +39,7 @@ export default function MenuNav({ toggleOpen }: { toggleOpen: any }) {
                     undoFlex={style.flexBox}
                     className={style.menuBarInfo}
                 />
-            </div>
-        </div>
-    );
+            </div> */}
+    </div>
+  );
 }
