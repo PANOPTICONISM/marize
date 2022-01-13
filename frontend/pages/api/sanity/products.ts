@@ -1,7 +1,10 @@
 import { sanity } from "../lib/sanity";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function (_req: NextApiRequest, res: NextApiResponse) {
+export default async function products(
+  _req: NextApiRequest,
+  res: NextApiResponse
+) {
   const products = await sanity.fetch(
     `{'products': *[_type == "product"]{
       _id, 
