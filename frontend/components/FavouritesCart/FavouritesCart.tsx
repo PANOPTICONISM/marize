@@ -23,7 +23,7 @@ export function FavouritesCartResumeContainer({
 export function ProductCard({ product }: { product: any }) {
   const { dispatch } = useContext(FavouritesContext);
 
-  console.log(product);
+  // console.log(product);
   return (
     <div className={style.fullCart}>
       <Image

@@ -5,7 +5,6 @@ export const addToFavourites = (dispatch: any, product: any) =>
   });
 
 export const removeFromFavourites = (dispatch: any, _id: string) => {
-  console.log(_id);
   dispatch({
     type: "REMOVE_FAVOURITES",
     payload: _id,

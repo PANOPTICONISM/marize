@@ -39,12 +39,12 @@ export function ProductDetails({
 
   return (
     <section className={style.productDetails}>
-      {/* <Image
-        src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
+      <Image
+        src={absoluteURLsForSanity(product.images[0].asset._ref).url()}
         width={350}
         height={455}
-        alt={product?.title}
-      /> */}
+        alt="product"
+      />
       <div className={style.wrapper}>
         <div className={style.introduction}>
           <h2>{product?.title}</h2>
@@ -153,6 +153,7 @@ export async function getStaticProps({ params: { id } }) {
       vendor->{_id, title}}`
   );
 
+  console.log(`Slug slug ${id}`);
   return {
     props: {
       products,
@@ -173,14 +174,17 @@ export async function getStaticPaths() {
       vendor->{_id, title}}`
   );
 
-  const paths = data.map((path) => ({
-    params: {
-      id: path._id,
-    },
-  }));
+  const paths = data.map((path) => {
+    return {
+      params: {
+        id: path._id,
+      },
+    };
+  });
+  console.log(`Sl paths ${paths.params}`);
 
   return {
     paths,
-    fallback: true,
+    fallback: "blocking",
   };
 }
