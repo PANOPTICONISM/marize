@@ -11,7 +11,7 @@ export default function SearchDropdown({
     return (
       <div className={style.dropdown}>
         {searchedArticles?.slice(0, 10).map((article: any) => (
-          <Link href={`/products/${article.id}`} key={article.id}>
+          <Link href={`/products/${article._id}`} key={article._id}>
             <a>
               {" "}
               <div className={style.items}>

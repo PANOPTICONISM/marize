@@ -12,7 +12,7 @@ const RelatedProducts = ({ relatedProducts }: { relatedProducts?: any }) => {
         <div className={style.articles}>
           {returnMax5Products?.map((article: any) => (
             <div key={article.id}>
-              <Link href={`/products/${article.id}`}>
+              <Link href={`/products/${article._id}`}>
                 <a>
                   <Image
                     src={article.image.url}

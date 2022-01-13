@@ -78,7 +78,7 @@ export default function Products({ data }) {
       <div className={style.blue_heart}>
         {state?.favourites.includes(article) ? (
           <AiFillHeart
-            onClick={() => removeFromFavourites(dispatch, article.id)}
+            onClick={() => removeFromFavourites(dispatch, article._id)}
             className={style.shoppingSVG}
           />
         ) : (

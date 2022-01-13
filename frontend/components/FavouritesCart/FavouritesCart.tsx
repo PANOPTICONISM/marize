@@ -57,7 +57,7 @@ export default function FavouritesCart() {
   const { state, dispatch } = useContext(FavouritesContext);
 
   const addToCartAndRemove = (product: any) => {
-    removeFromFavourites(dispatch, product.id);
+    removeFromFavourites(dispatch, product._id);
     // addToCart(product, setCart);
   };
 
@@ -66,7 +66,7 @@ export default function FavouritesCart() {
       <FavouritesCartResumeContainer>
         {state.favourites?.map((product: any) => (
           <>
-            <div key={product?.id}>
+            <div key={product?._id}>
               <ProductCard product={product} />
             </div>
             <PrimaryIconButton
