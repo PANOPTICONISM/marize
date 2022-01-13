@@ -15,9 +15,9 @@ import {
   addToFavourites,
   removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
-import { useRouter } from "next/router";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+// import { useShoppingBagCMS } from "../../contexts/CartContext";
 
 export function ProductDetails({
   showDetailsAccordion,
@@ -29,6 +29,11 @@ export function ProductDetails({
   isScroll?: any;
 }) {
   // const { setCart } = useShoppingBagCMS();
+
+  const addToCart = (product) => {
+    console.log(product, "product");
+    // setCart(product);
+  };
 
   const { state, dispatch } = useContext(FavouritesContext);
 
@@ -70,7 +75,7 @@ export function ProductDetails({
         <div className={style.shopping}>
           <PrimaryIconButton
             text="Add to shopping bag"
-            // onClick={() => addToCart(product, setCart)}
+            onClick={() => addToCart(product, setCart)}
           />
           {state?.favourites.includes(product) ? (
             <AiFillHeart
