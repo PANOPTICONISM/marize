@@ -74,32 +74,30 @@ export default function Products({ data }) {
   const { state, dispatch } = useContext(FavouritesContext);
 
   const articlesUI = filteredArticles?.map((article: any) => (
-    <div className={style.card} key={article.id}>
-      <div className={style.Image_container}>
-        <div className={style.blue_heart}>
-          {state?.favourites.includes(article) ? (
-            <AiFillHeart
-              onClick={() => removeFromFavourites(dispatch, article.id)}
-              className={style.shoppingSVG}
-            />
-          ) : (
-            <AiOutlineHeart
-              onClick={() => addToFavourites(dispatch, article)}
-              className={style.shoppingSVG}
-            />
-          )}
-        </div>
-        <Link href={`/products/${article._id}`}>
-          <a>
-            <Image
-              src={absoluteURLsForSanity(article?.images[0].asset._ref).url()}
-              width={300}
-              height={340}
-              alt="products"
-            />
-          </a>
-        </Link>
+    <div className={style.card} key={article._id}>
+      <div className={style.blue_heart}>
+        {state?.favourites.includes(article) ? (
+          <AiFillHeart
+            onClick={() => removeFromFavourites(dispatch, article.id)}
+            className={style.shoppingSVG}
+          />
+        ) : (
+          <AiOutlineHeart
+            onClick={() => addToFavourites(dispatch, article)}
+            className={style.shoppingSVG}
+          />
+        )}
       </div>
+      <Link href={`/products/${article._id}`}>
+        <a>
+          <Image
+            src={absoluteURLsForSanity(article?.images[0].asset._ref).url()}
+            width={300}
+            height={340}
+            alt="products"
+          />
+        </a>
+      </Link>
       <div className={style.card_txt}>
         <p className={style.brand}>{article.vendor?.title}</p>
         <p>{article.title}</p>

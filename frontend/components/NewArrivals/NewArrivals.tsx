@@ -13,7 +13,7 @@ const NewArrivals = ({ products }) => {
       <h1>New Arrivals</h1>
       <div className={style.articles}>
         {newArrivals?.map((article) => (
-          <div key={article.id}>
+          <div key={article._id}>
             <Link href={`/products/${article._id}`}>
               <a>
                 <Image

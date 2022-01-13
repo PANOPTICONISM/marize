@@ -8,8 +8,7 @@ import VisitStore from "../components/VisitStore/VisitStore";
 import CategorySections from "../components/CategorySections/CategorySections";
 import { sanity } from "./api/lib/sanity.js";
 
-export default function Homepage({ posts }) {
-  console.log(posts);
+export default function Homepage({ products }) {
   return (
     <>
       <Head>
@@ -55,7 +54,7 @@ export default function Homepage({ posts }) {
             alt="love-m"
           />
         </section>
-        {/* <NewArrivals products={products} /> */}
+        <NewArrivals products={products} />
         <VisitStore className={style.visitHomepage} />
         <CategorySections />
       </Main>
@@ -63,39 +62,39 @@ export default function Homepage({ posts }) {
   );
 }
 
-// export async function getStaticProps() {
-//   const products = await sanity.fetch(
-//     `*[_type == "product"]{
-//       _id,
-//       body,
-//       category[]->{_id, title, parentVendor},
-//       images,
-//       slug,
-//       title,
-//       vendor->{_id, title}}
-//     `
-//   );
-
-//   return {
-//     props: {
-//       products,
-//     },
-//   };
-// }
-
-export async function getServerSideProps(ctx) {
-  // get the current environment
-  let dev = process.env.NODE_ENV !== "production";
-  let { DEV_URL, PROD_URL } = process.env;
-
-  // request posts from api
-  let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/mongo`);
-  // extract the data
-  let data = await response.json();
+export async function getStaticProps() {
+  const products = await sanity.fetch(
+    `*[_type == "product"]{
+      _id,
+      body,
+      category[]->{_id, title, parentVendor},
+      images,
+      slug,
+      title,
+      vendor->{_id, title}}
+    `
+  );
 
   return {
     props: {
-      posts: data["message"],
+      products,
     },
   };
 }
+
+// export async function getServerSideProps(ctx) {
+//   // get the current environment
+//   let dev = process.env.NODE_ENV !== "production";
+//   let { DEV_URL, PROD_URL } = process.env;
+
+//   // request posts from api
+//   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/mongo`);
+//   // extract the data
+//   let data = await response.json();
+
+//   return {
+//     props: {
+//       posts: data["message"],
+//     },
+//   };
+// }

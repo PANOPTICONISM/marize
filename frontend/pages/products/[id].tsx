@@ -5,7 +5,7 @@ import { RiRuler2Line } from "react-icons/ri";
 import { MdAvTimer } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Main from "../../containers/Main/Main";
-import style from "./Product/product.module.css";
+import style from "../../styles/product.module.css";
 import { PrimaryIconButton } from "../../components/Buttons/Buttons";
 import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
 import { AccordionDetails } from "../../components/Accordion/Accordion";
