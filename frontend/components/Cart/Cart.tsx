@@ -5,7 +5,7 @@ import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
-import { FavouritesContext } from "../../contexts/FavouritesContext";
+import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import { addToFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import { removeFromCart } from "../../utils/CartFunctions";
@@ -24,7 +24,7 @@ export function CartResumeContainer({
 }
 
 export function ProductCard({ product }: { product: any }) {
-  const { state, dispatch, dispatchCart } = useContext(FavouritesContext);
+  const { state, dispatch, dispatchCart } = useContext(GlobalContext);
   // const { setCart } = useShoppingBagCMS();
   const maxItems = {
     quantity: [1, 2, 3, 4],
@@ -88,8 +88,7 @@ export function ProductCard({ product }: { product: any }) {
 }
 
 export default function Cart() {
-  const { stateCart } = useContext(FavouritesContext);
-  console.log(stateCart.cart, "hey");
+  const { stateCart } = useContext(GlobalContext);
 
   if (stateCart.cart.length > 0) {
     return (

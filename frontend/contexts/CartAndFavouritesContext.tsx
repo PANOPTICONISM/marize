@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useState } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 
 interface IState {
   favourites: Array<any>;
@@ -15,7 +15,7 @@ const initialState: IState = {
   cart: [],
 };
 
-export const FavouritesContext = createContext<IState | any>(initialState);
+export const GlobalContext = createContext<IState | any>(initialState);
 
 function reducer(state: IState, action: IAction): IState {
   switch (action.type) {
@@ -46,11 +46,7 @@ function reducer(state: IState, action: IAction): IState {
   }
 }
 
-export function FavouritesProvider({
-  children,
-}: {
-  children?: React.ReactNode;
-}) {
+export function GlobalProvider({ children }: { children?: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, [], () => {
     if (process.browser) {
       const localData = localStorage.getItem("favourites");
@@ -74,39 +70,39 @@ export function FavouritesProvider({
   }, [stateCart]);
 
   return (
-    <FavouritesContext.Provider
+    <GlobalContext.Provider
       value={{ state, dispatch, stateCart, dispatchCart }}
     >
       {children}
-    </FavouritesContext.Provider>
+    </GlobalContext.Provider>
   );
 }
 
-export function IndividualFavouritesList({}) {
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
-  const handleUser = async (e) => {
-    e.preventDefault();
+// export function IndividualFavouritesList({}) {
+//   const [error, setError] = useState("");
+//   const [message, setMessage] = useState("");
+//   const handleUser = async (e) => {
+//     e.preventDefault();
 
-    let userStructure = {
-      // name,
-      // email,
-      // phoneNumber,
-      createdAt: new Date().toISOString(),
-    };
+//     let userStructure = {
+//       // name,
+//       // email,
+//       // phoneNumber,
+//       createdAt: new Date().toISOString(),
+//     };
 
-    let response = await fetch("/api/mongo", {
-      method: "POST",
-      body: JSON.stringify(userStructure),
-    });
+//     let response = await fetch("/api/mongo", {
+//       method: "POST",
+//       body: JSON.stringify(userStructure),
+//     });
 
-    let data = await response.json();
+//     let data = await response.json();
 
-    if (data.success) {
-      // clean up fields here
-      return setMessage(data.message);
-    } else {
-      return setError(data.message);
-    }
-  };
-}
+//     if (data.success) {
+//       // clean up fields here
+//       return setMessage(data.message);
+//     } else {
+//       return setError(data.message);
+//     }
+//   };
+// }

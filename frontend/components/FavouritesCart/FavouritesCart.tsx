@@ -3,7 +3,7 @@ import Image from "next/image";
 import style from "./favouritescart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
-import { FavouritesContext } from "../../contexts/FavouritesContext";
+import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import { removeFromFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import Link from "next/link";
@@ -23,7 +23,7 @@ export function FavouritesCartResumeContainer({
 }
 
 export function ProductCard({ product }: { product: any }) {
-  const { dispatch } = useContext(FavouritesContext);
+  const { dispatch } = useContext(GlobalContext);
 
   // console.log(product);
   return (
@@ -58,7 +58,7 @@ export function ProductCard({ product }: { product: any }) {
 }
 
 export default function FavouritesCart() {
-  const { state, dispatch, dispatchCart } = useContext(FavouritesContext);
+  const { state, dispatch, dispatchCart } = useContext(GlobalContext);
 
   const addToCartAndRemove = (product: any) => {
     removeFromFavourites(dispatch, product._id);

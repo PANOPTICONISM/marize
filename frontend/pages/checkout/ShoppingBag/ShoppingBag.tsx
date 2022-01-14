@@ -8,10 +8,10 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { addToFavourites } from "../../../utils/FavouritesFunctions";
 import { useContext } from "react";
-import { FavouritesContext } from "../../../contexts/FavouritesContext";
+import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
 
 export default function ShoppingBag({ next }: { next?: any }) {
-  const { state, dispatch } = useContext(FavouritesContext);
+  const { state, dispatch } = useContext(GlobalContext);
   // const { cart, setCart } = useShoppingBagCMS();
   const maxItems = {
     quantity: [1, 2, 3, 4],

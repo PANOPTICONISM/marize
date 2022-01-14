@@ -9,12 +9,12 @@ import { useContext, useState } from "react";
 import Cart from "../Cart/Cart";
 import MenuNav from "../../pages/MenuNav/MenuNav";
 import FavouritesCart from "../FavouritesCart/FavouritesCart";
-import { FavouritesContext } from "../../contexts/FavouritesContext";
+import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 
 export default function Navigation() {
   // const { cart } = useShoppingBagCMS();
   const [openCart, setOpenCart] = useState(false);
-  const { state, stateCart } = useContext(FavouritesContext);
+  const { state, stateCart } = useContext(GlobalContext);
   const [openFavouritesCart, setOpenFavouritesCart] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleOpen = () => {

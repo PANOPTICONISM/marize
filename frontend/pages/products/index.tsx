@@ -7,7 +7,7 @@ import heroproducts from "../../public/assets/heroproducts.png";
 import FilterComponent from "../../components/Filters/Filters";
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
-import { FavouritesContext } from "../../contexts/FavouritesContext";
+import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import {
   addToFavourites,
   removeFromFavourites,
@@ -68,7 +68,7 @@ export default function Products({ data }) {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [sortType]);
 
-  const { state, dispatch } = useContext(FavouritesContext);
+  const { state, dispatch } = useContext(GlobalContext);
 
   const articlesUI = filteredArticles?.map((article: any) => (
     <div className={style.card} key={article._id}>

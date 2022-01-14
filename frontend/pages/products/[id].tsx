@@ -10,16 +10,14 @@ import { PrimaryIconButton } from "../../components/Buttons/Buttons";
 import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
 import { AccordionDetails } from "../../components/Accordion/Accordion";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { FavouritesContext } from "../../contexts/FavouritesContext";
+import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import {
   addToFavourites,
   removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
-import { GlobalContext } from "../../contexts/GlobalState";
 import { addToCart } from "../../utils/CartFunctions";
-// import { useShoppingBagCMS } from "../../contexts/CartContext";
 
 export function ProductDetails({
   showDetailsAccordion,
@@ -31,7 +29,7 @@ export function ProductDetails({
   isScroll?: any;
 }) {
   const { state, dispatch, stateCart, dispatchCart } =
-    useContext(FavouritesContext);
+    useContext(GlobalContext);
   const [show, setShow] = useState(null);
 
   useEffect(() => {
