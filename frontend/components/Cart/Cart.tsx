@@ -7,6 +7,8 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
 import { addToFavourites } from "../../utils/FavouritesFunctions";
+import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+import { removeFromCart } from "../../utils/CartFunctions";
 
 export function CartResumeContainer({
   children,
@@ -22,21 +24,21 @@ export function CartResumeContainer({
 }
 
 export function ProductCard({ product }: { product: any }) {
-  const { state, dispatch } = useContext(FavouritesContext);
+  const { state, dispatch, dispatchCart } = useContext(FavouritesContext);
   // const { setCart } = useShoppingBagCMS();
   const maxItems = {
     quantity: [1, 2, 3, 4],
   };
 
   const removeFromCartAndFavourite = (product: any) => {
-    // removeFromCart(product, setCart);
+    removeFromCart(dispatchCart, product._id);
     addToFavourites(dispatch, product);
   };
 
   return (
     <div className={style.fullCart}>
-      {/* <Image
-        src={product.image.url}
+      <Image
+        src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
         width={100}
         height={130}
         alt={product.name}
@@ -45,14 +47,14 @@ export function ProductCard({ product }: { product: any }) {
         <div>
           <div className={style.presentation}>
             <div>
-              <h4>{product.name}</h4>
+              <h4>{product.title}</h4>
             </div>
-            <h5>{product.line_total.formatted_with_code}</h5>
+            {/* <h5>{product.line_total.formatted_with_code}</h5> */}
           </div>
         </div>
         <div className={style.bottomProduct}>
           <div>
-            <button onClick={() => removeFromCart(product, setCart)}>
+            <button onClick={() => removeFromCart(dispatchCart, product._id)}>
               <BsTrash />
             </button>
             <span>||</span>
@@ -65,7 +67,7 @@ export function ProductCard({ product }: { product: any }) {
               </button>
             )}
           </div>
-          <select
+          {/* <select
             onChange={(e: any) => {
               updateCart(product, e.target.value, setCart);
             }}
@@ -78,39 +80,36 @@ export function ProductCard({ product }: { product: any }) {
                 {quant}
               </option>
             ))}
-          </select>
+          </select> */}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
 
 export default function Cart() {
-  // const { cart } = useShoppingBagCMS();
+  const { stateCart } = useContext(FavouritesContext);
+  console.log(stateCart.cart, "hey");
 
-  // if (cart && cart.total_unique_items > 0) {
-  //   return (
-  //     <CartResumeContainer>
-  //       {cart.line_items?.map((product: any) => (
-  //         <div key={product.id}>
-  //           <ProductCard product={product} />
-  //         </div>
-  //       ))}
-  //       <div className={style.totalCosts}>
-  //         <span>Total</span>
-  //         <span>{cart.subtotal.formatted_with_code}</span>
-  //       </div>
-  //       <Link href={`/checkout/${cart.id}`}>
-  //         <a>
-  //           <PrimaryIconButton
-  //             className={style.shopBagBtn}
-  //             text="Go to your shopping bag"
-  //           />
-  //         </a>
-  //       </Link>
-  //     </CartResumeContainer>
-  //   );
-  // }
+  if (stateCart.cart.length > 0) {
+    return (
+      <CartResumeContainer>
+        {stateCart.cart?.map((product: any) => (
+          <div key={product._id}>
+            <ProductCard product={product} />
+          </div>
+        ))}
+        {/* <Link href={`/checkout/${cart.id}`}>
+          <a>
+            <PrimaryIconButton
+              className={style.shopBagBtn}
+              text="Go to your shopping bag"
+            />
+          </a>
+        </Link> */}
+      </CartResumeContainer>
+    );
+  }
   return (
     <CartResumeContainer>
       <div className={style.emptyCart}>

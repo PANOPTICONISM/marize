@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import ContentfulProvider from "../contexts/ContentfulContext";
 import { FavouritesProvider } from "../contexts/FavouritesContext";
+import { GlobalProvider } from "../contexts/GlobalState";
 import "../styles/index.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {

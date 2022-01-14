@@ -17,6 +17,8 @@ import {
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+import { GlobalContext } from "../../contexts/GlobalState";
+import { addToCart } from "../../utils/CartFunctions";
 // import { useShoppingBagCMS } from "../../contexts/CartContext";
 
 export function ProductDetails({
@@ -28,19 +30,18 @@ export function ProductDetails({
   product?: any;
   isScroll?: any;
 }) {
-  // const { setCart } = useShoppingBagCMS();
-
-  const addToCart = (product) => {
-    // console.log(product, "product");
-    // setCart(product);
-  };
-
-  const { state, dispatch } = useContext(FavouritesContext);
+  const { state, dispatch, stateCart, dispatchCart } =
+    useContext(FavouritesContext);
   const [show, setShow] = useState(null);
 
   useEffect(() => {
-    setShow(state.favourites.some((food) => food._id === product._id));
+    setShow(
+      state.favourites.some((food: { _id: string }) => food._id === product._id)
+    );
   }, [product._id, state?.favourites]);
+
+  console.log(stateCart, "cart");
+  console.log(state, "faves");
 
   return (
     <section className={style.productDetails}>
@@ -78,7 +79,7 @@ export function ProductDetails({
         <div className={style.shopping}>
           <PrimaryIconButton
             text="Add to shopping bag"
-            // onClick={() => addToCart(product, setCart)}
+            onClick={() => addToCart(dispatchCart, product)}
           />
           {show ? (
             <AiFillHeart

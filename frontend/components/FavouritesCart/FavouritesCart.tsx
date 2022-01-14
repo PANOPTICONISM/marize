@@ -7,6 +7,7 @@ import { FavouritesContext } from "../../contexts/FavouritesContext";
 import { removeFromFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import Link from "next/link";
+import { addToCart } from "../../utils/CartFunctions";
 
 export function FavouritesCartResumeContainer({
   children,
@@ -57,13 +58,11 @@ export function ProductCard({ product }: { product: any }) {
 }
 
 export default function FavouritesCart() {
-  // const { setCart } = useShoppingBagCMS();
-
-  const { state, dispatch } = useContext(FavouritesContext);
+  const { state, dispatch, dispatchCart } = useContext(FavouritesContext);
 
   const addToCartAndRemove = (product: any) => {
     removeFromFavourites(dispatch, product._id);
-    // addToCart(product, setCart);
+    addToCart(dispatchCart, product);
   };
 
   if (state?.favourites.length > 0) {
