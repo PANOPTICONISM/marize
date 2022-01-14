@@ -9,7 +9,7 @@ import style from "../../styles/product.module.css";
 import { PrimaryIconButton } from "../../components/Buttons/Buttons";
 import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
 import { AccordionDetails } from "../../components/Accordion/Accordion";
-import { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
 import {
   addToFavourites,
@@ -36,6 +36,11 @@ export function ProductDetails({
   };
 
   const { state, dispatch } = useContext(FavouritesContext);
+  const [show, setShow] = useState(null);
+
+  useEffect(() => {
+    setShow(state.favourites.some((food) => food._id === product._id));
+  }, [product._id, state?.favourites]);
 
   return (
     <section className={style.productDetails}>
@@ -75,7 +80,7 @@ export function ProductDetails({
             text="Add to shopping bag"
             // onClick={() => addToCart(product, setCart)}
           />
-          {state?.favourites.includes(product) ? (
+          {show ? (
             <AiFillHeart
               onClick={() => removeFromFavourites(dispatch, product._id)}
               className={style.shoppingSVG}
@@ -153,7 +158,6 @@ export async function getStaticProps({ params: { id } }) {
       vendor->{_id, title}}`
   );
 
-  console.log(`Slug slug ${id}`);
   return {
     props: {
       products,
@@ -181,7 +185,6 @@ export async function getStaticPaths() {
       },
     };
   });
-  console.log(`Sl paths ${paths.params}`);
 
   return {
     paths,
