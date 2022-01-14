@@ -6,6 +6,7 @@ import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
 import { FavouritesContext } from "../../contexts/FavouritesContext";
 import { removeFromFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+import Link from "next/link";
 
 export function FavouritesCartResumeContainer({
   children,
@@ -26,12 +27,16 @@ export function ProductCard({ product }: { product: any }) {
   // console.log(product);
   return (
     <div className={style.fullCart}>
-      <Image
-        src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
-        width={100}
-        height={130}
-        alt={product.title}
-      />
+      <Link href={`/products/${product._id}`}>
+        <a>
+          <Image
+            src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
+            width={100}
+            height={130}
+            alt={product.title}
+          />
+        </a>
+      </Link>
       <div className={style.spaceBetween}>
         <div>
           <div className={style.presentation}>
