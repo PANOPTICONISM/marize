@@ -1,108 +1,110 @@
-import Link from 'next/link'
+import Link from "next/link";
 import style from "./buttons.module.css";
 import { BsHandbag } from "react-icons/bs";
 
 export default function Button({
-    path,
-    children,
-    className,
+  path,
+  children,
+  className,
+  locale,
 }: {
-    path: string;
-    children?: React.ReactNode;
-    className?: string;
+  path: string;
+  children?: React.ReactNode;
+  className?: string;
+  locale?: string;
 }) {
-    return (
-        <Link href={path}>
-            <a className={className}>{children}</a>
-        </Link>
-    );
+  return (
+    <Link href={path} locale={locale}>
+      <a className={className}>{children}</a>
+    </Link>
+  );
 }
 
 export function PrimaryButton({
-    path,
-    text,
-    className,
+  path,
+  text,
+  className,
+  locale,
 }: {
-    path: string;
-    text?: string;
-    className?: string;
+  path: string;
+  text?: string;
+  className?: string;
+  locale?: string;
 }) {
-    return (
-        <Button
-            path={path}
-            className={`${style.globalButton} ${style.primaryButton} ${className}`}
-        >
-            {text}
-        </Button>
-    );
+  return (
+    <Button
+      path={path}
+      locale={locale}
+      className={`${style.globalButton} ${style.primaryButton} ${className}`}
+    >
+      {text}
+    </Button>
+  );
 }
 
 export function PrimaryIconButton({
-    className,
-    onClick,
-    text,
+  className,
+  onClick,
+  text,
 }: {
-    className?: string;
-    onClick?: () => void;
-    text?: string;
+  className?: string;
+  onClick?: () => void;
+  text?: string;
 }) {
-    return (
-        <button
-            onClick={onClick}
-            className={`${style.globalButton} ${style.cartButton} ${className}`}
-        >
-            <BsHandbag />
-            {text}
-        </button>
-    );
+  return (
+    <button
+      onClick={onClick}
+      className={`${style.globalButton} ${style.cartButton} ${className}`}
+    >
+      <BsHandbag />
+      {text}
+    </button>
+  );
 }
 
 export function ContinueButton({
-    onClick,
-    text,
+  onClick,
+  text,
 }: {
-    onClick?: () => void;
-    text?: string;
+  onClick?: () => void;
+  text?: string;
 }) {
-    return (
-        <button
-            onClick={onClick}
-            className={`${style.globalButton} ${style.cartButton}`}
-        >
-            {text}
-        </button>
-    );
+  return (
+    <button
+      onClick={onClick}
+      className={`${style.globalButton} ${style.cartButton}`}
+    >
+      {text}
+    </button>
+  );
 }
 
 export function SubmitButton({
-    className,
-    text,
+  className,
+  text,
 }: {
-    className?: string;
-    text?: string;
+  className?: string;
+  text?: string;
 }) {
-    return (
-        <button type="submit" className={`${style.globalButton} ${className}`}>
-            {text}
-        </button>
-    );
+  return (
+    <button type="submit" className={`${style.globalButton} ${className}`}>
+      {text}
+    </button>
+  );
 }
 
 export function BackButton({
-    className,
-    onClick,
-    text,
+  className,
+  onClick,
+  text,
 }: {
-    className?: string;
-    onClick?: () => void;
-    text?: string;
+  className?: string;
+  onClick?: () => void;
+  text?: string;
 }) {
-    return (
-        <button
-            onClick={onClick}
-            className={`${style.backButton} ${className}`}
-        >
-            {text}
-        </button>
-    );
+  return (
+    <button onClick={onClick} className={`${style.backButton} ${className}`}>
+      {text}
+    </button>
+  );
 }

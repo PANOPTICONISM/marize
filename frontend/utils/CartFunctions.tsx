@@ -1,3 +1,5 @@
+import { addToFavourites } from "./FavouritesFunctions";
+
 export const addToCart = (dispatchCart: any, product: any) =>
   dispatchCart({
     type: "ADD_TO_CART",
@@ -9,4 +11,13 @@ export const removeFromCart = (dispatchCart: any, _id: string) => {
     type: "REMOVE_FROM_CART",
     payload: _id,
   });
+};
+
+export const removeFromCartAndFavourite = (
+  dispatchCart: any,
+  product: any,
+  dispatch: any
+) => {
+  removeFromCart(dispatchCart, product._id);
+  addToFavourites(dispatch, product);
 };

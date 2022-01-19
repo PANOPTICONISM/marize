@@ -18,15 +18,18 @@ import {
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import { addToCart } from "../../utils/CartFunctions";
+import { useRouter } from "next/router";
 
 export function ProductDetails({
   showDetailsAccordion,
   product,
   isScroll,
+  locale,
 }: {
   showDetailsAccordion?: any;
   product?: any;
   isScroll?: any;
+  locale?: string;
 }) {
   const { state, dispatch, stateCart, dispatchCart } =
     useContext(GlobalContext);
@@ -51,7 +54,7 @@ export function ProductDetails({
       />
       <div className={style.wrapper}>
         <div className={style.introduction}>
-          <h2>{product?.title}</h2>
+          <h2>{product?.title[locale]}</h2>
         </div>
         <div className={style.sizing}>
           {/* <form>
@@ -110,6 +113,7 @@ export function ProductDetails({
 
 export default function Product({ products, id }) {
   const [showAccordion, setShownAccordion] = useState(false);
+  const { locale } = useRouter();
 
   const showDetailsAccordion = () => {
     setShownAccordion(!showAccordion);
@@ -131,6 +135,7 @@ export default function Product({ products, id }) {
         showDetailsAccordion={showDetailsAccordion}
         isScroll={isScroll}
         product={product}
+        locale={locale}
       />
       {showAccordion && <AccordionDetails fields={product} />}
       <RelatedProducts relatedProducts={product?.related_products} />
@@ -145,7 +150,6 @@ export default function Product({ products, id }) {
 }
 
 export async function getStaticProps({ params: { id } }) {
-  console.log(id);
   const products = await sanity.fetch(
     `*[_type == "product"]{
       _id, 

@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-const { connectToDatabase } = require("./lib/mongo");
-const ObjectId = require("mongodb").ObjectId;
+import { connectToDatabase } from "./lib/mongo";
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,13 +17,11 @@ export default async function handler(
   }
 }
 
-async function getUser(req, res) {
+async function getUser(req: NextApiRequest, res: NextApiResponse) {
   try {
     // connect to the database
     let { db } = await connectToDatabase();
-    // fetch the posts
     let posts = await db.collection("movies").find({}).toArray();
-    // return the posts
     return res.json({
       message: JSON.parse(JSON.stringify(posts)),
       success: true,
@@ -38,15 +35,13 @@ async function getUser(req, res) {
   }
 }
 
-async function addUser(req, res) {
+async function addUser(req: NextApiRequest, res: NextApiResponse) {
   try {
-    // connect to the database
     let { db } = await connectToDatabase();
-    // add the post
     await db.collection("users").insertOne(JSON.parse(req.body));
     // return a message
     return res.json({
-      message: "Post added successfully",
+      message: "User added successfully",
       success: true,
     });
   } catch (error) {

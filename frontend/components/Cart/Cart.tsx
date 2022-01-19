@@ -8,7 +8,10 @@ import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import { addToFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
-import { removeFromCart } from "../../utils/CartFunctions";
+import {
+  removeFromCart,
+  removeFromCartAndFavourite,
+} from "../../utils/CartFunctions";
 
 export function CartResumeContainer({
   children,
@@ -30,18 +33,13 @@ export function ProductCard({ product }: { product: any }) {
     quantity: [1, 2, 3, 4],
   };
 
-  const removeFromCartAndFavourite = (product: any) => {
-    removeFromCart(dispatchCart, product._id);
-    addToFavourites(dispatch, product);
-  };
-
   return (
     <div className={style.fullCart}>
       <Image
         src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
         width={100}
         height={130}
-        alt={product.name}
+        alt={product.title}
       />
       <div className={style.spaceBetween}>
         <div>
@@ -61,7 +59,9 @@ export function ProductCard({ product }: { product: any }) {
             {!state.favourites.includes(product) && (
               <button
                 className={style.favouritesBag}
-                onClick={() => removeFromCartAndFavourite(product)}
+                onClick={() =>
+                  removeFromCartAndFavourite(dispatchCart, product, dispatch)
+                }
               >
                 <AiOutlineHeart className={style.shoppingSVG} />
               </button>
@@ -98,14 +98,15 @@ export default function Cart() {
             <ProductCard product={product} />
           </div>
         ))}
-        {/* <Link href={`/checkout/${cart.id}`}>
+        {/* RETURN UNIQUE ID FOR EACH CUSTOMER - STORE IN BACKEND */}
+        <Link href={`/checkout/`}>
           <a>
             <PrimaryIconButton
               className={style.shopBagBtn}
               text="Go to your shopping bag"
             />
           </a>
-        </Link> */}
+        </Link>
       </CartResumeContainer>
     );
   }

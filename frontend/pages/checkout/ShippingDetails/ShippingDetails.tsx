@@ -13,7 +13,6 @@ type FormValues = {
 };
 
 export default function ShippingDetails({
-  checkoutTokenId,
   next,
   back,
 }: {
@@ -79,24 +78,6 @@ export default function ShippingDetails({
               id="phonenumber"
             />
             {errors.phonenumber?.message}
-          </div>
-        </section>
-        <section>
-          <div>
-            <label htmlFor="address">Address</label>
-            <input
-              placeholder="Street's name"
-              {...register("address")}
-              id="address"
-            />
-          </div>
-          <div>
-            <label htmlFor="zip">ZIP code</label>
-            <input
-              placeholder="Street's ZIP code"
-              {...register("zip")}
-              id="zip"
-            />
           </div>
         </section>
         <div className={style.buttons}>

@@ -15,7 +15,8 @@ import {
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
-export default function Products({ data }) {
+export default function Products({ data, context }) {
+  const { locale } = context;
   const { products, vendors } = data;
   const [filteredArticles, setFilteredArticles] = useState<any>([]);
   const [filters, setFilters] = useState([]);
@@ -97,7 +98,7 @@ export default function Products({ data }) {
       </Link>
       <div className={style.card_txt}>
         <p className={style.brand}>{article.vendor?.title}</p>
-        <p>{article.title}</p>
+        <p>{article.title[locale]}</p>
       </div>
     </div>
   ));
@@ -159,7 +160,7 @@ export default function Products({ data }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   const data = await sanity.fetch(
     `{'products': *[_type == "product"]{
       _id, 
@@ -177,6 +178,7 @@ export async function getStaticProps() {
   return {
     props: {
       data,
+      context,
     },
   };
 }

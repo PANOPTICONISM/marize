@@ -52,32 +52,6 @@ export default function OrderProcessed({
             </article>
           ))} */}
         </div>
-        <div className={style.priceWrapper}>
-          <div className={style.priceFinalSummary}>
-            <h1>Price Summary</h1>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Subtotal</td>
-                  {/* <td>{cart.subtotal.formatted_with_code}</td> */}
-                </tr>
-                <tr>
-                  <td>Shipping</td>
-                  <td>{`${shippingData?.shippingPrice} EUR`}</td>
-                </tr>
-              </tbody>
-            </table>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Total</td>
-                  {/* <td>{`${totalPrice} EUR`}</td> */}
-                </tr>
-              </tbody>
-            </table>
-            <p className={style.importDuties}>(import duties included)</p>
-          </div>
-        </div>
         <div className={style.finalMessage}>
           <p>
             We'll send you an email with a payment link to finalised your

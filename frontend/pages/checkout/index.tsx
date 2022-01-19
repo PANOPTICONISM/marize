@@ -1,34 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ShoppingBag from "./ShoppingBag/ShoppingBag";
 import { Stepper, Step, StepLabel, makeStyles } from "@material-ui/core";
 import ShippingDetails from "./ShippingDetails/ShippingDetails";
 import Confirmation from "./Confirmation/Confirmation";
 import Main from "../../containers/Main/Main";
 import OrderProcessed from "./OrderProcessed/OrderProcessed";
+import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 
-function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
-  // const { cart } = useShoppingBagCMS();
-  const [checkoutTokenId, setCheckoutTokenId] = useState();
-  const [shippingData, setShippingData] = useState({});
+function CheckoutWrapper() {
+  const [shippingData, setShippingData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phonenumber: "",
+    cart: [],
+  });
   const steps = ["Shopping Bag", "Shipping Details", "Confirmation"];
-
-  // useEffect(() => {
-  //   if (cart?.id) {
-  //     const generateToken = async () => {
-  //       try {
-  //         const token = await commerce.checkout.generateToken(cart.id, {
-  //           type: "cart",
-  //         });
-
-  //         setCheckoutTokenId(token);
-  //       } catch {
-  //         console.log("wrong");
-  //       }
-  //     };
-
-  //     generateToken();
-  //   }
-  // }, [cart]);
 
   const [activeStep, setActiveStep] = useState(0);
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -40,7 +27,39 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
     nextStep();
   };
 
-  // console.log(shippingData);
+  const { stateCart } = useContext(GlobalContext);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
+  const processOrder = async (e: { preventDefault: () => void }) => {
+    console.log("clicked");
+    let userStructure = {
+      userName: shippingData.firstname + " " + shippingData.lastname,
+      email: shippingData.email,
+      phoneNumber: shippingData.phonenumber,
+      createdAt: new Date().toISOString(),
+      cart: stateCart.cart,
+    };
+
+    let response = await fetch("/api/mongo", {
+      method: "POST",
+      body: JSON.stringify(userStructure),
+    });
+
+    let data = await response.json();
+
+    if (data.success) {
+      // clean up fields here
+      nextStep();
+      console.log(data, "sucess");
+      return setMessage(data.message);
+    } else {
+      console.log(data, "error");
+      return setError(data.message);
+    }
+  };
+
+  console.log(shippingData);
 
   const useStyles = makeStyles(() => ({
     root: {
@@ -74,15 +93,9 @@ function CheckoutWrapper({ children }: { children?: React.ReactNode }) {
       </Stepper>
       {/* )} */}
       {activeStep === 0 && <ShoppingBag next={next} />}
-      {activeStep === 1 && (
-        <ShippingDetails
-          checkoutTokenId={checkoutTokenId}
-          back={backStep}
-          next={next}
-        />
-      )}
+      {activeStep === 1 && <ShippingDetails back={backStep} next={next} />}
       {activeStep === 2 && (
-        <Confirmation next={nextStep} shippingData={shippingData} />
+        <Confirmation processOrder={processOrder} shippingData={shippingData} />
       )}
       {activeStep === 3 && <OrderProcessed shippingData={shippingData} />}
     </Main>
