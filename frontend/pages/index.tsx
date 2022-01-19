@@ -7,8 +7,12 @@ import NewArrivals from "../components/NewArrivals/NewArrivals";
 import VisitStore from "../components/VisitStore/VisitStore";
 import CategorySections from "../components/CategorySections/CategorySections";
 import { sanity } from "./api/lib/sanity.js";
+import { useRouter } from "next/router";
 
 export default function Homepage({ products }) {
+  console.log(products);
+  const { locale } = useRouter();
+
   return (
     <>
       <Head>
@@ -54,7 +58,7 @@ export default function Homepage({ products }) {
             alt="love-m"
           />
         </section>
-        <NewArrivals products={products} />
+        <NewArrivals products={products} locale={locale} />
         <VisitStore className={style.visitHomepage} />
         <CategorySections />
       </Main>

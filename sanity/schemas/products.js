@@ -1,12 +1,30 @@
+// const localeString = {
+//   name: "localeString",
+//   title: "Localized title",
+//   type: "object",
+//   fields: [
+//     {
+//       title: "Portugues",
+//       name: "pt",
+//       type: "string",
+//     },
+//     {
+//       title: "Espanhol",
+//       name: "es",
+//       type: "string",
+//     },
+//   ],
+// };
+
 export default {
   name: "product",
   title: "Product",
   type: "document",
   fields: [
     {
+      title: "title",
       name: "title",
-      title: "Titulo de artigo",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "images",
