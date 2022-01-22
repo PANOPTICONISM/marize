@@ -3,7 +3,7 @@ import Image from "next/image";
 import style from "./newarrivals.module.css";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
-const NewArrivals = ({ products }) => {
+const NewArrivals = ({ products, locale }) => {
   const reversedArray: any[] = [];
   products?.map((product) => reversedArray.unshift(product));
   const newArrivals = reversedArray?.slice(0, 4);
@@ -27,7 +27,7 @@ const NewArrivals = ({ products }) => {
               </a>
             </Link>
             <h2 className={style.brand}>{article.vendor?.title}</h2>
-            <h3>{article.title}</h3>
+            <h3>{article.title[locale]}</h3>
           </div>
         ))}
       </div>

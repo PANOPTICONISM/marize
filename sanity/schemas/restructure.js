@@ -20,7 +20,7 @@ export default () =>
                 .schemaType("product")
                 .child(S.documentTypeList("product").title("Artigo")),
               S.listItem()
-                .title("Categories")
+                .title("Categorias")
                 .schemaType("category")
                 .child(S.documentTypeList("category").title("Categories")),
               S.listItem()

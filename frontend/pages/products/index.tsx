@@ -7,7 +7,7 @@ import heroproducts from "../../public/assets/heroproducts.png";
 import FilterComponent from "../../components/Filters/Filters";
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
-import { FavouritesContext } from "../../contexts/FavouritesContext";
+import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import {
   addToFavourites,
   removeFromFavourites,
@@ -15,7 +15,8 @@ import {
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
-export default function Products({ data }) {
+export default function Products({ data, context }) {
+  const { locale } = context;
   const { products, vendors } = data;
   const [filteredArticles, setFilteredArticles] = useState<any>([]);
   const [filters, setFilters] = useState([]);
@@ -68,7 +69,7 @@ export default function Products({ data }) {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [sortType]);
 
-  const { state, dispatch } = useContext(FavouritesContext);
+  const { state, dispatch } = useContext(GlobalContext);
 
   const articlesUI = filteredArticles?.map((article: any) => (
     <div className={style.card} key={article._id}>
@@ -97,7 +98,7 @@ export default function Products({ data }) {
       </Link>
       <div className={style.card_txt}>
         <p className={style.brand}>{article.vendor?.title}</p>
-        <p>{article.title}</p>
+        <p>{article.title[locale]}</p>
       </div>
     </div>
   ));
@@ -159,7 +160,7 @@ export default function Products({ data }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   const data = await sanity.fetch(
     `{'products': *[_type == "product"]{
       _id, 
@@ -177,6 +178,7 @@ export async function getStaticProps() {
   return {
     props: {
       data,
+      context,
     },
   };
 }

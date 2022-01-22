@@ -3,9 +3,11 @@ import Image from "next/image";
 import style from "./favouritescart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
-import { FavouritesContext } from "../../contexts/FavouritesContext";
+import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import { removeFromFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+import Link from "next/link";
+import { addToCart } from "../../utils/CartFunctions";
 
 export function FavouritesCartResumeContainer({
   children,
@@ -21,17 +23,21 @@ export function FavouritesCartResumeContainer({
 }
 
 export function ProductCard({ product }: { product: any }) {
-  const { dispatch } = useContext(FavouritesContext);
+  const { dispatch } = useContext(GlobalContext);
 
   // console.log(product);
   return (
     <div className={style.fullCart}>
-      <Image
-        src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
-        width={100}
-        height={130}
-        alt={product.title}
-      />
+      <Link href={`/products/${product._id}`}>
+        <a>
+          <Image
+            src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
+            width={100}
+            height={130}
+            alt={product.title}
+          />
+        </a>
+      </Link>
       <div className={style.spaceBetween}>
         <div>
           <div className={style.presentation}>
@@ -52,13 +58,11 @@ export function ProductCard({ product }: { product: any }) {
 }
 
 export default function FavouritesCart() {
-  // const { setCart } = useShoppingBagCMS();
-
-  const { state, dispatch } = useContext(FavouritesContext);
+  const { state, dispatch, dispatchCart } = useContext(GlobalContext);
 
   const addToCartAndRemove = (product: any) => {
     removeFromFavourites(dispatch, product._id);
-    // addToCart(product, setCart);
+    addToCart(dispatchCart, product);
   };
 
   if (state?.favourites.length > 0) {

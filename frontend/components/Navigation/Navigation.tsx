@@ -9,12 +9,12 @@ import { useContext, useState } from "react";
 import Cart from "../Cart/Cart";
 import MenuNav from "../../pages/MenuNav/MenuNav";
 import FavouritesCart from "../FavouritesCart/FavouritesCart";
-import { FavouritesContext } from "../../contexts/FavouritesContext";
+import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 
 export default function Navigation() {
   // const { cart } = useShoppingBagCMS();
   const [openCart, setOpenCart] = useState(false);
-  const { state } = useContext(FavouritesContext);
+  const { state, stateCart } = useContext(GlobalContext);
   const [openFavouritesCart, setOpenFavouritesCart] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleOpen = () => {
@@ -25,13 +25,10 @@ export default function Navigation() {
   // } else {
   //     document.body.style.overflowY = "scroll";
   // }
-  // const cartTotal =
-  //   cart && cart?.total_unique_items > 0 ? cart?.total_unique_items : "";
+  const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.length : "";
 
   const favouritesCartTotal =
     state?.favourites?.length > 0 ? state.favourites.length : "";
-
-  // console.log(state.favourites.length);
 
   return (
     <nav className={style.wrapper}>
@@ -73,7 +70,7 @@ export default function Navigation() {
           <div onClick={() => setOpenCart(!openCart)}>
             <BsHandbag />
           </div>
-          {/* {cartTotal && <span className={style.cartTotal}>{cartTotal}</span>} */}
+          {cartTotal && <span className={style.cartTotal}>{cartTotal}</span>}
           {openCart && <Cart />}
         </div>
         {/* // )} */}

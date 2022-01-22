@@ -8,49 +8,60 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { addToFavourites } from "../../../utils/FavouritesFunctions";
 import { useContext } from "react";
-import { FavouritesContext } from "../../../contexts/FavouritesContext";
+import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
+import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
+import {
+  removeFromCart,
+  removeFromCartAndFavourite,
+} from "../../../utils/CartFunctions";
+import { useRouter } from "next/router";
 
 export default function ShoppingBag({ next }: { next?: any }) {
-  const { state, dispatch } = useContext(FavouritesContext);
-  // const { cart, setCart } = useShoppingBagCMS();
+  const { state, dispatch, stateCart, dispatchCart } =
+    useContext(GlobalContext);
+
+  const { locale } = useRouter();
   const maxItems = {
     quantity: [1, 2, 3, 4],
   };
 
-  const removeFromCartAndFavourite = (product: any) => {
-    addToFavourites(dispatch, product);
-    // removeFromCart(product, setCart);
-  };
+  console.log(stateCart);
 
   return (
     <section>
-      {/* {cart?.line_items.length > 0 ? (
+      {stateCart?.cart.length > 0 ? (
         <div className={style.shoppingBagWrapper}>
           <div className={style.shoppingBag}>
             <h1>
               My Shopping Bag
-              <span> ({cart?.total_items} articles)</span>
+              <span> ({stateCart.cart.length} articles)</span>
             </h1>
-            {cart?.line_items.map((product: any) => (
-              <article key={product.id} className={style.shoppingArticle}>
+            {stateCart.cart.map((product: any) => (
+              <article key={product._id} className={style.shoppingArticle}>
                 <Image
-                  src={product.image.url}
+                  src={absoluteURLsForSanity(
+                    product?.images[0].asset._ref
+                  ).url()}
                   width={230}
                   height={300}
-                  alt={product.name}
+                  alt={product.title}
                 />
                 <div className={style.fullSpace}>
                   <div className={style.descDetails}>
                     <div>
-                      <p>{product.name}</p>
+                      <p>
+                        {product.title[locale] !== undefined
+                          ? product.title[locale]
+                          : product.title.pt}
+                      </p>
                       <p>
                         <span>Size:</span> M
                       </p>
                     </div>
                     <select
-                      onChange={(e: any) => {
-                        updateCart(product, e.target.value, setCart);
-                      }}
+                      // onChange={(e: any) => {
+                      //   updateCart(product, e.target.value, setCart);
+                      // }}
                       defaultValue={product.quantity}
                       name="quantity"
                       id="quantity"
@@ -64,22 +75,29 @@ export default function ShoppingBag({ next }: { next?: any }) {
                   </div>
                   <div className={style.flex}>
                     <div className={style.moveFromCart}>
-                      <span onClick={() => removeFromCart(product, setCart)}>
+                      <span
+                        onClick={() =>
+                          removeFromCart(dispatchCart, product._id)
+                        }
+                      >
                         <BsTrash /> Remove from shopping bag
                       </span>
                       {!state.favourites.includes(product) && (
                         <button
                           className={style.favouritesBag}
-                          onClick={() => removeFromCartAndFavourite(product)}
+                          onClick={() =>
+                            removeFromCartAndFavourite(
+                              dispatchCart,
+                              product,
+                              dispatch
+                            )
+                          }
                         >
                           <AiOutlineHeart className={style.shoppingSVG} />
                           Save to favourites
                         </button>
                       )}
                     </div>
-                    <span className={style.bagPrice}>
-                      {product.line_total.formatted_with_code}
-                    </span>
                   </div>
                 </div>
               </article>
@@ -104,7 +122,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
             path="/products"
           />
         </div>
-      )} */}
+      )}
     </section>
   );
 }

@@ -1,12 +1,16 @@
+import supportedLanguages from "./locale/supportedLanguages";
+
+const baseLanguage = supportedLanguages.find((l) => l.isDefault);
+
 export default {
   name: "product",
   title: "Product",
   type: "document",
   fields: [
     {
+      title: "title",
       name: "title",
-      title: "Titulo de artigo",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "images",
@@ -54,24 +58,21 @@ export default {
         },
       ],
     },
-    {
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      description:
-        "Carrega o butão para gerar automaticamente (isto serve como url especifica para cada artigo)",
-      options: {
-        source: "title",
-        maxLength: 96,
-      },
-    },
+    // {
+    //   name: "slug",
+    //   title: "Slug",
+    //   type: "slug",
+    //   description:
+    //     "Carrega o butão para gerar automaticamente (isto serve como url especifica para cada artigo)",
+    //   options: {
+    //     source: "title",
+    //     maxLength: 96,
+    //   },
+    // },
   ],
-
   preview: {
     select: {
-      title: "title",
-      manufactor: "manufactor.title",
-      media: "defaultProductVariant.images[0]",
+      title: `title.${baseLanguage.id}`,
     },
   },
 };

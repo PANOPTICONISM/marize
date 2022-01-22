@@ -9,33 +9,40 @@ import style from "../../styles/product.module.css";
 import { PrimaryIconButton } from "../../components/Buttons/Buttons";
 import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
 import { AccordionDetails } from "../../components/Accordion/Accordion";
-import { useContext, useRef, useState } from "react";
-import { FavouritesContext } from "../../contexts/FavouritesContext";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import {
   addToFavourites,
   removeFromFavourites,
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
-// import { useShoppingBagCMS } from "../../contexts/CartContext";
+import { addToCart } from "../../utils/CartFunctions";
+import { useRouter } from "next/router";
 
 export function ProductDetails({
   showDetailsAccordion,
   product,
   isScroll,
+  locale,
 }: {
   showDetailsAccordion?: any;
   product?: any;
   isScroll?: any;
+  locale?: string;
 }) {
-  // const { setCart } = useShoppingBagCMS();
+  const { state, dispatch, stateCart, dispatchCart } =
+    useContext(GlobalContext);
+  const [show, setShow] = useState(null);
 
-  const addToCart = (product) => {
-    // console.log(product, "product");
-    // setCart(product);
-  };
+  useEffect(() => {
+    setShow(
+      state.favourites.some((food: { _id: string }) => food._id === product._id)
+    );
+  }, [product._id, state?.favourites]);
 
-  const { state, dispatch } = useContext(FavouritesContext);
+  console.log(stateCart, "cart");
+  console.log(state, "faves");
 
   return (
     <section className={style.productDetails}>
@@ -47,7 +54,7 @@ export function ProductDetails({
       />
       <div className={style.wrapper}>
         <div className={style.introduction}>
-          <h2>{product?.title}</h2>
+          <h2>{product?.title[locale]}</h2>
         </div>
         <div className={style.sizing}>
           {/* <form>
@@ -73,9 +80,9 @@ export function ProductDetails({
         <div className={style.shopping}>
           <PrimaryIconButton
             text="Add to shopping bag"
-            // onClick={() => addToCart(product, setCart)}
+            onClick={() => addToCart(dispatchCart, product)}
           />
-          {state?.favourites.includes(product) ? (
+          {show ? (
             <AiFillHeart
               onClick={() => removeFromFavourites(dispatch, product._id)}
               className={style.shoppingSVG}
@@ -106,6 +113,7 @@ export function ProductDetails({
 
 export default function Product({ products, id }) {
   const [showAccordion, setShownAccordion] = useState(false);
+  const { locale } = useRouter();
 
   const showDetailsAccordion = () => {
     setShownAccordion(!showAccordion);
@@ -127,6 +135,7 @@ export default function Product({ products, id }) {
         showDetailsAccordion={showDetailsAccordion}
         isScroll={isScroll}
         product={product}
+        locale={locale}
       />
       {showAccordion && <AccordionDetails fields={product} />}
       <RelatedProducts relatedProducts={product?.related_products} />
@@ -141,7 +150,6 @@ export default function Product({ products, id }) {
 }
 
 export async function getStaticProps({ params: { id } }) {
-  console.log(id);
   const products = await sanity.fetch(
     `*[_type == "product"]{
       _id, 
@@ -153,7 +161,6 @@ export async function getStaticProps({ params: { id } }) {
       vendor->{_id, title}}`
   );
 
-  console.log(`Slug slug ${id}`);
   return {
     props: {
       products,
@@ -181,7 +188,6 @@ export async function getStaticPaths() {
       },
     };
   });
-  console.log(`Sl paths ${paths.params}`);
 
   return {
     paths,

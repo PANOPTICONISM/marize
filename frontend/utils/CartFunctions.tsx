@@ -1,24 +1,23 @@
-export {};
-// import { commerce } from "../pages/api/lib/Commerce.js";
+import { addToFavourites } from "./FavouritesFunctions";
 
-// export const addToCart = (product: any, setCart: any) => {
-//     commerce.cart
-//         .add(product.id, 1)
-//         .then(({ cart }: { cart: any }) => setCart(cart));
-// };
+export const addToCart = (dispatchCart: any, product: any) =>
+  dispatchCart({
+    type: "ADD_TO_CART",
+    payload: product,
+  });
 
-// export const removeFromCart = (product: { id: any }, setCart: any) => {
-//     commerce.cart
-//         .remove(product.id, 1)
-//         .then(({ cart }: { cart: any }) => setCart(cart));
-// };
+export const removeFromCart = (dispatchCart: any, _id: string) => {
+  dispatchCart({
+    type: "REMOVE_FROM_CART",
+    payload: _id,
+  });
+};
 
-// export const updateCart = (
-//     product: { id: any },
-//     quantityValue: any,
-//     setCart: any
-// ) => {
-//     commerce.cart
-//         .update(product.id, { quantity: quantityValue })
-//         .then(({ cart }: { cart: any }) => setCart(cart));
-// };
+export const removeFromCartAndFavourite = (
+  dispatchCart: any,
+  product: any,
+  dispatch: any
+) => {
+  removeFromCart(dispatchCart, product._id);
+  addToFavourites(dispatch, product);
+};
