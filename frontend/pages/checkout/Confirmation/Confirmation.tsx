@@ -19,7 +19,6 @@ function Confirmation({
   // set up user data and sent it to server that sends it to mongodb
 
   const { stateCart } = useContext(GlobalContext);
-  const { cart } = stateCart;
   const { locale } = useRouter();
 
   if (shippingData) {
@@ -29,9 +28,9 @@ function Confirmation({
           <div className={style.shoppingBag}>
             <h1>
               My Shopping Bag
-              <span> ({cart?.length} articles)</span>
+              <span> ({stateCart.cart?.length} articles)</span>
             </h1>
-            {cart?.map((product: any) => (
+            {stateCart.cart?.map((product: any) => (
               <article key={product._id} className={style.shoppingArticle}>
                 <Image
                   src={absoluteURLsForSanity(
