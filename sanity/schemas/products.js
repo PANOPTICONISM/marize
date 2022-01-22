@@ -1,20 +1,6 @@
-// const localeString = {
-//   name: "localeString",
-//   title: "Localized title",
-//   type: "object",
-//   fields: [
-//     {
-//       title: "Portugues",
-//       name: "pt",
-//       type: "string",
-//     },
-//     {
-//       title: "Espanhol",
-//       name: "es",
-//       type: "string",
-//     },
-//   ],
-// };
+import supportedLanguages from "./locale/supportedLanguages";
+
+const baseLanguage = supportedLanguages.find((l) => l.isDefault);
 
 export default {
   name: "product",
@@ -72,24 +58,21 @@ export default {
         },
       ],
     },
-    {
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      description:
-        "Carrega o butão para gerar automaticamente (isto serve como url especifica para cada artigo)",
-      options: {
-        source: "title",
-        maxLength: 96,
-      },
-    },
+    // {
+    //   name: "slug",
+    //   title: "Slug",
+    //   type: "slug",
+    //   description:
+    //     "Carrega o butão para gerar automaticamente (isto serve como url especifica para cada artigo)",
+    //   options: {
+    //     source: "title",
+    //     maxLength: 96,
+    //   },
+    // },
   ],
-
   preview: {
     select: {
-      title: "title",
-      manufactor: "manufactor.title",
-      media: "defaultProductVariant.images[0]",
+      title: `title.${baseLanguage.id}`,
     },
   },
 };

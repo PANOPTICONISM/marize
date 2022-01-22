@@ -1,33 +1,33 @@
 export default {
-  name: 'vendor',
-  title: 'Vendor',
-  type: 'document',
+  name: "vendor",
+  title: "Vendor",
+  type: "document",
   fields: [
     {
-      name: 'title',
-      title: 'Nome',
-      type: 'string',
+      name: "title",
+      title: "Nome",
+      type: "string",
     },
+    // {
+    //   name: 'slug',
+    //   title: 'Slug',
+    //   type: 'slug',
+    //   options: {
+    //     source: 'title',
+    //     maxLength: 96,
+    //   },
+    // },
     {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
-    },
-    {
-      name: 'logo',
-      title: 'Logo',
-      type: 'image',
-      description: 'Tem que ser igual aos outros e em .png formato'
+      name: "logo",
+      title: "Logo",
+      type: "image",
+      description: "Tem que ser igual aos outros e em .png formato",
     },
   ],
   preview: {
     select: {
-      title: 'title',
-      media: 'logo',
+      title: "title",
+      media: "logo",
     },
   },
-}
+};

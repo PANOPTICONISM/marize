@@ -1,3 +1,7 @@
+import supportedLanguages from "./locale/supportedLanguages";
+
+const baseLanguage = supportedLanguages.find((l) => l.isDefault);
+
 export default {
   name: "colour",
   title: "Colours",
@@ -6,7 +10,12 @@ export default {
     {
       name: "title",
       title: "Nome",
-      type: "string",
+      type: "localeString",
     },
   ],
+  preview: {
+    select: {
+      title: `title.${baseLanguage.id}`,
+    },
+  },
 };
