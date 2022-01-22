@@ -12,6 +12,7 @@ import {
   removeFromCart,
   removeFromCartAndFavourite,
 } from "../../utils/CartFunctions";
+import { useRouter } from "next/router";
 
 export function CartResumeContainer({
   children,
@@ -32,6 +33,7 @@ export function ProductCard({ product }: { product: any }) {
   const maxItems = {
     quantity: [1, 2, 3, 4],
   };
+  const { locale } = useRouter();
 
   return (
     <div className={style.fullCart}>
@@ -45,7 +47,11 @@ export function ProductCard({ product }: { product: any }) {
         <div>
           <div className={style.presentation}>
             <div>
-              <h4>{product.title}</h4>
+              <h4>
+                {product.title[locale] !== undefined
+                  ? product.title[locale]
+                  : product.title.pt}
+              </h4>
             </div>
             {/* <h5>{product.line_total.formatted_with_code}</h5> */}
           </div>

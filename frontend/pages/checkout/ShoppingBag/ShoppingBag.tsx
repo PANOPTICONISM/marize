@@ -49,7 +49,11 @@ export default function ShoppingBag({ next }: { next?: any }) {
                 <div className={style.fullSpace}>
                   <div className={style.descDetails}>
                     <div>
-                      <p>{product.title}</p>
+                      <p>
+                        {product.title[locale] !== undefined
+                          ? product.title[locale]
+                          : product.title.pt}
+                      </p>
                       <p>
                         <span>Size:</span> M
                       </p>
