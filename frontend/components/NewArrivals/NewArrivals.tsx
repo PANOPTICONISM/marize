@@ -8,6 +8,8 @@ const NewArrivals = ({ products, locale }) => {
   products?.map((product) => reversedArray.unshift(product));
   const newArrivals = reversedArray?.slice(0, 4);
 
+  console.log(locale);
+
   return (
     <section className={style.newArrivals}>
       <h1>New Arrivals</h1>
@@ -22,12 +24,14 @@ const NewArrivals = ({ products, locale }) => {
                   ).url()}
                   width={350}
                   height={455}
-                  alt={article.name}
+                  alt={article.title[locale]}
                 />
               </a>
             </Link>
             <h2 className={style.brand}>{article.vendor?.title}</h2>
-            <h3>{article.title[locale]}</h3>
+            <h3>
+              {article.title[locale] ? article.title[locale] : article.title.pt}
+            </h3>
           </div>
         ))}
       </div>

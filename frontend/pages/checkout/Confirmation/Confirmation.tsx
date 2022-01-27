@@ -43,7 +43,12 @@ function Confirmation({
                 <div className={style.fullSpace}>
                   <div className={style.descDetails}>
                     <div>
-                      <p>{product.title[locale]}</p>
+                      <p>
+                        {" "}
+                        {product.title[locale]
+                          ? product.title[locale]
+                          : product.title.pt}
+                      </p>
                       <p>
                         <span>Size:</span> M
                       </p>

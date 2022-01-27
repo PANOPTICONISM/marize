@@ -54,7 +54,9 @@ export function ProductDetails({
       />
       <div className={style.wrapper}>
         <div className={style.introduction}>
-          <h2>{product?.title[locale]}</h2>
+          <h2>
+            {product.title[locale] ? product.title[locale] : product.title.pt}
+          </h2>
         </div>
         <div className={style.sizing}>
           {/* <form>

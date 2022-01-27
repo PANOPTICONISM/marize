@@ -50,7 +50,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                   <div className={style.descDetails}>
                     <div>
                       <p>
-                        {product.title[locale] !== undefined
+                        {product.title[locale]
                           ? product.title[locale]
                           : product.title.pt}
                       </p>

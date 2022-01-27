@@ -98,7 +98,9 @@ export default function Products({ data, context }) {
       </Link>
       <div className={style.card_txt}>
         <p className={style.brand}>{article.vendor?.title}</p>
-        <p>{article.title[locale]}</p>
+        <p>
+          {article.title[locale] ? article.title[locale] : article.title.pt}
+        </p>
       </div>
     </div>
   ));

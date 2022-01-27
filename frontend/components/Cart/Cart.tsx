@@ -48,7 +48,7 @@ export function ProductCard({ product }: { product: any }) {
           <div className={style.presentation}>
             <div>
               <h4>
-                {product.title[locale] !== undefined
+                {product.title[locale]
                   ? product.title[locale]
                   : product.title.pt}
               </h4>
