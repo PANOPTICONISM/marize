@@ -18,11 +18,14 @@ const initialState: IState = {
 export const GlobalContext = createContext<IState | any>(initialState);
 
 function reducer(state: IState, action: IAction): IState {
+  console.log(action.payload, "payload");
+  console.log(state);
+
   switch (action.type) {
     case "ADD_FAVOURITES":
       return {
         ...state,
-        favourites: [...state.favourites, action.payload],
+        favourites: [state.favourites, action.payload],
       };
     case "REMOVE_FAVOURITES":
       return {
@@ -34,7 +37,11 @@ function reducer(state: IState, action: IAction): IState {
     case "ADD_TO_CART":
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: JSON.stringify(state.cart).includes(action.payload._id)
+          ? state.cart.map((product) => {
+              return { ...product, quantity: product.quantity + 1 };
+            })
+          : [...state.cart, { ...action.payload, quantity: 1 }],
       };
     case "REMOVE_FROM_CART":
       return {
