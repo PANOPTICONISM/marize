@@ -14,6 +14,7 @@ import {
   updateCartQuantity,
 } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
+import { uuid } from "uuidv4";
 
 export function CartResumeContainer({
   children,
@@ -105,8 +106,7 @@ export default function Cart() {
             <ProductCard product={product} />
           </div>
         ))}
-        {/* RETURN UNIQUE ID FOR EACH CUSTOMER - STORE IN BACKEND */}
-        <Link href={`/checkout/`}>
+        <Link href={`/checkout/${stateCart.userId}`}>
           <a>
             <PrimaryIconButton
               className={style.shopBagBtn}

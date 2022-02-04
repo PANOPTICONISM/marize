@@ -9,6 +9,7 @@ import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 
 function CheckoutWrapper() {
   const [shippingData, setShippingData] = useState({
+    id: "",
     firstname: "",
     lastname: "",
     email: "",

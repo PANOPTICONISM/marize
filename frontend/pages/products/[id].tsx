@@ -82,7 +82,7 @@ export function ProductDetails({
         <div className={style.shopping}>
           <PrimaryIconButton
             text="Add to shopping bag"
-            onClick={() => addToCart(stateCart, dispatchCart, product, 1)}
+            onClick={() => addToCart(dispatchCart, product)}
           />
           {show ? (
             <AiFillHeart

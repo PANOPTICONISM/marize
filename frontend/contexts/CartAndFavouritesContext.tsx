@@ -1,8 +1,12 @@
 import React, { createContext, useReducer, useEffect } from "react";
+import { v4 as uuid } from "uuid";
+
+const customer_id = uuid();
 
 interface IState {
   favourites: Array<any>;
   cart: Array<any>;
+  userId: string;
 }
 
 interface IAction {
@@ -13,6 +17,7 @@ interface IAction {
 const initialState: IState = {
   favourites: [],
   cart: [],
+  userId: customer_id,
 };
 
 export const GlobalContext = createContext<IState | any>(initialState);
