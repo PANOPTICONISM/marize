@@ -1,7 +1,6 @@
 import Image from "next/image";
 import style from "../styles/about.module.css";
 import Main from "../containers/Main/Main";
-import { useContentfulCMS } from "../contexts/ContentfulContext";
 import sky from "../public/assets/sky-cashmere.svg";
 import caminatta from "../public/assets/caminatta.svg";
 import atlanta from "../public/assets/atlanta_mocassin.svg";

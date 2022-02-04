@@ -11,6 +11,7 @@ import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import {
   removeFromCart,
   removeFromCartAndFavourite,
+  updateCartQuantity,
 } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
 
@@ -73,9 +74,9 @@ export function ProductCard({ product }: { product: any }) {
               </button>
             )}
           </div>
-          {/* <select
+          <select
             onChange={(e: any) => {
-              updateCart(product, e.target.value, setCart);
+              updateCartQuantity(dispatchCart, product, e.target.value);
             }}
             defaultValue={product.quantity}
             name="quantity"
@@ -86,7 +87,7 @@ export function ProductCard({ product }: { product: any }) {
                 {quant}
               </option>
             ))}
-          </select> */}
+          </select>
         </div>
       </div>
     </div>

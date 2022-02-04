@@ -27,3 +27,11 @@ export const removeFromCartAndFavourite = (
   removeFromCart(dispatchCart, product._id);
   addToFavourites(dispatch, product);
 };
+
+export const updateCartQuantity = (dispatchCart, product, quantity) => {
+  console.log(dispatchCart, product, quantity, "three");
+  dispatchCart({
+    type: "UPDATE_CART_QUANTITY",
+    payload: { product, quantity },
+  });
+};

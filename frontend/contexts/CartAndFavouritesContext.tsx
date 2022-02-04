@@ -25,7 +25,7 @@ function reducer(state: IState, action: IAction): IState {
     case "ADD_FAVOURITES":
       return {
         ...state,
-        favourites: [state.favourites, action.payload],
+        favourites: [...state.favourites, action.payload],
       };
     case "REMOVE_FAVOURITES":
       return {
@@ -38,15 +38,31 @@ function reducer(state: IState, action: IAction): IState {
       return {
         ...state,
         cart: JSON.stringify(state.cart).includes(action.payload._id)
-          ? state.cart.map((product) => {
-              return { ...product, quantity: product.quantity + 1 };
-            })
+          ? state.cart.map((product) =>
+              product._id === action.payload._id
+                ? {
+                    ...product,
+                    quantity: product.quantity + 1,
+                  }
+                : product
+            )
           : [...state.cart, { ...action.payload, quantity: 1 }],
       };
     case "REMOVE_FROM_CART":
       return {
         ...state,
         cart: state.cart.filter((item) => item._id !== action.payload),
+      };
+    case "UPDATE_CART_QUANTITY":
+      return {
+        ...state,
+        cart:
+          JSON.stringify(state.cart).includes(action.payload.product._id) &&
+          state.cart.map((product) =>
+            product._id === action.payload.product._id
+              ? { ...product, quantity: action.payload.quantity }
+              : product
+          ),
       };
     default:
       return state;
