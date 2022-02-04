@@ -55,9 +55,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                           ? product.title[locale]
                           : product.title.pt}
                       </p>
-                      <p>
-                        <span>Size:</span> M
-                      </p>
+                      <p>{/* <span>Size:</span> M */}</p>
                     </div>
                     <select
                       onChange={(e: any) => {

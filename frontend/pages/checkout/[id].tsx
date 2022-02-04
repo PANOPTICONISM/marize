@@ -34,6 +34,7 @@ function CheckoutWrapper() {
 
   const processOrder = async (e: { preventDefault: () => void }) => {
     console.log("clicked");
+    e.preventDefault();
     let userStructure = {
       userName: shippingData.firstname + " " + shippingData.lastname,
       email: shippingData.email,
@@ -42,12 +43,17 @@ function CheckoutWrapper() {
       cart: stateCart.cart,
     };
 
-    let response = await fetch("/api/mongo", {
+    let mongoResponse = await fetch("/api/mongo", {
       method: "POST",
       body: JSON.stringify(userStructure),
     });
 
-    let data = await response.json();
+    await fetch("/api/email", {
+      method: "POST",
+      body: JSON.stringify(userStructure),
+    });
+
+    let data = await mongoResponse.json();
 
     if (data.success) {
       // clean up fields here

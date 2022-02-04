@@ -1,24 +1,24 @@
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import style from "./orderprocessed.module.css";
 import { IoMdCheckmarkCircle } from "react-icons/io";
+import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
 
 export default function OrderProcessed({
   shippingData,
 }: {
   shippingData?: any;
 }) {
-  // const { cart } = useShoppingBagCMS();
-  // const orderId = cart?.id.slice(5);
-  // const totalPrice = shippingData?.shippingPrice + cart?.subtotal.raw;
+  const { state } = useContext(GlobalContext);
+  const orderID = state.userId.slice(0, 8);
 
   if (shippingData) {
     return (
       <main className={style.finalSummary}>
         <div className={style.shoppingBag}>
-          <p>Hi, {shippingData?.firstname},</p>
+          <p>Hi, {shippingData?.firstname}.</p>
           <p>
-            {/* <IoMdCheckmarkCircle /> Your order number #{orderId} has been */}
+            <IoMdCheckmarkCircle /> Your order number #{orderID} has been
             confirmed.
           </p>
           <p>

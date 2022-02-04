@@ -44,14 +44,11 @@ function Confirmation({
                   <div className={style.descDetails}>
                     <div>
                       <p>
-                        {" "}
                         {product.title[locale]
                           ? product.title[locale]
                           : product.title.pt}
                       </p>
-                      <p>
-                        <span>Size:</span> M
-                      </p>
+                      <p>{/* <span>Size:</span> M */}</p>
                     </div>
                     <p>{product.quantity} pieces</p>
                   </div>
