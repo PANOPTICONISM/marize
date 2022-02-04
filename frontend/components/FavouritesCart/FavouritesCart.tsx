@@ -8,6 +8,7 @@ import { removeFromFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import Link from "next/link";
 import { addToCart } from "../../utils/CartFunctions";
+import { useRouter } from "next/router";
 
 export function FavouritesCartResumeContainer({
   children,
@@ -25,7 +26,7 @@ export function FavouritesCartResumeContainer({
 export function ProductCard({ product }: { product: any }) {
   const { dispatch } = useContext(GlobalContext);
 
-  // console.log(product);
+  const { locale } = useRouter();
   return (
     <div className={style.fullCart}>
       <Link href={`/products/${product._id}`}>
@@ -42,7 +43,9 @@ export function ProductCard({ product }: { product: any }) {
         <div>
           <div className={style.presentation}>
             <h4>{product.vendor?.title}</h4>
-            <h5>{product.title}</h5>
+            <h5>
+              {product.title[locale] ? product.title[locale] : product.title.pt}
+            </h5>
           </div>
         </div>
         <div className={style.bottomProduct}>

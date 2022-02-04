@@ -13,6 +13,7 @@ import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 import {
   removeFromCart,
   removeFromCartAndFavourite,
+  updateCartQuantity,
 } from "../../../utils/CartFunctions";
 import { useRouter } from "next/router";
 
@@ -59,9 +60,13 @@ export default function ShoppingBag({ next }: { next?: any }) {
                       </p>
                     </div>
                     <select
-                      // onChange={(e: any) => {
-                      //   updateCart(product, e.target.value, setCart);
-                      // }}
+                      onChange={(e: any) => {
+                        updateCartQuantity(
+                          dispatchCart,
+                          product,
+                          e.target.value
+                        );
+                      }}
                       defaultValue={product.quantity}
                       name="quantity"
                       id="quantity"
