@@ -8,8 +8,9 @@ import OrderProcessed from "./OrderProcessed/OrderProcessed";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 
 function CheckoutWrapper() {
+  const { stateCart } = useContext(GlobalContext);
+
   const [shippingData, setShippingData] = useState({
-    id: "",
     firstname: "",
     lastname: "",
     email: "",
@@ -28,7 +29,6 @@ function CheckoutWrapper() {
     nextStep();
   };
 
-  const { stateCart } = useContext(GlobalContext);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -36,7 +36,9 @@ function CheckoutWrapper() {
     console.log("clicked");
     e.preventDefault();
     let userStructure = {
-      userName: shippingData.firstname + " " + shippingData.lastname,
+      userId: stateCart.userId,
+      firstName: shippingData.firstname,
+      lastName: shippingData.lastname,
       email: shippingData.email,
       phoneNumber: shippingData.phonenumber,
       createdAt: new Date().toISOString(),
