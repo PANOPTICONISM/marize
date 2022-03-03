@@ -17,7 +17,8 @@ import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
 export default function Products({ data, context }) {
   const { locale } = context;
-  const { products, vendors } = data;
+  const { products, vendors, categories } = data;
+  console.log(data);
   const [filteredArticles, setFilteredArticles] = useState<any>([]);
   const [filters, setFilters] = useState([]);
   const [sortType, setSortType] = useState(null);
@@ -34,13 +35,16 @@ export default function Products({ data, context }) {
     setSortType(null);
   };
 
+  console.log(filters, "filter");
+
   useEffect(() => {
     if (filters.length > 0) {
       const filtered = products?.filter((product) => {
         return filters?.some(
           (c: string) =>
-            product.category[0].title.includes(c) ||
-            product.vendor.name.includes(c)
+            (product.category &&
+              product.category[0].title[locale].includes(c)) ||
+            (product.vendor && product.vendor.title.includes(c))
         );
       });
       setFilteredArticles(filtered);
@@ -152,7 +156,8 @@ export default function Products({ data, context }) {
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}
-            // categories={vendors}
+            vendors={vendors}
+            categories={categories}
             mobileFilters={mobileFilters}
           />
           <div className={style.products_wrapper}>{articlesUI}</div>
