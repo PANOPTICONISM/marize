@@ -1,5 +1,3 @@
-import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
-
 const mail = require("@sendgrid/mail");
 
 export default async function handler(req, res) {
@@ -7,18 +5,8 @@ export default async function handler(req, res) {
 
   const body = JSON.parse(req.body);
 
-  // const message = `
-  //   Name: ${body.userName}\r\n
-  //   Email: ${body.email}\r\n
-  //   Message: ${body.message}
-  // `;
-
   console.log(body, "body");
   const orderID = "#" + body.userId.slice(0, 8);
-  // const productImage = absoluteURLsForSanity(product?.images[0].asset._ref).url()
-
-  // const product = body.cart.map((product) => product);
-  // console.log(product, "each product yay");
 
   await mail
     .send({
@@ -28,7 +16,7 @@ export default async function handler(req, res) {
         email: "panopticonism@gmail.com",
       },
       subject: "Nova compra!",
-      template_id: "d-c0118d168a414704ad07fb3bbbbe3401",
+      template_id: "d-4cbce36eb5914a4fb4e44b01c3ad70ed",
       dynamic_template_data: {
         orderNumber: orderID,
         firstName: body.firstName,
@@ -41,5 +29,24 @@ export default async function handler(req, res) {
     .then(() => res.status(200).json({ status: "Ok" }))
     .catch(() => res.status(500).json({ status: "Error" }));
 
-  // res.status(200).json({ status: "Ok" });
+  await mail
+    .send({
+      to: "panopticonism@gmail.com",
+      from: {
+        name: "Marize - reserva nova",
+        email: "panopticonism@gmail.com",
+      },
+      subject: "Nova compra!",
+      template_id: "d-b6dccad79c7649dbb558872f7bf3c7b4",
+      dynamic_template_data: {
+        orderNumber: orderID,
+        firstName: body.firstName,
+        userName: body.firstName + " " + body.lastName,
+        email: body.email,
+        phoneNumber: body.phoneNumber,
+        products: body.cart,
+      },
+    })
+    .then(() => res.status(200).json({ status: "Ok" }))
+    .catch(() => res.status(500).json({ status: "Error" }));
 }

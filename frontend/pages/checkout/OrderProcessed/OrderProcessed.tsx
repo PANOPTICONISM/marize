@@ -3,14 +3,17 @@ import React, { useContext } from "react";
 import style from "./orderprocessed.module.css";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
+import { useRouter } from "next/router";
+import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 
 export default function OrderProcessed({
   shippingData,
 }: {
   shippingData?: any;
 }) {
-  const { state } = useContext(GlobalContext);
+  const { state, stateCart } = useContext(GlobalContext);
   const orderID = state.userId.slice(0, 8);
+  const { locale } = useRouter();
 
   if (shippingData) {
     return (
@@ -26,31 +29,34 @@ export default function OrderProcessed({
             order can’t be changed after it has been shipped, but you’re always
             welcome in our store.
           </p>
-          <h1>Order Summary</h1>
-          {/* {cart?.line_items.map((product: any) => (
-            <article key={product.id} className={style.shoppingArticle}>
-              <Image
-                src={product.image.url}
-                width={230}
-                height={300}
-                alt={product.name}
-              />
-              <div className={style.fullSpace}>
-                <div className={style.descDetails}>
-                  <div>
-                    <p>{product.name}</p>
-                    <p>
-                      <span>Size:</span> M
-                    </p>
+          <div className={style.orderSummary}>
+            <h1>Order Summary</h1>
+            {stateCart.cart?.map((product: any) => (
+              <article key={product._id} className={style.shoppingArticle}>
+                <Image
+                  src={absoluteURLsForSanity(
+                    product?.images[0].asset._ref
+                  ).url()}
+                  width={230}
+                  height={300}
+                  alt={product.title}
+                />
+                <div className={style.fullSpace}>
+                  <div className={style.descDetails}>
+                    <div>
+                      <p>
+                        {product.title[locale]
+                          ? product.title[locale]
+                          : product.title.pt}
+                      </p>
+                      <p>{/* <span>Size:</span> M */}</p>
+                    </div>
+                    <p>{product.quantity} pieces</p>
                   </div>
-                  <p>{product.quantity} pieces</p>
                 </div>
-                <div className={style.bagPrice}>
-                  <span>20EUR</span>
-                </div>
-              </div>
-            </article>
-          ))} */}
+              </article>
+            ))}
+          </div>
         </div>
         <div className={style.finalMessage}>
           <p>

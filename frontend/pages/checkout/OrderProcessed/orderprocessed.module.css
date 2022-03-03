@@ -1,163 +1,111 @@
 .finalSummary svg {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .finalSummary p:nth-child(2) {
-    display: flex;
+  display: flex;
 }
 
-.shoppingBag>p:nth-child(1),
-.shoppingBag>p:nth-child(2) {
-    font-weight: 700;
-}
-
-.shoppingArticle,
-.priceFinalSummary {
-    max-width: 230px;
-    margin: 36px auto;
-    position: relative;
+.shoppingBag > p:nth-child(1),
+.shoppingBag > p:nth-child(2) {
+  font-weight: 700;
 }
 
 .finalSummary h1 {
-    text-transform: capitalize;
-    margin-top: 30px;
-    font-size: 24px;
+  text-transform: capitalize;
+  margin-top: 30px;
+  font-size: 24px;
 }
 
 .finalSummary h1 span {
-    font-weight: 300;
-    font-size: 26px;
+  font-weight: 300;
+  font-size: 26px;
 }
 
 .shoppingArticle p span,
 .priceSummary p span,
 .descDetails p:first-child {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .shoppingArticle p {
-    margin: 6px 0;
+  margin: 6px 0;
 }
 
-.shoppingArticle .moveFromCart {
-    margin: 18px 0;
-}
-
-.shoppingArticle .moveFromCart span {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    margin: 4px 0;
-}
-
-.shoppingArticle .moveFromCart svg {
-    margin-right: 4px;
-    font-size: 12px;
-}
-
-.shoppingArticle .bagPrice {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 6px;
-    background-color: var(--primary-colour);
-    color: var(--white-colour);
+.orderSummary {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  margin: 30px 0;
 }
 
 .shoppingArticle img {
-    max-width: 230px;
-}
-
-.priceFinalSummary table {
-    width: 100%;
-}
-
-.priceFinalSummary table tr td:last-of-type {
-    text-align: right;
-}
-
-.priceFinalSummary .importDuties {
-    text-align: right;
-    font-size: 14px;
-    color: #9C9C9C;
-    margin: 0;
-}
-
-.priceFinalSummary table:last-of-type {
-    margin-top: 12px;
+  max-width: 230px;
 }
 
 .finalMessage p:last-of-type {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .finalSummary p:nth-child(3) {
-    margin-bottom: 0;
-}
-
-.shoppingBag,
-.priceWrapper {
-    border-bottom: 1px solid var(--black-colour);
+  margin-bottom: 0;
 }
 
 @media screen and (min-width: 800px) {
+  .shoppingBag,
+  .priceWrapper,
+  .finalMessage {
+    max-width: 800px;
+    margin: 30px auto;
+  }
 
-    .shoppingBag,
-    .priceWrapper,
-    .finalMessage {
-        max-width: 800px;
-        margin: 30px auto;
-    }
+  .shoppingBag h1 {
+    text-align: left;
+  }
 
-    .shoppingBag h1 {
-        text-align: left;
-    }
+  .shoppingArticle {
+    display: flex;
+  }
 
-    .shoppingArticle {
-        display: flex;
-    }
+  .shoppingArticle {
+    max-width: 800px;
+    margin: 30px auto;
+  }
 
-    .shoppingArticle,
-    .priceFinalSummary {
-        max-width: 800px;
-        margin: 30px auto;
-    }
+  .shoppingArticle img {
+    margin-right: 18px;
+  }
 
-    .shoppingArticle img {
-        margin-right: 18px;
-    }
+  .shoppingArticle div {
+    width: 100%;
+  }
 
-    .shoppingArticle div {
-        width: 100%;
-    }
+  .descDetails {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    .descDetails {
-        display: flex;
-        justify-content: space-between;
-    }
+  .descDetails p {
+    white-space: nowrap;
+  }
 
-    .descDetails p {
-        white-space: nowrap;
-    }
+  .shoppingArticle .bagPrice {
+    position: inherit;
+    padding: 0;
+    text-align: right;
+  }
 
-    .shoppingArticle .bagPrice {
-        position: inherit;
-        padding: 0;
-        text-align: right;
-    }
+  .shoppingArticle .fullSpace {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-    .shoppingArticle .fullSpace {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+  .shoppingArticle .bagPrice {
+    background: none;
+    color: var(--black-colour);
+  }
 
-    .shoppingArticle .bagPrice {
-        background: none;
-        color: var(--black-colour);
-    }
-
-    .priceFinalSummary h1 {
-        text-align: left;
-    }
+  .priceFinalSummary h1 {
+    text-align: left;
+  }
 }
