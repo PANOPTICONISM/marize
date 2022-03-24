@@ -41,8 +41,7 @@ export function ProductDetails({
     );
   }, [product._id, state?.favourites]);
 
-  console.log(stateCart, "cart");
-  console.log(state, "faves");
+  console.log(product, "prod");
 
   return (
     <section className={style.productDetails}>
@@ -59,20 +58,20 @@ export function ProductDetails({
           </h2>
         </div>
         <div className={style.sizing}>
-          {/* <form>
+          <form>
             <select name="subject" id="subject" defaultValue="" required>
               <option value="" disabled>
                 Pick your size
               </option>
-              {product?.variant_groups[0]?.options?.map(
-                (size: any, index: any) => (
-                  <option key={index} value={size.id}>
-                    {size.name}
+              {product.variants?.map((variant) =>
+                variant.sizes.map((size) => (
+                  <option key={size._id} value={size.title}>
+                    {size.title}
                   </option>
-                )
+                ))
               )}
             </select>
-          </form> */}
+          </form>
           <Link href="/assets/sizing-chart.jpg">
             <a>
               <RiRuler2Line />
@@ -160,6 +159,7 @@ export async function getStaticProps({ params: { id } }) {
       images, 
       slug, 
       title, 
+      variants[]{colours[]->, sizes[]->},
       vendor->{_id, title}}`
   );
 
@@ -180,6 +180,7 @@ export async function getStaticPaths() {
       images, 
       slug, 
       title, 
+      variants,
       vendor->{_id, title}}`
   );
 
