@@ -7,7 +7,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { useContext, useState } from "react";
 import Cart from "../Cart/Cart";
-import MenuNav from "../../pages/MenuNav/MenuNav";
+import MenuNav from "../MenuNav/MenuNav";
 import FavouritesCart from "../FavouritesCart/FavouritesCart";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 

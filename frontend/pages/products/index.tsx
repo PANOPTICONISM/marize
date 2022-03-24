@@ -14,6 +14,13 @@ import {
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+import { useRouter } from "next/router";
+
+export const addUrlParams = (router, cat) => {
+  router.push({ pathname: "/products", query: cat }, undefined, {
+    shallow: true,
+  });
+};
 
 export default function Products({ data, context }) {
   const { locale } = context;
@@ -23,6 +30,9 @@ export default function Products({ data, context }) {
   const [filters, setFilters] = useState([]);
   const [sortType, setSortType] = useState(null);
   const [mobileFilters, setMobileFilters] = useState(true);
+  const { query } = useRouter();
+  const router = useRouter();
+
   const handleChecked = (e: {
     target: { value: number; checked: boolean };
   }) => {
@@ -35,9 +45,8 @@ export default function Products({ data, context }) {
     setSortType(null);
   };
 
-  console.log(filters, "filter");
-
   useEffect(() => {
+    console.log(filters, "filters");
     if (filters.length > 0) {
       const filtered = products?.filter((product) => {
         return filters?.some(
@@ -51,7 +60,13 @@ export default function Products({ data, context }) {
     } else {
       setFilteredArticles(products);
     }
-  }, [filters, products]);
+  }, [filters, products, locale]);
+
+  useEffect(() => {
+    if (query) {
+      setFilters(Object.values(query));
+    }
+  }, [query]);
 
   // useEffect(() => {
   //   const sortArray = (type: any) => {

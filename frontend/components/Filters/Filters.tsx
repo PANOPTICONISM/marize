@@ -15,7 +15,6 @@ export function Filters({
   vendors: any[];
   mobileFilters: boolean;
 }) {
-  console.log(categories, "yo");
   const { locale } = useRouter();
   return (
     <div className={style.filters_container}>
