@@ -182,7 +182,7 @@ export default function Products({ data, context }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const data = await sanity.fetch(
     `{'products': *[_type == "product"]{
       _id, 
@@ -202,5 +202,6 @@ export async function getServerSideProps(context) {
       data,
       context,
     },
+    revalidate: 1,
   };
 }

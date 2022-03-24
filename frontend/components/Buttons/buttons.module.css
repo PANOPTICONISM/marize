@@ -1,48 +1,61 @@
 .globalButton {
-    padding: 18px;
-    background-color: var(--primary-colour);
-    border: 2px solid var(--primary-colour);
-    color: var(--white-colour);
-    text-transform: uppercase;
-    font-weight: 700;
-    text-decoration: none;
-    display: block;
-    font-size: var(--body-font-size);
-    text-align: center;
+  padding: 18px;
+  background-color: var(--primary-colour);
+  border: 2px solid var(--primary-colour);
+  color: var(--white-colour);
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+  display: block;
+  font-size: var(--body-font-size);
+  text-align: center;
 }
 
 .globalButton:hover,
 .globalButton:hover svg {
-    background-color: var(--white-colour);
-    color: var(--primary-colour);
-    fill: var(--primary-colour);
+  background-color: var(--white-colour);
+  color: var(--primary-colour);
+  fill: var(--primary-colour);
+}
+
+.sectionButton {
+  list-style: none;
+}
+
+.sectionButton a {
+  color: var(--white-colour);
+  background-color: var(--primary-colour);
+  padding: 18px;
+  border: 2px solid var(--primary-colour);
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .cartButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px;
-    font-size: 14px;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  font-size: 14px;
+  width: 100%;
 }
 
 .cartButton svg {
-    font-size: 20px;
-    fill: var(--white-colour);
-    margin-right: 6px;
+  font-size: 20px;
+  fill: var(--white-colour);
+  margin-right: 6px;
 }
 
 .backButton {
-    padding: 12px;
-    border: 1px solid var(--black-colour);
-    background-color: transparent;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 16px;
+  padding: 12px;
+  border: 1px solid var(--black-colour);
+  background-color: transparent;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 .backButton:hover {
-    background-color: var(--black-colour);
-    color: var(--white-colour);
+  background-color: var(--black-colour);
+  color: var(--white-colour);
 }

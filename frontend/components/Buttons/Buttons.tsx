@@ -42,6 +42,26 @@ export function PrimaryButton({
   );
 }
 
+export function SectionButton({
+  href,
+  text,
+  className,
+  locale,
+}: {
+  href: any;
+  text?: string;
+  className?: string;
+  locale?: string;
+}) {
+  return (
+    <li className={`${style.sectionButton} ${className}`}>
+      <Link href={href} locale={locale}>
+        {text}
+      </Link>
+    </li>
+  );
+}
+
 export function PrimaryIconButton({
   className,
   onClick,
