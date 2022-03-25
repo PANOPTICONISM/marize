@@ -1,23 +1,19 @@
 import Image from "next/image";
 import { ContinueButton } from "../../../components/Buttons/Buttons";
 import style from "./confirmation.module.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
 import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 import { useRouter } from "next/router";
 
 function Confirmation({
   shippingData,
-  next,
   processOrder,
 }: {
   shippingData?: any;
-  next?: any;
   processOrder?: any;
 }) {
   console.log(shippingData, "shipping data");
-  // set up user data and sent it to server that sends it to mongodb
-
   const { stateCart } = useContext(GlobalContext);
   const { locale } = useRouter();
 

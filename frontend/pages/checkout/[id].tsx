@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import ShoppingBag from "./ShoppingBag/ShoppingBag";
 import { Stepper, Step, StepLabel, makeStyles } from "@material-ui/core";
 import ShippingDetails from "./ShippingDetails/ShippingDetails";

@@ -6,7 +6,6 @@ import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
-import { addToFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import {
   removeFromCart,
@@ -14,7 +13,6 @@ import {
   updateCartQuantity,
 } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
-import { uuid } from "uuidv4";
 
 export function CartResumeContainer({
   children,
@@ -31,7 +29,6 @@ export function CartResumeContainer({
 
 export function ProductCard({ product }: { product: any }) {
   const { state, dispatch, dispatchCart } = useContext(GlobalContext);
-  // const { setCart } = useShoppingBagCMS();
   const maxItems = {
     quantity: [1, 2, 3, 4],
   };

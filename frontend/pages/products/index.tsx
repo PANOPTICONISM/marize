@@ -1,4 +1,4 @@
-import { MdKeyboardArrowDown, MdOutlineFilterAlt } from "react-icons/md";
+import { MdOutlineFilterAlt } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import style from "../../styles/products.module.css";
 import Main from "../../containers/Main/Main";

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Head from "next/head";
 import Main from "../containers/Main/Main";
-import hero from "../public/assets/hero-image.png";
 import style from "../styles/homepage.module.css";
 import NewArrivals from "../components/NewArrivals/NewArrivals";
 import VisitStore from "../components/VisitStore/VisitStore";

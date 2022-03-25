@@ -8,8 +8,6 @@ const NewArrivals = ({ title, products, locale }) => {
   products?.map((product) => reversedArray.unshift(product));
   const newArrivals = reversedArray?.slice(0, 4);
 
-  console.log(locale);
-
   return (
     <section className={style.newArrivals}>
       <h1>{title}</h1>

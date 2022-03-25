@@ -3,11 +3,9 @@ import { MdHighlightOff } from "react-icons/md";
 import VisitStore from "../VisitStore/VisitStore";
 import StoreInfo from "../StoreInfo/StoreInfo";
 import Link from "next/link";
-import { sanity } from "../../pages/api/lib/sanity";
 import { useEffect, useState } from "react";
 import { addUrlParams } from "../../pages/products";
 import { useRouter } from "next/router";
-import { title } from "process";
 
 export default function MenuNav({ toggleOpen }) {
   const [data, setData] = useState({ categories: [], vendors: [] });

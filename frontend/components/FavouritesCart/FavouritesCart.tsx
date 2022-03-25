@@ -7,7 +7,6 @@ import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import { removeFromFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import Link from "next/link";
-import { addToCart } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
 
 export function FavouritesCartResumeContainer({
@@ -61,12 +60,7 @@ export function ProductCard({ product }: { product: any }) {
 }
 
 export default function FavouritesCart() {
-  const { state, dispatch, dispatchCart } = useContext(GlobalContext);
-
-  const addToCartAndRemove = (product: any) => {
-    removeFromFavourites(dispatch, product._id);
-    addToCart(dispatchCart, product);
-  };
+  const { state } = useContext(GlobalContext);
 
   if (state?.favourites.length > 0) {
     return (
@@ -76,11 +70,6 @@ export default function FavouritesCart() {
             <div key={product?._id}>
               <ProductCard product={product} />
             </div>
-            <PrimaryIconButton
-              className={style.shopBagBtn}
-              text="Add to cart"
-              onClick={() => addToCartAndRemove(product)}
-            />
           </>
         ))}
       </FavouritesCartResumeContainer>

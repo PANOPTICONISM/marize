@@ -6,7 +6,6 @@ import {
 import style from "./shoppingbag.module.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
-import { addToFavourites } from "../../../utils/FavouritesFunctions";
 import { useContext } from "react";
 import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
 import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
