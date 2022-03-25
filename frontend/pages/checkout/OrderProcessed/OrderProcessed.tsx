@@ -12,7 +12,7 @@ export default function OrderProcessed({
   shippingData?: any;
 }) {
   const { state, stateCart } = useContext(GlobalContext);
-  const orderID = state.userId.slice(0, 8);
+  const orderID = state?.userId.slice(0, 8);
   const { locale } = useRouter();
 
   if (shippingData) {
