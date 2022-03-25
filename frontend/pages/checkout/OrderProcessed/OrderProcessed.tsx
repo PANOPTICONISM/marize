@@ -49,7 +49,11 @@ export default function OrderProcessed({
                           ? product.title[locale]
                           : product.title.pt}
                       </p>
-                      <p>{/* <span>Size:</span> M */}</p>
+                      {product.size !== null ? (
+                        <p>
+                          <span>Size:</span> {product.size}
+                        </p>
+                      ) : null}
                     </div>
                     <p>{product.quantity} pieces</p>
                   </div>

@@ -30,6 +30,8 @@ export default function Navigation() {
   const favouritesCartTotal =
     state?.favourites?.length > 0 ? state.favourites.length : "";
 
+  console.log(stateCart, "cart here");
+
   return (
     <nav className={style.wrapper}>
       {menuOpen && <MenuNav toggleOpen={toggleOpen} />}
