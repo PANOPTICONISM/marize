@@ -42,16 +42,24 @@ function reducer(state: IState, action: IAction): IState {
     case "ADD_TO_CART":
       return {
         ...state,
-        cart: JSON.stringify(state.cart).includes(action.payload._id)
+        cart: JSON.stringify(state.cart).includes(action.payload.product._id)
           ? state.cart.map((product) =>
-              product._id === action.payload._id
+              product._id === action.payload.product._id
                 ? {
                     ...product,
                     quantity: product.quantity + 1,
+                    size: product.size + " " + action.payload.productSize,
                   }
                 : product
             )
-          : [...state.cart, { ...action.payload, quantity: 1 }],
+          : [
+              ...state.cart,
+              {
+                ...action.payload.product,
+                quantity: 1,
+                size: action.payload.productSize,
+              },
+            ],
       };
     case "REMOVE_FROM_CART":
       return {

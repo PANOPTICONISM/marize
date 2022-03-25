@@ -37,14 +37,16 @@ export function ProductCard({ product }: { product: any }) {
   };
   const { locale } = useRouter();
 
+  console.log(product, "product in cart");
+
   return (
     <div className={style.fullCart}>
-      <Image
+      {/* <Image
         src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
         width={100}
         height={130}
         alt={product.title}
-      />
+      /> */}
       <div className={style.spaceBetween}>
         <div>
           <div className={style.presentation}>

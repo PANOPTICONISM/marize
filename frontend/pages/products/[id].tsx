@@ -34,6 +34,7 @@ export function ProductDetails({
   const { state, dispatch, stateCart, dispatchCart } =
     useContext(GlobalContext);
   const [show, setShow] = useState(null);
+  const [storeSize, setStoreSize] = useState(null);
 
   useEffect(() => {
     setShow(
@@ -42,6 +43,10 @@ export function ProductDetails({
   }, [product._id, state?.favourites]);
 
   console.log(product, "prod");
+
+  const storeSizeValue = (e) => {
+    setStoreSize(e.target.value);
+  };
 
   return (
     <section className={style.productDetails}>
@@ -59,12 +64,18 @@ export function ProductDetails({
         </div>
         <div className={style.sizing}>
           <form>
-            <select name="subject" id="subject" defaultValue="" required>
-              <option value="" disabled>
+            <select
+              name="subject"
+              id="subject"
+              defaultValue="def"
+              required
+              onChange={storeSizeValue}
+            >
+              <option value="def" disabled>
                 Pick your size
               </option>
               {product.variants?.map((variant) =>
-                variant.sizes.map((size) => (
+                variant?.sizes?.map((size) => (
                   <option key={size._id} value={size.title}>
                     {size.title}
                   </option>
@@ -81,7 +92,7 @@ export function ProductDetails({
         <div className={style.shopping}>
           <PrimaryIconButton
             text="Add to shopping bag"
-            onClick={() => addToCart(dispatchCart, product)}
+            onClick={() => addToCart(dispatchCart, product, storeSize)}
           />
           {show ? (
             <AiFillHeart

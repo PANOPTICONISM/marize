@@ -1,9 +1,13 @@
 import { addToFavourites } from "./FavouritesFunctions";
 
-export const addToCart = (dispatchCart: any, product: any) => {
+export const addToCart = (
+  dispatchCart: any,
+  product: any,
+  productSize: any
+) => {
   dispatchCart({
     type: "ADD_TO_CART",
-    payload: product,
+    payload: { product, productSize },
   });
 };
 
