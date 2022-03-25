@@ -1,6 +1,9 @@
 import { MongoClient } from "mongodb";
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI =
+  process.env.NODE_ENV === "development"
+    ? process.env.MONGODB_URI_DEV
+    : process.env.MONGODB_URI_PROD;
 const MONGODB_DB = process.env.MONGODB_DB;
 
 // check the MongoDB URI
