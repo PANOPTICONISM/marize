@@ -1,4 +1,4 @@
-import { MdKeyboardArrowDown, MdOutlineFilterAlt } from "react-icons/md";
+import { MdOutlineFilterAlt } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import style from "../../styles/products.module.css";
 import Main from "../../containers/Main/Main";
@@ -14,14 +14,25 @@ import {
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+import { useRouter } from "next/router";
+
+export const addUrlParams = (router, cat) => {
+  router.push({ pathname: "/products", query: cat }, undefined, {
+    shallow: true,
+  });
+};
 
 export default function Products({ data, context }) {
   const { locale } = context;
-  const { products, vendors } = data;
+  const { products, vendors, categories } = data;
+  console.log(data);
   const [filteredArticles, setFilteredArticles] = useState<any>([]);
   const [filters, setFilters] = useState([]);
   const [sortType, setSortType] = useState(null);
   const [mobileFilters, setMobileFilters] = useState(true);
+  const { query } = useRouter();
+  const router = useRouter();
+
   const handleChecked = (e: {
     target: { value: number; checked: boolean };
   }) => {
@@ -35,19 +46,27 @@ export default function Products({ data, context }) {
   };
 
   useEffect(() => {
+    console.log(filters, "filters");
     if (filters.length > 0) {
       const filtered = products?.filter((product) => {
         return filters?.some(
           (c: string) =>
-            product.category[0].title.includes(c) ||
-            product.vendor.name.includes(c)
+            (product.category &&
+              product.category[0].title[locale].includes(c)) ||
+            (product.vendor && product.vendor.title.includes(c))
         );
       });
       setFilteredArticles(filtered);
     } else {
       setFilteredArticles(products);
     }
-  }, [filters, products]);
+  }, [filters, products, locale]);
+
+  useEffect(() => {
+    if (query) {
+      setFilters(Object.values(query));
+    }
+  }, [query]);
 
   // useEffect(() => {
   //   const sortArray = (type: any) => {
@@ -98,7 +117,9 @@ export default function Products({ data, context }) {
       </Link>
       <div className={style.card_txt}>
         <p className={style.brand}>{article.vendor?.title}</p>
-        <p>{article.title[locale]}</p>
+        <p>
+          {article.title[locale] ? article.title[locale] : article.title.pt}
+        </p>
       </div>
     </div>
   ));
@@ -150,7 +171,8 @@ export default function Products({ data, context }) {
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}
-            // categories={vendors}
+            vendors={vendors}
+            categories={categories}
             mobileFilters={mobileFilters}
           />
           <div className={style.products_wrapper}>{articlesUI}</div>
@@ -180,5 +202,6 @@ export async function getStaticProps(context) {
       data,
       context,
     },
+    revalidate: 1,
   };
 }

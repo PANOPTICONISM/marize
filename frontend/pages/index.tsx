@@ -1,72 +1,57 @@
 import Image from "next/image";
 import Head from "next/head";
 import Main from "../containers/Main/Main";
-import hero from "../public/assets/hero-image.png";
 import style from "../styles/homepage.module.css";
 import NewArrivals from "../components/NewArrivals/NewArrivals";
 import VisitStore from "../components/VisitStore/VisitStore";
 import CategorySections from "../components/CategorySections/CategorySections";
 import { sanity } from "./api/lib/sanity.js";
 import { useRouter } from "next/router";
+import { absoluteURLsForSanity } from "../utils/SanityFunctions";
 
-export default function Homepage({ products }) {
+export default function Homepage({ products, homepage }) {
   console.log(products);
+  console.log(homepage[0], "home");
   const { locale } = useRouter();
+
+  const { slogan, image, imagesGallery, newArrivals, body } = homepage[0];
 
   return (
     <>
       <Head>
-        <title>Homepage</title>
+        <title>Marizé</title>
         <link rel="icon" href="/logo.svg" />
       </Head>
       <Main>
         <header className={style.homepageHero}>
-          <h1 className={style.heading}>
-            HANDPICKED APPAREL WITH <span>YOU</span> IN MIND
-          </h1>
-          <Image src={hero} width={750} height={440} alt="hero" />
+          <h1 className={style.heading}>{slogan}</h1>
+          <Image
+            src={absoluteURLsForSanity(image.asset._ref).url()}
+            width={750}
+            height={440}
+            alt="hero"
+          />
         </header>
         <section className={style.brands}>
-          <Image
-            src="/assets/sky-cashmere.svg"
-            width={220}
-            height={60}
-            alt="sky cashmere"
-          />
-          <Image
-            src="/assets/caminatta.svg"
-            width={220}
-            height={100}
-            alt="caminatta"
-          />
-          <Image
-            src="/assets/atlanta_mocassin.svg"
-            width={220}
-            height={60}
-            alt="atlanta-mocassin"
-          />
-          <Image
-            src="/assets/moda_ana.svg"
-            width={220}
-            height={100}
-            alt="moda-ana"
-          />
-          <Image
-            src="/assets/love_m.svg"
-            width={220}
-            height={60}
-            alt="love-m"
-          />
+          {imagesGallery.map((img) => (
+            <Image
+              src={absoluteURLsForSanity(img.asset._ref).url()}
+              key={img._key}
+              width={250}
+              height={80}
+              alt=""
+            />
+          ))}
         </section>
-        <NewArrivals products={products} locale={locale} />
+        <NewArrivals title={newArrivals} products={products} locale={locale} />
         <VisitStore className={style.visitHomepage} />
-        <CategorySections />
+        <CategorySections body={body} />
       </Main>
     </>
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const products = await sanity.fetch(
     `*[_type == "product"]{
       _id,
@@ -79,26 +64,22 @@ export async function getStaticProps() {
     `
   );
 
+  const homepage = await sanity.fetch(
+    `*[_type == "homepage"]{
+      _id,
+      image,
+      slogan,
+      imagesGallery,
+      newArrivals,
+      body
+    }
+    `
+  );
+
   return {
     props: {
       products,
+      homepage,
     },
   };
 }
-
-// export async function getServerSideProps(ctx) {
-//   // get the current environment
-//   let dev = process.env.NODE_ENV !== "production";
-//   let { DEV_URL, PROD_URL } = process.env;
-
-//   // request posts from api
-//   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/mongo`);
-//   // extract the data
-//   let data = await response.json();
-
-//   return {
-//     props: {
-//       posts: data["message"],
-//     },
-//   };
-// }

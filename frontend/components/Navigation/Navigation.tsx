@@ -7,7 +7,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { useContext, useState } from "react";
 import Cart from "../Cart/Cart";
-import MenuNav from "../../pages/MenuNav/MenuNav";
+import MenuNav from "../MenuNav/MenuNav";
 import FavouritesCart from "../FavouritesCart/FavouritesCart";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 
@@ -29,6 +29,8 @@ export default function Navigation() {
 
   const favouritesCartTotal =
     state?.favourites?.length > 0 ? state.favourites.length : "";
+
+  console.log(stateCart, "cart here");
 
   return (
     <nav className={style.wrapper}>

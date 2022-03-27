@@ -1,70 +1,88 @@
+import { useRouter } from "next/router";
 import React from "react";
 import style from "./filters.module.css";
 
 export function Filters({
-    className,
-    onChange,
-    categories,
-    mobileFilters,
+  className,
+  onChange,
+  categories,
+  vendors,
+  mobileFilters,
 }: {
-    className?: string;
-    onChange: any;
-    categories: any[];
-    mobileFilters: boolean;
+  className?: string;
+  onChange: any;
+  categories: any[];
+  vendors: any[];
+  mobileFilters: boolean;
 }) {
-    return (
-        <div className={style.filters_container}>
-            {categories?.map(
-                (filter: { name: string; children: any[] }, index: number) => (
-                    <div
-                        className={`${style.filters_products} ${
-                            mobileFilters && style.mobile
-                        }`}
-                        key={index}
-                    >
-                        <h4>{filter.name}</h4>
-                        {filter.children.map(
-                            (innerFilter: { name: string }, index: number) => (
-                                <label
-                                    key={index}
-                                    className={style.container_checkbox}
-                                >
-                                    {innerFilter.name}
-                                    <input
-                                        type="checkbox"
-                                        name="name"
-                                        value={innerFilter.name}
-                                        onChange={onChange}
-                                    />
-                                    <span className={style.checkmark}></span>
-                                </label>
-                            )
-                        )}
-                    </div>
-                )
-            )}
+  const { locale } = useRouter();
+  return (
+    <div className={style.filters_container}>
+      <h4>Marcas</h4>
+      {vendors?.map((filter: { title: string; _id: any }) => (
+        <div
+          className={`${style.filters_products} ${
+            mobileFilters && style.mobile
+          }`}
+          key={filter._id}
+        >
+          <label key={filter._id} className={style.container_checkbox}>
+            {filter.title}
+            <input
+              type="checkbox"
+              name="name"
+              value={filter.title}
+              onChange={onChange}
+            />
+            <span className={style.checkmark}></span>
+          </label>
         </div>
-    );
+      ))}
+      <h4>Artigos</h4>
+      {categories?.map((filter: { title: string; _id: any }) => (
+        <div
+          className={`${style.filters_products} ${
+            mobileFilters && style.mobile
+          }`}
+          key={filter._id}
+        >
+          <label key={filter._id} className={style.container_checkbox}>
+            {filter.title[locale]}
+            <input
+              type="checkbox"
+              name="name"
+              value={filter.title[locale]}
+              onChange={onChange}
+            />
+            <span className={style.checkmark}></span>
+          </label>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default function FilterComponent({
-    onChange,
-    categories,
-    mobileFilters,
-    setMobileFilters,
+  onChange,
+  categories,
+  vendors,
+  mobileFilters,
+  setMobileFilters,
 }: {
-    onChange?: (e: any) => void | undefined;
-    categories?: any;
-    mobileFilters?: any;
-    setMobileFilters?: boolean;
+  onChange?: (e: any) => void | undefined;
+  categories?: any;
+  vendors?: any;
+  mobileFilters?: any;
+  setMobileFilters?: boolean;
 }) {
-    return (
-        <div>
-            <Filters
-                onChange={onChange}
-                categories={categories}
-                mobileFilters={mobileFilters}
-            />
-        </div>
-    );
+  return (
+    <div>
+      <Filters
+        onChange={onChange}
+        categories={categories}
+        vendors={vendors}
+        mobileFilters={mobileFilters}
+      />
+    </div>
+  );
 }

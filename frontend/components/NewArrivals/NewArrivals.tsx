@@ -3,14 +3,14 @@ import Image from "next/image";
 import style from "./newarrivals.module.css";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
-const NewArrivals = ({ products, locale }) => {
+const NewArrivals = ({ title, products, locale }) => {
   const reversedArray: any[] = [];
   products?.map((product) => reversedArray.unshift(product));
   const newArrivals = reversedArray?.slice(0, 4);
 
   return (
     <section className={style.newArrivals}>
-      <h1>New Arrivals</h1>
+      <h1>{title}</h1>
       <div className={style.articles}>
         {newArrivals?.map((article) => (
           <div key={article._id}>
@@ -22,12 +22,14 @@ const NewArrivals = ({ products, locale }) => {
                   ).url()}
                   width={350}
                   height={455}
-                  alt={article.name}
+                  alt={article.title[locale]}
                 />
               </a>
             </Link>
             <h2 className={style.brand}>{article.vendor?.title}</h2>
-            <h3>{article.title[locale]}</h3>
+            <h3>
+              {article.title[locale] ? article.title[locale] : article.title.pt}
+            </h3>
           </div>
         ))}
       </div>

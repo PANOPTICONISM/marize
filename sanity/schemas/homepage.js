@@ -29,5 +29,10 @@ export default {
       title: "Nome em cima de artigos mais recents",
       type: "string",
     },
+    {
+      name: "body",
+      title: "Categorias",
+      type: "categorySections",
+    },
   ],
 };

@@ -34,6 +34,7 @@ export function ProductDetails({
   const { state, dispatch, stateCart, dispatchCart } =
     useContext(GlobalContext);
   const [show, setShow] = useState(null);
+  const [storeSize, setStoreSize] = useState(null);
 
   useEffect(() => {
     setShow(
@@ -41,8 +42,11 @@ export function ProductDetails({
     );
   }, [product._id, state?.favourites]);
 
-  console.log(stateCart, "cart");
-  console.log(state, "faves");
+  console.log(product, "prod");
+
+  const storeSizeValue = (e) => {
+    setStoreSize(e.target.value);
+  };
 
   return (
     <section className={style.productDetails}>
@@ -54,23 +58,31 @@ export function ProductDetails({
       />
       <div className={style.wrapper}>
         <div className={style.introduction}>
-          <h2>{product?.title[locale]}</h2>
+          <h2>
+            {product.title[locale] ? product.title[locale] : product.title.pt}
+          </h2>
         </div>
         <div className={style.sizing}>
-          {/* <form>
-            <select name="subject" id="subject" defaultValue="" required>
-              <option value="" disabled>
+          <form>
+            <select
+              name="subject"
+              id="subject"
+              defaultValue="def"
+              required
+              onChange={storeSizeValue}
+            >
+              <option value="def" disabled>
                 Pick your size
               </option>
-              {product?.variant_groups[0]?.options?.map(
-                (size: any, index: any) => (
-                  <option key={index} value={size.id}>
-                    {size.name}
+              {product.variants?.map((variant) =>
+                variant?.sizes?.map((size) => (
+                  <option key={size._id} value={size.title}>
+                    {size.title}
                   </option>
-                )
+                ))
               )}
             </select>
-          </form> */}
+          </form>
           <Link href="/assets/sizing-chart.jpg">
             <a>
               <RiRuler2Line />
@@ -80,7 +92,7 @@ export function ProductDetails({
         <div className={style.shopping}>
           <PrimaryIconButton
             text="Add to shopping bag"
-            onClick={() => addToCart(dispatchCart, product)}
+            onClick={() => addToCart(dispatchCart, product, storeSize)}
           />
           {show ? (
             <AiFillHeart
@@ -158,6 +170,7 @@ export async function getStaticProps({ params: { id } }) {
       images, 
       slug, 
       title, 
+      variants[]{colours[]->, sizes[]->},
       vendor->{_id, title}}`
   );
 
@@ -178,6 +191,7 @@ export async function getStaticPaths() {
       images, 
       slug, 
       title, 
+      variants,
       vendor->{_id, title}}`
   );
 

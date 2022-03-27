@@ -1,12 +1,31 @@
 {
   "root": true,
-  "project": {
-    "name": "marize-loja"
-  },
   "api": {
     "projectId": "902997dt",
     "dataset": "production"
   },
+  "project": {
+    "name": "marize-loja"
+  },
+  "__experimental_spaces": [
+    {
+      "name": "production",
+      "title": "Production",
+      "default": true,
+      "api": {
+        "projectId": "902997dt",
+        "dataset": "production"
+      }
+    },
+    {
+      "name": "staging",
+      "title": "Staging",
+      "api": {
+        "projectId": "902997dt",
+        "dataset": "staging"
+      }
+    }
+  ],
   "plugins": [
     "@sanity/base",
     "@sanity/default-layout",
@@ -30,6 +49,5 @@
       "name": "part:@sanity/desk-tool/structure",
       "path": "./schemas/restructure.js"
     }
-
   ]
 }

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import style from "../styles/about.module.css";
 import Main from "../containers/Main/Main";
-import { useContentfulCMS } from "../contexts/ContentfulContext";
 import sky from "../public/assets/sky-cashmere.svg";
 import caminatta from "../public/assets/caminatta.svg";
 import atlanta from "../public/assets/atlanta_mocassin.svg";
@@ -79,7 +78,7 @@ export default function About({ data }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const data = await sanity.fetch(`{'about': *[_type == "about"]{
     _id,
     heading,

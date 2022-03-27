@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import ShoppingBag from "./ShoppingBag/ShoppingBag";
 import { Stepper, Step, StepLabel, makeStyles } from "@material-ui/core";
 import ShippingDetails from "./ShippingDetails/ShippingDetails";
@@ -8,6 +8,8 @@ import OrderProcessed from "./OrderProcessed/OrderProcessed";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 
 function CheckoutWrapper() {
+  const { stateCart } = useContext(GlobalContext);
+
   const [shippingData, setShippingData] = useState({
     firstname: "",
     lastname: "",
@@ -27,26 +29,33 @@ function CheckoutWrapper() {
     nextStep();
   };
 
-  const { stateCart } = useContext(GlobalContext);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
   const processOrder = async (e: { preventDefault: () => void }) => {
     console.log("clicked");
+    e.preventDefault();
     let userStructure = {
-      userName: shippingData.firstname + " " + shippingData.lastname,
+      userId: stateCart.userId,
+      firstName: shippingData.firstname,
+      lastName: shippingData.lastname,
       email: shippingData.email,
       phoneNumber: shippingData.phonenumber,
       createdAt: new Date().toISOString(),
       cart: stateCart.cart,
     };
 
-    let response = await fetch("/api/mongo", {
+    let mongoResponse = await fetch("/api/mongo", {
       method: "POST",
       body: JSON.stringify(userStructure),
     });
 
-    let data = await response.json();
+    await fetch("/api/email", {
+      method: "POST",
+      body: JSON.stringify(userStructure),
+    });
+
+    let data = await mongoResponse.json();
 
     if (data.success) {
       // clean up fields here

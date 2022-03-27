@@ -6,11 +6,11 @@ import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
-import { addToFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import {
   removeFromCart,
   removeFromCartAndFavourite,
+  updateCartQuantity,
 } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
 
@@ -29,7 +29,6 @@ export function CartResumeContainer({
 
 export function ProductCard({ product }: { product: any }) {
   const { state, dispatch, dispatchCart } = useContext(GlobalContext);
-  // const { setCart } = useShoppingBagCMS();
   const maxItems = {
     quantity: [1, 2, 3, 4],
   };
@@ -48,7 +47,7 @@ export function ProductCard({ product }: { product: any }) {
           <div className={style.presentation}>
             <div>
               <h4>
-                {product.title[locale] !== undefined
+                {product.title[locale]
                   ? product.title[locale]
                   : product.title.pt}
               </h4>
@@ -73,9 +72,9 @@ export function ProductCard({ product }: { product: any }) {
               </button>
             )}
           </div>
-          {/* <select
+          <select
             onChange={(e: any) => {
-              updateCart(product, e.target.value, setCart);
+              updateCartQuantity(dispatchCart, product, e.target.value);
             }}
             defaultValue={product.quantity}
             name="quantity"
@@ -86,7 +85,7 @@ export function ProductCard({ product }: { product: any }) {
                 {quant}
               </option>
             ))}
-          </select> */}
+          </select>
         </div>
       </div>
     </div>
@@ -104,8 +103,7 @@ export default function Cart() {
             <ProductCard product={product} />
           </div>
         ))}
-        {/* RETURN UNIQUE ID FOR EACH CUSTOMER - STORE IN BACKEND */}
-        <Link href={`/checkout/`}>
+        <Link href={`/checkout/${stateCart.userId}`}>
           <a>
             <PrimaryIconButton
               className={style.shopBagBtn}

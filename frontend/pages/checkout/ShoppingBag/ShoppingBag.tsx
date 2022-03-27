@@ -6,13 +6,13 @@ import {
 import style from "./shoppingbag.module.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
-import { addToFavourites } from "../../../utils/FavouritesFunctions";
 import { useContext } from "react";
 import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
 import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 import {
   removeFromCart,
   removeFromCartAndFavourite,
+  updateCartQuantity,
 } from "../../../utils/CartFunctions";
 import { useRouter } from "next/router";
 
@@ -50,18 +50,24 @@ export default function ShoppingBag({ next }: { next?: any }) {
                   <div className={style.descDetails}>
                     <div>
                       <p>
-                        {product.title[locale] !== undefined
+                        {product.title[locale]
                           ? product.title[locale]
                           : product.title.pt}
                       </p>
-                      <p>
-                        <span>Size:</span> M
-                      </p>
+                      {product.size !== null ? (
+                        <p>
+                          <span>Size:</span> {product.size}
+                        </p>
+                      ) : null}
                     </div>
                     <select
-                      // onChange={(e: any) => {
-                      //   updateCart(product, e.target.value, setCart);
-                      // }}
+                      onChange={(e: any) => {
+                        updateCartQuantity(
+                          dispatchCart,
+                          product,
+                          e.target.value
+                        );
+                      }}
                       defaultValue={product.quantity}
                       name="quantity"
                       id="quantity"

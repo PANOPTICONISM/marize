@@ -1,8 +1,12 @@
 import React, { createContext, useReducer, useEffect } from "react";
+import { v4 as uuid } from "uuid";
+
+const customer_id = uuid();
 
 interface IState {
   favourites: Array<any>;
   cart: Array<any>;
+  userId: string;
 }
 
 interface IAction {
@@ -13,11 +17,15 @@ interface IAction {
 const initialState: IState = {
   favourites: [],
   cart: [],
+  userId: customer_id,
 };
 
 export const GlobalContext = createContext<IState | any>(initialState);
 
 function reducer(state: IState, action: IAction): IState {
+  console.log(action.payload, "payload");
+  console.log(state);
+
   switch (action.type) {
     case "ADD_FAVOURITES":
       return {
@@ -34,12 +42,40 @@ function reducer(state: IState, action: IAction): IState {
     case "ADD_TO_CART":
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: JSON.stringify(state.cart).includes(action.payload.product._id)
+          ? state.cart.map((product) =>
+              product._id === action.payload.product._id
+                ? {
+                    ...product,
+                    quantity: product.quantity + 1,
+                    size: product.size + " " + action.payload.productSize,
+                  }
+                : product
+            )
+          : [
+              ...state.cart,
+              {
+                ...action.payload.product,
+                quantity: 1,
+                size: action.payload.productSize,
+              },
+            ],
       };
     case "REMOVE_FROM_CART":
       return {
         ...state,
         cart: state.cart.filter((item) => item._id !== action.payload),
+      };
+    case "UPDATE_CART_QUANTITY":
+      return {
+        ...state,
+        cart:
+          JSON.stringify(state.cart).includes(action.payload.product._id) &&
+          state.cart.map((product) =>
+            product._id === action.payload.product._id
+              ? { ...product, quantity: action.payload.quantity }
+              : product
+          ),
       };
     default:
       return state;
