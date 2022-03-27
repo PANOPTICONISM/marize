@@ -57,11 +57,14 @@ function CheckoutWrapper() {
 
     let userData = await baseResponse.json();
     let emailData = await emailResponse.json();
-
-    if (userData.success && emailData.success) {
+    console.log(emailData);
+    console.log(userData);
+    if (userData.success) {
       nextStep();
+      console.log(userData.message);
       return setMessage(userData.message);
     } else {
+      console.log(userData.message);
       return setError(userData.message);
     }
   };
