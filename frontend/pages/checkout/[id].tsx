@@ -41,30 +41,31 @@ function CheckoutWrapper() {
       lastName: shippingData.lastname,
       email: shippingData.email,
       phoneNumber: shippingData.phonenumber,
-      createdAt: new Date().toISOString(),
+      // createdAt: new Date().toISOString(),
       cart: stateCart.cart,
     };
 
-    let mongoResponse = await fetch("/api/mongo", {
+    let baseResponse = await fetch("/api/supabase", {
       method: "POST",
       body: JSON.stringify(userStructure),
     });
 
-    await fetch("/api/email", {
+    let emailResponse = await fetch("/api/email", {
       method: "POST",
       body: JSON.stringify(userStructure),
     });
 
-    let data = await mongoResponse.json();
-
-    if (data.success) {
-      // clean up fields here
+    let userData = await baseResponse.json();
+    let emailData = await emailResponse.json();
+    console.log(emailData);
+    console.log(userData);
+    if (userData.success) {
       nextStep();
-      console.log(data, "sucess");
-      return setMessage(data.message);
+      console.log(userData.message);
+      return setMessage(userData.message);
     } else {
-      console.log(data, "error");
-      return setError(data.message);
+      console.log(userData.message);
+      return setError(userData.message);
     }
   };
 

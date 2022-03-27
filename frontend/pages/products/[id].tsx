@@ -42,8 +42,6 @@ export function ProductDetails({
     );
   }, [product._id, state?.favourites]);
 
-  console.log(product, "prod");
-
   const storeSizeValue = (e) => {
     setStoreSize(e.target.value);
   };
