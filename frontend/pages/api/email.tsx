@@ -5,17 +5,16 @@ export default async function handler(req, res) {
 
   const body = JSON.parse(req.body);
 
-  console.log(body, "body");
   const orderID = "#" + body.userId.slice(0, 8);
 
   await mail
     .send({
       to: body.email,
       from: {
-        name: "Marize",
+        name: "Marizé",
         email: "panopticonism@gmail.com",
       },
-      subject: "Nova compra!",
+      subject: "Confirmação!",
       template_id: "d-4cbce36eb5914a4fb4e44b01c3ad70ed",
       dynamic_template_data: {
         orderNumber: orderID,
@@ -33,7 +32,7 @@ export default async function handler(req, res) {
     .send({
       to: "panopticonism@gmail.com",
       from: {
-        name: "Marize - reserva nova",
+        name: "Marizé - reserva nova",
         email: "panopticonism@gmail.com",
       },
       subject: "Nova compra!",
