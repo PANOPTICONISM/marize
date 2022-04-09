@@ -31,6 +31,11 @@ export default {
       type: "localeBlockContent",
     },
     {
+      title: "Este artigo está em saldos?",
+      name: "discounted",
+      type: "boolean",
+    },
+    {
       name: "vendor",
       title: "Vendedor",
       type: "reference",
