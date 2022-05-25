@@ -51,7 +51,7 @@ export function Filters({
           <input
             type="checkbox"
             name="categories"
-            value="saldos"
+            value="Saldos"
             onChange={onChange}
           />
           <span className={style.checkmark}></span>

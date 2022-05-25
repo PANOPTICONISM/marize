@@ -24,16 +24,17 @@ export const addUrlParams = (router, cat) => {
 export default function Products({ data, context }) {
   const { locale } = context;
   const { products, vendors, categories } = data;
-  const [filteredArticles, setFilteredArticles] = useState<any>([]);
+  const [filteredArticles, setFilteredArticles] = useState<any>(products);
   const [filters, setFilters] = useState({
     brands: [],
     categories: [],
-    state: false,
   });
   const [mobileFilters, setMobileFilters] = useState(true);
   let isDiscounts = false;
 
-  const handleChecked = (e) => {
+  const handleChecked = (e: {
+    target: { value: string; checked: any; name: string };
+  }) => {
     const value = e.target.value;
 
     const filterBrand =
@@ -45,20 +46,37 @@ export default function Products({ data, context }) {
         ? [...filters.categories, value]
         : filters.categories.filter((prev: any) => prev !== value);
 
-    setFilters({ brands: filterBrand, categories: filterCat, state: true });
+    setFilters({
+      brands: filterBrand,
+      categories: filterCat,
+    });
   };
 
   // fix filtering method
   useEffect(() => {
-    if (filters.state) {
-      const filtered = products?.filter((product) => {
-        return filters?.brands?.some(
+    const brandList = [];
+    if (filters.brands.length > 0) {
+      const filtered = products?.filter((product) =>
+        filters?.brands?.some(
           (c: string) => product.vendor && product.vendor.title.includes(c)
-        );
-      });
+        )
+      );
+      brandList.push(...filtered);
       setFilteredArticles(filtered);
     } else {
       setFilteredArticles(products);
+    }
+
+    if (filters.categories.length > 0) {
+      const filteredByCat = (
+        brandList.length > 0 ? brandList : products
+      )?.filter((product) =>
+        filters?.categories?.some(
+          (c: string) =>
+            product.category && product?.category?.title.pt?.includes(c)
+        )
+      );
+      setFilteredArticles(filteredByCat);
     }
   }, [filters, locale, products]);
 
@@ -98,8 +116,6 @@ export default function Products({ data, context }) {
       </div>
     </div>
   ));
-
-  console.log(filteredArticles, filters);
 
   return (
     <Main>
@@ -151,7 +167,7 @@ export async function getStaticProps(context) {
     `{'products': *[_type == "product"]{
       _id, 
       body, 
-      category[]->{_id, title, parentVendor}, 
+      category->{_id, title}, 
       images, 
       slug, 
       title, 
