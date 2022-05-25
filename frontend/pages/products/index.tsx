@@ -14,7 +14,6 @@ import {
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
-import { useRouter } from "next/router";
 
 export const addUrlParams = (router, cat) => {
   router.push({ pathname: "/products", query: cat }, undefined, {
@@ -25,45 +24,43 @@ export const addUrlParams = (router, cat) => {
 export default function Products({ data, context }) {
   const { locale } = context;
   const { products, vendors, categories } = data;
-  console.log(data);
   const [filteredArticles, setFilteredArticles] = useState<any>([]);
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState({
+    brands: [],
+    categories: [],
+    state: false,
+  });
   const [mobileFilters, setMobileFilters] = useState(true);
-  const { query } = useRouter();
   let isDiscounts = false;
 
-  const handleChecked = (e: {
-    target: { value: number; checked: boolean };
-  }) => {
+  const handleChecked = (e) => {
     const value = e.target.value;
-    setFilters((previous: any) =>
-      !e.target.checked
-        ? previous.filter((prev: any) => prev !== value)
-        : [...previous, value]
-    );
+
+    const filterBrand =
+      e.target.checked && e.target.name === "brands"
+        ? [...filters.brands, value]
+        : filters.brands.filter((prev: any) => prev !== value);
+    const filterCat =
+      e.target.checked && e.target.name === "categories"
+        ? [...filters.categories, value]
+        : filters.categories.filter((prev: any) => prev !== value);
+
+    setFilters({ brands: filterBrand, categories: filterCat, state: true });
   };
 
+  // fix filtering method
   useEffect(() => {
-    if (filters.length > 0) {
+    if (filters.state) {
       const filtered = products?.filter((product) => {
-        return filters?.some(
-          (c: string) =>
-            (product.category &&
-              product.category[0].title[locale].includes(c)) ||
-            (product.vendor && product.vendor.title.includes(c))
+        return filters?.brands?.some(
+          (c: string) => product.vendor && product.vendor.title.includes(c)
         );
       });
       setFilteredArticles(filtered);
     } else {
       setFilteredArticles(products);
     }
-  }, [filters, products, locale]);
-
-  useEffect(() => {
-    if (query) {
-      setFilters(Object.values(query));
-    }
-  }, [query]);
+  }, [filters, locale, products]);
 
   const { state, dispatch } = useContext(GlobalContext);
 
@@ -102,7 +99,8 @@ export default function Products({ data, context }) {
     </div>
   ));
 
-  console.log(isDiscounts);
+  console.log(filteredArticles, filters);
+
   return (
     <Main>
       <div className={style.products_container}>

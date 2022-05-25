@@ -18,7 +18,6 @@ export function Filters({
   mobileFilters: boolean;
 }) {
   const { locale } = useRouter();
-  console.log(categories, vendors, mobileFilters);
   return (
     <div className={style.filters_container}>
       <h4 className={`${mobileFilters && style.mobile}`}>Marcas</h4>
@@ -33,7 +32,7 @@ export function Filters({
             {filter.title}
             <input
               type="checkbox"
-              name="name"
+              name="brands"
               value={filter.title}
               onChange={onChange}
             />
@@ -51,7 +50,7 @@ export function Filters({
           Saldos
           <input
             type="checkbox"
-            name="name"
+            name="categories"
             value="saldos"
             onChange={onChange}
           />
@@ -69,7 +68,7 @@ export function Filters({
             {filter.title[locale]}
             <input
               type="checkbox"
-              name="name"
+              name="categories"
               value={filter.title[locale]}
               onChange={onChange}
             />
