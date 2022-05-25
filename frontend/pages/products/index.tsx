@@ -28,9 +28,10 @@ export default function Products({ data, context }) {
   const [filters, setFilters] = useState({
     brands: [],
     categories: [],
+    stateDiscount: false,
   });
   const [mobileFilters, setMobileFilters] = useState(true);
-  let isDiscounts = false;
+  const [isDiscounts, setIsDiscounts] = useState(false);
 
   const handleChecked = (e: {
     target: { value: string; checked: any; name: string };
@@ -46,13 +47,16 @@ export default function Products({ data, context }) {
         ? [...filters.categories, value]
         : filters.categories.filter((prev: any) => prev !== value);
 
+    const filterDiscounts =
+      e.target.checked && e.target.value === "Saldos" ? true : false;
+
     setFilters({
       brands: filterBrand,
       categories: filterCat,
+      stateDiscount: filterDiscounts,
     });
   };
 
-  // fix filtering method
   useEffect(() => {
     const brandList = [];
     if (filters.brands.length > 0) {
@@ -78,13 +82,22 @@ export default function Products({ data, context }) {
       );
       setFilteredArticles(filteredByCat);
     }
-  }, [filters, locale, products]);
+
+    if (isDiscounts && filters.stateDiscount) {
+      const filteredByDiscount = products?.filter(
+        (product) => product.discounted
+      );
+      setFilteredArticles(filteredByDiscount);
+    }
+
+    const discountState = products.map((product) => product.discounted);
+    setIsDiscounts(discountState?.includes(true));
+  }, [filters, isDiscounts, locale, products]);
 
   const { state, dispatch } = useContext(GlobalContext);
 
   const articlesUI = filteredArticles?.map((article: any) => (
     <div className={style.card} key={article._id}>
-      {article.discounted === true ? (isDiscounts = true) : null}
       <div className={style.blue_heart}>
         {state?.favourites.includes(article) ? (
           <AiFillHeart

@@ -18,6 +18,7 @@ export function Filters({
   mobileFilters: boolean;
 }) {
   const { locale } = useRouter();
+
   return (
     <div className={style.filters_container}>
       <h4 className={`${mobileFilters && style.mobile}`}>Marcas</h4>
