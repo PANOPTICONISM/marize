@@ -68,7 +68,7 @@ export default function MenuNav({ toggleOpen }) {
           </div>
         ) : null}
         <VisitStore className={style.visitImage} />
-        <StoreInfo undoFlex={style.flexBox} className={style.menuBarInfo} />
+        {/* <StoreInfo undoFlex={style.flexBox} className={style.menuBarInfo} /> */}
       </div>
     </div>
   );
