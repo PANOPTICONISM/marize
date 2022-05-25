@@ -21,8 +21,7 @@ export const addUrlParams = (router, cat) => {
   });
 };
 
-export default function Products({ data, context }) {
-  const { locale } = context;
+export default function Products({ data, locale }) {
   const { products, vendors, categories } = data;
   const [filteredArticles, setFilteredArticles] = useState<any>(products);
   const [filters, setFilters] = useState({
@@ -175,7 +174,7 @@ export default function Products({ data, context }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const data = await sanity.fetch(
     `{'products': *[_type == "product"]{
       _id, 
@@ -191,11 +190,12 @@ export async function getStaticProps(context) {
     }`
   );
 
+  const { locale } = context;
+
   return {
     props: {
       data,
-      context,
+      locale,
     },
-    revalidate: 1,
   };
 }
