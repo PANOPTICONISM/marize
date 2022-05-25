@@ -21,8 +21,6 @@ export default function MenuNav({ toggleOpen }) {
     fetchData();
   }, []);
 
-  console.log(data, "o");
-
   const goToProducts = (title) => {
     addUrlParams(router, { 0: title });
   };

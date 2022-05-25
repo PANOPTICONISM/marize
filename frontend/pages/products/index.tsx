@@ -28,10 +28,8 @@ export default function Products({ data, context }) {
   console.log(data);
   const [filteredArticles, setFilteredArticles] = useState<any>([]);
   const [filters, setFilters] = useState([]);
-  const [sortType, setSortType] = useState(null);
   const [mobileFilters, setMobileFilters] = useState(true);
   const { query } = useRouter();
-  const router = useRouter();
 
   const handleChecked = (e: {
     target: { value: number; checked: boolean };
@@ -42,11 +40,9 @@ export default function Products({ data, context }) {
         ? previous.filter((prev: any) => prev !== value)
         : [...previous, value]
     );
-    setSortType(null);
   };
 
   useEffect(() => {
-    console.log(filters, "filters");
     if (filters.length > 0) {
       const filtered = products?.filter((product) => {
         return filters?.some(
@@ -67,26 +63,6 @@ export default function Products({ data, context }) {
       setFilters(Object.values(query));
     }
   }, [query]);
-
-  // useEffect(() => {
-  //   const sortArray = (type: any) => {
-  //     let sorted: any;
-  //     if (sortType === "Highest price") {
-  //       sorted = [...filteredArticles].sort((a: any, b: any) =>
-  //         a.price.raw < b.price.raw ? 1 : -1
-  //       );
-  //       setFilteredArticles(sorted);
-  //     }
-  //     if (sortType === "Lowest price") {
-  //       sorted = [...filteredArticles].sort((a: any, b: any) =>
-  //         a.price.raw > b.price.raw ? 1 : -1
-  //       );
-  //       setFilteredArticles(sorted);
-  //     }
-  //   };
-  //   sortArray(sortType);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [sortType]);
 
   const { state, dispatch } = useContext(GlobalContext);
 
@@ -151,20 +127,6 @@ export default function Products({ data, context }) {
               </span>
               All filters
             </li>
-            {/* <li className={style.sort}>
-              <span>
-                Sort by
-                <MdKeyboardArrowDown />
-              </span>
-              <div className={style.sort_dropdown}>
-                <p onClick={(e: any) => setSortType(e.target.innerText)}>
-                  Highest price
-                </p>
-                <p onClick={(e: any) => setSortType(e.target.innerText)}>
-                  Lowest price
-                </p>
-              </div>
-            </li> */}
           </ul>
         </div>
 

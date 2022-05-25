@@ -16,9 +16,10 @@ export function Filters({
   mobileFilters: boolean;
 }) {
   const { locale } = useRouter();
+  console.log(categories, vendors, mobileFilters);
   return (
     <div className={style.filters_container}>
-      <h4>Marcas</h4>
+      <h4 className={`${mobileFilters && style.mobile}`}>Marcas</h4>
       {vendors?.map((filter: { title: string; _id: any }) => (
         <div
           className={`${style.filters_products} ${
@@ -38,7 +39,7 @@ export function Filters({
           </label>
         </div>
       ))}
-      <h4>Artigos</h4>
+      <h4 className={`${mobileFilters && style.mobile}`}>Artigos</h4>
       {categories?.map((filter: { title: string; _id: any }) => (
         <div
           className={`${style.filters_products} ${
