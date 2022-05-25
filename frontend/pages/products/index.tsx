@@ -30,6 +30,7 @@ export default function Products({ data, context }) {
   const [filters, setFilters] = useState([]);
   const [mobileFilters, setMobileFilters] = useState(true);
   const { query } = useRouter();
+  let isDiscounts = false;
 
   const handleChecked = (e: {
     target: { value: number; checked: boolean };
@@ -68,6 +69,7 @@ export default function Products({ data, context }) {
 
   const articlesUI = filteredArticles?.map((article: any) => (
     <div className={style.card} key={article._id}>
+      {article.discounted === true ? (isDiscounts = true) : null}
       <div className={style.blue_heart}>
         {state?.favourites.includes(article) ? (
           <AiFillHeart
@@ -100,6 +102,7 @@ export default function Products({ data, context }) {
     </div>
   ));
 
+  console.log(isDiscounts);
   return (
     <Main>
       <div className={style.products_container}>
@@ -135,6 +138,7 @@ export default function Products({ data, context }) {
             onChange={handleChecked}
             vendors={vendors}
             categories={categories}
+            discounts={isDiscounts}
             mobileFilters={mobileFilters}
           />
           <div className={style.products_wrapper}>{articlesUI}</div>
@@ -153,6 +157,7 @@ export async function getStaticProps(context) {
       images, 
       slug, 
       title, 
+      discounted,
       vendor->{_id, title}},
       'vendors': *[_type == "vendor"]{title, _id},
       'categories': *[_type == "category"]
