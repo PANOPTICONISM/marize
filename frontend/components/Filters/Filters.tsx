@@ -7,18 +7,21 @@ export function Filters({
   onChange,
   categories,
   vendors,
+  discounts,
   mobileFilters,
 }: {
   className?: string;
   onChange: any;
   categories: any[];
   vendors: any[];
+  discounts: boolean;
   mobileFilters: boolean;
 }) {
   const { locale } = useRouter();
+
   return (
     <div className={style.filters_container}>
-      <h4>Marcas</h4>
+      <h4 className={`${mobileFilters && style.mobile}`}>Marcas</h4>
       {vendors?.map((filter: { title: string; _id: any }) => (
         <div
           className={`${style.filters_products} ${
@@ -30,7 +33,7 @@ export function Filters({
             {filter.title}
             <input
               type="checkbox"
-              name="name"
+              name="brands"
               value={filter.title}
               onChange={onChange}
             />
@@ -38,7 +41,23 @@ export function Filters({
           </label>
         </div>
       ))}
-      <h4>Artigos</h4>
+      <h4 className={`${mobileFilters && style.mobile}`}>Artigos</h4>
+      {discounts ? (
+        <label
+          className={`${style.container_checkbox} ${style.filters_products} ${
+            mobileFilters && style.mobile
+          }`}
+        >
+          Saldos
+          <input
+            type="checkbox"
+            name="categories"
+            value="Saldos"
+            onChange={onChange}
+          />
+          <span className={style.checkmark}></span>
+        </label>
+      ) : null}
       {categories?.map((filter: { title: string; _id: any }) => (
         <div
           className={`${style.filters_products} ${
@@ -50,7 +69,7 @@ export function Filters({
             {filter.title[locale]}
             <input
               type="checkbox"
-              name="name"
+              name="categories"
               value={filter.title[locale]}
               onChange={onChange}
             />
@@ -66,12 +85,14 @@ export default function FilterComponent({
   onChange,
   categories,
   vendors,
+  discounts,
   mobileFilters,
   setMobileFilters,
 }: {
   onChange?: (e: any) => void | undefined;
   categories?: any;
   vendors?: any;
+  discounts?: any;
   mobileFilters?: any;
   setMobileFilters?: boolean;
 }) {
@@ -81,6 +102,7 @@ export default function FilterComponent({
         onChange={onChange}
         categories={categories}
         vendors={vendors}
+        discounts={discounts}
         mobileFilters={mobileFilters}
       />
     </div>

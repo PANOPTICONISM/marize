@@ -14,7 +14,6 @@ import {
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
-import { useRouter } from "next/router";
 
 export const addUrlParams = (router, cat) => {
   router.push({ pathname: "/products", query: cat }, undefined, {
@@ -22,71 +21,77 @@ export const addUrlParams = (router, cat) => {
   });
 };
 
-export default function Products({ data, context }) {
-  const { locale } = context;
+export default function Products({ data, locale }) {
   const { products, vendors, categories } = data;
-  console.log(data);
-  const [filteredArticles, setFilteredArticles] = useState<any>([]);
-  const [filters, setFilters] = useState([]);
-  const [sortType, setSortType] = useState(null);
+  const [filteredArticles, setFilteredArticles] = useState<any>(products);
+  const [filters, setFilters] = useState({
+    brands: [],
+    categories: [],
+    stateDiscount: false,
+  });
   const [mobileFilters, setMobileFilters] = useState(true);
-  const { query } = useRouter();
-  const router = useRouter();
+  const [isDiscounts, setIsDiscounts] = useState(false);
 
   const handleChecked = (e: {
-    target: { value: number; checked: boolean };
+    target: { value: string; checked: any; name: string };
   }) => {
     const value = e.target.value;
-    setFilters((previous: any) =>
-      !e.target.checked
-        ? previous.filter((prev: any) => prev !== value)
-        : [...previous, value]
-    );
-    setSortType(null);
+
+    const filterBrand =
+      e.target.checked && e.target.name === "brands"
+        ? [...filters.brands, value]
+        : filters.brands.filter((prev: any) => prev !== value);
+    const filterCat =
+      e.target.checked && e.target.name === "categories"
+        ? [...filters.categories, value]
+        : filters.categories.filter((prev: any) => prev !== value);
+
+    const filterDiscounts =
+      e.target.checked && e.target.value === "Saldos" ? true : false;
+
+    setFilters({
+      brands: filterBrand,
+      categories: filterCat,
+      stateDiscount: filterDiscounts,
+    });
   };
 
   useEffect(() => {
-    console.log(filters, "filters");
-    if (filters.length > 0) {
-      const filtered = products?.filter((product) => {
-        return filters?.some(
-          (c: string) =>
-            (product.category &&
-              product.category[0].title[locale].includes(c)) ||
-            (product.vendor && product.vendor.title.includes(c))
-        );
-      });
+    const brandList = [];
+    if (filters.brands.length > 0) {
+      const filtered = products?.filter((product) =>
+        filters?.brands?.some(
+          (c: string) => product.vendor && product.vendor.title.includes(c)
+        )
+      );
+      brandList.push(...filtered);
       setFilteredArticles(filtered);
     } else {
       setFilteredArticles(products);
     }
-  }, [filters, products, locale]);
 
-  useEffect(() => {
-    if (query) {
-      setFilters(Object.values(query));
+    if (filters.categories.length > 0) {
+      const filteredByCat = (
+        brandList.length > 0 ? brandList : products
+      )?.filter((product) =>
+        filters?.categories?.some(
+          (c: string) =>
+            product.category && product?.category?.title.pt?.includes(c)
+        )
+      );
+      setFilteredArticles(filteredByCat);
     }
-  }, [query]);
 
-  // useEffect(() => {
-  //   const sortArray = (type: any) => {
-  //     let sorted: any;
-  //     if (sortType === "Highest price") {
-  //       sorted = [...filteredArticles].sort((a: any, b: any) =>
-  //         a.price.raw < b.price.raw ? 1 : -1
-  //       );
-  //       setFilteredArticles(sorted);
-  //     }
-  //     if (sortType === "Lowest price") {
-  //       sorted = [...filteredArticles].sort((a: any, b: any) =>
-  //         a.price.raw > b.price.raw ? 1 : -1
-  //       );
-  //       setFilteredArticles(sorted);
-  //     }
-  //   };
-  //   sortArray(sortType);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [sortType]);
+    if (isDiscounts && filters.stateDiscount) {
+      const filteredByDiscount = products?.filter(
+        (product) => product.discounted
+      );
+      setFilteredArticles(filteredByDiscount);
+    }
+
+    const discountState = products.map((product) => product.discounted);
+    setIsDiscounts(discountState?.includes(true));
+  }, [filters, isDiscounts, locale, products]);
 
   const { state, dispatch } = useContext(GlobalContext);
 
@@ -151,20 +156,6 @@ export default function Products({ data, context }) {
               </span>
               All filters
             </li>
-            {/* <li className={style.sort}>
-              <span>
-                Sort by
-                <MdKeyboardArrowDown />
-              </span>
-              <div className={style.sort_dropdown}>
-                <p onClick={(e: any) => setSortType(e.target.innerText)}>
-                  Highest price
-                </p>
-                <p onClick={(e: any) => setSortType(e.target.innerText)}>
-                  Lowest price
-                </p>
-              </div>
-            </li> */}
           </ul>
         </div>
 
@@ -173,6 +164,7 @@ export default function Products({ data, context }) {
             onChange={handleChecked}
             vendors={vendors}
             categories={categories}
+            discounts={isDiscounts}
             mobileFilters={mobileFilters}
           />
           <div className={style.products_wrapper}>{articlesUI}</div>
@@ -182,26 +174,28 @@ export default function Products({ data, context }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const data = await sanity.fetch(
     `{'products': *[_type == "product"]{
       _id, 
       body, 
-      category[]->{_id, title, parentVendor}, 
+      category->{_id, title}, 
       images, 
       slug, 
       title, 
+      discounted,
       vendor->{_id, title}},
       'vendors': *[_type == "vendor"]{title, _id},
       'categories': *[_type == "category"]
     }`
   );
 
+  const { locale } = context;
+
   return {
     props: {
       data,
-      context,
+      locale,
     },
-    revalidate: 1,
   };
 }

@@ -27,34 +27,34 @@ export default function StoreInfo({
           rel="noreferrer"
         >
           <h4>
-            Connect with us on
+            Encontra-nos no
             <AiOutlineFacebook />
           </h4>
         </a>
       </div>
-      {isFooter && (
+      {/* {isFooter && (
         <div className={style.about_footer}>
-          <h4>About Marizé</h4>
+          <h4>Sobre Marizé</h4>
           <ul>
             <li>
-              <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
+              <Link href="/terms-and-conditions">Termos e condições</Link>
             </li>
             <li>
-              <Link href="/privacy-policy">Privacy policy</Link>
+              <Link href="/privacy-policy">Politica de privacidade</Link>
             </li>
             <li>FAQ &amp; Returns</li>
             <li>
-              <Link href="/about">Our story</Link>
+              <Link href="/about">Sobre nós</Link>
             </li>
           </ul>
         </div>
-      )}
+      )} */}
 
-      <div className={`${style.flex} ${undoFlex}`}>
+      <div className={style.innerGrid}>
         <div className={style.phone}>
           <FiPhoneIncoming />
           <div>
-            <h4>Phone-number</h4>
+            <h4>Telefone</h4>
             <p>+351 251 823 857</p>
           </div>
         </div>
@@ -62,41 +62,40 @@ export default function StoreInfo({
           <RiMailSendLine />
 
           <div>
-            <h4>E-mail</h4>
+            <h4>Email</h4>
             <p>
               <a href="mailto: hello@marize.pt">hello@marize.pt</a>
-            </p>
+            </p>{" "}
           </div>
         </div>
       </div>
-      <div className={`${style.flex} ${undoFlex}`}>
-        <div className={style.address}>
-          <a
-            href="https://www.google.fr/maps/place/Rua Mouzinho de Albuquerque 81, 
+      <div className={style.address}>
+        <a
+          href="https://www.google.fr/maps/place/Rua Mouzinho de Albuquerque 81, 
                             4930-733 Valença, Portugal"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <IoLocationOutline />
+          target="_blank"
+          rel="noreferrer"
+        >
+          <IoLocationOutline />
 
-            <div>
-              <h4>Store's adress</h4>
-              <p>
-                Rua Mouzinho de Albuquerque 81, <br />
-                4930-733 Valença, Portugal
-              </p>
-            </div>
-          </a>
-        </div>
-        <div className={style.hours}>
-          <MdOutlineLockClock />
           <div>
-            <h4>Opening hours</h4>
+            <h4>Endereço da loja</h4>
             <p>
-              Mon - Sun, 10:00 - 13:00 <br />
-              to, 15:00 - 19:00
+              Rua Mouzinho de Albuquerque 81, <br />
+              4930-733 Valença, Portugal
             </p>
           </div>
+        </a>
+      </div>
+      <div className={style.hours}>
+        <MdOutlineLockClock />
+        <div>
+          <h4>Horário de funcionamento</h4>
+          <p>
+            Segunda - Domingo: <br />
+            Entre 10:00 - 13:00 <br />
+            e, 15:00 - 19:00
+          </p>
         </div>
       </div>
     </div>

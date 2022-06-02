@@ -1,62 +1,68 @@
 .contact_wrapper {
-    display: grid;
-    justify-content: center;
-    gap: 20px;
+  display: grid;
+  justify-content: center;
+  gap: 30px;
 }
 
-.contact_wrapper .flex .mail,
-.contact_wrapper .flex .phone,
-.contact_wrapper .flex .address a,
-.contact_wrapper .flex .hours {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+.innerGrid {
+  display: grid;
+  gap: 30px;
+}
+
+.contact_wrapper .mail,
+.contact_wrapper .phone,
+.contact_wrapper .address a,
+.contact_wrapper .hours {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .contact_wrapper .facebook h4,
 .contact_wrapper .facebook h4 a {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .contact_wrapper .facebook h4 svg {
-    color: var(--white-colour);
-    font-size: 26px;
+  color: var(--white-colour);
+  font-size: 26px;
 }
 
 .contact_wrapper h4 {
-    margin: 0;
+  margin: 0;
 }
 
 .contact_wrapper p {
-    margin-top: 6px;
+  margin-top: 6px;
+  margin-bottom: 0;
 }
 
 .contact_wrapper .facebook h4 a {
-    margin-left: 6px;
-    color: var(--white-colour);
+  margin-left: 6px;
+  color: var(--white-colour);
 }
 
 .facebook h4 {
-    width: max-content;
-    background-color: var(--background-colour-h1);
-    color: var(--white-colour);
-    text-align: center;
-    padding: 12px;
-    margin-top: 18px;
+  width: max-content;
+  background-color: var(--background-colour-h1);
+  color: var(--white-colour);
+  text-align: center;
+  padding: 12px;
+  margin-top: 18px;
 }
 
 .about_footer ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .about_footer ul a {
-    color: var(--black-colour);
+  color: var(--black-colour);
 }
 
 .about_footer li {
-    padding: 4px 0;
+  padding: 4px 0;
 }
 
 .phone svg,
@@ -64,34 +70,34 @@
 .hours svg,
 .address svg,
 .mail svg {
-    font-size: 18px;
-    color: var(--black-colour);
-    margin-right: 4px;
+  font-size: 18px;
+  color: var(--black-colour);
+  margin-right: 6px;
 }
 
 .facebook svg {
-    margin-left: 4px;
+  margin-left: 4px;
 }
 
 .address h4 {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .address a svg {
-    font-size: 26px;
+  font-size: 26px;
 }
 
 .address h4,
 .address p {
-    color: var(--black-colour);
+  color: var(--black-colour);
 }
 
 .mail a {
-    color: var(--black-colour);
+  color: var(--black-colour);
 }
 
 @media screen and (min-width: 800px) {
-    .contact_wrapper {
-        justify-content: space-between;
-    }
+  .contact_wrapper {
+    justify-content: space-between;
+  }
 }

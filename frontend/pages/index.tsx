@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Head from "next/head";
 import Main from "../containers/Main/Main";
 import style from "../styles/homepage.module.css";
 import NewArrivals from "../components/NewArrivals/NewArrivals";
@@ -18,10 +17,6 @@ export default function Homepage({ products, homepage }) {
 
   return (
     <>
-      <Head>
-        <title>Marizé</title>
-        <link rel="icon" href="/logo.svg" />
-      </Head>
       <Main>
         <header className={style.homepageHero}>
           <h1 className={style.heading}>{slogan}</h1>

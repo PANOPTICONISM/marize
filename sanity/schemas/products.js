@@ -43,14 +43,9 @@ export default {
     },
     {
       name: "category",
-      title: "Categorias",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "category" }],
-        },
-      ],
+      title: "Categoria",
+      type: "reference",
+      to: { type: "category" },
     },
     {
       title: "Variantes",
