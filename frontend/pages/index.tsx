@@ -9,8 +9,6 @@ import { useRouter } from "next/router";
 import { absoluteURLsForSanity } from "../utils/SanityFunctions";
 
 export default function Homepage({ products, homepage }) {
-  console.log(products);
-  console.log(homepage[0], "home");
   const { locale } = useRouter();
 
   const { slogan, image, imagesGallery, newArrivals, body } = homepage[0];

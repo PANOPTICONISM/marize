@@ -13,15 +13,17 @@ import {
   updateCartQuantity,
 } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
+import { translations } from "../../translations/common";
 
 export function CartResumeContainer({
   children,
 }: {
   children?: React.ReactNode;
 }) {
+  const { locale } = useRouter();
   return (
     <div className={style.cartWrapper}>
-      <h3>Shopping Bag</h3>
+      <h3>{translations[locale].cart}</h3>
       {children}
     </div>
   );
@@ -94,6 +96,7 @@ export function ProductCard({ product }: { product: any }) {
 
 export default function Cart() {
   const { stateCart } = useContext(GlobalContext);
+  const { locale } = useRouter();
 
   if (stateCart.cart.length > 0) {
     return (
@@ -107,7 +110,7 @@ export default function Cart() {
           <a>
             <PrimaryIconButton
               className={style.shopBagBtn}
-              text="Go to your shopping bag"
+              text={translations[locale].shopping_bag_go}
             />
           </a>
         </Link>
@@ -117,9 +120,9 @@ export default function Cart() {
   return (
     <CartResumeContainer>
       <div className={style.emptyCart}>
-        <h4>Your shopping bag is currently empty.</h4>
-        <h5>No idea, how to get started?</h5>
-        <PrimaryButton path="/products" text="Find out what's new here" />
+        <h4>{translations[locale].empty_bag_cart}</h4>
+        <h5>{translations[locale].get_started}</h5>
+        <PrimaryButton path="/products" text={translations[locale].cart_cta} />
       </div>
     </CartResumeContainer>
   );
