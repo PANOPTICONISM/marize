@@ -48,7 +48,9 @@ export default function Products({ data, locale }) {
         : filters.categories.filter((prev: any) => prev !== value);
 
     const filterDiscounts =
-      e.target.checked && e.target.value === "Saldos" ? true : false;
+      e.target.checked && e.target.value === translations[locale].discount
+        ? true
+        : false;
 
     setFilters({
       brands: filterBrand,
@@ -77,7 +79,7 @@ export default function Products({ data, locale }) {
       )?.filter((product) =>
         filters?.categories?.some(
           (c: string) =>
-            product.category && product?.category?.title.pt?.includes(c)
+            product.category && product?.category?.title[locale].includes(c)
         )
       );
       setFilteredArticles(filteredByCat);

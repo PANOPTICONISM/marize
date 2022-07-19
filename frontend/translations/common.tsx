@@ -20,7 +20,8 @@ export const translations = {
     address: "Address",
 
     brands: "Brands",
-    articles: "Articles",
+    articles: "Categories",
+    discount: "Discounts",
     productsTitle: "Women's clothes",
   },
   pt: {
@@ -44,7 +45,8 @@ export const translations = {
     address: "Endereço da loja",
 
     brands: "Marcas",
-    articles: "Artigos",
+    articles: "Categorias",
+    discount: "Saldos",
     productsTitle: "Artigos para a mulher",
   },
 };

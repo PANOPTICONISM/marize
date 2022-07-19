@@ -53,11 +53,11 @@ export function Filters({
             mobileFilters && style.mobile
           }`}
         >
-          Saldos
+          {translations[locale].discount}
           <input
             type="checkbox"
             name="categories"
-            value="Saldos"
+            value={translations[locale].discount}
             onChange={onChange}
           />
           <span className={style.checkmark}></span>
