@@ -14,6 +14,7 @@ import {
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+import { translations } from "../../translations/common";
 
 export const addUrlParams = (router, cat) => {
   router.push({ pathname: "/products", query: cat }, undefined, {
@@ -143,7 +144,7 @@ export default function Products({ data, locale }) {
             20% discount on all Christmas gifts
           </h1>
         </header>
-        <h1>WOMEN'S CLOTHES</h1>
+        <h1>{translations[locale].productsTitle}</h1>
 
         <div>
           <ul className={style.sort_filter}>

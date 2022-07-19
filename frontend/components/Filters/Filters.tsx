@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { translations } from "../../translations/common";
 import style from "./filters.module.css";
 
 export function Filters({
@@ -21,7 +22,9 @@ export function Filters({
 
   return (
     <div className={style.filters_container}>
-      <h4 className={`${mobileFilters && style.mobile}`}>Marcas</h4>
+      <h4 className={`${mobileFilters && style.mobile}`}>
+        {translations[locale].brands}
+      </h4>
       {vendors?.map((filter: { title: string; _id: any }) => (
         <div
           className={`${style.filters_products} ${
@@ -41,7 +44,9 @@ export function Filters({
           </label>
         </div>
       ))}
-      <h4 className={`${mobileFilters && style.mobile}`}>Artigos</h4>
+      <h4 className={`${mobileFilters && style.mobile}`}>
+        {translations[locale].articles}
+      </h4>
       {discounts ? (
         <label
           className={`${style.container_checkbox} ${style.filters_products} ${

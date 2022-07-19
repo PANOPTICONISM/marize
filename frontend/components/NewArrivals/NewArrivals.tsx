@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import style from "./newarrivals.module.css";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+import { useRouter } from "next/router";
 
 const NewArrivals = ({ title, products, locale }) => {
   const reversedArray: any[] = [];
@@ -10,7 +11,7 @@ const NewArrivals = ({ title, products, locale }) => {
 
   return (
     <section className={style.newArrivals}>
-      <h1>{title}</h1>
+      <h1>{title[locale]}</h1>
       <div className={style.articles}>
         {newArrivals?.map((article) => (
           <div key={article._id}>

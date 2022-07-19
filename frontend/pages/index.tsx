@@ -17,7 +17,7 @@ export default function Homepage({ products, homepage }) {
     <>
       <Main>
         <header className={style.homepageHero}>
-          <h1 className={style.heading}>{slogan}</h1>
+          <h1 className={style.heading}>{slogan[locale]}</h1>
           <Image
             src={absoluteURLsForSanity(image.asset._ref).url()}
             width={750}
