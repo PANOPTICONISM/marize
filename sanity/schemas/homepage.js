@@ -1,3 +1,6 @@
+import supportedLanguages from "./locale/supportedLanguages";
+const baseLanguage = supportedLanguages.find((l) => l.isDefault);
+
 export default {
   name: "homepage",
   title: "Homepage",
@@ -35,4 +38,9 @@ export default {
       type: "categorySections",
     },
   ],
+  preview: {
+    select: {
+      title: `title.${baseLanguage.id}`,
+    },
+  },
 };

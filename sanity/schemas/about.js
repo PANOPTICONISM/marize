@@ -1,3 +1,6 @@
+import supportedLanguages from "./locale/supportedLanguages";
+const baseLanguage = supportedLanguages.find((l) => l.isDefault);
+
 export default {
   name: "about",
   title: "About",
@@ -45,4 +48,9 @@ export default {
       of: [{ type: "image" }],
     },
   ],
+  preview: {
+    select: {
+      title: `title.${baseLanguage.id}`,
+    },
+  },
 };
