@@ -8,13 +8,13 @@ export default {
   type: "document",
   fields: [
     {
-      title: "title",
+      title: "Titulo",
       name: "title",
       type: "localeString",
     },
     {
-      name: "images",
       title: "Imagens",
+      name: "images",
       type: "array",
       of: [
         {

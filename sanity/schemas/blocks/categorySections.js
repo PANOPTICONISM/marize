@@ -18,7 +18,7 @@ export default {
     {
       name: "firstBox",
       title: "Texto do butão",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "imageTwo",
@@ -28,7 +28,7 @@ export default {
     {
       name: "secondBox",
       title: "Texto do butão",
-      type: "string",
+      type: "localeString",
     },
   ],
 };

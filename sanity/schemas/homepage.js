@@ -6,7 +6,7 @@ export default {
     {
       name: "title",
       title: "Nome",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "image",
@@ -16,7 +16,7 @@ export default {
     {
       name: "slogan",
       title: "Slogan em cima da imagem principal",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "imagesGallery",
@@ -27,7 +27,7 @@ export default {
     {
       name: "newArrivals",
       title: "Nome em cima de artigos mais recents",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "body",
