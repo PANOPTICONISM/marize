@@ -11,6 +11,11 @@ export default {
       title: "Slogan",
       type: "localeString",
     },
+    {
+      name: "backgroundImage",
+      title: "Imagem de background",
+      type: "image",
+    },
   ],
   preview: {
     select: {
