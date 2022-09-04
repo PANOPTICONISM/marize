@@ -177,7 +177,7 @@ export default function Products({ data, locale }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const data = await sanity.fetch(
     `{'products': *[_type == "product"]{
       _id, 
