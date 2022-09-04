@@ -5,16 +5,17 @@ import { RiMailSendLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineLockClock } from "react-icons/md";
 import Image from "next/image";
-import Link from "next/link";
+import { translations } from "../../translations/common";
+import { useRouter } from "next/router";
 export default function StoreInfo({
   className,
-  undoFlex,
   isFooter,
 }: {
   className?: string;
   undoFlex?: string;
   isFooter?: boolean;
 }) {
+  const { locale } = useRouter();
   return (
     <div className={`${style.contact_wrapper} ${className}`}>
       <div className={style.facebook}>
@@ -54,7 +55,7 @@ export default function StoreInfo({
         <div className={style.phone}>
           <FiPhoneIncoming />
           <div>
-            <h4>Telefone</h4>
+            <h4>{translations[locale].phone}</h4>
             <p>+351 251 823 857</p>
           </div>
         </div>
@@ -62,7 +63,7 @@ export default function StoreInfo({
           <RiMailSendLine />
 
           <div>
-            <h4>Email</h4>
+            <h4>{translations[locale].email}</h4>
             <p>
               <a href="mailto: hello@marize.pt">hello@marize.pt</a>
             </p>{" "}
@@ -79,7 +80,7 @@ export default function StoreInfo({
           <IoLocationOutline />
 
           <div>
-            <h4>Endereço da loja</h4>
+            <h4>{translations[locale].address}</h4>
             <p>
               Rua Mouzinho de Albuquerque 81, <br />
               4930-733 Valença, Portugal
@@ -90,12 +91,8 @@ export default function StoreInfo({
       <div className={style.hours}>
         <MdOutlineLockClock />
         <div>
-          <h4>Horário de funcionamento</h4>
-          <p>
-            Segunda - Domingo: <br />
-            Entre 10:00 - 13:00 <br />
-            e, 15:00 - 19:00
-          </p>
+          <h4>{translations[locale].open_hours}</h4>
+          <p>{translations[locale].schedule}</p>
         </div>
       </div>
     </div>

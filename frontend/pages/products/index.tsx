@@ -14,6 +14,7 @@ import {
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+import { translations } from "../../translations/common";
 
 export const addUrlParams = (router, cat) => {
   router.push({ pathname: "/products", query: cat }, undefined, {
@@ -47,7 +48,9 @@ export default function Products({ data, locale }) {
         : filters.categories.filter((prev: any) => prev !== value);
 
     const filterDiscounts =
-      e.target.checked && e.target.value === "Saldos" ? true : false;
+      e.target.checked && e.target.value === translations[locale].discount
+        ? true
+        : false;
 
     setFilters({
       brands: filterBrand,
@@ -76,7 +79,7 @@ export default function Products({ data, locale }) {
       )?.filter((product) =>
         filters?.categories?.some(
           (c: string) =>
-            product.category && product?.category?.title.pt?.includes(c)
+            product.category && product?.category?.title[locale].includes(c)
         )
       );
       setFilteredArticles(filteredByCat);
@@ -143,7 +146,7 @@ export default function Products({ data, locale }) {
             20% discount on all Christmas gifts
           </h1>
         </header>
-        <h1>WOMEN'S CLOTHES</h1>
+        <h1>{translations[locale].productsTitle}</h1>
 
         <div>
           <ul className={style.sort_filter}>
@@ -174,7 +177,7 @@ export default function Products({ data, locale }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const data = await sanity.fetch(
     `{'products': *[_type == "product"]{
       _id, 

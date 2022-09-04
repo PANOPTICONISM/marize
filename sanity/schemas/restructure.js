@@ -51,6 +51,11 @@ export default () =>
               S.listItem()
                 .title("Sobre Marize")
                 .child(S.document().schemaType("about").documentId("about")),
+              S.listItem()
+                .title("Pagina de Artigos")
+                .child(
+                  S.document().schemaType("products").documentId("products")
+                ),
             ])
         ),
     ]);

@@ -9,8 +9,6 @@ import { useRouter } from "next/router";
 import { absoluteURLsForSanity } from "../utils/SanityFunctions";
 
 export default function Homepage({ products, homepage }) {
-  console.log(products);
-  console.log(homepage[0], "home");
   const { locale } = useRouter();
 
   const { slogan, image, imagesGallery, newArrivals, body } = homepage[0];
@@ -19,7 +17,7 @@ export default function Homepage({ products, homepage }) {
     <>
       <Main>
         <header className={style.homepageHero}>
-          <h1 className={style.heading}>{slogan}</h1>
+          <h1 className={style.heading}>{slogan[locale]}</h1>
           <Image
             src={absoluteURLsForSanity(image.asset._ref).url()}
             width={750}

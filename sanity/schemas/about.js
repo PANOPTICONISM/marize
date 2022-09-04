@@ -1,3 +1,6 @@
+import supportedLanguages from "./locale/supportedLanguages";
+const baseLanguage = supportedLanguages.find((l) => l.isDefault);
+
 export default {
   name: "about",
   title: "About",
@@ -6,12 +9,12 @@ export default {
     {
       name: "title",
       title: "Nome",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "heading",
       title: "Titulo",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "hero",
@@ -21,14 +24,12 @@ export default {
     {
       name: "description",
       title: "Historia",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "localeBlockContent",
     },
     {
       name: "bulletPoints",
       title: "Porque visitar a loja?",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "localeBlockContent",
     },
     {
       name: "image",
@@ -38,7 +39,7 @@ export default {
     {
       name: "subheading",
       title: "Titulo sobre as fotos",
-      type: "string",
+      type: "localeString",
     },
     {
       name: "storeImages",
@@ -47,4 +48,9 @@ export default {
       of: [{ type: "image" }],
     },
   ],
+  preview: {
+    select: {
+      title: `title.${baseLanguage.id}`,
+    },
+  },
 };

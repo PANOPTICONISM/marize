@@ -2,21 +2,23 @@ import React, { useContext } from "react";
 import Image from "next/image";
 import style from "./favouritescart.module.css";
 import { BsTrash } from "react-icons/bs";
-import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
+import { PrimaryButton } from "../Buttons/Buttons";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import { removeFromFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { translations } from "../../translations/common";
 
 export function FavouritesCartResumeContainer({
   children,
 }: {
   children?: React.ReactNode;
 }) {
+  const { locale } = useRouter();
   return (
     <div className={style.cartFavouritesWrapper}>
-      <h3>Favourites Bag</h3>
+      <h3>{translations[locale].favorites_bag}</h3>
       {children}
     </div>
   );
@@ -50,7 +52,7 @@ export function ProductCard({ product }: { product: any }) {
         <div className={style.bottomProduct}>
           <div>
             <button onClick={() => removeFromFavourites(dispatch, product._id)}>
-              <BsTrash /> Remove from favourites
+              <BsTrash /> {translations[locale].remove_favorites}
             </button>
           </div>
         </div>
@@ -61,6 +63,7 @@ export function ProductCard({ product }: { product: any }) {
 
 export default function FavouritesCart() {
   const { state } = useContext(GlobalContext);
+  const { locale } = useRouter();
 
   if (state?.favourites.length > 0) {
     return (
@@ -78,9 +81,12 @@ export default function FavouritesCart() {
   return (
     <FavouritesCartResumeContainer>
       <div className={style.emptyCart}>
-        <h4>Your favourites bag is currently empty.</h4>
-        <h5>No idea, how to get started?</h5>
-        <PrimaryButton path="/products" text="Explore all our products" />
+        <h4>{translations[locale].empty_bag_favorites}</h4>
+        <h5>{translations[locale].get_started}</h5>
+        <PrimaryButton
+          path="/products"
+          text={translations[locale].explore_products}
+        />
       </div>
     </FavouritesCartResumeContainer>
   );

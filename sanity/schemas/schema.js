@@ -13,6 +13,7 @@ import colour from "./colour";
 import size from "./size";
 import homepage from "./homepage";
 import about from "./about";
+import productsPage from "./products-page";
 
 import localeString from "./locale/String";
 import localeText from "./locale/Text";
@@ -35,6 +36,7 @@ export default createSchema({
 
     about,
     homepage,
+    productsPage,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
     blockContent,

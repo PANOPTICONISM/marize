@@ -11,7 +11,7 @@ export default {
     },
   ],
   fields: supportedLanguages.map((lang) => ({
-    title: `Descrição sobre o material - ${lang.title}`,
+    title: `${lang.title}`,
     name: lang.id,
     type: "blockContent",
     fieldset: lang.isDefault ? null : "translations",
