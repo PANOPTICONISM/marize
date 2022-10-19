@@ -25,8 +25,6 @@ export default function ShoppingBag({ next }: { next?: any }) {
     quantity: [1, 2, 3, 4],
   };
 
-  console.log(stateCart);
-
   return (
     <section>
       {stateCart?.cart.length > 0 ? (

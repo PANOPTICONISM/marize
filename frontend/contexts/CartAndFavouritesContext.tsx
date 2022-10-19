@@ -47,7 +47,7 @@ function reducer(state: IState, action: IAction): IState {
               product._id === action.payload.product._id
                 ? {
                     ...product,
-                    quantity: product.quantity + 1,
+                    quantity: Number(product.quantity) + 1,
                     size: product.size + " " + action.payload.productSize,
                   }
                 : product
