@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { addUrlParams } from "../../pages/products";
 import { useRouter } from "next/router";
+import { translations } from "../../translations/common";
 
 export default function MenuNav({ toggleOpen }) {
   const [data, setData] = useState({ categories: [], vendors: [] });
@@ -33,7 +34,7 @@ export default function MenuNav({ toggleOpen }) {
       <div className={style.container}>
         {data !== undefined ? (
           <div className={style.nav_wrapper}>
-            <h4> Categories </h4>
+            <h4>{translations[locale].categories}</h4>
             <ul className={style.menu_sections}>
               {data.categories.map((cat) => (
                 <li key={cat._id}>
@@ -48,7 +49,7 @@ export default function MenuNav({ toggleOpen }) {
                 </li>
               ))}
             </ul>
-            <h4> Vendors </h4>
+            <h4>{translations[locale].brands}</h4>
             <ul className={style.menu_sections}>
               {data.vendors.map((vendor) => (
                 <li key={vendor._id}>
