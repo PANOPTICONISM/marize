@@ -110,7 +110,7 @@ export default function Cart() {
           <a>
             <PrimaryIconButton
               className={style.shopBagBtn}
-              text={translations[locale].shopping_bag_go}
+              text={translations[locale].cart_go}
             />
           </a>
         </Link>
