@@ -18,10 +18,10 @@
   align-items: flex-start;
 }
 
-.contact_wrapper .facebook h4,
-.contact_wrapper .facebook h4 a {
+.contact_wrapper .facebook h4 {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .contact_wrapper .facebook h4 svg {
@@ -44,7 +44,7 @@
 }
 
 .facebook h4 {
-  width: max-content;
+  width: 100%;
   background-color: var(--background-colour-h1);
   color: var(--white-colour);
   text-align: center;

@@ -28,7 +28,7 @@ export default function StoreInfo({
           rel="noreferrer"
         >
           <h4>
-            Encontra-nos no
+          {translations[locale].facebook}
             <AiOutlineFacebook />
           </h4>
         </a>
