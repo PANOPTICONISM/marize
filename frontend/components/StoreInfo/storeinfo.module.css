@@ -13,9 +13,9 @@
 .contact_wrapper .phone,
 .contact_wrapper .address a,
 .contact_wrapper .hours {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 6px;
 }
 
 .contact_wrapper .facebook h4 {
@@ -67,9 +67,8 @@
 
 .phone svg,
 .mail svg,
-.hours svg,
 .address svg,
-.mail svg {
+.mail svg, .hours svg {
   font-size: 18px;
   color: var(--black-colour);
   margin-right: 6px;
@@ -84,7 +83,11 @@
 }
 
 .address a svg {
-  font-size: 26px;
+  font-size: 24px;
+}
+
+.hours svg {
+  font-size: 20px;
 }
 
 .address h4,

@@ -9,6 +9,7 @@
     z-index: 2;
     max-height: 300px;
     overflow: auto;
+    z-index: 999;
 }
 
 .cartWrapper h3 {

@@ -95,11 +95,12 @@
   max-width: 300px;
 }
 
-.img_container img {
-  display: block;
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
+.image {
+  transition: transform 0.2s;
+}
+
+.image:hover {
+  transform: scale(0.9);
 }
 
 .blue_heart svg {
@@ -113,10 +114,17 @@
   color: var(--color-h1);
   padding: 3px;
   z-index: 2;
+  cursor: pointer;
 }
 
-.brand {
-  text-transform: uppercase;
+.card_txt h2 {
+  font-size: 16px;
+  font-weight: 300;
+  margin: 6px 0;
+}
+
+.card_txt h3 {
+  margin-top: 0;
 }
 
 .price {
