@@ -15,6 +15,8 @@ function Confirmation({
 }) {
   const { stateCart } = useContext(GlobalContext);
   const { locale } = useRouter();
+  
+  const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.reduce((accum, item) => Number(accum) + Number(item.quantity), 0) : "";
 
   if (shippingData) {
     return (
@@ -23,7 +25,7 @@ function Confirmation({
           <div className={style.shoppingBag}>
             <h1>
               My Shopping Bag
-              <span> ({stateCart.cart?.length} articles)</span>
+              <span> ({cartTotal} articles)</span>
             </h1>
             {stateCart.cart?.map((product: any) => (
               <article key={product._id} className={style.shoppingArticle}>
@@ -57,10 +59,9 @@ function Confirmation({
           </div>
         </main>
         <aside>
+          <div>
           <h2>Order details</h2>
-
           <h3>Shipping Summary</h3>
-
           <table>
             <tbody>
               <tr>
@@ -68,7 +69,7 @@ function Confirmation({
                 <td>{shippingData.firstname + " " + shippingData.lastname}</td>
               </tr>
               <tr>
-                <td>Phone-number</td>
+                <td style={{whiteSpace: 'nowrap'}}>Phone-number</td>
                 <td>{shippingData.phonenumber}</td>
               </tr>
               <tr>
@@ -77,6 +78,7 @@ function Confirmation({
               </tr>
             </tbody>
           </table>
+          </div>
           <ContinueButton onClick={processOrder} text="Confirm Order" />
         </aside>
       </div>

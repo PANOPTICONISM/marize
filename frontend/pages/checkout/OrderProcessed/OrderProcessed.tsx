@@ -66,7 +66,7 @@ export default function OrderProcessed({
           <p>
             We'll send you an email with a payment link to finalised your
             purchase, and another with shipping confirmation when your item(s)
-            are on the way! We hope you enjoy your new items.
+            are on the way! We hope you enjoy your new purchase.
           </p>
           <p>Thank you!</p>
           <p>Have an amazing day,</p>
