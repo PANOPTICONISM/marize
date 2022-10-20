@@ -10,6 +10,7 @@
     max-height: 300px;
     overflow: auto;
     white-space: nowrap;
+    z-index: 999;
 }
 
 .cartFavouritesWrapper h3 {

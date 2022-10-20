@@ -120,14 +120,15 @@ export default function Products({ data, locale }) {
             width={300}
             height={340}
             alt="products"
+            className={style.image}
           />
         </a>
       </Link>
       <div className={style.card_txt}>
-        <p className={style.brand}>{article.vendor?.title}</p>
-        <p>
+        <h2 className={style.brand}>{article.vendor?.title}</h2>
+        <h3>
           {article.title[locale] ? article.title[locale] : article.title.pt}
-        </p>
+        </h3>
       </div>
     </div>
   ));

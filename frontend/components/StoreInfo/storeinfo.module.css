@@ -13,15 +13,15 @@
 .contact_wrapper .phone,
 .contact_wrapper .address a,
 .contact_wrapper .hours {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 6px;
 }
 
-.contact_wrapper .facebook h4,
-.contact_wrapper .facebook h4 a {
+.contact_wrapper .facebook h4 {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .contact_wrapper .facebook h4 svg {
@@ -44,7 +44,7 @@
 }
 
 .facebook h4 {
-  width: max-content;
+  width: 100%;
   background-color: var(--background-colour-h1);
   color: var(--white-colour);
   text-align: center;
@@ -67,9 +67,8 @@
 
 .phone svg,
 .mail svg,
-.hours svg,
 .address svg,
-.mail svg {
+.mail svg, .hours svg {
   font-size: 18px;
   color: var(--black-colour);
   margin-right: 6px;
@@ -84,7 +83,11 @@
 }
 
 .address a svg {
-  font-size: 26px;
+  font-size: 24px;
+}
+
+.hours svg {
+  font-size: 20px;
 }
 
 .address h4,

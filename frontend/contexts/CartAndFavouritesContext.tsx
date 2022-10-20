@@ -23,8 +23,6 @@ const initialState: IState = {
 export const GlobalContext = createContext<IState | any>(initialState);
 
 function reducer(state: IState, action: IAction): IState {
-  console.log(action.payload, "payload");
-  console.log(state);
 
   switch (action.type) {
     case "ADD_FAVOURITES":
@@ -47,8 +45,8 @@ function reducer(state: IState, action: IAction): IState {
               product._id === action.payload.product._id
                 ? {
                     ...product,
-                    quantity: product.quantity + 1,
-                    size: product.size + " " + action.payload.productSize,
+                    quantity: Number(product.quantity) + 1,
+                    size: action.payload.productSize === null ? null : product.size + " " + action.payload.productSize,
                   }
                 : product
             )

@@ -5,7 +5,7 @@ import Hamburger from "hamburger-react";
 import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Cart from "../Cart/Cart";
 import MenuNav from "../MenuNav/MenuNav";
 import FavouritesCart from "../FavouritesCart/FavouritesCart";
@@ -20,13 +20,16 @@ export default function Navigation() {
   const toggleOpen = () => {
     setMenuOpen(!menuOpen);
   };
-  // if (menuOpen) {
-  //     document.body.style.overflowY = "hidden";
-  // } else {
-  //     document.body.style.overflowY = "scroll";
-  // }
-  const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.length : "";
 
+  if (typeof window !== 'undefined') {
+    if (menuOpen) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "scroll";
+    }
+  }
+
+  const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.reduce((accum, item) => Number(accum) + Number(item.quantity), 0) : "";
   const favouritesCartTotal =
     state?.favourites?.length > 0 ? state.favourites.length : "";
 

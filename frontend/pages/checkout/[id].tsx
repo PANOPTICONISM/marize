@@ -33,9 +33,8 @@ function CheckoutWrapper() {
   const [message, setMessage] = useState("");
 
   const processOrder = async (e: { preventDefault: () => void }) => {
-    console.log("clicked");
     e.preventDefault();
-    let userStructure = {
+    const userStructure = {
       userId: stateCart.userId,
       firstName: shippingData.firstname,
       lastName: shippingData.lastname,
@@ -45,31 +44,26 @@ function CheckoutWrapper() {
       cart: stateCart.cart,
     };
 
-    let baseResponse = await fetch("/api/supabase", {
+    const baseResponse = await fetch("/api/supabase", {
       method: "POST",
       body: JSON.stringify(userStructure),
     });
 
-    let emailResponse = await fetch("/api/email", {
+    const emailResponse = await fetch("/api/email", {
       method: "POST",
       body: JSON.stringify(userStructure),
     });
 
-    let userData = await baseResponse.json();
-    let emailData = await emailResponse.json();
-    console.log(emailData);
-    console.log(userData);
+    const userData = await baseResponse.json();
+    const emailData = await emailResponse.json();
+
     if (userData.success) {
       nextStep();
-      console.log(userData.message);
       return setMessage(userData.message);
     } else {
-      console.log(userData.message);
       return setError(userData.message);
     }
   };
-
-  console.log(shippingData);
 
   const useStyles = makeStyles(() => ({
     root: {

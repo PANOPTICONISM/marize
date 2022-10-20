@@ -32,7 +32,7 @@ export function CartResumeContainer({
 export function ProductCard({ product }: { product: any }) {
   const { state, dispatch, dispatchCart } = useContext(GlobalContext);
   const maxItems = {
-    quantity: [1, 2, 3, 4],
+    quantity: [1, 2, 3, 4, 5],
   };
   const { locale } = useRouter();
 
@@ -78,7 +78,7 @@ export function ProductCard({ product }: { product: any }) {
             onChange={(e: any) => {
               updateCartQuantity(dispatchCart, product, e.target.value);
             }}
-            defaultValue={product.quantity}
+            value={product?.quantity}
             name="quantity"
             id="quantity"
           >
@@ -110,7 +110,7 @@ export default function Cart() {
           <a>
             <PrimaryIconButton
               className={style.shopBagBtn}
-              text={translations[locale].shopping_bag_go}
+              text={translations[locale].cart_go}
             />
           </a>
         </Link>

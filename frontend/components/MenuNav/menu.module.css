@@ -11,6 +11,10 @@ body .menu {
   z-index: 900;
 }
 
+.menu h4 {
+  margin-bottom: 0;
+}
+
 .menu_sections a {
   color: var(--black-colour);
 }
@@ -47,6 +51,7 @@ body .menu {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 18px;
+  margin-top: 3px;
 }
 
 .nav_wrapper ul li {

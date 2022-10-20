@@ -33,8 +33,6 @@ const SearchBar = ({
     }
   };
 
-  // console.log(searchedArticles, products)
-
   return (
     <>
       <input

@@ -7,8 +7,6 @@ export default async function server(
 ) {
   const products = await sanity.fetch(`*`);
 
-  console.log("server");
-
   return res.json({
     products,
   });
