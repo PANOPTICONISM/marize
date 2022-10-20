@@ -23,6 +23,10 @@ export const translations = {
     categories: "Categories",
     discount: "Discounts",
     productsTitle: "Women's clothes",
+
+    pickSize: "Pick your size",
+    uniqueSize: "Unique size",
+    addToBag: "Add to shopping bag",
   },
   pt: {
     visit_headline: "Visite a nossa loja",
@@ -48,5 +52,9 @@ export const translations = {
     categories: "Categorias",
     discount: "Saldos",
     productsTitle: "Artigos para a mulher",
+
+    pickSize: "Escolha o tamanho",
+    uniqueSize: "Tamanho unico",
+    addToBag: "Adicione a sua bolsa",
   },
 };

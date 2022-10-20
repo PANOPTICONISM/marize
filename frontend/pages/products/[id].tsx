@@ -19,6 +19,7 @@ import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import { addToCart } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
+import { translations } from "../../translations/common";
 
 export function ProductDetails({
   showDetailsAccordion,
@@ -69,16 +70,20 @@ export function ProductDetails({
               required
               onChange={storeSizeValue}
             >
-              <option value="def" disabled>
-                Pick your size
-              </option>
-              {product.variants?.map((variant) =>
-                variant?.sizes?.map((size) => (
-                  <option key={size._id} value={size.title}>
-                    {size.title}
+              {product?.variants?.[0] ?
+                <>
+                  <option value="def" disabled>
+                    {translations[locale].pickSize}
                   </option>
-                ))
-              )}
+                  {product.variants[0].sizes?.map((size) => (
+                    <option key={size._id} value={size.title}>
+                      {size.title}
+                    </option>
+                  ))
+                  }</>
+                : <option value="def" disabled>
+                {translations[locale].uniqueSize}
+              </option>}
             </select>
           </form>
           <Link href="/assets/sizing-chart.jpg">
@@ -89,7 +94,7 @@ export function ProductDetails({
         </div>
         <div className={style.shopping}>
           <PrimaryIconButton
-            text="Add to shopping bag"
+            text={translations[locale].addToBag}
             onClick={() => addToCart(dispatchCart, product, storeSize)}
           />
           {show ? (
@@ -104,7 +109,7 @@ export function ProductDetails({
             />
           )}
         </div>
-        <div className={style.details}>
+        {/* <div className={style.details}>
           {product?.description && (
             <span onClick={showDetailsAccordion}>
               <GiMailShirt />
@@ -115,7 +120,7 @@ export function ProductDetails({
             <MdAvTimer />
             Delivery and Returns
           </span>
-        </div>
+        </div> */}
       </div>
     </section>
   );
