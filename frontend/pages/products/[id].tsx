@@ -53,6 +53,7 @@ export function ProductDetails({
         src={absoluteURLsForSanity(product.images[0].asset._ref).url()}
         width={350}
         height={455}
+        objectFit="contain"
         alt="product"
       />
       <div className={style.wrapper}>
