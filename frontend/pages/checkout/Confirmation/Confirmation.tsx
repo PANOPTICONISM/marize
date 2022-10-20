@@ -13,7 +13,6 @@ function Confirmation({
   shippingData?: any;
   processOrder?: any;
 }) {
-  console.log(shippingData, "shipping data");
   const { stateCart } = useContext(GlobalContext);
   const { locale } = useRouter();
 

@@ -23,8 +23,6 @@ const initialState: IState = {
 export const GlobalContext = createContext<IState | any>(initialState);
 
 function reducer(state: IState, action: IAction): IState {
-  console.log(action.payload, "payload");
-  console.log(state);
 
   switch (action.type) {
     case "ADD_FAVOURITES":

@@ -25,6 +25,8 @@ export default function ShoppingBag({ next }: { next?: any }) {
     quantity: [1, 2, 3, 4],
   };
 
+  const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.reduce((accum, item) => Number(accum) + Number(item.quantity), 0) : "";
+
   return (
     <section>
       {stateCart?.cart.length > 0 ? (
@@ -32,7 +34,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
           <div className={style.shoppingBag}>
             <h1>
               My Shopping Bag
-              <span> ({stateCart.cart.length} articles)</span>
+              <span> ({cartTotal} articles)</span>
             </h1>
             {stateCart.cart.map((product: any) => (
               <article key={product._id} className={style.shoppingArticle}>
@@ -111,7 +113,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
             <div>
               <h2>Does your shopping bag check out?</h2>
               <p>
-                You can pick your preferred shopping option in the next step.
+                You can pick your preferred shipping option in the next step.
               </p>
               <ContinueButton onClick={next} text="continue" />
             </div>
