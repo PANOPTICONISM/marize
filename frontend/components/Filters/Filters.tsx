@@ -27,9 +27,8 @@ export function Filters({
       </h4>
       {vendors?.map((filter: { title: string; _id: any }) => (
         <div
-          className={`${style.filters_products} ${
-            mobileFilters && style.mobile
-          }`}
+          className={`${style.filters_products} ${mobileFilters && style.mobile
+            }`}
           key={filter._id}
         >
           <label key={filter._id} className={style.container_checkbox}>
@@ -45,13 +44,12 @@ export function Filters({
         </div>
       ))}
       <h4 className={`${mobileFilters && style.mobile}`}>
-        {translations[locale].articles}
+        {translations[locale].categories}
       </h4>
       {discounts ? (
         <label
-          className={`${style.container_checkbox} ${style.filters_products} ${
-            mobileFilters && style.mobile
-          }`}
+          className={`${style.container_checkbox} ${style.filters_products} ${mobileFilters && style.mobile
+            }`}
         >
           {translations[locale].discount}
           <input
@@ -65,9 +63,8 @@ export function Filters({
       ) : null}
       {categories?.map((filter: { title: string; _id: any }) => (
         <div
-          className={`${style.filters_products} ${
-            mobileFilters && style.mobile
-          }`}
+          className={`${style.filters_products} ${mobileFilters && style.mobile
+            }`}
           key={filter._id}
         >
           <label key={filter._id} className={style.container_checkbox}>

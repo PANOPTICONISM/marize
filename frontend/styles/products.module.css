@@ -26,7 +26,7 @@
 
 .products_wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
   gap: 18px;
   justify-items: center;
@@ -138,11 +138,13 @@
   font-weight: 800;
   display: none;
 }
+
 @media screen and (max-width: 600px) {
   .products_title {
     text-align: center;
     font-size: 18px;
   }
+
   .containerProductSection {
     grid-template-columns: 1fr;
   }
@@ -151,10 +153,12 @@
     width: 270px;
     height: 270px;
   }
+
   .blue_heart svg {
     width: 25px;
     height: 25px;
   }
+
   .mobile_filters {
     display: flex;
   }
@@ -164,4 +168,11 @@
   .sort_dropdown {
     right: 0%;
   }
+}
+
+@media screen and (min-width: 800px) {
+  .products_wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(300px, min-content));
+  }
+
 }
