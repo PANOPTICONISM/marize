@@ -103,18 +103,21 @@
   transform: scale(0.9);
 }
 
+.blue_heart button,
 .blue_heart svg {
   position: absolute;
   right: 0;
   top: 0;
-  width: 40px;
-  height: 40px;
-  font-size: 2rem;
+  width: 30px;
+  height: 30px;
   background-color: var(--background-colour-h1);
   color: var(--color-h1);
+  font-size: 30px;
   padding: 3px;
   z-index: 2;
   cursor: pointer;
+  outline: none;
+  border: none;
 }
 
 .card_txt h2 {

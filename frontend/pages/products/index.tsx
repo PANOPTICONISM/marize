@@ -101,11 +101,13 @@ export default function Products({ data, locale }) {
   const articlesUI = filteredArticles?.map((article: any) => (
     <div className={style.card} key={article._id}>
       <div className={style.blue_heart}>
-        {state?.favourites.includes(article) ? (
-          <AiFillHeart
+        {state?.favourites.some((favourite: { _id: string; }) => favourite._id === article._id) ? (
+          <button
             onClick={() => removeFromFavourites(dispatch, article._id)}
             className={style.shoppingSVG}
-          />
+          >
+            <AiFillHeart />
+          </button>
         ) : (
           <AiOutlineHeart
             onClick={() => addToFavourites(dispatch, article)}
