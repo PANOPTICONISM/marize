@@ -39,7 +39,7 @@ export function ProductDetails({
 
   useEffect(() => {
     setShow(
-      state.favourites.some((food: { _id: string }) => food._id === product._id)
+      state?.favourites.some((favourite: { _id: string; }) => favourite._id === product._id)
     );
   }, [product._id, state?.favourites]);
 
@@ -83,8 +83,8 @@ export function ProductDetails({
                   ))
                   }</>
                 : <option value="def" disabled>
-                {translations[locale].uniqueSize}
-              </option>}
+                  {translations[locale].uniqueSize}
+                </option>}
             </select>
           </form>
           <Link href="/assets/sizing-chart.jpg">
