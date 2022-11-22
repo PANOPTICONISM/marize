@@ -34,7 +34,7 @@ export default function Products({ data, locale }) {
   const [isDiscounts, setIsDiscounts] = useState(false);
 
   const handleChecked = (e: {
-    target: { value: string; checked: any; name: string };
+    target: { value: string; checked: boolean; name: string };
   }) => {
     const value = e.target.value;
 
