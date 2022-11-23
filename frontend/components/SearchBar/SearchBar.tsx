@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
+import { ProductsContext } from "../../contexts/ProductsContext";
 import SearchDropdown from "../SearchDropdown/SearchDropdown";
 
 const SearchBar = ({
   className,
-  products,
 }: {
-  className?: string;
-  products?: any;
+  className: string;
 }) => {
   const [search, setSearch] = useState("");
   const [searchedArticles, setSearchedArticles] = useState([]);
 
+  const { state } = useContext(ProductsContext);
+  console.log(state.products, 'oi')
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    const searchArticles: any = products?.filter((p) => {
-      const searchParam = p.categories.map((c: any) => {
+    const searchArticles: any = state.products?.filter((p) => {
+      const searchParam = p.categories?.map((c: any) => {
         return c.name;
       });
       return (

@@ -5,7 +5,7 @@ import Hamburger from "hamburger-react";
 import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Cart from "../Cart/Cart";
 import MenuNav from "../MenuNav/MenuNav";
 import FavouritesCart from "../FavouritesCart/FavouritesCart";

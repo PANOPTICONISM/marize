@@ -5,21 +5,23 @@ import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 
 type ArrivalProps = {
   title: string,
-  products: {
-    _id: string,
-    title: { en: string, pt: string },
-    vendor: { title: string, _id: string },
-    slug: string | null,
-  }[],
+  products: ProductProps,
   locale: string,
-  category: string | null,
+}
+
+export type ProductProps = {
+  _id: string,
+  title: { en: string, pt: string },
+  category: {} | null,
+  vendor: { title: string, _id: string },
+  slug: string | null,
   body: { en: any, pt: any } | null,
   images: {
     _type: string,
     _key: string,
     asset: { _ref: string, _type: string }
   }[],
-}
+}[]
 
 const NewArrivals = ({ title, products, locale }: ArrivalProps) => {
   const reversedArray: any[] = [];

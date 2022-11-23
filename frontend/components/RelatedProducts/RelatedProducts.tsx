@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import style from "./relatedproducts.module.css";
+import { ProductProps } from "../NewArrivals/NewArrivals";
 
-const RelatedProducts = ({ relatedProducts }: { relatedProducts?: any }) => {
+const RelatedProducts = ({ relatedProducts }: { relatedProducts: ProductProps }) => {
   const returnMax5Products = relatedProducts?.slice(0, 5);
 
   if (relatedProducts?.length > 0) {
