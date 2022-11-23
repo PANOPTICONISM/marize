@@ -7,26 +7,27 @@
     border: 1px solid #000;
     max-height: 180px;
     overflow: auto;
+    display: grid;
+    gap: 6px;
 }
 
 input:focus .dropdown {
     display: block;
 }
 
-.items {
-    width: 200px;
+.item {
+    width: 250px;
     color: var(--black-colour);
     display: flex;
     align-items: center;
 }
 
-.items:not(:last-child) {
+.item:not(:last-child) {
     margin-bottom: 6px;
 }
 
 .dropdown img {
     width: 60px;
-    margin-right: 6px;
 }
 
 .dropdown::-webkit-scrollbar {
@@ -42,6 +43,11 @@ input:focus .dropdown {
 
 .dropdown p:hover {
     cursor: pointer;
+}
+
+.title {
+    font-size: 12px;
+    margin-left: 10px;
 }
 
 @media screen and (min-width: 600px) {

@@ -56,7 +56,7 @@ export async function getServerSideProps() {
     `*[_type == "product"]{
       _id,
       body,
-      category[]->{_id, title, parentVendor},
+      category->{_id, title},
       images,
       slug,
       title,
