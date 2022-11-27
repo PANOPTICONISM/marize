@@ -7,9 +7,16 @@ import CategorySections from "../components/CategorySections/CategorySections";
 import { sanity } from "./api/lib/sanity.js";
 import { useRouter } from "next/router";
 import { absoluteURLsForSanity } from "../utils/SanityFunctions";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { ProductsContext } from "../contexts/ProductsContext";
 
 export default function Homepage({ products, homepage }) {
+  const { dispatch } = useContext(ProductsContext);
   const { locale } = useRouter();
+
+  useEffect(() => {
+    dispatch({ payload: products });
+  }, [dispatch, products])
 
   const { slogan, image, imagesGallery, newArrivals, body } = homepage[0];
 
@@ -49,7 +56,7 @@ export async function getServerSideProps() {
     `*[_type == "product"]{
       _id,
       body,
-      category[]->{_id, title, parentVendor},
+      category->{_id, title},
       images,
       slug,
       title,

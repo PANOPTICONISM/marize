@@ -1,28 +1,33 @@
 import style from "./searchdropdown.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { ProductProps } from "../NewArrivals/NewArrivals";
+import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
+import { useRouter } from "next/router";
 
 export default function SearchDropdown({
   searchedArticles,
 }: {
-  searchedArticles?: any;
+  searchedArticles?: ProductProps;
 }) {
+  const { locale } = useRouter();
+
   if (searchedArticles?.length > 0) {
     return (
       <div className={style.dropdown}>
-        {searchedArticles?.slice(0, 10).map((article: any) => (
+        {searchedArticles?.slice(0, 10).map((article) => (
           <Link href={`/products/${article._id}`} key={article._id}>
             <a>
-              {" "}
-              <div className={style.items}>
+              <div className={style.item}>
                 <Image
-                  className={style.items}
-                  src={article.image.url}
+                  src={absoluteURLsForSanity(
+                    article?.images[0].asset._ref
+                  ).url()}
                   width={40}
                   height={60}
-                  alt={article.name}
+                  alt={article.title[locale]}
                 />
-                <span>{article.name}</span>
+                <span className={style.title}>{article.title[locale]}</span>
               </div>
             </a>
           </Link>

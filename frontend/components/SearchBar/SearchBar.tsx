@@ -1,32 +1,31 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
 import { useState } from "react";
+import { ProductsContext } from "../../contexts/ProductsContext";
+import { ProductProps } from "../NewArrivals/NewArrivals";
 import SearchDropdown from "../SearchDropdown/SearchDropdown";
 
 const SearchBar = ({
   className,
-  products,
 }: {
-  className?: string;
-  products?: any;
+  className: string;
 }) => {
   const [search, setSearch] = useState("");
   const [searchedArticles, setSearchedArticles] = useState([]);
 
+  const { state } = useContext(ProductsContext);
+  const { locale } = useRouter();
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    const searchArticles: any = products?.filter((p) => {
-      const searchParam = p.categories.map((c: any) => {
-        return c.name;
-      });
+    const searchArticles = state.products?.filter((p) => {
       return (
-        searchParam
-          .flat()
-          .toString()
+        p.title[locale]
           .toLowerCase()
           .indexOf(search.toLowerCase()) > -1
       );
     });
-    if (search.length > 1) {
+    if (search.length > 0) {
       setSearchedArticles(searchArticles);
     } else {
       setSearchedArticles([]);

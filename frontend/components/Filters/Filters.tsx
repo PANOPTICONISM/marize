@@ -3,21 +3,48 @@ import React from "react";
 import { translations } from "../../translations/common";
 import style from "./filters.module.css";
 
+type FilterProps = {
+  onChange: (e: {
+    target: {
+      value: string,
+      checked: boolean,
+      name: string,
+    }
+  }) => void,
+  categories: {
+    _id: string,
+    _type: string,
+    _updatedAt: string,
+    title: {
+      en: string,
+      pt: string,
+      _type: string,
+    }
+    parentVendor: {
+      _key: string,
+      _type: string,
+      _reference: string,
+    }[],
+    slug: {
+      _type: string,
+      current: string,
+    }
+  }[],
+  vendors: {
+    title: string,
+    _id: string,
+  }[],
+  discounts: boolean,
+  mobileFilters: boolean,
+}
+
 export function Filters({
-  className,
   onChange,
   categories,
   vendors,
   discounts,
   mobileFilters,
-}: {
-  className?: string;
-  onChange: any;
-  categories: any[];
-  vendors: any[];
-  discounts: boolean;
-  mobileFilters: boolean;
-}) {
+}: FilterProps) {
   const { locale } = useRouter();
 
   return (
@@ -61,7 +88,7 @@ export function Filters({
           <span className={style.checkmark}></span>
         </label>
       ) : null}
-      {categories?.map((filter: { title: string; _id: any }) => (
+      {categories?.map((filter) => (
         <div
           className={`${style.filters_products} ${mobileFilters && style.mobile
             }`}
@@ -89,15 +116,7 @@ export default function FilterComponent({
   vendors,
   discounts,
   mobileFilters,
-  setMobileFilters,
-}: {
-  onChange?: (e: any) => void | undefined;
-  categories?: any;
-  vendors?: any;
-  discounts?: any;
-  mobileFilters?: any;
-  setMobileFilters?: boolean;
-}) {
+}: FilterProps) {
   return (
     <div>
       <Filters
