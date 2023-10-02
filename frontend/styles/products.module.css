@@ -93,6 +93,12 @@
 .card {
   position: relative;
   max-width: 300px;
+  min-width: 100%;
+}
+
+.imageWrapper {
+  max-height: 340px;
+  height: 100%;
 }
 
 .image {
@@ -177,5 +183,4 @@
   .products_wrapper {
     grid-template-columns: repeat(auto-fill, minmax(300px, min-content));
   }
-
 }

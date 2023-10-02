@@ -65,8 +65,8 @@ export default function StoreInfo({
           <div>
             <h4>{translations[locale].email}</h4>
             <p>
-              <a href="mailto: hello@marize.pt">hello@marize.pt</a>
-            </p>{" "}
+              <a href="mailto: mariaseixas1@sapo.pt">mariaseixas1@sapo.pt</a>
+            </p>
           </div>
         </div>
       </div>

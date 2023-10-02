@@ -34,18 +34,19 @@ const NewArrivals = ({ title, products, locale }: ArrivalProps) => {
       <div className={style.articles}>
         {newArrivals?.map((article) => (
           <div key={article._id}>
+            {article.images ? 
             <Link href={`/products/${article._id}`}>
               <a>
                 <Image
                   src={absoluteURLsForSanity(
-                    article?.images[0].asset._ref
+                    article.images[0].asset._ref
                   ).url()}
                   width={350}
                   height={455}
                   alt={article.title[locale]}
                 />
               </a>
-            </Link>
+            </Link> : null}
             <h2 className={style.brand}>{article.vendor?.title}</h2>
             <h3>
               {article.title[locale] ? article.title[locale] : article.title.pt}
