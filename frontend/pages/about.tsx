@@ -10,8 +10,10 @@ import { sanity } from "./api/lib/sanity";
 import { absoluteURLsForSanity } from "../utils/SanityFunctions";
 import { styleSanityBlocks } from "../utils/SanityFunctions";
 import { Key } from "react";
+import { useRouter } from "next/router";
 
 export default function About({ data }) {
+  const { locale } = useRouter();
   const {
     heading,
     bulletPoints,
@@ -33,11 +35,11 @@ export default function About({ data }) {
               height={300}
               alt="muralhas"
             />
-            <h1>{heading}</h1>
+            <h1>{heading[locale] ? heading[locale] : heading.pt}</h1>
           </header>
           <article>
             <section className={style.introduction}>
-              {styleSanityBlocks(description)}
+              {styleSanityBlocks(description[locale] ? description[locale] : description.pt)}
             </section>
             <section className={style.whyVisitUs}>
               <Image
@@ -46,7 +48,7 @@ export default function About({ data }) {
                 height={300}
                 alt="background-image"
               />
-              <div>{styleSanityBlocks(bulletPoints)}</div>
+              <div>{styleSanityBlocks(bulletPoints[locale] ? bulletPoints[locale] : bulletPoints.pt)}</div>
             </section>
             <section className={style.brands}>
               <Image src={sky} alt="vera" />
@@ -56,7 +58,7 @@ export default function About({ data }) {
               <Image src={love} alt="love-m" />
             </section>
             <section>
-              <h1>{subheading}</h1>
+              <h1>{subheading[locale] ? subheading[locale] : subheading.pt}</h1>
               <div className={style.storeImages}>
                 {storeImages.map(
                   (image: { _key: Key; asset: { _ref: any } }) => (

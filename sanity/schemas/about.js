@@ -9,7 +9,7 @@ export default {
     {
       name: "title",
       title: "Nome",
-      type: "localeString",
+      type: "string",
     },
     {
       name: "heading",
