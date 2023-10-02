@@ -93,6 +93,10 @@
 .card {
   position: relative;
   max-width: 300px;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 
 .image {
@@ -177,5 +181,4 @@
   .products_wrapper {
     grid-template-columns: repeat(auto-fill, minmax(300px, min-content));
   }
-
 }

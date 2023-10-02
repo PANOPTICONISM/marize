@@ -115,17 +115,18 @@ export default function Products({ data, locale }) {
           />
         )}
       </div>
+      {article.images ? 
       <Link href={`/products/${article._id}`}>
         <a>
           <Image
-            src={absoluteURLsForSanity(article?.images?.[0].asset._ref).url()}
+            src={absoluteURLsForSanity(article.images?.[0].asset._ref).url()}
             width={300}
             height={340}
             alt="products"
             className={style.image}
           />
         </a>
-      </Link>
+      </Link> : null}
       <div className={style.card_txt}>
         <h2 className={style.brand}>{article.vendor?.title}</h2>
         <h3>
