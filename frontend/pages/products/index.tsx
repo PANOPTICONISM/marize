@@ -115,6 +115,7 @@ export default function Products({ data, locale }) {
           />
         )}
       </div>
+      <div className={style.imageWrapper}>
       {article.images ? 
       <Link href={`/products/${article._id}`}>
         <a>
@@ -127,6 +128,7 @@ export default function Products({ data, locale }) {
           />
         </a>
       </Link> : null}
+      </div>
       <div className={style.card_txt}>
         <h2 className={style.brand}>{article.vendor?.title}</h2>
         <h3>
