@@ -1,24 +1,7 @@
 import Link from "next/link";
 import style from "./buttons.module.css";
 import { BsHandbag } from "react-icons/bs";
-
-export default function Button({
-  path,
-  children,
-  className,
-  locale,
-}: {
-  path: string;
-  children?: React.ReactNode;
-  className?: string;
-  locale?: string;
-}) {
-  return (
-    <Link href={path} locale={locale}>
-      <a className={className}>{children}</a>
-    </Link>
-  );
-}
+import { Button } from "@mui/material";
 
 export function PrimaryButton({
   path,
@@ -32,13 +15,13 @@ export function PrimaryButton({
   locale?: string;
 }) {
   return (
-    <Button
-      path={path}
-      locale={locale}
-      className={`${style.globalButton} ${style.primaryButton} ${className}`}
-    >
-      {text}
-    </Button>
+    <Link href={path} locale={locale}>
+      <a
+        className={`${style.globalButton} ${style.primaryButton} ${className}`}
+      >
+        {text}
+      </a>
+    </Link>
   );
 }
 
@@ -66,19 +49,24 @@ export function PrimaryIconButton({
   className,
   onClick,
   text,
+  disabled,
 }: {
   className?: string;
-  onClick?: () => void;
+  onClick: () => void;
   text?: string;
+  disabled?: boolean;
 }) {
   return (
-    <button
+    <Button
+      variant="contained"
       onClick={onClick}
-      className={`${style.globalButton} ${style.cartButton} ${className}`}
+      startIcon={<BsHandbag />}
+      disabled={disabled}
+      fullWidth
+      sx={{ padding: "14px" }}
     >
-      <BsHandbag />
       {text}
-    </button>
+    </Button>
   );
 }
 

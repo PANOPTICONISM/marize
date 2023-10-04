@@ -102,6 +102,7 @@ export function ProductDetails({
           <PrimaryIconButton
             text={translations[locale].addToBag}
             onClick={() => addToCart(dispatchCart, product, storeSize)}
+            disabled={storeSize === null}
           />
           {show ? (
             <AiFillHeart
