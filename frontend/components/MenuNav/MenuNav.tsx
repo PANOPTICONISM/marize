@@ -1,3 +1,5 @@
+"use client";
+
 import style from "./menu.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -19,13 +21,13 @@ export default function MenuNav() {
   }, []);
 
   if (data.categories.length === 0) {
-    return (<LinearProgress />)
+    return <LinearProgress />;
   }
 
   return (
     <div className={style.menu}>
-        {data !== undefined ? (
-         <>
+      {data !== undefined ? (
+        <>
           <div>
             <h4>{translations[locale].categories}</h4>
             <ul className={style.menu_sections}>
@@ -42,8 +44,8 @@ export default function MenuNav() {
                 </li>
               ))}
             </ul>
-            </div>
-            <div>
+          </div>
+          <div>
             <h4>{translations[locale].brands}</h4>
             <ul className={style.menu_sections}>
               {data.vendors.map((vendor) => (
@@ -60,8 +62,8 @@ export default function MenuNav() {
               ))}
             </ul>
           </div>
-          </>
-        ) : null}
+        </>
+      ) : null}
     </div>
   );
 }
