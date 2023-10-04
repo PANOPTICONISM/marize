@@ -71,20 +71,25 @@ export function ProductDetails({
               required
               onChange={storeSizeValue}
             >
-              {product?.variants?.[0] ?
-                <>
-                  <option value="def" disabled>
-                    {translations[locale].pickSize}
-                  </option>
-                  {product.variants[0].sizes?.map((size) => (
+              <>
+                <option value="def" disabled>
+                  {translations[locale].pickSize}
+                </option>
+                {product.variants?.[0]?.sizes?.map((size) => {
+                  if (size.title === "Tamanho único") {
+                    return (
+                      <option key={size._id} value={size.title}>
+                        {translations[locale].uniqueSize}
+                      </option>
+                    );
+                  }
+                  return (
                     <option key={size._id} value={size.title}>
                       {size.title}
                     </option>
-                  ))
-                  }</>
-                : <option value="def" disabled>
-                  {translations[locale].uniqueSize}
-                </option>}
+                  );
+                })}
+              </>
             </select>
           </form>
           <Link href="/assets/sizing-chart.jpg">
