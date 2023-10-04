@@ -12,7 +12,6 @@ import FavouritesCart from "../FavouritesCart/FavouritesCart";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 
 export default function Navigation() {
-  // const { cart } = useShoppingBagCMS();
   const [openCart, setOpenCart] = useState(false);
   const { state, stateCart } = useContext(GlobalContext);
   const [openFavouritesCart, setOpenFavouritesCart] = useState(false);
@@ -21,33 +20,22 @@ export default function Navigation() {
     setMenuOpen(!menuOpen);
   };
 
-  if (typeof window !== 'undefined') {
-    if (menuOpen) {
-      document.body.style.overflowY = "hidden";
-    } else {
-      document.body.style.overflowY = "scroll";
-    }
-  }
-
   const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.reduce((accum, item) => Number(accum) + Number(item.quantity), 0) : "";
   const favouritesCartTotal =
     state?.favourites?.length > 0 ? state.favourites.length : "";
 
   return (
-    <nav className={style.wrapper}>
-      {menuOpen && <MenuNav toggleOpen={toggleOpen} />}
-      <div className={style.left_nav}>
+    <header className={style.header}>
+    <div className={style.left_nav}>
         <Hamburger
           aria-label="burger-menu"
           toggle={toggleOpen}
           toggled={menuOpen}
         />
-
-        <div className={style.search_bar_wrapper}>
+      </div>
+      <div className={style.search_bar_wrapper}>
           <SearchBar className={style.search_bar} />
         </div>
-      </div>
-
       <div className={style.logo}>
         <Link href="/">
           <a>
@@ -55,7 +43,6 @@ export default function Navigation() {
           </a>
         </Link>
       </div>
-
       <div className={style.right_nav}>
         <div className={style.favouritesWrapper}>
           <div onClick={() => setOpenFavouritesCart(!openFavouritesCart)}>
@@ -68,7 +55,6 @@ export default function Navigation() {
           )}
           {openFavouritesCart && <FavouritesCart />}
         </div>
-        {/* {!window.location.pathname.includes("/checkout/") && ( */}
         <div className={style.shoppingBag}>
           <div onClick={() => setOpenCart(!openCart)}>
             <BsHandbag />
@@ -76,8 +62,10 @@ export default function Navigation() {
           {cartTotal && <span className={style.cartTotal}>{cartTotal}</span>}
           {openCart && <Cart />}
         </div>
-        {/* // )} */}
       </div>
+    <nav className={style.wrapper}>
+      {menuOpen && <MenuNav />}
     </nav>
+    </header>
   );
 }

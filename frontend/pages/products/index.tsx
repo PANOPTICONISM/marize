@@ -3,7 +3,6 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import style from "../../styles/products.module.css";
 import Main from "../../containers/Main/Main";
 import Image from "next/image";
-import heroproducts from "../../public/assets/heroproducts.png";
 import FilterComponent from "../../components/Filters/Filters";
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
@@ -22,7 +21,7 @@ export const addUrlParams = (router, cat) => {
   });
 };
 
-export default function Products({ data, locale }) {
+export default function Products({ data, locale, mainPageContent }) {
   const { products, vendors, categories } = data;
   const [filteredArticles, setFilteredArticles] = useState<any>(products);
   const [filters, setFilters] = useState({
@@ -101,7 +100,9 @@ export default function Products({ data, locale }) {
   const articlesUI = filteredArticles?.map((article: any) => (
     <div className={style.card} key={article._id}>
       <div className={style.blue_heart}>
-        {state?.favourites.some((favourite: { _id: string; }) => favourite._id === article._id) ? (
+        {state?.favourites.some(
+          (favourite: { _id: string }) => favourite._id === article._id
+        ) ? (
           <button
             onClick={() => removeFromFavourites(dispatch, article._id)}
             className={style.shoppingSVG}
@@ -116,18 +117,21 @@ export default function Products({ data, locale }) {
         )}
       </div>
       <div className={style.imageWrapper}>
-      {article.images ? 
-      <Link href={`/products/${article._id}`}>
-        <a>
-          <Image
-            src={absoluteURLsForSanity(article.images?.[0].asset._ref).url()}
-            width={300}
-            height={340}
-            alt="products"
-            className={style.image}
-          />
-        </a>
-      </Link> : null}
+        {article.images ? (
+          <Link href={`/products/${article._id}`}>
+            <a>
+              <Image
+                src={absoluteURLsForSanity(
+                  article.images?.[0].asset._ref
+                ).url()}
+                width={300}
+                height={340}
+                alt="products"
+                className={style.image}
+              />
+            </a>
+          </Link>
+        ) : null}
       </div>
       <div className={style.card_txt}>
         <h2 className={style.brand}>{article.vendor?.title}</h2>
@@ -138,22 +142,26 @@ export default function Products({ data, locale }) {
     </div>
   ));
 
+  if (!mainPageContent) {
+    return <></>;
+  }
+
   return (
     <Main>
       <div className={style.products_container}>
-        <header className={style.products_hero}>
+        <section className={style.products_hero}>
           <Image
-            src={heroproducts}
+            src={absoluteURLsForSanity(
+              mainPageContent[0].backgroundImage.asset._ref
+            ).url()}
             width={1140}
             height={200}
             alt="products_hero"
           />
           <h1 className={style.products_title}>
-            20% discount on all Christmas gifts
+            {mainPageContent[0].slogan[locale]}
           </h1>
-        </header>
-        <h1>{translations[locale].productsTitle}</h1>
-
+        </section>
         <div>
           <ul className={style.sort_filter}>
             <li
@@ -184,6 +192,15 @@ export default function Products({ data, locale }) {
 }
 
 export async function getServerSideProps(context) {
+  const { locale } = context;
+
+  const mainPageContent = await sanity.fetch(
+    `*[_type == "products"]{
+      slogan,
+      backgroundImage
+    }`
+  );
+
   const data = await sanity.fetch(
     `{'products': *[_type == "product"]{
       _id, 
@@ -199,10 +216,9 @@ export async function getServerSideProps(context) {
     }`
   );
 
-  const { locale } = context;
-
   return {
     props: {
+      mainPageContent,
       data,
       locale,
     },

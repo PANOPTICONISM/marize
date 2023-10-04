@@ -22,7 +22,6 @@ export const translations = {
     brands: "Brands",
     categories: "Categories",
     discount: "Discounts",
-    productsTitle: "Women's clothes",
 
     pickSize: "Pick your size",
     uniqueSize: "Unique size",
@@ -30,11 +29,11 @@ export const translations = {
   },
   pt: {
     visit_headline: "Visite a nossa loja",
-    visit_btn: "Descobra mais sobre nos",
+    visit_btn: "Descobra mais sobre nós",
     favorites_bag: "Os seus favoritos",
     remove_favorites: "Retire dos favoritos",
     empty_bag_favorites: "A sua mochila esta vazia.",
-    get_started: "Nao sabe onde comecar?",
+    get_started: "Nao sabe onde começar?",
     explore_products: "Veja os nossos artigos",
     cart: "Bolsa",
     cart_go: "Abra a sua bolsa",
@@ -51,7 +50,6 @@ export const translations = {
     brands: "Marcas",
     categories: "Categorias",
     discount: "Saldos",
-    productsTitle: "Artigos para a mulher",
 
     pickSize: "Escolha o tamanho",
     uniqueSize: "Tamanho unico",

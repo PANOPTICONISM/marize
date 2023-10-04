@@ -23,7 +23,7 @@ export default function Homepage({ products, homepage }) {
   return (
     <>
       <Main>
-        <header className={style.homepageHero}>
+        <section className={style.homepageHero}>
           <h1 className={style.heading}>{slogan[locale] ? slogan[locale] : slogan.pt}</h1>
           <Image
             src={absoluteURLsForSanity(image.asset._ref).url()}
@@ -31,7 +31,7 @@ export default function Homepage({ products, homepage }) {
             height={440}
             alt="hero"
           />
-        </header>
+        </section>
         <section className={style.brands}>
           {imagesGallery.map((img) => (
             <Image
