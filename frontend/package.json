@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@chec/commerce.js": "^2.8.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.12",
     "@sanity/client": "^2.23.2",
     "@sanity/image-url": "^1.0.1",
     "@sendgrid/mail": "^7.6.0",

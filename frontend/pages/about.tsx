@@ -28,7 +28,7 @@ export default function About({ data }) {
     <Main>
       {data.about[0] ? (
         <div className={style.aboutPage}>
-          <header>
+          <section>
             <Image
               src={absoluteURLsForSanity(hero.asset._ref).url()}
               width={1000}
@@ -36,7 +36,7 @@ export default function About({ data }) {
               alt="muralhas"
             />
             <h1>{heading[locale] ? heading[locale] : heading.pt}</h1>
-          </header>
+          </section>
           <article>
             <section className={style.introduction}>
               {styleSanityBlocks(description[locale] ? description[locale] : description.pt)}

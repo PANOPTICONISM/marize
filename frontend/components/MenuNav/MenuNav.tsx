@@ -1,19 +1,16 @@
 import style from "./menu.module.css";
 import { MdHighlightOff } from "react-icons/md";
-import VisitStore from "../VisitStore/VisitStore";
-import StoreInfo from "../StoreInfo/StoreInfo";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { addUrlParams } from "../../pages/products";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
+import { LinearProgress } from "@mui/material";
+import React from "react";
 
 export default function MenuNav({ toggleOpen }) {
-  const [data, setData] = useState({ categories: [], vendors: [] });
-  const router = useRouter();
+  const [data, setData] = React.useState({ categories: [], vendors: [] });
   const { locale } = useRouter();
 
-  useEffect(() => {
+  React.useEffect(() => {
     async function fetchData() {
       const res = await fetch("/api/sanity/categories");
       const data = await res.json();
@@ -22,9 +19,11 @@ export default function MenuNav({ toggleOpen }) {
     fetchData();
   }, []);
 
-  const goToProducts = (title) => {
-    addUrlParams(router, { 0: title });
-  };
+  console.log(data.categories.length)
+
+  if (data.categories.length === 0) {
+    return (<LinearProgress />)
+  }
 
   return (
     <div className={style.menu}>
@@ -66,8 +65,6 @@ export default function MenuNav({ toggleOpen }) {
             </ul>
           </div>
         ) : null}
-        <VisitStore className={style.visitImage} />
-        {/* <StoreInfo undoFlex={style.flexBox} className={style.menuBarInfo} /> */}
       </div>
     </div>
   );

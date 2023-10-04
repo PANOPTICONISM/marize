@@ -1,12 +1,14 @@
-nav.wrapper {
+.header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-areas:
-        "b b b"
-        "a . c";
+        "c c c"
+        "a . d"
+        "b b b";
     grid-template-rows: auto;
     padding: 30px 0;
-    gap: 2em 18px;
+    gap: 12px;
+    align-items: center;
 }
 
 .search_bar_wrapper {
@@ -15,7 +17,7 @@ nav.wrapper {
 
 .search_bar {
     height: 30px;
-    width: 30px;
+    width: 100%;
 }
 
 .left_nav {
@@ -26,14 +28,19 @@ nav.wrapper {
     align-items: center;
 }
 
-.logo {
+.search_bar_wrapper {
     grid-area: b;
+    grid-row: 3;
+}
+
+.logo {
+    grid-area: c;
     grid-row: 1;
     text-align: center;
 }
 
 .right_nav {
-    grid-area: c;
+    grid-area: d;
     grid-row: 2;
     font-size: 30px;
     display: flex;
@@ -41,8 +48,12 @@ nav.wrapper {
     align-items: center;
 }
 
+.left_nav>* {
+    margin-right: 6px;
+}
+
 .right_nav>* {
-    margin-left: 18px;
+    margin-left: 12px;
 }
 
 .shoppingBag,
@@ -93,12 +104,15 @@ nav.wrapper {
         width: auto;
     }
 
-    nav.wrapper {
-        grid-template-areas: "a b c";
+    .header {
+        grid-template-columns: 48px 1fr 1fr 1fr;
+        grid-template-areas: "a b c d";
     }
 
     .left_nav,
-    .right_nav {
+    .right_nav, 
+    .search_bar_wrapper, 
+    .logo {
         grid-row: 1;
     }
 }

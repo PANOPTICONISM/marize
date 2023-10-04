@@ -141,7 +141,7 @@ export default function Products({ data, locale }) {
   return (
     <Main>
       <div className={style.products_container}>
-        <header className={style.products_hero}>
+        <section className={style.products_hero}>
           <Image
             src={heroproducts}
             width={1140}
@@ -151,7 +151,7 @@ export default function Products({ data, locale }) {
           <h1 className={style.products_title}>
             20% discount on all Christmas gifts
           </h1>
-        </header>
+        </section>
         <h1>{translations[locale].productsTitle}</h1>
 
         <div>
