@@ -1,10 +1,7 @@
-"use client";
-
 import style from "./menu.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
-import { LinearProgress } from "@mui/material";
 import React from "react";
 
 export default function MenuNav() {
@@ -19,10 +16,6 @@ export default function MenuNav() {
     }
     fetchData();
   }, []);
-
-  if (data.categories.length === 0) {
-    return <LinearProgress />;
-  }
 
   return (
     <div className={style.menu}>

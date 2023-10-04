@@ -1,9 +1,24 @@
-"use client";
-
 import Link from "next/link";
 import style from "./buttons.module.css";
 import { BsHandbag } from "react-icons/bs";
-import { Button } from "@mui/material";
+
+export default function Button({
+  path,
+  children,
+  className,
+  locale,
+}: {
+  path: string;
+  children?: React.ReactNode;
+  className?: string;
+  locale?: string;
+}) {
+  return (
+    <Link href={path} locale={locale}>
+      <a className={className}>{children}</a>
+    </Link>
+  );
+}
 
 export function PrimaryButton({
   path,
@@ -17,13 +32,13 @@ export function PrimaryButton({
   locale?: string;
 }) {
   return (
-    <Link href={path} locale={locale}>
-      <a
-        className={`${style.globalButton} ${style.primaryButton} ${className}`}
-      >
-        {text}
-      </a>
-    </Link>
+    <Button
+      path={path}
+      locale={locale}
+      className={`${style.globalButton} ${style.primaryButton} ${className}`}
+    >
+      {text}
+    </Button>
   );
 }
 
@@ -48,25 +63,22 @@ export function SectionButton({
 }
 
 export function PrimaryIconButton({
+  className,
   onClick,
   text,
-  disabled,
 }: {
+  className?: string;
   onClick?: () => void;
-  text: string;
-  disabled?: boolean;
+  text?: string;
 }) {
   return (
-    <Button
-      variant="contained"
+    <button
       onClick={onClick}
-      startIcon={<BsHandbag />}
-      disabled={disabled}
-      fullWidth
-      sx={{ padding: "14px" }}
+      className={`${style.globalButton} ${style.cartButton} ${className}`}
     >
+      <BsHandbag />
       {text}
-    </Button>
+    </button>
   );
 }
 
