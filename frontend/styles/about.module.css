@@ -3,18 +3,18 @@
     margin: auto;
 }
 
-.aboutPage header,
+.aboutPage section:first-child,
 .whyVisitUs {
     position: relative;
 }
 
-.aboutPage header img,
+.aboutPage section:first-child img,
 .aboutPage .whyVisitUs img {
     max-height: 300px;
     object-fit: cover;
 }
 
-.aboutPage header h1,
+.aboutPage section:first-child h1,
 .aboutPage .whyVisitUs div {
     position: absolute;
     top: 50%;
@@ -63,7 +63,6 @@
     grid-template-columns: repeat(auto-fit,
             175px);
     ;
-    margin: 50px auto;
 }
 
 .aboutPage .brands img:nth-child(1),
@@ -83,6 +82,6 @@
     }
 
     .aboutPage .brands {
-        margin: 100px auto;
+        margin: 60px auto;
     }
 }
