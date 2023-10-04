@@ -4,7 +4,8 @@
     grid-template-areas:
         "c c c"
         "a . d"
-        "b b b";
+        "b b b"
+        "e e e";
     grid-template-rows: auto;
     padding: 30px 0;
     gap: 12px;
@@ -46,6 +47,10 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+.wrapper {
+    grid-area: e;
 }
 
 .left_nav>* {
@@ -106,7 +111,8 @@
 
     .header {
         grid-template-columns: 48px 1fr 1fr 1fr;
-        grid-template-areas: "a b c d";
+        grid-template-areas: "a b c d"
+        "e e e e";
     }
 
     .left_nav,

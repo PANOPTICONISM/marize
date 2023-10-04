@@ -1,12 +1,11 @@
 import style from "./menu.module.css";
-import { MdHighlightOff } from "react-icons/md";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
 import { LinearProgress } from "@mui/material";
 import React from "react";
 
-export default function MenuNav({ toggleOpen }) {
+export default function MenuNav() {
   const [data, setData] = React.useState({ categories: [], vendors: [] });
   const { locale } = useRouter();
 
@@ -19,20 +18,15 @@ export default function MenuNav({ toggleOpen }) {
     fetchData();
   }, []);
 
-  console.log(data.categories.length)
-
   if (data.categories.length === 0) {
     return (<LinearProgress />)
   }
 
   return (
     <div className={style.menu}>
-      <div className={style.close} onClick={toggleOpen}>
-        <MdHighlightOff />
-      </div>
-      <div className={style.container}>
         {data !== undefined ? (
-          <div className={style.nav_wrapper}>
+         <>
+          <div>
             <h4>{translations[locale].categories}</h4>
             <ul className={style.menu_sections}>
               {data.categories.map((cat) => (
@@ -48,6 +42,8 @@ export default function MenuNav({ toggleOpen }) {
                 </li>
               ))}
             </ul>
+            </div>
+            <div>
             <h4>{translations[locale].brands}</h4>
             <ul className={style.menu_sections}>
               {data.vendors.map((vendor) => (
@@ -64,8 +60,8 @@ export default function MenuNav({ toggleOpen }) {
               ))}
             </ul>
           </div>
+          </>
         ) : null}
-      </div>
     </div>
   );
 }

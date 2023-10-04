@@ -20,14 +20,6 @@ export default function Navigation() {
     setMenuOpen(!menuOpen);
   };
 
-  if (typeof window !== 'undefined') {
-    if (menuOpen) {
-      document.body.style.overflowY = "hidden";
-    } else {
-      document.body.style.overflowY = "scroll";
-    }
-  }
-
   const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.reduce((accum, item) => Number(accum) + Number(item.quantity), 0) : "";
   const favouritesCartTotal =
     state?.favourites?.length > 0 ? state.favourites.length : "";
@@ -72,7 +64,7 @@ export default function Navigation() {
         </div>
       </div>
     <nav className={style.wrapper}>
-      {menuOpen && <MenuNav toggleOpen={toggleOpen} />}
+      {menuOpen && <MenuNav />}
     </nav>
     </header>
   );
