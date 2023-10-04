@@ -2,24 +2,6 @@ import Link from "next/link";
 import style from "./buttons.module.css";
 import { BsHandbag } from "react-icons/bs";
 
-export default function Button({
-  path,
-  children,
-  className,
-  locale,
-}: {
-  path: string;
-  children?: React.ReactNode;
-  className?: string;
-  locale?: string;
-}) {
-  return (
-    <Link href={path} locale={locale}>
-      <a className={className}>{children}</a>
-    </Link>
-  );
-}
-
 export function PrimaryButton({
   path,
   text,
@@ -32,13 +14,13 @@ export function PrimaryButton({
   locale?: string;
 }) {
   return (
-    <Button
-      path={path}
+    <Link
+      href={path}
       locale={locale}
       className={`${style.globalButton} ${style.primaryButton} ${className}`}
     >
       {text}
-    </Button>
+    </Link>
   );
 }
 

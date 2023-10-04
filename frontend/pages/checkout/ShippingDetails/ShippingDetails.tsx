@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { BackButton, SubmitButton } from "../../../components/Buttons/Buttons";
 import style from "./shippingdetails.module.css";
-import { InputLabel, Select, MenuItem } from "@material-ui/core";
+import { InputLabel, Select, MenuItem } from "@mui/material";
 
 type FormValues = {
   firstname: string;
@@ -30,11 +30,12 @@ export default function ShippingDetails({
     <section className={style.shippingDetails}>
       <h1>Shipping Details</h1>
       <form
-        onSubmit={handleSubmit((data) =>
+        onSubmit={handleSubmit((data) => {
+          const response = { data };
           next({
-            ...data,
-          })
-        )}
+            ...response,
+          });
+        })}
       >
         <section>
           <div>

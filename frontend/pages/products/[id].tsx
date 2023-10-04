@@ -92,10 +92,8 @@ export function ProductDetails({
               </>
             </select>
           </form>
-          <Link href="/assets/sizing-chart.jpg">
-            <a>
-              <RiRuler2Line />
-            </a>
+          <Link href="/assets/sizing-chart.jpg" passHref>
+            <RiRuler2Line />
           </Link>
         </div>
         <div className={style.shopping}>

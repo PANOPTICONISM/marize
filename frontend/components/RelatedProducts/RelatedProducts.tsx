@@ -13,15 +13,13 @@ const RelatedProducts = ({ relatedProducts }: { relatedProducts: ProductProps })
         <div className={style.articles}>
           {returnMax5Products?.map((article: any) => (
             <div key={article.id}>
-              <Link href={`/products/${article._id}`}>
-                <a>
-                  <Image
-                    src={article.image.url}
-                    width={200}
-                    height={288}
-                    alt={article.name}
-                  />
-                </a>
+              <Link href={`/products/${article._id}`} passHref>
+                <Image
+                  src={article.image.url}
+                  width={200}
+                  height={288}
+                  alt={article.name}
+                />
               </Link>
               <h2>{article.name}</h2>
               <span>{article.price.formatted_with_code}</span>

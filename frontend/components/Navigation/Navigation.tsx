@@ -26,7 +26,7 @@ export default function Navigation() {
 
   return (
     <header className={style.header}>
-    <div className={style.left_nav}>
+      <div className={style.left_nav}>
         <Hamburger
           aria-label="burger-menu"
           toggle={toggleOpen}
@@ -34,13 +34,11 @@ export default function Navigation() {
         />
       </div>
       <div className={style.search_bar_wrapper}>
-          <SearchBar className={style.search_bar} />
-        </div>
+        <SearchBar className={style.search_bar} />
+      </div>
       <div className={style.logo}>
-        <Link href="/">
-          <a>
-            <Image src="/assets/logo.svg" width={198} height={38} alt="logo" />
-          </a>
+        <Link href="/" passHref>
+          <Image src="/assets/logo.svg" width={198} height={38} alt="logo" />
         </Link>
       </div>
       <div className={style.right_nav}>
@@ -63,9 +61,7 @@ export default function Navigation() {
           {openCart && <Cart />}
         </div>
       </div>
-    <nav className={style.wrapper}>
-      {menuOpen && <MenuNav />}
-    </nav>
+      <nav className={style.wrapper}>{menuOpen && <MenuNav />}</nav>
     </header>
   );
 }

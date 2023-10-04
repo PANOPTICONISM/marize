@@ -118,18 +118,14 @@ export default function Products({ data, locale, mainPageContent }) {
       </div>
       <div className={style.imageWrapper}>
         {article.images ? (
-          <Link href={`/products/${article._id}`}>
-            <a>
-              <Image
-                src={absoluteURLsForSanity(
-                  article.images?.[0].asset._ref
-                ).url()}
-                width={300}
-                height={340}
-                alt="products"
-                className={style.image}
-              />
-            </a>
+          <Link href={`/products/${article._id}`} passHref>
+            <Image
+              src={absoluteURLsForSanity(article.images?.[0].asset._ref).url()}
+              width={300}
+              height={340}
+              alt="products"
+              className={style.image}
+            />
           </Link>
         ) : null}
       </div>

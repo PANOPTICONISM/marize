@@ -106,10 +106,8 @@ export default function Cart() {
             <ProductCard product={product} />
           </div>
         ))}
-        <Link href={`/checkout/${stateCart.userId}`}>
-          <a>
-            <PrimaryIconButton text={translations[locale].cart_go} />
-          </a>
+        <Link href={`/checkout/${stateCart.userId}`} passHref>
+          <PrimaryIconButton text={translations[locale].cart_go} />
         </Link>
       </CartResumeContainer>
     );

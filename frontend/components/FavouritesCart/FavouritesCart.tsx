@@ -30,15 +30,13 @@ export function ProductCard({ product }: { product: any }) {
   const { locale } = useRouter();
   return (
     <div className={style.fullCart}>
-      <Link href={`/products/${product._id}`}>
-        <a>
-          <Image
-            src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
-            width={100}
-            height={130}
-            alt={product.title}
-          />
-        </a>
+      <Link href={`/products/${product._id}`} passHref>
+        <Image
+          src={absoluteURLsForSanity(product?.images[0].asset._ref).url()}
+          width={100}
+          height={130}
+          alt={product.title}
+        />
       </Link>
       <div className={style.spaceBetween}>
         <div>
