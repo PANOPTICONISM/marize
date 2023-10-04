@@ -108,10 +108,7 @@ export default function Cart() {
         ))}
         <Link href={`/checkout/${stateCart.userId}`}>
           <a>
-            <PrimaryIconButton
-              className={style.shopBagBtn}
-              text={translations[locale].cart_go}
-            />
+            <PrimaryIconButton text={translations[locale].cart_go} />
           </a>
         </Link>
       </CartResumeContainer>

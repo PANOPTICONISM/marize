@@ -31,10 +31,6 @@
     text-align: center;
 }
 
-.cartWrapper .shopBagBtn {
-    margin-top: 12px;
-}
-
 .cartWrapper .fullCart {
     display: grid;
     grid-template-columns: 100px auto;

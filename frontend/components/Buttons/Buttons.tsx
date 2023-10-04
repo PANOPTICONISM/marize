@@ -46,14 +46,12 @@ export function SectionButton({
 }
 
 export function PrimaryIconButton({
-  className,
   onClick,
   text,
   disabled,
 }: {
-  className?: string;
-  onClick: () => void;
-  text?: string;
+  onClick?: () => void;
+  text: string;
   disabled?: boolean;
 }) {
   return (
