@@ -95,7 +95,6 @@ function CheckoutWrapper() {
           </Step>
         ))}
       </Stepper>
-      {/* )} */}
       {activeStep === 0 && <ShoppingBag next={next} />}
       {activeStep === 1 && <ShippingDetails back={backStep} next={next} />}
       {activeStep === 2 && (
