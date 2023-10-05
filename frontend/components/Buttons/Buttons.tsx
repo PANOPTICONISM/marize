@@ -46,17 +46,23 @@ export function SectionButton({
 }
 
 export function PrimaryIconButton({
-  className,
   onClick,
   text,
+  disabled = false,
 }: {
-  className?: string;
   onClick?: () => void;
-  text?: string;
+  text: string;
+  disabled?: boolean;
 }) {
   return (
-    <Button onClick={onClick}>
-      <BsHandbag />
+    <Button
+      variant="contained"
+      onClick={onClick}
+      disabled={disabled}
+      startIcon={<BsHandbag />}
+      fullWidth
+      sx={{ padding: "12px" }}
+    >
       {text}
     </Button>
   );
