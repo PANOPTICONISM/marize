@@ -1,6 +1,7 @@
 import Link from "next/link";
 import style from "./buttons.module.css";
 import { BsHandbag } from "react-icons/bs";
+import { Button } from "@mui/material";
 
 export function PrimaryButton({
   path,
@@ -54,13 +55,10 @@ export function PrimaryIconButton({
   text?: string;
 }) {
   return (
-    <button
-      onClick={onClick}
-      className={`${style.globalButton} ${style.cartButton} ${className}`}
-    >
+    <Button onClick={onClick}>
       <BsHandbag />
       {text}
-    </button>
+    </Button>
   );
 }
 

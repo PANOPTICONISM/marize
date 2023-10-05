@@ -5,22 +5,38 @@ import Hamburger from "hamburger-react";
 import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
-import { useContext, useState } from "react";
 import Cart from "../Cart/Cart";
 import MenuNav from "../MenuNav/MenuNav";
 import FavouritesCart from "../FavouritesCart/FavouritesCart";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
+import React from "react";
 
 export default function Navigation() {
-  const [openCart, setOpenCart] = useState(false);
-  const { state, stateCart } = useContext(GlobalContext);
-  const [openFavouritesCart, setOpenFavouritesCart] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [openCart, setOpenCart] = React.useState(false);
+  const { state, stateCart } = React.useContext(GlobalContext);
+  const [openFavouritesCart, setOpenFavouritesCart] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const toggleOpen = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.reduce((accum, item) => Number(accum) + Number(item.quantity), 0) : "";
+  const [data, setData] = React.useState({ categories: [], vendors: [] });
+  React.useEffect(() => {
+    async function fetchData() {
+      const res = await fetch("/api/sanity/categories");
+      const data = await res.json();
+      setData(data.data);
+    }
+    fetchData();
+  }, []);
+
+  const cartTotal =
+    stateCart?.cart?.length > 0
+      ? stateCart.cart.reduce(
+          (accum, item) => Number(accum) + Number(item.quantity),
+          0
+        )
+      : "";
   const favouritesCartTotal =
     state?.favourites?.length > 0 ? state.favourites.length : "";
 
@@ -61,7 +77,7 @@ export default function Navigation() {
           {openCart && <Cart />}
         </div>
       </div>
-      <nav className={style.wrapper}>{menuOpen && <MenuNav />}</nav>
+      <nav className={style.wrapper}>{menuOpen && <MenuNav data={data} />}</nav>
     </header>
   );
 }
