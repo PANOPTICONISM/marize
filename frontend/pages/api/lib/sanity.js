@@ -5,5 +5,5 @@ export const sanity = sanityClient({
   dataset: process.env.SANITY_DATASET || process.env.NEXT_PUBLIC_API_DATASET,
   token: process.env.SANITY_API_TOKEN,
   apiVersion: "2021-03-25",
-  useCdn: true,
+  useCdn: false,
 });

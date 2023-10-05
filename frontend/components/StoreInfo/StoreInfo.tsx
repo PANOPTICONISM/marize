@@ -7,6 +7,7 @@ import { MdOutlineLockClock } from "react-icons/md";
 import Image from "next/image";
 import { translations } from "../../translations/common";
 import { useRouter } from "next/router";
+import LogoSvg from "../../public/assets/logo";
 export default function StoreInfo({
   className,
   isFooter,
@@ -19,16 +20,14 @@ export default function StoreInfo({
   return (
     <div className={`${style.contact_wrapper} ${className}`}>
       <div className={style.facebook}>
-        {isFooter && (
-          <Image src="/assets/logo.svg" width={198} height={38} alt="logo" />
-        )}
+        {isFooter && <LogoSvg />}
         <a
           href="https://www.facebook.com/loja.marize"
           target="_blank"
           rel="noreferrer"
         >
           <h4>
-          {translations[locale].facebook}
+            {translations[locale].facebook}
             <AiOutlineFacebook />
           </h4>
         </a>

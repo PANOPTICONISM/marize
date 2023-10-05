@@ -10,6 +10,7 @@ import MenuNav from "../MenuNav/MenuNav";
 import FavouritesCart from "../FavouritesCart/FavouritesCart";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import React from "react";
+import LogoSvg from "../../public/assets/logo";
 
 export default function Navigation() {
   const [openCart, setOpenCart] = React.useState(false);
@@ -54,7 +55,7 @@ export default function Navigation() {
       </div>
       <div className={style.logo}>
         <Link href="/" passHref>
-          <Image src="/assets/logo.svg" width={198} height={38} alt="logo" />
+          <LogoSvg />
         </Link>
       </div>
       <div className={style.right_nav}>
