@@ -15,6 +15,7 @@ import {
   updateCartQuantity,
 } from "../../../utils/CartFunctions";
 import { useRouter } from "next/router";
+import { translations } from "../../../translations/common";
 
 export default function ShoppingBag({ next }: { next?: any }) {
   const { state, dispatch, stateCart, dispatchCart } =
@@ -25,7 +26,13 @@ export default function ShoppingBag({ next }: { next?: any }) {
     quantity: [1, 2, 3, 4],
   };
 
-  const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.reduce((accum, item) => Number(accum) + Number(item.quantity), 0) : "";
+  const cartTotal =
+    stateCart?.cart?.length > 0
+      ? stateCart.cart.reduce(
+          (accum, item) => Number(accum) + Number(item.quantity),
+          0
+        )
+      : "";
 
   return (
     <section>
@@ -74,7 +81,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                     >
                       {maxItems.quantity.map((quant, index) => (
                         <option key={index} value={quant}>
-                          {quant} pieces
+                          {quant} {translations[locale].pieces}
                         </option>
                       ))}
                     </select>

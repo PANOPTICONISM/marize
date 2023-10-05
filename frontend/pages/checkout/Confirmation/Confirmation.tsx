@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
 import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 import { useRouter } from "next/router";
+import { translations } from "../../../translations/common";
 
 function Confirmation({
   shippingData,
@@ -15,8 +16,14 @@ function Confirmation({
 }) {
   const { stateCart } = useContext(GlobalContext);
   const { locale } = useRouter();
-  
-  const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.reduce((accum, item) => Number(accum) + Number(item.quantity), 0) : "";
+
+  const cartTotal =
+    stateCart?.cart?.length > 0
+      ? stateCart.cart.reduce(
+          (accum, item) => Number(accum) + Number(item.quantity),
+          0
+        )
+      : "";
 
   if (shippingData) {
     return (
@@ -51,7 +58,9 @@ function Confirmation({
                         </p>
                       ) : null}
                     </div>
-                    <p>{product.quantity} pieces</p>
+                    <p>
+                      {product.quantity} {translations[locale].pieces}
+                    </p>
                   </div>
                 </div>
               </article>
@@ -60,24 +69,26 @@ function Confirmation({
         </main>
         <aside>
           <div>
-          <h2>Order details</h2>
-          <h3>Shipping Summary</h3>
-          <table>
-            <tbody>
-              <tr>
-                <td>Name</td>
-                <td>{shippingData.firstname + " " + shippingData.lastname}</td>
-              </tr>
-              <tr>
-                <td style={{whiteSpace: 'nowrap'}}>Phone-number</td>
-                <td>{shippingData.phonenumber}</td>
-              </tr>
-              <tr>
-                <td>E-mail</td>
-                <td>{shippingData.email}</td>
-              </tr>
-            </tbody>
-          </table>
+            <h2>Order details</h2>
+            <h3>Shipping Summary</h3>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td>
+                    {shippingData.firstname + " " + shippingData.lastname}
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ whiteSpace: "nowrap" }}>Phone-number</td>
+                  <td>{shippingData.phonenumber}</td>
+                </tr>
+                <tr>
+                  <td>E-mail</td>
+                  <td>{shippingData.email}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <ContinueButton onClick={processOrder} text="Confirm Order" />
         </aside>

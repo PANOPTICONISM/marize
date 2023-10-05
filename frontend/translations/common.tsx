@@ -26,6 +26,7 @@ export const translations = {
     pickSize: "Pick your size",
     uniqueSize: "Unique size",
     addToBag: "Add to shopping bag",
+    pieces: "piece(s)",
   },
   pt: {
     visit_headline: "Visite a nossa loja",
@@ -54,5 +55,6 @@ export const translations = {
     pickSize: "Escolha o tamanho",
     uniqueSize: "Tamanho unico",
     addToBag: "Adicione a sua bolsa",
+    pieces: "artigo(s)",
   },
 };
