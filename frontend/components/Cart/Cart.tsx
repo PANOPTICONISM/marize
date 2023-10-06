@@ -45,17 +45,10 @@ export function ProductCard({ product }: { product: any }) {
         alt={product.title}
       />
       <div className={style.spaceBetween}>
-        <div>
-          <div className={style.presentation}>
-            <div>
-              <h4>
-                {product.title[locale]
-                  ? product.title[locale]
-                  : product.title.pt}
-              </h4>
-            </div>
-            {/* <h5>{product.line_total.formatted_with_code}</h5> */}
-          </div>
+        <div className={style.presentation}>
+          <h4>
+            {product.title[locale] ? product.title[locale] : product.title.pt}
+          </h4>
         </div>
         <div className={style.bottomProduct}>
           <div>
@@ -102,9 +95,7 @@ export default function Cart() {
     return (
       <CartResumeContainer>
         {stateCart.cart?.map((product: any) => (
-          <div key={product._id}>
-            <ProductCard product={product} />
-          </div>
+          <ProductCard key={product._id} product={product} />
         ))}
         <Link href={`/checkout/${stateCart.userId}`} passHref>
           <PrimaryIconButton text={translations[locale].cart_go} />

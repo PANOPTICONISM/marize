@@ -47,23 +47,10 @@
     justify-content: space-between;
 }
 
-.cartWrapper .fullCart .presentation h4 {
-    width: 50px;
-}
-
-.cartWrapper .fullCart .presentation h5 {
-    white-space: nowrap;
-}
-
 .cartWrapper .fullCart h4,
-.cartWrapper .fullCart h5,
 .cartWrapper .fullCart p {
     margin: 0;
-    font-size: 12px;
-}
-
-.cartWrapper .fullCart h5 {
-    font-weight: 300;
+    font-size: 14px;
 }
 
 .cartWrapper .fullCart .spaceBetween {
