@@ -111,32 +111,3 @@ export function GlobalProvider({ children }: { children?: React.ReactNode }) {
     </GlobalContext.Provider>
   );
 }
-
-// export function IndividualFavouritesList({}) {
-//   const [error, setError] = useState("");
-//   const [message, setMessage] = useState("");
-//   const handleUser = async (e) => {
-//     e.preventDefault();
-
-//     let userStructure = {
-//       // name,
-//       // email,
-//       // phoneNumber,
-//       createdAt: new Date().toISOString(),
-//     };
-
-//     let response = await fetch("/api/mongo", {
-//       method: "POST",
-//       body: JSON.stringify(userStructure),
-//     });
-
-//     let data = await response.json();
-
-//     if (data.success) {
-//       // clean up fields here
-//       return setMessage(data.message);
-//     } else {
-//       return setError(data.message);
-//     }
-//   };
-// }

@@ -21,11 +21,7 @@ export default function ShippingDetails({
   next?: any;
   back?: any;
 }) {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>();
+  const { control, handleSubmit } = useForm<FormValues>();
 
   return (
     <section className={style.shippingDetails}>
@@ -46,6 +42,7 @@ export default function ShippingDetails({
               label="First name"
               variant="outlined"
               fullWidth
+              required
             />
           )}
         />
@@ -58,6 +55,7 @@ export default function ShippingDetails({
               label="Last name"
               variant="outlined"
               fullWidth
+              required
             />
           )}
         />
@@ -65,7 +63,13 @@ export default function ShippingDetails({
           name="email"
           control={control}
           render={({ field }) => (
-            <TextField {...field} label="Email" variant="outlined" fullWidth />
+            <TextField
+              {...field}
+              label="Email"
+              variant="outlined"
+              fullWidth
+              required
+            />
           )}
         />
         <Controller
@@ -74,9 +78,10 @@ export default function ShippingDetails({
           render={({ field }) => (
             <TextField
               {...field}
-              label="PhoneNumber"
+              label="Phone Number"
               variant="outlined"
               fullWidth
+              required
             />
           )}
         />
