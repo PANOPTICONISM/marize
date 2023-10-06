@@ -1,7 +1,8 @@
-import { useForm } from "react-hook-form";
-import { BackButton, SubmitButton } from "../../../components/Buttons/Buttons";
+import { Controller, useForm } from "react-hook-form";
+import { BackButton } from "../../../components/Buttons/Buttons";
 import style from "./shippingdetails.module.css";
 import { ShippingDataProps } from "../[id]";
+import { Button, Input, TextField } from "@mui/material";
 
 type FormValues = {
   firstname: string;
@@ -21,7 +22,7 @@ export default function ShippingDetails({
   back?: any;
 }) {
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
@@ -36,54 +37,58 @@ export default function ShippingDetails({
           });
         })}
       >
-        <section>
-          <div>
-            <label htmlFor="firstname">First name</label>
-            <input
-              placeholder="John"
-              {...register("firstname", { required: true })}
-              id="firstname"
+        <Controller
+          name="firstname"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="First name"
+              variant="outlined"
+              fullWidth
             />
-            {errors.firstname && <p>This is required</p>}
-          </div>
-          <div>
-            <label htmlFor="lastname">Last name</label>
-            <input
-              placeholder="Smith"
-              {...register("lastname")}
-              id="lastname"
+          )}
+        />
+        <Controller
+          name="lastname"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Last name"
+              variant="outlined"
+              fullWidth
             />
-          </div>
-        </section>
-        <section>
-          <div>
-            <label htmlFor="email">E-mail</label>
-            <input
-              placeholder="john@mail.pt"
-              {...register("email")}
-              id="email"
+          )}
+        />
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <TextField {...field} label="Email" variant="outlined" fullWidth />
+          )}
+        />
+        <Controller
+          name="phonenumber"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="PhoneNumber"
+              variant="outlined"
+              fullWidth
             />
-          </div>
-          <div>
-            <label htmlFor="phonenumber">Phone number</label>
-            <input
-              placeholder="+45 00 00 00"
-              {...register("phonenumber", {
-                valueAsNumber: true,
-                maxLength: {
-                  value: 4,
-                  message: "Too many numbers",
-                },
-              })}
-              id="phonenumber"
-            />
-            {errors.phonenumber?.message}
-          </div>
-        </section>
-        <div className={style.buttons}>
-          <BackButton text="Return" onClick={back} />
-          <SubmitButton className={style.submitButton} text="Next step" />
-        </div>
+          )}
+        />
+        <BackButton text="Return" onClick={back} />
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{ padding: "12px" }}
+        >
+          Next step
+        </Button>
       </form>
     </section>
   );

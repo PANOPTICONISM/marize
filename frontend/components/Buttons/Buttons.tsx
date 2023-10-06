@@ -85,32 +85,21 @@ export function ContinueButton({
   );
 }
 
-export function SubmitButton({
-  className,
-  text,
-}: {
-  className?: string;
-  text?: string;
-}) {
-  return (
-    <button type="submit" className={`${style.globalButton} ${className}`}>
-      {text}
-    </button>
-  );
-}
-
 export function BackButton({
-  className,
   onClick,
   text,
 }: {
-  className?: string;
   onClick?: () => void;
   text?: string;
 }) {
   return (
-    <button onClick={onClick} className={`${style.backButton} ${className}`}>
+    <Button
+      onClick={onClick}
+      variant="outlined"
+      fullWidth
+      sx={{ padding: "12px" }}
+    >
       {text}
-    </button>
+    </Button>
   );
 }
