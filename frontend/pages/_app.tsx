@@ -10,7 +10,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <ProductsProvider>
         <Head>
           <title>Marizé</title>
-          <link rel="icon" href="/logo.svg" />
+          <link rel="icon" href="/assets/logo_icon.svg" />
         </Head>
         <Component {...pageProps} />
       </ProductsProvider>

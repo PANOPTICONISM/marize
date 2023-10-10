@@ -55,7 +55,7 @@ export default function Navigation() {
       </div>
       <div className={style.logo}>
         <Link href="/" passHref>
-          <LogoSvg />
+          <LogoSvg width={234} height={55} />
         </Link>
       </div>
       <div className={style.right_nav}>
