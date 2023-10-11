@@ -20,7 +20,7 @@ export default function StoreInfo({
   return (
     <div className={`${style.contact_wrapper} ${className}`}>
       <div className={style.facebook}>
-        {isFooter && <LogoSvg />}
+        {isFooter && <LogoSvg width={234} height={55} />}
         <a
           href="https://www.facebook.com/loja.marize"
           target="_blank"
