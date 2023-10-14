@@ -10,7 +10,7 @@ export function PrimaryButton({
   fullWidth = false,
 }: {
   path: string;
-  text?: string;
+  text: string;
   className?: string;
   locale?: string;
   fullWidth?: boolean;
@@ -30,20 +30,20 @@ export function PrimaryButton({
 export function SectionButton({
   href,
   text,
-  className,
   locale,
 }: {
   href: any;
-  text?: string;
-  className?: string;
+  text: string;
   locale?: string;
 }) {
   return (
-    <li className={`${style.sectionButton} ${className}`}>
-      <Link href={href} locale={locale}>
-        {text}
-      </Link>
-    </li>
+    <Button
+      variant="contained"
+      href={`${locale ? locale + "/" : ""}${href}`}
+      sx={{ padding: "12px 16px", marginTop: "18px" }}
+    >
+      {text}
+    </Button>
   );
 }
 
@@ -78,12 +78,14 @@ export function ContinueButton({
   text?: string;
 }) {
   return (
-    <button
+    <Button
+      variant="contained"
+      sx={{ padding: "12px" }}
       onClick={onClick}
-      className={`${style.globalButton} ${style.cartButton}`}
+      fullWidth
     >
       {text}
-    </button>
+    </Button>
   );
 }
 

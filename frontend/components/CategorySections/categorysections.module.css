@@ -7,15 +7,14 @@
   padding-bottom: 30px;
 }
 
+.homepageCategories div {
+  text-align: center;
+}
+
 .homepageWrapper img {
   width: 100%;
   max-height: 240px;
   object-fit: cover;
-}
-
-.homepageCategories .categoryBtns {
-  max-width: max-content;
-  margin: 38px auto 0 auto;
 }
 
 @media screen and (min-width: 700px) {

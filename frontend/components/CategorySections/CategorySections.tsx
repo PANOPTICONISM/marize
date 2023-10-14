@@ -21,7 +21,6 @@ function CategorySections({ body }) {
           />
         </div>
         <SectionButton
-          className={style.categoryBtns}
           text={firstBox[locale]}
           href={{
             pathname: "/products",
@@ -38,7 +37,6 @@ function CategorySections({ body }) {
           />
         </div>
         <SectionButton
-          className={style.categoryBtns}
           text={secondBox[locale]}
           href={{
             pathname: "/products",

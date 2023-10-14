@@ -123,7 +123,6 @@ export default function Products({ data, locale, mainPageContent }) {
               src={absoluteURLsForSanity(article.images?.[0].asset._ref).url()}
               layout="fill"
               alt="products"
-              objectFit="cover"
               className={style.image}
             />
           </Link>
