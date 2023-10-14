@@ -127,7 +127,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
           </div>
         </div>
       ) : (
-        <div>
+        <div className={style.main}>
           <h1>Your Shopping Bag is currently empty</h1>
           <PrimaryButton
             className={style.getStarted}

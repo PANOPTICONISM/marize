@@ -4,10 +4,10 @@ import { FiPhoneIncoming } from "react-icons/fi";
 import { RiMailSendLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineLockClock } from "react-icons/md";
-import Image from "next/image";
 import { translations } from "../../translations/common";
 import { useRouter } from "next/router";
 import LogoSvg from "../../public/assets/logo";
+
 export default function StoreInfo({
   className,
   isFooter,

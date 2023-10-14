@@ -6,22 +6,24 @@ import { Button } from "@mui/material";
 export function PrimaryButton({
   path,
   text,
-  className,
   locale,
+  fullWidth = false,
 }: {
   path: string;
   text?: string;
   className?: string;
   locale?: string;
+  fullWidth?: boolean;
 }) {
   return (
-    <Link
-      href={path}
-      locale={locale}
-      className={`${style.globalButton} ${style.primaryButton} ${className}`}
+    <Button
+      variant="contained"
+      href={`${locale ? locale + "/" : ""}${path}`}
+      fullWidth={fullWidth}
+      sx={{ padding: "12px" }}
     >
       {text}
-    </Link>
+    </Button>
   );
 }
 

@@ -108,7 +108,11 @@ export default function Cart() {
       <div className={style.emptyCart}>
         <h4>{translations[locale].empty_bag_cart}</h4>
         <h5>{translations[locale].get_started}</h5>
-        <PrimaryButton path="/products" text={translations[locale].cart_cta} />
+        <PrimaryButton
+          path="/products"
+          text={translations[locale].cart_cta}
+          fullWidth
+        />
       </div>
     </CartResumeContainer>
   );

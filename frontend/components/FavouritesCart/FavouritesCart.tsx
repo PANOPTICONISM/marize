@@ -84,6 +84,7 @@ export default function FavouritesCart() {
         <PrimaryButton
           path="/products"
           text={translations[locale].explore_products}
+          fullWidth
         />
       </div>
     </FavouritesCartResumeContainer>

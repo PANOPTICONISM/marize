@@ -116,25 +116,23 @@ export default function Products({ data, locale, mainPageContent }) {
           />
         )}
       </div>
-      <div className={style.imageWrapper}>
-        {article.images ? (
+      {article.images ? (
+        <div className={style.imageWrapper}>
           <Link href={`/products/${article._id}`} passHref>
             <Image
               src={absoluteURLsForSanity(article.images?.[0].asset._ref).url()}
-              width={300}
-              height={340}
+              layout="fill"
               alt="products"
+              objectFit="cover"
               className={style.image}
             />
           </Link>
-        ) : null}
-      </div>
-      <div className={style.card_txt}>
-        <h2 className={style.brand}>{article.vendor?.title}</h2>
-        <h3>
-          {article.title[locale] ? article.title[locale] : article.title.pt}
-        </h3>
-      </div>
+        </div>
+      ) : null}
+      <h2 className={style.brand}>{article.vendor?.title}</h2>
+      <h3 className={style.title}>
+        {article.title[locale] ? article.title[locale] : article.title.pt}
+      </h3>
     </div>
   ));
 
@@ -171,7 +169,6 @@ export default function Products({ data, locale, mainPageContent }) {
             </li>
           </ul>
         </div>
-
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}
