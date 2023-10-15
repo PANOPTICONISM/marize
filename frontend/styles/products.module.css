@@ -26,10 +26,10 @@
 
 .products_wrapper {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 300px;
   grid-template-rows: auto;
   gap: 18px;
-  justify-items: center;
+  justify-content: center;
 }
 
 .sort_filter {
@@ -98,7 +98,7 @@
 
 .imageWrapper {
   height: 380px;
-  width: 100%;
+  width: fit-content;
   position: relative;
 }
 
@@ -160,11 +160,6 @@
 
   .containerProductSection {
     grid-template-columns: 1fr;
-  }
-
-  .img_container img {
-    width: 270px;
-    height: 270px;
   }
 
   .blue_heart svg {

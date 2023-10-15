@@ -60,58 +60,61 @@ export default function Navigation() {
   const favouritesCartTotal =
     state?.favourites?.length > 0 ? state.favourites.length : "";
 
-  return (
-    <header className={style.header}>
-      <div className={style.left_nav}>
-        <Hamburger
-          aria-label="burger-menu"
-          toggle={toggleOpen}
-          toggled={menuOpen}
-        />
-      </div>
-      <div className={style.search_bar_wrapper}>
-        <SearchBar className={style.search_bar} />
-      </div>
-      <div className={style.logo}>
-        <Link href="/" passHref>
-          <LogoSvg width={234} height={55} />
-        </Link>
-      </div>
-      <div className={style.right_nav}>
-        <div className={style.favouritesWrapper}>
-          <div
-            onClick={() => {
-              if (openCart) {
-                setOpenCart(false);
-              }
-              setOpenFavouritesCart(!openFavouritesCart);
-            }}
-          >
-            <AiOutlineHeart />
-          </div>
-          {favouritesCartTotal && (
-            <span className={style.cartFavouritesTotal}>
-              {favouritesCartTotal}
-            </span>
-          )}
-          {openFavouritesCart && <FavouritesCart ref={boxRef} />}
+    return (
+      <header className={style.header}>
+        <div className={style.left_nav}>
+          <Hamburger
+            aria-label="burger-menu"
+            toggle={toggleOpen}
+            toggled={menuOpen}
+          />
         </div>
-        <div className={style.shoppingBag}>
-          <div
-            onClick={() => {
-              if (openFavouritesCart) {
-                setOpenFavouritesCart(false);
-              }
-              setOpenCart(!openCart);
-            }}
-          >
-            <BsHandbag />
-          </div>
-          {cartTotal && <span className={style.cartTotal}>{cartTotal}</span>}
-          {openCart && <Cart ref={boxRef} />}
+        <div className={style.search_bar_wrapper}>
+          <SearchBar className={style.search_bar} />
         </div>
-      </div>
-      <nav className={style.wrapper}>{menuOpen && <MenuNav data={data} />}</nav>
-    </header>
-  );
+        <div className={style.logo}>
+          <Link href="/" passHref>
+            <LogoSvg width={234} height={55} />
+          </Link>
+        </div>
+        <div className={style.right_nav}>
+          <div className={style.favouritesWrapper}>
+            <div
+              onClick={() => {
+                if (openCart) {
+                  setOpenCart(false);
+                }
+                setOpenFavouritesCart(!openFavouritesCart);
+              }}
+            >
+              <AiOutlineHeart />
+            </div>
+            {favouritesCartTotal && (
+              <span className={style.cartFavouritesTotal}>
+                {favouritesCartTotal}
+              </span>
+            )}
+            {openFavouritesCart && <FavouritesCart ref={boxRef} />}
+          </div>
+          <div className={style.shoppingBag}>
+            <div
+              onClick={() => {
+                if (openFavouritesCart) {
+                  setOpenFavouritesCart(false);
+                }
+                setOpenCart(!openCart);
+              }}
+              ref={boxRef}
+            >
+              <BsHandbag />
+            </div>
+            {cartTotal && <span className={style.cartTotal}>{cartTotal}</span>}
+            {openCart && <Cart ref={boxRef} />}
+          </div>
+        </div>
+        <nav className={style.wrapper}>
+          {menuOpen && <MenuNav data={data} />}
+        </nav>
+      </header>
+    );
 }

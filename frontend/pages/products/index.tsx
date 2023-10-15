@@ -121,7 +121,8 @@ export default function Products({ data, locale, mainPageContent }) {
           <Link href={`/products/${article._id}`} passHref>
             <Image
               src={absoluteURLsForSanity(article.images?.[0].asset._ref).url()}
-              layout="fill"
+              width={300}
+              height={380}
               alt="products"
               className={style.image}
             />
@@ -143,14 +144,25 @@ export default function Products({ data, locale, mainPageContent }) {
     <Main>
       <div className={style.products_container}>
         <section className={style.products_hero}>
-          <Image
-            src={absoluteURLsForSanity(
-              mainPageContent[0].backgroundImage.asset._ref
-            ).url()}
-            width={1140}
-            height={200}
-            alt="products_hero"
-          />
+          <div
+            style={{
+              position: "relative",
+              maxWidth: "1140px",
+              height: "200px",
+            }}
+          >
+            <Image
+              src={absoluteURLsForSanity(
+                mainPageContent[0].backgroundImage.asset._ref
+              ).url()}
+              sizes="100%"
+              fill
+              style={{
+                objectFit: "cover",
+              }}
+              alt="products_hero"
+            />
+          </div>
           <h1 className={style.products_title}>
             {mainPageContent[0].slogan[locale]}
           </h1>
