@@ -13,6 +13,7 @@ import React from "react";
 import LogoSvg from "../../public/assets/logo";
 
 export default function Navigation() {
+  const boxRef = React.useRef<HTMLDivElement>(null);
   const [openCart, setOpenCart] = React.useState(false);
   const { state, stateCart } = React.useContext(GlobalContext);
   const [openFavouritesCart, setOpenFavouritesCart] = React.useState(false);
@@ -20,6 +21,24 @@ export default function Navigation() {
   const toggleOpen = () => {
     setMenuOpen(!menuOpen);
   };
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (boxRef.current && !boxRef.current.contains(event.target)) {
+        if (openFavouritesCart) {
+          setOpenFavouritesCart(false);
+        }
+        if (openCart) {
+          setOpenCart(false);
+        }
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [openCart, openFavouritesCart]);
 
   const [data, setData] = React.useState({ categories: [], vendors: [] });
   React.useEffect(() => {
@@ -75,7 +94,7 @@ export default function Navigation() {
               {favouritesCartTotal}
             </span>
           )}
-          {openFavouritesCart && <FavouritesCart />}
+          {openFavouritesCart && <FavouritesCart ref={boxRef} />}
         </div>
         <div className={style.shoppingBag}>
           <div
@@ -89,7 +108,7 @@ export default function Navigation() {
             <BsHandbag />
           </div>
           {cartTotal && <span className={style.cartTotal}>{cartTotal}</span>}
-          {openCart && <Cart />}
+          {openCart && <Cart ref={boxRef} />}
         </div>
       </div>
       <nav className={style.wrapper}>{menuOpen && <MenuNav data={data} />}</nav>

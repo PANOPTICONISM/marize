@@ -10,19 +10,20 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
 
-export function FavouritesCartResumeContainer({
-  children,
-}: {
-  children?: React.ReactNode;
-}) {
+const FavouritesCartResumeContainer = React.forwardRef<
+  HTMLDivElement,
+  { children?: React.ReactNode }
+>(({ children }, ref) => {
   const { locale } = useRouter();
   return (
-    <div className={style.cartFavouritesWrapper}>
+    <div className={style.cartFavouritesWrapper} ref={ref}>
       <h3>{translations[locale].favorites_bag}</h3>
       {children}
     </div>
   );
-}
+});
+
+FavouritesCartResumeContainer.displayName = "FavouritesCartResumeContainer";
 
 export function ProductCard({ product }: { product: any }) {
   const { dispatch } = useContext(GlobalContext);
@@ -59,13 +60,13 @@ export function ProductCard({ product }: { product: any }) {
   );
 }
 
-export default function FavouritesCart() {
+const FavouritesCart = React.forwardRef<HTMLDivElement>((_, ref) => {
   const { state } = useContext(GlobalContext);
   const { locale } = useRouter();
 
   if (state?.favourites.length > 0) {
     return (
-      <FavouritesCartResumeContainer>
+      <FavouritesCartResumeContainer ref={ref}>
         {state.favourites?.map((product: any) => (
           <>
             <div key={product?._id}>
@@ -77,7 +78,7 @@ export default function FavouritesCart() {
     );
   }
   return (
-    <FavouritesCartResumeContainer>
+    <FavouritesCartResumeContainer ref={ref}>
       <div className={style.emptyCart}>
         <h4>{translations[locale].empty_bag_favorites}</h4>
         <h5>{translations[locale].get_started}</h5>
@@ -89,4 +90,8 @@ export default function FavouritesCart() {
       </div>
     </FavouritesCartResumeContainer>
   );
-}
+});
+
+FavouritesCart.displayName = "FavouritesCart";
+
+export default FavouritesCart;

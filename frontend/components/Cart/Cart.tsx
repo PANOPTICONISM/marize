@@ -14,20 +14,22 @@ import {
 } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
+import React from "react";
 
-export function CartResumeContainer({
-  children,
-}: {
-  children?: React.ReactNode;
-}) {
+const CartResumeContainer = React.forwardRef<
+  HTMLDivElement,
+  { children?: React.ReactNode }
+>(({ children }, ref) => {
   const { locale } = useRouter();
   return (
-    <div className={style.cartWrapper}>
+    <div className={style.cartWrapper} ref={ref}>
       <h3>{translations[locale].cart}</h3>
       {children}
     </div>
   );
-}
+});
+
+CartResumeContainer.displayName = "CartResumeContainer";
 
 export function ProductCard({ product }: { product: any }) {
   const { state, dispatch, dispatchCart } = useContext(GlobalContext);
@@ -87,13 +89,13 @@ export function ProductCard({ product }: { product: any }) {
   );
 }
 
-export default function Cart() {
+const Cart = React.forwardRef<HTMLDivElement>((_, ref) => {
   const { stateCart } = useContext(GlobalContext);
   const { locale } = useRouter();
 
   if (stateCart.cart.length > 0) {
     return (
-      <CartResumeContainer>
+      <CartResumeContainer ref={ref}>
         {stateCart.cart?.map((product: any) => (
           <ProductCard key={product._id} product={product} />
         ))}
@@ -104,7 +106,7 @@ export default function Cart() {
     );
   }
   return (
-    <CartResumeContainer>
+    <CartResumeContainer ref={ref}>
       <div className={style.emptyCart}>
         <h4>{translations[locale].empty_bag_cart}</h4>
         <h5>{translations[locale].get_started}</h5>
@@ -116,4 +118,8 @@ export default function Cart() {
       </div>
     </CartResumeContainer>
   );
-}
+});
+
+Cart.displayName = "Cart";
+
+export default Cart;
