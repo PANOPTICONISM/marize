@@ -1,5 +1,6 @@
 import { BsHandbag } from "react-icons/bs";
 import { Button } from "@mui/material";
+import Link from "next/link";
 
 export function PrimaryButton({
   path,
@@ -35,13 +36,14 @@ export function SectionButton({
   locale?: string;
 }) {
   return (
-    <Button
-      variant="contained"
-      href={`${locale ? locale + "/" : ""}${href}`}
-      sx={{ padding: "12px 16px", marginTop: "18px" }}
-    >
-      {text}
-    </Button>
+    <Link href={href} locale={locale}>
+      <Button
+        variant="contained"
+        sx={{ padding: "12px 16px", marginTop: "18px" }}
+      >
+        {text}
+      </Button>
+    </Link>
   );
 }
 
