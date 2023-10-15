@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { ContinueButton } from "../../../components/Buttons/Buttons";
 import style from "./confirmation.module.css";
 import { useContext } from "react";
 import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
 import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 import { useRouter } from "next/router";
 import { translations } from "../../../translations/common";
+import { PrimaryButton } from "../../../components/Buttons/Buttons";
 
 function Confirmation({
   shippingData,
@@ -90,7 +90,7 @@ function Confirmation({
               </tbody>
             </table>
           </div>
-          <ContinueButton onClick={processOrder} text="Confirm Order" />
+          <PrimaryButton onClick={processOrder} text="Confirm Order" />
         </aside>
       </div>
     );

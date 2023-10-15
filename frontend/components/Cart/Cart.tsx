@@ -1,10 +1,10 @@
-import Link from "next/link";
+import { BsHandbag } from "react-icons/bs";
 import Image from "next/image";
 import { useContext } from "react";
 import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
-import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
+import { PrimaryButtonAsLink } from "../Buttons/Buttons";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import {
@@ -99,9 +99,12 @@ const Cart = React.forwardRef<HTMLDivElement>((_, ref) => {
         {stateCart.cart?.map((product: any) => (
           <ProductCard key={product._id} product={product} />
         ))}
-        <Link href={`/checkout/${stateCart.userId}`} passHref>
-          <PrimaryIconButton text={translations[locale].cart_go} />
-        </Link>
+        <PrimaryButtonAsLink
+          path={`/checkout/${stateCart.userId}`}
+          text={translations[locale].cart_go}
+          icon={<BsHandbag />}
+          fullWidth
+        />
       </CartResumeContainer>
     );
   }
@@ -110,7 +113,7 @@ const Cart = React.forwardRef<HTMLDivElement>((_, ref) => {
       <div className={style.emptyCart}>
         <h4>{translations[locale].empty_bag_cart}</h4>
         <h5>{translations[locale].get_started}</h5>
-        <PrimaryButton
+        <PrimaryButtonAsLink
           path="/products"
           text={translations[locale].cart_cta}
           fullWidth

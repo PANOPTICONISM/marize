@@ -6,7 +6,6 @@ import { MdAvTimer } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Main from "../../containers/Main/Main";
 import style from "../../styles/product.module.css";
-import { PrimaryIconButton } from "../../components/Buttons/Buttons";
 import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
 import { AccordionDetails } from "../../components/Accordion/Accordion";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -20,6 +19,7 @@ import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import { addToCart } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
+import { PrimaryButton } from "../../components/Buttons/Buttons";
 
 export function ProductDetails({
   showDetailsAccordion,
@@ -39,7 +39,9 @@ export function ProductDetails({
 
   useEffect(() => {
     setShow(
-      state?.favourites.some((favourite: { _id: string; }) => favourite._id === product._id)
+      state?.favourites.some(
+        (favourite: { _id: string }) => favourite._id === product._id
+      )
     );
   }, [product._id, state?.favourites]);
 
@@ -97,7 +99,7 @@ export function ProductDetails({
           </Link>
         </div>
         <div className={style.shopping}>
-          <PrimaryIconButton
+          <PrimaryButton
             text={translations[locale].addToBag}
             onClick={() => addToCart(dispatchCart, product, storeSize)}
             disabled={storeSize === null}

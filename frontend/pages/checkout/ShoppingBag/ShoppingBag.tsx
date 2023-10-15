@@ -1,7 +1,7 @@
 import Image from "next/image";
 import {
-  ContinueButton,
   PrimaryButton,
+  PrimaryButtonAsLink,
 } from "../../../components/Buttons/Buttons";
 import style from "./shoppingbag.module.css";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -122,14 +122,14 @@ export default function ShoppingBag({ next }: { next?: any }) {
               <p>
                 You can pick your preferred shipping option in the next step.
               </p>
-              <ContinueButton onClick={next} text="continue" />
+              <PrimaryButton onClick={next} text="continue" />
             </div>
           </div>
         </div>
       ) : (
         <div className={style.main}>
           <h1>Your Shopping Bag is currently empty</h1>
-          <PrimaryButton
+          <PrimaryButtonAsLink
             className={style.getStarted}
             text="Let's get shopping"
             path="/products"

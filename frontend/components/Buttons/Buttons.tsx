@@ -1,28 +1,56 @@
-import { BsHandbag } from "react-icons/bs";
 import { Button } from "@mui/material";
 import Link from "next/link";
 
 export function PrimaryButton({
+  onClick,
+  text,
+  disabled = false,
+  icon,
+}: {
+  onClick?: () => void;
+  text: string;
+  disabled?: boolean;
+  icon?: React.ReactNode;
+}) {
+  return (
+    <Button
+      variant="contained"
+      onClick={onClick}
+      disabled={disabled}
+      startIcon={icon}
+      fullWidth
+      sx={{ padding: "12px" }}
+    >
+      {text}
+    </Button>
+  );
+}
+
+export function PrimaryButtonAsLink({
   path,
   text,
   locale,
   fullWidth = false,
+  icon,
 }: {
   path: string;
   text: string;
   className?: string;
   locale?: string;
   fullWidth?: boolean;
+  icon?: React.ReactNode;
 }) {
   return (
-    <Button
-      variant="contained"
-      href={`${locale ? locale + "/" : ""}${path}`}
-      fullWidth={fullWidth}
-      sx={{ padding: "12px" }}
-    >
-      {text}
-    </Button>
+    <Link href={path} locale={locale}>
+      <Button
+        variant="contained"
+        fullWidth={fullWidth}
+        sx={{ padding: "12px" }}
+        startIcon={icon}
+      >
+        {text}
+      </Button>
+    </Link>
   );
 }
 
@@ -44,48 +72,6 @@ export function SectionButton({
         {text}
       </Button>
     </Link>
-  );
-}
-
-export function PrimaryIconButton({
-  onClick,
-  text,
-  disabled = false,
-}: {
-  onClick?: () => void;
-  text: string;
-  disabled?: boolean;
-}) {
-  return (
-    <Button
-      variant="contained"
-      onClick={onClick}
-      disabled={disabled}
-      startIcon={<BsHandbag />}
-      fullWidth
-      sx={{ padding: "12px" }}
-    >
-      {text}
-    </Button>
-  );
-}
-
-export function ContinueButton({
-  onClick,
-  text,
-}: {
-  onClick?: () => void;
-  text?: string;
-}) {
-  return (
-    <Button
-      variant="contained"
-      sx={{ padding: "12px" }}
-      onClick={onClick}
-      fullWidth
-    >
-      {text}
-    </Button>
   );
 }
 

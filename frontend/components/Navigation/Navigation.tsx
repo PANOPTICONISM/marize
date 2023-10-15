@@ -79,7 +79,8 @@ export default function Navigation() {
         </div>
         <div className={style.right_nav}>
           <div className={style.favouritesWrapper}>
-            <div
+            <button
+              className={style.icon}
               onClick={() => {
                 if (openCart) {
                   setOpenCart(false);
@@ -88,26 +89,26 @@ export default function Navigation() {
               }}
             >
               <AiOutlineHeart />
-            </div>
-            {favouritesCartTotal && (
-              <span className={style.cartFavouritesTotal}>
-                {favouritesCartTotal}
-              </span>
-            )}
+              {favouritesCartTotal && (
+                <span className={style.cartFavouritesTotal}>
+                  {favouritesCartTotal}
+                </span>
+              )}
+            </button>
             {openFavouritesCart && <FavouritesCart ref={boxRef} />}
           </div>
           <div className={style.shoppingBag}>
-            <div
+            <button
+              className={style.icon}
               onClick={() => {
                 if (openFavouritesCart) {
                   setOpenFavouritesCart(false);
                 }
                 setOpenCart(!openCart);
               }}
-              ref={boxRef}
             >
               <BsHandbag />
-            </div>
+            </button>
             {cartTotal && <span className={style.cartTotal}>{cartTotal}</span>}
             {openCart && <Cart ref={boxRef} />}
           </div>

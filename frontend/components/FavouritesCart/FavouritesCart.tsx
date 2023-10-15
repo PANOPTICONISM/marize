@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Image from "next/image";
 import style from "./favouritescart.module.css";
 import { BsTrash } from "react-icons/bs";
-import { PrimaryButton } from "../Buttons/Buttons";
+import { PrimaryButtonAsLink } from "../Buttons/Buttons";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import { removeFromFavourites } from "../../utils/FavouritesFunctions";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
@@ -68,11 +68,7 @@ const FavouritesCart = React.forwardRef<HTMLDivElement>((_, ref) => {
     return (
       <FavouritesCartResumeContainer ref={ref}>
         {state.favourites?.map((product: any) => (
-          <>
-            <div key={product?._id}>
-              <ProductCard product={product} />
-            </div>
-          </>
+          <ProductCard key={product?._id} product={product} />
         ))}
       </FavouritesCartResumeContainer>
     );
@@ -82,7 +78,7 @@ const FavouritesCart = React.forwardRef<HTMLDivElement>((_, ref) => {
       <div className={style.emptyCart}>
         <h4>{translations[locale].empty_bag_favorites}</h4>
         <h5>{translations[locale].get_started}</h5>
-        <PrimaryButton
+        <PrimaryButtonAsLink
           path="/products"
           text={translations[locale].explore_products}
           fullWidth

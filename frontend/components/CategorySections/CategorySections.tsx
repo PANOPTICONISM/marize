@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { PrimaryButton, SectionButton } from "../Buttons/Buttons";
+import { SectionButton } from "../Buttons/Buttons";
 import style from "./categorysections.module.css";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import { useRouter } from "next/router";

@@ -79,6 +79,10 @@
   transform: rotate(45deg);
 }
 
+.brands {
+  margin-top: 0;
+}
+
 @media screen and (max-width: 600px) {
   .mobile {
     display: none;
@@ -87,7 +91,10 @@
     position: absolute;
     background-color: var(--white-colour);
     width: max-content;
-    padding: 0 10px;
     z-index: 1000;
+  }
+
+  .container_mobile {
+    padding: 20px;
   }
 }
