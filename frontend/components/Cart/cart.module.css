@@ -1,6 +1,5 @@
 .cartWrapper {
     padding: 30px;
-    width: 300px;
     border: 1px solid #000;
     position: absolute;
     top: 40px;
@@ -10,6 +9,8 @@
     max-height: 300px;
     overflow: auto;
     z-index: 999;
+    width: 70vw;
+    max-width: 300px;
 }
 
 .cartWrapper h3 {
