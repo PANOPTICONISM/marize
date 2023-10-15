@@ -60,7 +60,14 @@ export default function Navigation() {
       </div>
       <div className={style.right_nav}>
         <div className={style.favouritesWrapper}>
-          <div onClick={() => setOpenFavouritesCart(!openFavouritesCart)}>
+          <div
+            onClick={() => {
+              if (openCart) {
+                setOpenCart(false);
+              }
+              setOpenFavouritesCart(!openFavouritesCart);
+            }}
+          >
             <AiOutlineHeart />
           </div>
           {favouritesCartTotal && (
@@ -71,7 +78,14 @@ export default function Navigation() {
           {openFavouritesCart && <FavouritesCart />}
         </div>
         <div className={style.shoppingBag}>
-          <div onClick={() => setOpenCart(!openCart)}>
+          <div
+            onClick={() => {
+              if (openFavouritesCart) {
+                setOpenFavouritesCart(false);
+              }
+              setOpenCart(!openCart);
+            }}
+          >
             <BsHandbag />
           </div>
           {cartTotal && <span className={style.cartTotal}>{cartTotal}</span>}
