@@ -145,10 +145,6 @@
 }
 
 .mobile_filters {
-  margin-right: auto;
-  cursor: pointer;
-  text-transform: capitalize;
-  font-weight: 800;
   display: none;
 }
 
@@ -168,6 +164,10 @@
   }
 
   .mobile_filters {
+    margin-right: auto;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-weight: 800;
     display: flex;
   }
 }

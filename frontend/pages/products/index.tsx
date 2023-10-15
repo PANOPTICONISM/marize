@@ -167,19 +167,17 @@ export default function Products({ data, locale, mainPageContent }) {
             {mainPageContent[0].slogan[locale]}
           </h1>
         </section>
-        <div>
-          <ul className={style.sort_filter}>
-            <li
-              className={style.mobile_filters}
-              onClick={() => setMobileFilters(!mobileFilters)}
-            >
-              <span>
-                <MdOutlineFilterAlt />
-              </span>
-              All filters
-            </li>
-          </ul>
-        </div>
+        <ul className={style.sort_filter}>
+          <li
+            className={style.mobile_filters}
+            onClick={() => setMobileFilters(!mobileFilters)}
+          >
+            <span>
+              <MdOutlineFilterAlt />
+            </span>
+            All filters
+          </li>
+        </ul>
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}

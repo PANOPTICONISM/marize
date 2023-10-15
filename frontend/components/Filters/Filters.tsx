@@ -48,14 +48,19 @@ export function Filters({
   const { locale } = useRouter();
 
   return (
-    <div className={style.filters_container}>
-      <h4 className={`${mobileFilters && style.mobile}`}>
+    <div
+      className={`${style.filters_container} ${
+        !mobileFilters && style.container_mobile
+      }`}
+    >
+      <h4 className={`${mobileFilters && style.mobile} ${style.brands}`}>
         {translations[locale].brands}
       </h4>
       {vendors?.map((filter: { title: string; _id: any }) => (
         <div
-          className={`${style.filters_products} ${mobileFilters && style.mobile
-            }`}
+          className={`${style.filters_products} ${
+            mobileFilters && style.mobile
+          }`}
           key={filter._id}
         >
           <label key={filter._id} className={style.container_checkbox}>
@@ -75,8 +80,9 @@ export function Filters({
       </h4>
       {discounts ? (
         <label
-          className={`${style.container_checkbox} ${style.filters_products} ${mobileFilters && style.mobile
-            }`}
+          className={`${style.container_checkbox} ${style.filters_products} ${
+            mobileFilters && style.mobile
+          }`}
         >
           {translations[locale].discount}
           <input
@@ -90,8 +96,9 @@ export function Filters({
       ) : null}
       {categories?.map((filter) => (
         <div
-          className={`${style.filters_products} ${mobileFilters && style.mobile
-            }`}
+          className={`${style.filters_products} ${
+            mobileFilters && style.mobile
+          }`}
           key={filter._id}
         >
           <label key={filter._id} className={style.container_checkbox}>
@@ -118,14 +125,12 @@ export default function FilterComponent({
   mobileFilters,
 }: FilterProps) {
   return (
-    <div>
-      <Filters
-        onChange={onChange}
-        categories={categories}
-        vendors={vendors}
-        discounts={discounts}
-        mobileFilters={mobileFilters}
-      />
-    </div>
+    <Filters
+      onChange={onChange}
+      categories={categories}
+      vendors={vendors}
+      discounts={discounts}
+      mobileFilters={mobileFilters}
+    />
   );
 }
