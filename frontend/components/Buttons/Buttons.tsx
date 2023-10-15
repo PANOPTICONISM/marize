@@ -1,5 +1,3 @@
-import Link from "next/link";
-import style from "./buttons.module.css";
 import { BsHandbag } from "react-icons/bs";
 import { Button } from "@mui/material";
 
