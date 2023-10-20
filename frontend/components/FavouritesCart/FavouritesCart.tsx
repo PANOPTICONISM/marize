@@ -39,21 +39,17 @@ export function ProductCard({ product }: { product: any }) {
           alt={product.title}
         />
       </Link>
-      <div className={style.spaceBetween}>
+      <div className={style.presentation}>
         <div>
-          <div className={style.presentation}>
-            <h4>{product.vendor?.title}</h4>
-            <h5>
-              {product.title[locale] ? product.title[locale] : product.title.pt}
-            </h5>
-          </div>
+          <h4>
+            {product.title[locale] ? product.title[locale] : product.title.pt}
+          </h4>
+          {product.vendor ? <h5>{product.vendor?.title}</h5> : null}
         </div>
         <div className={style.bottomProduct}>
-          <div>
-            <button onClick={() => removeFromFavourites(dispatch, product._id)}>
-              <BsTrash /> {translations[locale].remove_favorites}
-            </button>
-          </div>
+          <button onClick={() => removeFromFavourites(dispatch, product._id)}>
+            <BsTrash /> {translations[locale].remove_favorites}
+          </button>
         </div>
       </div>
     </div>

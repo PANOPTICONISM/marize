@@ -21,20 +21,21 @@
 }
 
 .cartFavouritesWrapper h4 {
+    font-size: 18px;
+    white-space: wrap;
+}
+
+.cartFavouritesWrapper h5 {
     font-weight: 300;
     font-size: 16px;
 }
 
-.cartFavouritesWrapper h5 {
-    font-size: 18px;
-}
-
-.cartFavouritesWrapper {
-    text-align: center;
-}
-
 .cartFavouritesWrapper .shopBagBtn {
     margin-top: 12px;
+}
+
+.emptyCart {
+    text-align: center;
 }
 
 .fullCart {
@@ -50,12 +51,8 @@
 
 .fullCart .presentation {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-}
-
-.fullCart .presentation h4 {
-    width: 50px;
-    white-space: normal;
 }
 
 .fullCart .presentation h5 {
@@ -70,11 +67,7 @@
 
 .fullCart h5 {
     font-weight: 300;
-}
-
-.fullCart .spaceBetween {
-    display: grid;
-    align-content: space-between;
+    margin-top: 4px;
 }
 
 .fullCart .bottomProduct button {

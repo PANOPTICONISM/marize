@@ -33,7 +33,7 @@ const NewArrivals = ({ title, products, locale }: ArrivalProps) => {
       <h1>{title[locale]}</h1>
       <div className={style.articles}>
         {newArrivals?.map((article) => (
-          <div key={article._id}>
+          <div className={style.imageWrapper} key={article._id}>
             {article.images ? (
               <Link href={`/products/${article._id}`} passHref>
                 <Image
