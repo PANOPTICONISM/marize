@@ -5,6 +5,12 @@
     justify-content: center;
 }
 
+.article {
+    display: grid;
+    gap: 12px;
+    align-content: baseline;
+}
+
 .imageWrapper {
     height: 300px;
     width: 230px;
@@ -23,7 +29,7 @@
 }
 
 .newArrivals h3 {
-    margin-top: 0;
+    margin: 0;
 }
 
 .newArrivals span {
