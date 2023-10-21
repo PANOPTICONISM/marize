@@ -16,20 +16,16 @@ export default function SearchDropdown({
     return (
       <div className={style.dropdown}>
         {searchedArticles?.slice(0, 10).map((article) => (
-          <Link href={`/products/${article._id}`} key={article._id}>
-            <a>
-              <div className={style.item}>
-                <Image
-                  src={absoluteURLsForSanity(
-                    article?.images[0].asset._ref
-                  ).url()}
-                  width={40}
-                  height={60}
-                  alt={article.title[locale]}
-                />
-                <span className={style.title}>{article.title[locale]}</span>
-              </div>
-            </a>
+          <Link href={`/products/${article._id}`} key={article._id} passHref>
+            <div className={style.item}>
+              <Image
+                src={absoluteURLsForSanity(article?.images[0].asset._ref).url()}
+                width={40}
+                height={60}
+                alt={article.title[locale]}
+              />
+              <span className={style.title}>{article.title[locale]}</span>
+            </div>
           </Link>
         ))}
       </div>

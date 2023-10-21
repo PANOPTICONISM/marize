@@ -116,29 +116,23 @@ export default function Products({ data, locale, mainPageContent }) {
           />
         )}
       </div>
-      <div className={style.imageWrapper}>
-        {article.images ? (
-          <Link href={`/products/${article._id}`}>
-            <a>
-              <Image
-                src={absoluteURLsForSanity(
-                  article.images?.[0].asset._ref
-                ).url()}
-                width={300}
-                height={340}
-                alt="products"
-                className={style.image}
-              />
-            </a>
+      {article.images ? (
+        <div className={style.imageWrapper}>
+          <Link href={`/products/${article._id}`} passHref>
+            <Image
+              src={absoluteURLsForSanity(article.images?.[0].asset._ref).url()}
+              width={300}
+              height={380}
+              alt="products"
+              className={style.image}
+            />
           </Link>
-        ) : null}
-      </div>
-      <div className={style.card_txt}>
-        <h2 className={style.brand}>{article.vendor?.title}</h2>
-        <h3>
-          {article.title[locale] ? article.title[locale] : article.title.pt}
-        </h3>
-      </div>
+        </div>
+      ) : null}
+      <h2 className={style.brand}>{article.vendor?.title}</h2>
+      <h3 className={style.title}>
+        {article.title[locale] ? article.title[locale] : article.title.pt}
+      </h3>
     </div>
   ));
 
@@ -150,32 +144,40 @@ export default function Products({ data, locale, mainPageContent }) {
     <Main>
       <div className={style.products_container}>
         <section className={style.products_hero}>
-          <Image
-            src={absoluteURLsForSanity(
-              mainPageContent[0].backgroundImage.asset._ref
-            ).url()}
-            width={1140}
-            height={200}
-            alt="products_hero"
-          />
+          <div
+            style={{
+              position: "relative",
+              maxWidth: "1140px",
+              height: "200px",
+            }}
+          >
+            <Image
+              src={absoluteURLsForSanity(
+                mainPageContent[0].backgroundImage.asset._ref
+              ).url()}
+              sizes="100%"
+              fill
+              style={{
+                objectFit: "cover",
+              }}
+              alt="products_hero"
+            />
+          </div>
           <h1 className={style.products_title}>
             {mainPageContent[0].slogan[locale]}
           </h1>
         </section>
-        <div>
-          <ul className={style.sort_filter}>
-            <li
-              className={style.mobile_filters}
-              onClick={() => setMobileFilters(!mobileFilters)}
-            >
-              <span>
-                <MdOutlineFilterAlt />
-              </span>
-              All filters
-            </li>
-          </ul>
-        </div>
-
+        <ul className={style.sort_filter}>
+          <li
+            className={style.mobile_filters}
+            onClick={() => setMobileFilters(!mobileFilters)}
+          >
+            <span>
+              <MdOutlineFilterAlt />
+            </span>
+            All filters
+          </li>
+        </ul>
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}

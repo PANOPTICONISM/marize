@@ -1,7 +1,7 @@
 import Image from "next/image";
 import {
-  ContinueButton,
   PrimaryButton,
+  PrimaryButtonAsLink,
 } from "../../../components/Buttons/Buttons";
 import style from "./shoppingbag.module.css";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -15,6 +15,7 @@ import {
   updateCartQuantity,
 } from "../../../utils/CartFunctions";
 import { useRouter } from "next/router";
+import { translations } from "../../../translations/common";
 
 export default function ShoppingBag({ next }: { next?: any }) {
   const { state, dispatch, stateCart, dispatchCart } =
@@ -25,7 +26,13 @@ export default function ShoppingBag({ next }: { next?: any }) {
     quantity: [1, 2, 3, 4],
   };
 
-  const cartTotal = stateCart?.cart?.length > 0 ? stateCart.cart.reduce((accum, item) => Number(accum) + Number(item.quantity), 0) : "";
+  const cartTotal =
+    stateCart?.cart?.length > 0
+      ? stateCart.cart.reduce(
+          (accum, item) => Number(accum) + Number(item.quantity),
+          0
+        )
+      : "";
 
   return (
     <section>
@@ -74,7 +81,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                     >
                       {maxItems.quantity.map((quant, index) => (
                         <option key={index} value={quant}>
-                          {quant} pieces
+                          {quant} {translations[locale].pieces}
                         </option>
                       ))}
                     </select>
@@ -115,14 +122,14 @@ export default function ShoppingBag({ next }: { next?: any }) {
               <p>
                 You can pick your preferred shipping option in the next step.
               </p>
-              <ContinueButton onClick={next} text="continue" />
+              <PrimaryButton onClick={next} text="continue" />
             </div>
           </div>
         </div>
       ) : (
-        <div>
+        <div className={style.main}>
           <h1>Your Shopping Bag is currently empty</h1>
-          <PrimaryButton
+          <PrimaryButtonAsLink
             className={style.getStarted}
             text="Let's get shopping"
             path="/products"

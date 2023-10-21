@@ -4,18 +4,12 @@ import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
 import React from "react";
 
-export default function MenuNav() {
-  const [data, setData] = React.useState({ categories: [], vendors: [] });
+export default function MenuNav({
+  data,
+}: {
+  data: { categories: any[]; vendors: any[] };
+}) {
   const { locale } = useRouter();
-
-  React.useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("/api/sanity/categories");
-      const data = await res.json();
-      setData(data.data);
-    }
-    fetchData();
-  }, []);
 
   return (
     <div className={style.menu}>

@@ -1,130 +1,95 @@
+import { Button } from "@mui/material";
 import Link from "next/link";
-import style from "./buttons.module.css";
-import { BsHandbag } from "react-icons/bs";
-
-export default function Button({
-  path,
-  children,
-  className,
-  locale,
-}: {
-  path: string;
-  children?: React.ReactNode;
-  className?: string;
-  locale?: string;
-}) {
-  return (
-    <Link href={path} locale={locale}>
-      <a className={className}>{children}</a>
-    </Link>
-  );
-}
 
 export function PrimaryButton({
-  path,
+  onClick,
   text,
-  className,
-  locale,
+  disabled = false,
+  icon,
 }: {
-  path: string;
-  text?: string;
-  className?: string;
-  locale?: string;
+  onClick?: () => void;
+  text: string;
+  disabled?: boolean;
+  icon?: React.ReactNode;
 }) {
   return (
     <Button
-      path={path}
-      locale={locale}
-      className={`${style.globalButton} ${style.primaryButton} ${className}`}
+      variant="contained"
+      onClick={onClick}
+      disabled={disabled}
+      startIcon={icon}
+      fullWidth
+      sx={{ padding: "12px" }}
     >
       {text}
     </Button>
   );
 }
 
+export function PrimaryButtonAsLink({
+  path,
+  text,
+  locale,
+  fullWidth = false,
+  icon,
+}: {
+  path: string;
+  text: string;
+  className?: string;
+  locale?: string;
+  fullWidth?: boolean;
+  icon?: React.ReactNode;
+}) {
+  return (
+    <Link href={path} locale={locale}>
+      <Button
+        variant="contained"
+        fullWidth={fullWidth}
+        sx={{ padding: "12px" }}
+        startIcon={icon}
+      >
+        {text}
+      </Button>
+    </Link>
+  );
+}
+
 export function SectionButton({
   href,
   text,
-  className,
   locale,
 }: {
   href: any;
-  text?: string;
-  className?: string;
+  text: string;
   locale?: string;
 }) {
   return (
-    <li className={`${style.sectionButton} ${className}`}>
-      <Link href={href} locale={locale}>
+    <Link href={href} locale={locale}>
+      <Button
+        variant="contained"
+        sx={{ padding: "12px 16px", marginTop: "18px" }}
+      >
         {text}
-      </Link>
-    </li>
-  );
-}
-
-export function PrimaryIconButton({
-  className,
-  onClick,
-  text,
-}: {
-  className?: string;
-  onClick?: () => void;
-  text?: string;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`${style.globalButton} ${style.cartButton} ${className}`}
-    >
-      <BsHandbag />
-      {text}
-    </button>
-  );
-}
-
-export function ContinueButton({
-  onClick,
-  text,
-}: {
-  onClick?: () => void;
-  text?: string;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`${style.globalButton} ${style.cartButton}`}
-    >
-      {text}
-    </button>
-  );
-}
-
-export function SubmitButton({
-  className,
-  text,
-}: {
-  className?: string;
-  text?: string;
-}) {
-  return (
-    <button type="submit" className={`${style.globalButton} ${className}`}>
-      {text}
-    </button>
+      </Button>
+    </Link>
   );
 }
 
 export function BackButton({
-  className,
   onClick,
   text,
 }: {
-  className?: string;
   onClick?: () => void;
   text?: string;
 }) {
   return (
-    <button onClick={onClick} className={`${style.backButton} ${className}`}>
+    <Button
+      onClick={onClick}
+      variant="outlined"
+      fullWidth
+      sx={{ padding: "12px" }}
+    >
       {text}
-    </button>
+    </Button>
   );
 }

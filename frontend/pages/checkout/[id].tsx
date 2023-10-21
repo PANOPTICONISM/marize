@@ -1,16 +1,24 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import ShoppingBag from "./ShoppingBag/ShoppingBag";
-import { Stepper, Step, StepLabel, makeStyles } from "@material-ui/core";
+import { Stepper, Step, StepLabel, makeStyles } from "@mui/material";
 import ShippingDetails from "./ShippingDetails/ShippingDetails";
 import Confirmation from "./Confirmation/Confirmation";
 import Main from "../../containers/Main/Main";
 import OrderProcessed from "./OrderProcessed/OrderProcessed";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 
-function CheckoutWrapper() {
-  const { stateCart } = useContext(GlobalContext);
+export type ShippingDataProps = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  phonenumber: string;
+  cart: [];
+};
 
-  const [shippingData, setShippingData] = useState({
+function CheckoutWrapper() {
+  const { stateCart } = React.useContext(GlobalContext);
+
+  const [shippingData, setShippingData] = React.useState<ShippingDataProps>({
     firstname: "",
     lastname: "",
     email: "",
@@ -19,18 +27,18 @@ function CheckoutWrapper() {
   });
   const steps = ["Shopping Bag", "Shipping Details", "Confirmation"];
 
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = React.useState(0);
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
-  const next = (data: any) => {
+  const next = (data: ShippingDataProps) => {
     setShippingData(data);
 
     nextStep();
   };
 
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  const [error, setError] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   const processOrder = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -65,7 +73,7 @@ function CheckoutWrapper() {
     }
   };
 
-  const useStyles = makeStyles(() => ({
+  const stepperStyling = {
     root: {
       "& .MuiStepIcon-active": {
         color: "white",
@@ -81,14 +89,12 @@ function CheckoutWrapper() {
       },
       "& .MuiStepIcon-text": { fill: "black" },
     },
-  }));
-
-  const mui = useStyles();
+  };
 
   return (
     <Main>
       {/* {activeStep !== steps.length && cart?.line_items.length > 0 && ( */}
-      <Stepper className={mui.root} activeStep={activeStep} alternativeLabel>
+      <Stepper sx={stepperStyling} activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>

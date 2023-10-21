@@ -1,7 +1,8 @@
-import { useForm } from "react-hook-form";
-import { BackButton, SubmitButton } from "../../../components/Buttons/Buttons";
+import { Controller, useForm } from "react-hook-form";
+import { BackButton } from "../../../components/Buttons/Buttons";
 import style from "./shippingdetails.module.css";
-import { InputLabel, Select, MenuItem } from "@material-ui/core";
+import { ShippingDataProps } from "../[id]";
+import { Button, Input, TextField } from "@mui/material";
 
 type FormValues = {
   firstname: string;
@@ -20,70 +21,79 @@ export default function ShippingDetails({
   next?: any;
   back?: any;
 }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>();
+  const { control, handleSubmit } = useForm<FormValues>();
 
   return (
     <section className={style.shippingDetails}>
       <h1>Shipping Details</h1>
       <form
-        onSubmit={handleSubmit((data) =>
+        onSubmit={handleSubmit((data) => {
           next({
-            ...data,
-          })
-        )}
+            ...(data as ShippingDataProps),
+          });
+        })}
       >
-        <section>
-          <div>
-            <label htmlFor="firstname">First name</label>
-            <input
-              placeholder="John"
-              {...register("firstname", { required: true })}
-              id="firstname"
+        <Controller
+          name="firstname"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="First name"
+              variant="outlined"
+              fullWidth
+              required
             />
-            {errors.firstname && <p>This is required</p>}
-          </div>
-          <div>
-            <label htmlFor="lastname">Last name</label>
-            <input
-              placeholder="Smith"
-              {...register("lastname")}
-              id="lastname"
+          )}
+        />
+        <Controller
+          name="lastname"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Last name"
+              variant="outlined"
+              fullWidth
+              required
             />
-          </div>
-        </section>
-        <section>
-          <div>
-            <label htmlFor="email">E-mail</label>
-            <input
-              placeholder="john@mail.pt"
-              {...register("email")}
-              id="email"
+          )}
+        />
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Email"
+              variant="outlined"
+              fullWidth
+              required
             />
-          </div>
-          <div>
-            <label htmlFor="phonenumber">Phone number</label>
-            <input
-              placeholder="+45 00 00 00"
-              {...register("phonenumber", {
-                valueAsNumber: true,
-                maxLength: {
-                  value: 4,
-                  message: "Too many numbers",
-                },
-              })}
-              id="phonenumber"
+          )}
+        />
+        <Controller
+          name="phonenumber"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Phone Number"
+              variant="outlined"
+              fullWidth
+              required
             />
-            {errors.phonenumber?.message}
-          </div>
-        </section>
-        <div className={style.buttons}>
-          <BackButton text="Return" onClick={back} />
-          <SubmitButton className={style.submitButton} text="Next step" />
-        </div>
+          )}
+        />
+        <BackButton text="Return" onClick={back} />
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{ padding: "12px" }}
+        >
+          Next step
+        </Button>
       </form>
     </section>
   );

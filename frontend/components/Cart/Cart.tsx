@@ -1,10 +1,10 @@
-import Link from "next/link";
+import { BsHandbag } from "react-icons/bs";
 import Image from "next/image";
 import { useContext } from "react";
 import style from "./cart.module.css";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
-import { PrimaryButton, PrimaryIconButton } from "../Buttons/Buttons";
+import { PrimaryButtonAsLink } from "../Buttons/Buttons";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import {
@@ -14,20 +14,22 @@ import {
 } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
+import React from "react";
 
-export function CartResumeContainer({
-  children,
-}: {
-  children?: React.ReactNode;
-}) {
+const CartResumeContainer = React.forwardRef<
+  HTMLDivElement,
+  { children?: React.ReactNode }
+>(({ children }, ref) => {
   const { locale } = useRouter();
   return (
-    <div className={style.cartWrapper}>
+    <div className={style.cartWrapper} ref={ref}>
       <h3>{translations[locale].cart}</h3>
       {children}
     </div>
   );
-}
+});
+
+CartResumeContainer.displayName = "CartResumeContainer";
 
 export function ProductCard({ product }: { product: any }) {
   const { state, dispatch, dispatchCart } = useContext(GlobalContext);
@@ -45,17 +47,10 @@ export function ProductCard({ product }: { product: any }) {
         alt={product.title}
       />
       <div className={style.spaceBetween}>
-        <div>
-          <div className={style.presentation}>
-            <div>
-              <h4>
-                {product.title[locale]
-                  ? product.title[locale]
-                  : product.title.pt}
-              </h4>
-            </div>
-            {/* <h5>{product.line_total.formatted_with_code}</h5> */}
-          </div>
+        <div className={style.presentation}>
+          <h4>
+            {product.title[locale] ? product.title[locale] : product.title.pt}
+          </h4>
         </div>
         <div className={style.bottomProduct}>
           <div>
@@ -94,33 +89,40 @@ export function ProductCard({ product }: { product: any }) {
   );
 }
 
-export default function Cart() {
+const Cart = React.forwardRef<HTMLDivElement>((_, ref) => {
   const { stateCart } = useContext(GlobalContext);
   const { locale } = useRouter();
 
   if (stateCart.cart.length > 0) {
     return (
-      <CartResumeContainer>
+      <CartResumeContainer ref={ref}>
         {stateCart.cart?.map((product: any) => (
-          <div key={product._id}>
-            <ProductCard product={product} />
-          </div>
+          <ProductCard key={product._id} product={product} />
         ))}
-        <Link href={`/checkout/${stateCart.userId}`}>
-          <a>
-            <PrimaryIconButton text={translations[locale].cart_go} />
-          </a>
-        </Link>
+        <PrimaryButtonAsLink
+          path={`/checkout/${stateCart.userId}`}
+          text={translations[locale].cart_go}
+          icon={<BsHandbag />}
+          fullWidth
+        />
       </CartResumeContainer>
     );
   }
   return (
-    <CartResumeContainer>
+    <CartResumeContainer ref={ref}>
       <div className={style.emptyCart}>
         <h4>{translations[locale].empty_bag_cart}</h4>
         <h5>{translations[locale].get_started}</h5>
-        <PrimaryButton path="/products" text={translations[locale].cart_cta} />
+        <PrimaryButtonAsLink
+          path="/products"
+          text={translations[locale].cart_cta}
+          fullWidth
+        />
       </div>
     </CartResumeContainer>
   );
-}
+});
+
+Cart.displayName = "Cart";
+
+export default Cart;

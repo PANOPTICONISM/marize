@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { PrimaryButton, SectionButton } from "../Buttons/Buttons";
+import { SectionButton } from "../Buttons/Buttons";
 import style from "./categorysections.module.css";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import { useRouter } from "next/router";
@@ -21,7 +21,6 @@ function CategorySections({ body }) {
           />
         </div>
         <SectionButton
-          className={style.categoryBtns}
           text={firstBox[locale]}
           href={{
             pathname: "/products",
@@ -38,7 +37,6 @@ function CategorySections({ body }) {
           />
         </div>
         <SectionButton
-          className={style.categoryBtns}
           text={secondBox[locale]}
           href={{
             pathname: "/products",

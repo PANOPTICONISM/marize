@@ -32,10 +32,15 @@
 
 .aboutPage .whyVisitUs h2 {
     margin: 0;
+    margin-bottom: 12px;
 }
 
 .aboutPage .whyVisitUs ul {
     margin-bottom: 0;
+}
+
+.aboutPage .whyVisitUs li {
+    margin-bottom: 4px;
 }
 
 .aboutPage .whyVisitUs div {
