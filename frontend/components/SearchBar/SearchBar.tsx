@@ -11,6 +11,7 @@ const SearchBar = ({
   className: string;
 }) => {
   const [search, setSearch] = useState("");
+  const [isOpen, setIsOpen] = React.useState(false);
   const [searchedArticles, setSearchedArticles] = useState([]);
 
   const { state } = useContext(ProductsContext);
@@ -19,11 +20,7 @@ const SearchBar = ({
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     const searchArticles = state.products?.filter((p) => {
-      return (
-        p.title[locale]
-          .toLowerCase()
-          .indexOf(search.toLowerCase()) > -1
-      );
+      return p.title[locale].toLowerCase().indexOf(search.toLowerCase()) > -1;
     });
     if (search.length > 0) {
       setSearchedArticles(searchArticles);
@@ -31,6 +28,10 @@ const SearchBar = ({
       setSearchedArticles([]);
     }
   };
+
+  React.useEffect(() => {
+    setIsOpen(search.length > 0);
+  }, [search.length]);
 
   return (
     <>
@@ -42,7 +43,7 @@ const SearchBar = ({
         placeholder="search here"
         onChange={(e) => handleSearch(e)}
       />
-      <SearchDropdown searchedArticles={searchedArticles} />
+      <SearchDropdown isOpen={isOpen} searchedArticles={searchedArticles} />
     </>
   );
 };
