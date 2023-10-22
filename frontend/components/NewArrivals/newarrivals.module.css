@@ -5,6 +5,12 @@
     justify-content: center;
 }
 
+.article {
+    display: grid;
+    gap: 12px;
+    align-content: baseline;
+}
+
 .imageWrapper {
     height: 300px;
     width: 230px;
@@ -16,6 +22,10 @@
     object-fit: cover;
 }
 
+.newArrivals h1 {
+    margin-top: 0;
+}
+
 .newArrivals h2 {
     font-size: 16px;
     font-weight: 300;
@@ -23,7 +33,7 @@
 }
 
 .newArrivals h3 {
-    margin-top: 0;
+    margin: 0;
 }
 
 .newArrivals span {

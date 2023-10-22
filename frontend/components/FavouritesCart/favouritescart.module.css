@@ -22,7 +22,7 @@
 
 .cartFavouritesWrapper h4 {
     font-size: 18px;
-    white-space: wrap;
+    white-space: pre-wrap;
 }
 
 .cartFavouritesWrapper h5 {

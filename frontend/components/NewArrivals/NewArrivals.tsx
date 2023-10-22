@@ -33,20 +33,24 @@ const NewArrivals = ({ title, products, locale }: ArrivalProps) => {
       <h1>{title[locale]}</h1>
       <div className={style.articles}>
         {newArrivals?.map((article) => (
-          <div className={style.imageWrapper} key={article._id}>
-            {article.images ? (
-              <Link href={`/products/${article._id}`} passHref>
-                <Image
-                  src={absoluteURLsForSanity(
-                    article.images[0].asset._ref
-                  ).url()}
-                  width={350}
-                  height={455}
-                  alt={article.title[locale]}
-                />
-              </Link>
+          <div key={article._id} className={style.article}>
+            <div className={style.imageWrapper}>
+              {article.images ? (
+                <Link href={`/products/${article._id}`} passHref>
+                  <Image
+                    src={absoluteURLsForSanity(
+                      article.images[0].asset._ref
+                    ).url()}
+                    width={350}
+                    height={455}
+                    alt={article.title[locale]}
+                  />
+                </Link>
+              ) : null}
+            </div>
+            {article.vendor ? (
+              <h2 className={style.brand}>{article.vendor?.title}</h2>
             ) : null}
-            <h2 className={style.brand}>{article.vendor?.title}</h2>
             <h3>
               {article.title[locale] ? article.title[locale] : article.title.pt}
             </h3>

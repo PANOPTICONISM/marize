@@ -44,7 +44,7 @@
 }
 
 .facebook h4 {
-  width: 100%;
+  max-width: 100%;
   background-color: var(--background-colour-h1);
   color: var(--white-colour);
   text-align: center;
@@ -99,7 +99,7 @@
   color: var(--black-colour);
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1000px) {
   .contact_wrapper {
     justify-content: space-between;
   }
