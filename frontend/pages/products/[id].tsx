@@ -20,7 +20,7 @@ import { addToCart } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
 import { PrimaryButton } from "../../components/Buttons/Buttons";
-import { SingleProduct } from "./product";
+import { SingleProduct } from "../../types/product";
 
 export function ProductDetails({
   showDetailsAccordion,
