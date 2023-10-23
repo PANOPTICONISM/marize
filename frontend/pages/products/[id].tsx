@@ -20,6 +20,7 @@ import { addToCart } from "../../utils/CartFunctions";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
 import { PrimaryButton } from "../../components/Buttons/Buttons";
+import { SingleProduct } from "./product";
 
 export function ProductDetails({
   showDetailsAccordion,
@@ -27,10 +28,10 @@ export function ProductDetails({
   isScroll,
   locale,
 }: {
-  showDetailsAccordion?: any;
-  product?: any;
-  isScroll?: any;
-  locale?: string;
+  showDetailsAccordion: () => void;
+  product: SingleProduct;
+  isScroll?: () => void;
+  locale: string;
 }) {
   const { state, dispatch, stateCart, dispatchCart } =
     useContext(GlobalContext);
@@ -39,9 +40,7 @@ export function ProductDetails({
 
   useEffect(() => {
     setShow(
-      state?.favourites.some(
-        (favourite: { _id: string }) => favourite._id === product._id
-      )
+      state?.favourites.some((favourite) => favourite._id === product._id)
     );
   }, [product._id, state?.favourites]);
 
@@ -142,7 +141,6 @@ export default function Product({ products, id }) {
   };
 
   const product = products?.find((prod) => prod._id === id);
-
   const scrollToComponent = (ref: any) =>
     window.scrollTo({
       top: ref.current.offsetTop,
@@ -159,8 +157,8 @@ export default function Product({ products, id }) {
         product={product}
         locale={locale}
       />
-      {showAccordion && <AccordionDetails fields={product} />}
-      <RelatedProducts relatedProducts={product?.related_products} />
+      {/* {showAccordion && <AccordionDetails fields={product} />}
+      <RelatedProducts relatedProducts={product?.related_products} /> */}
       {/* <div className={style.accordion} ref={ref}>
         <h1>FAQ</h1>
         {faq?.map(({ fields }, index) => (
@@ -176,11 +174,12 @@ export async function getStaticProps({ params: { id } }) {
     `*[_type == "product"]{
       _id, 
       body, 
-      category[]->{_id, title, parentVendor}, 
+      category->{_id, title}, 
       images, 
       slug, 
       title, 
-      variants[]{colours[]->, sizes[]->},
+      discounted,
+      variants[]{colours->{_id, title}, sizes[]->},
       vendor->{_id, title}}`
   );
 
@@ -193,17 +192,8 @@ export async function getStaticProps({ params: { id } }) {
 }
 
 export async function getStaticPaths() {
-  const data = await sanity.fetch(
-    `*[_type == "product"]{
-      _id, 
-      body, 
-      category[]->{_id, title, parentVendor}, 
-      images, 
-      slug, 
-      title, 
-      variants,
-      vendor->{_id, title}}`
-  );
+  const data = await sanity.fetch(`*[_type == "product"]{
+    _id}`);
 
   const paths = data.map((path) => {
     return {

@@ -7,7 +7,7 @@ import CategorySections from "../components/CategorySections/CategorySections";
 import { sanity } from "./api/lib/sanity.js";
 import { useRouter } from "next/router";
 import { absoluteURLsForSanity } from "../utils/SanityFunctions";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { ProductsContext } from "../contexts/ProductsContext";
 
 export default function Homepage({ products, homepage }) {

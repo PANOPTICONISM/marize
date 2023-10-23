@@ -48,7 +48,7 @@ export default {
       to: { type: "category" },
     },
     {
-      title: "Variantes",
+      title: "Tamanhos e cores",
       name: "variants",
       type: "array",
       of: [
