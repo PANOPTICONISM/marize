@@ -43,12 +43,12 @@ function CheckoutWrapper() {
   const processOrder = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const userStructure = {
-      userId: stateCart.userId,
+      id: stateCart.userId,
       firstName: shippingData.firstname,
       lastName: shippingData.lastname,
       email: shippingData.email,
       phoneNumber: shippingData.phonenumber,
-      // createdAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
       cart: stateCart.cart,
     };
 
@@ -57,13 +57,13 @@ function CheckoutWrapper() {
       body: JSON.stringify(userStructure),
     });
 
-    const emailResponse = await fetch("/api/email", {
-      method: "POST",
-      body: JSON.stringify(userStructure),
-    });
+    // const emailResponse = await fetch("/api/email", {
+    //   method: "POST",
+    //   body: JSON.stringify(userStructure),
+    // });
 
     const userData = await baseResponse.json();
-    const emailData = await emailResponse.json();
+    // const emailData = await emailResponse.json();
 
     if (userData.success) {
       nextStep();
