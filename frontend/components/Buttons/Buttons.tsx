@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import Link from "next/link";
+import { UrlObject } from "url";
 
 export function PrimaryButton({
   onClick,
@@ -62,7 +63,7 @@ export function SectionButton({
   text,
   locale,
 }: {
-  href: URL;
+  href: UrlObject;
   text: string;
   locale?: string;
 }) {
