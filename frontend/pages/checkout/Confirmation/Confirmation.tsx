@@ -71,24 +71,22 @@ function Confirmation({
           <div>
             <h2>Order details</h2>
             <h3>Shipping Summary</h3>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Name</td>
-                  <td>
-                    {shippingData.firstname + " " + shippingData.lastname}
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ whiteSpace: "nowrap" }}>Phone-number</td>
-                  <td>{shippingData.phonenumber}</td>
-                </tr>
-                <tr>
-                  <td>E-mail</td>
-                  <td>{shippingData.email}</td>
-                </tr>
-              </tbody>
-            </table>
+            <section>
+              <div>
+                <p>Name:</p>
+                <span>
+                  {shippingData.firstname + " " + shippingData.lastname}
+                </span>
+              </div>
+              <div>
+                <p>Phone-number:</p>
+                <span>{shippingData.phonenumber}</span>
+              </div>
+              <div>
+                <p>E-mail:</p>
+                <span>{shippingData.email}</span>
+              </div>
+            </section>
           </div>
           <PrimaryButton onClick={processOrder} text="Confirm Order" />
         </aside>

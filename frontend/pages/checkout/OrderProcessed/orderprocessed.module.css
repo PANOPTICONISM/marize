@@ -1,3 +1,7 @@
+.finalSummary {
+  padding: 30px 0;
+}
+
 .finalSummary svg {
   font-size: 24px;
 }
@@ -26,6 +30,14 @@
 .priceSummary p span,
 .descDetails p:first-child {
   font-weight: 700;
+}
+
+.descDetails p span {
+  margin-right: 4px;
+}
+
+.shoppingArticle {
+  margin-bottom: 30px;
 }
 
 .shoppingArticle p {

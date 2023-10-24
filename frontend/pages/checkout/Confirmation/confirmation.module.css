@@ -40,12 +40,8 @@
 }
 
 /* SIDEBAR */
-.confirmOrder aside table {
-    width: 100%;
-}
-
-.confirmOrder aside table tr td:last-of-type {
-    text-align: right;
+.confirmOrder {
+    margin: 30px auto;
 }
 
 .confirmOrder aside {
@@ -55,12 +51,20 @@
     margin: auto;
 }
 
+.confirmOrder aside section {
+    margin-bottom: 30px;
+}
+
+.confirmOrder aside section p {
+    font-weight: 800;
+}
+
 .confirmOrder h2 {
     margin-top: 0;
 }
 
-.confirmOrder table {
-    margin-bottom: 30px;
+.confirmOrder p {
+    margin-bottom: 0;
 }
 
 .descDetails>p {
@@ -76,7 +80,6 @@
 @media screen and (min-width: 800px) {
     .confirmOrder {
         max-width: 800px;
-        margin: 30px auto;
     }
 
     .shoppingBag h1 {
