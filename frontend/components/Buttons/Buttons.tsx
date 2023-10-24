@@ -6,20 +6,23 @@ export function PrimaryButton({
   text,
   disabled = false,
   icon,
+  type,
 }: {
   onClick?: () => void;
   text: string;
   disabled?: boolean;
   icon?: React.ReactNode;
+  type?: "button" | "submit" | "reset";
 }) {
   return (
     <Button
+      type={type}
       variant="contained"
       onClick={onClick}
       disabled={disabled}
       startIcon={icon}
       fullWidth
-      sx={{ padding: "12px" }}
+      sx={{ padding: "12px", borderRadius: "0" }}
     >
       {text}
     </Button>
@@ -45,7 +48,7 @@ export function PrimaryButtonAsLink({
       <Button
         variant="contained"
         fullWidth={fullWidth}
-        sx={{ padding: "12px" }}
+        sx={{ padding: "12px", borderRadius: "0" }}
         startIcon={icon}
       >
         {text}
@@ -67,7 +70,7 @@ export function SectionButton({
     <Link href={href} locale={locale}>
       <Button
         variant="contained"
-        sx={{ padding: "12px 16px", marginTop: "18px" }}
+        sx={{ padding: "12px 16px", marginTop: "18px", borderRadius: "0" }}
       >
         {text}
       </Button>
@@ -87,7 +90,7 @@ export function BackButton({
       onClick={onClick}
       variant="outlined"
       fullWidth
-      sx={{ padding: "12px" }}
+      sx={{ padding: "12px", borderRadius: "0" }}
     >
       {text}
     </Button>
