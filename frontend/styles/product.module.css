@@ -8,18 +8,20 @@
 }
 
 .productDetails .introduction {
-    display: flex;
-    justify-content: space-between;
+    margin-top: 12px;
+    display: grid;
+    gap: 6px;
 }
 
-.productDetails h2,
-.productDetails h3 {
-    font-size: 24px;
-    margin: 6px 0;
+.productDetails h2 {
+    font-size: 20px;
+    margin: 0;
 }
 
 .productDetails h3 {
     font-weight: 300;
+    font-size: 18px;
+    margin: 0;
 }
 
 .productDetails .sizing {

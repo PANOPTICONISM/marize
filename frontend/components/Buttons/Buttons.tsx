@@ -59,7 +59,7 @@ export function SectionButton({
   text,
   locale,
 }: {
-  href: any;
+  href: URL;
   text: string;
   locale?: string;
 }) {

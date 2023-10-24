@@ -62,6 +62,9 @@ export function ProductDetails({
           <h2>
             {product.title[locale] ? product.title[locale] : product.title.pt}
           </h2>
+          {product.vendor ? (
+            <h3 className={style.brand}>{product.vendor.title}</h3>
+          ) : null}
         </div>
         <div className={style.sizing}>
           <form>
