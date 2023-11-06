@@ -45,6 +45,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
             </h1>
             {stateCart.cart.map((product: any) => (
               <article key={product._id} className={style.shoppingArticle}>
+                <div className={style.imageWrapper}>
                 <Image
                   src={absoluteURLsForSanity(
                     product?.images[0].asset._ref
@@ -53,6 +54,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                   height={300}
                   alt={product.title}
                 />
+                </div>
                 <div className={style.fullSpace}>
                   <div className={style.descDetails}>
                     <div>
