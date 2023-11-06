@@ -61,11 +61,15 @@ export default function ShoppingBag({ next }: { next?: any }) {
                           ? product.title[locale]
                           : product.title.pt}
                       </p>
-                      {product.size !== null ? (
+                      {product.size?.[0] === "Tamanho único" ?
                         <p>
-                          <span>Size:</span> {product.size}
+                          <span>Size:</span> {translations[locale].uniqueSize}
+                        </p> :
+                        <p >
+                          <span>Size:</span> {product.size.join(", ")}
                         </p>
-                      ) : null}
+
+                      }
                     </div>
                     <select
                       onChange={(e: any) => {

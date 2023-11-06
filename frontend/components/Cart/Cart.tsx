@@ -38,8 +38,6 @@ export function ProductCard({ product }: { product: any }) {
   };
   const { locale } = useRouter();
 
-  console.log(product);
-
   return (
     <div className={style.fullCart}>
       <Image
