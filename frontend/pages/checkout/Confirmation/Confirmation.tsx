@@ -23,7 +23,7 @@ function Confirmation({
       )
       : "";
 
-  return (
+  return shippingData ? (
     <div className={style.confirmOrder}>
       <main>
         <div className={style.shoppingBag}>
@@ -94,7 +94,7 @@ function Confirmation({
         <PrimaryButton onClick={processOrder} text="Confirm Order" />
       </aside>
     </div>
-  );
+  ) : null;
 }
 
 export default Confirmation;
