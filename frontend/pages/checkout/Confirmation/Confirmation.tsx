@@ -1,7 +1,5 @@
 import Image from "next/image";
 import style from "./confirmation.module.css";
-import { useContext } from "react";
-import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
 import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 import { useRouter } from "next/router";
 import { translations } from "../../../translations/common";
@@ -25,7 +23,7 @@ function Confirmation({
       )
       : "";
 
-  return shippingData ? (
+  return (
     <div className={style.confirmOrder}>
       <main>
         <div className={style.shoppingBag}>
@@ -96,7 +94,7 @@ function Confirmation({
         <PrimaryButton onClick={processOrder} text="Confirm Order" />
       </aside>
     </div>
-  ) : null;
+  );
 }
 
 export default Confirmation;

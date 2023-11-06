@@ -16,8 +16,9 @@ import {
 } from "../../../utils/CartFunctions";
 import { useRouter } from "next/router";
 import { translations } from "../../../translations/common";
+import { ShippingDataProps } from "../[id]";
 
-export default function ShoppingBag({ nextStep }: { nextStep: () => void }) {
+export default function ShoppingBag({ next }: { next: (data: Partial<ShippingDataProps>) => void }) {
   const { state, dispatch, stateCart, dispatchCart } =
     useContext(GlobalContext);
 
@@ -127,7 +128,7 @@ export default function ShoppingBag({ nextStep }: { nextStep: () => void }) {
               <p>
                 You can pick your preferred shipping option in the next step.
               </p>
-              <PrimaryButton onClick={nextStep} text="continue" />
+              <PrimaryButton onClick={() => next({ cart: stateCart.cart })} text="continue" />
             </div>
           </div>
         </div>

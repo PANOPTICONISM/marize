@@ -41,11 +41,12 @@ function CheckoutWrapper() {
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
-  const next = (data: ShippingDataProps) => {
-    setShippingData(data);
-
+  const next = (shippingUpdate: Partial<ShippingDataProps>) => {
+    setShippingData((data) => ({ ...data, ...shippingUpdate }));
     nextStep();
   };
+
+  console.log(shippingData, 'ship')
 
   const [error, setError] = React.useState("");
   const [message, setMessage] = React.useState("");
@@ -114,10 +115,10 @@ function CheckoutWrapper() {
           </Step>
         ))}
       </Stepper>
-      {activeStep === 0 && <ShoppingBag nextStep={nextStep} />}
+      {activeStep === 0 && <ShoppingBag next={next} />}
       {activeStep === 1 && <ShippingDetails back={backStep} next={next} />}
       {activeStep === 2 && (
-        <Confirmation processOrder={processOrder} shippingData={shippingData} />
+        <Confirmation shippingData={shippingData} processOrder={processOrder} />
       )}
       {activeStep === 3 && <OrderProcessed shippingData={shippingData} />}
     </Main>
