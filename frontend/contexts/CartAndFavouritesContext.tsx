@@ -68,6 +68,11 @@ function reducer(state: StateProps, action: ActionProps): StateProps {
             },
           ],
       };
+    case "REMOVE_CART":
+      return {
+        ...state,
+        cart: [],
+      };
     case "REMOVE_FROM_CART":
       return {
         ...state,

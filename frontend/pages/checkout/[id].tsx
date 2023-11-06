@@ -24,7 +24,7 @@ export type ShippingDataProps = {
 
 function CheckoutWrapper() {
   const { locale } = useRouter()
-  const { stateCart } = React.useContext(GlobalContext);
+  const { stateCart, dispatchCart } = React.useContext(GlobalContext);
 
   const [shippingData, setShippingData] = React.useState<ShippingDataProps>({
     id: "",
@@ -75,6 +75,10 @@ function CheckoutWrapper() {
     // const emailData = await emailResponse.json();
 
     if (userData.success) {
+      dispatchCart({
+        type: "REMOVE_CART",
+        payload: null
+      })
       next(userStructure);
       return setMessage(userData.message);
     } else {

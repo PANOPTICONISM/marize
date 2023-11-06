@@ -2,18 +2,18 @@ import Image from "next/image";
 import React, { useContext } from "react";
 import style from "./orderprocessed.module.css";
 import { IoMdCheckmarkCircle } from "react-icons/io";
-import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
+import { GlobalContext, StateExtraProps } from "../../../contexts/CartAndFavouritesContext";
 import { useRouter } from "next/router";
 import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 import { translations } from "../../../translations/common";
 import { ShippingDataProps } from "../[id]";
+import { SingleProduct } from "../../../types/product";
 
 export default function OrderProcessed({
   shippingData,
 }: {
   shippingData: ShippingDataProps;
-}) {
-  const { stateCart } = useContext(GlobalContext);
+  }) {
   const { locale } = useRouter();
 
   return (
@@ -31,7 +31,7 @@ export default function OrderProcessed({
         </p>
         <div className={style.orderSummary}>
           <h1>Order Summary</h1>
-          {stateCart.cart?.map((product: any) => (
+          {shippingData.cart?.map((product: SingleProduct & StateExtraProps) => (
             <article key={product._id} className={style.shoppingArticle}>
               <div className={style.imageWrapper}>
                 <Image
@@ -40,7 +40,7 @@ export default function OrderProcessed({
                   ).url()}
                   width={230}
                   height={300}
-                  alt={product.title}
+                  alt={product.title[locale]}
                 />
               </div>
               <div className={style.fullSpace}>
