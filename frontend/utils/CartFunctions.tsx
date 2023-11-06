@@ -5,11 +5,11 @@ import { addToFavourites } from "./FavouritesFunctions";
 export const addToCart = (
   dispatchCart: React.Dispatch<ActionProps>,
   product: SingleProduct,
-  productSize: string
+  size: string
 ) => {
   dispatchCart({
     type: "ADD_TO_CART",
-    payload: { ...product, productSize },
+    payload: { ...product, size },
   });
 };
 

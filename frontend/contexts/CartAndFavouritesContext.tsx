@@ -2,20 +2,25 @@ import React from "react";
 import { v4 as uuid } from "uuid";
 import { SingleProduct } from "../types/product";
 
-type ExtraProductProps = {
-  productSize?: string;
+type StateExtraProps = {
+  size?: string[];
   quantity?: number;
 }
 
 export type StateProps = {
   favourites: Array<SingleProduct>;
-  cart: Array<SingleProduct & ExtraProductProps>;
+  cart: Array<SingleProduct & StateExtraProps>;
   userId: string;
+}
+
+type ActionExtraProps = {
+  size?: string;
+  quantity?: number;
 }
 
 export type ActionProps = {
   type: string;
-  payload: SingleProduct & ExtraProductProps;
+  payload: SingleProduct & ActionExtraProps;
 }
 
 type DefaultProps = {
@@ -47,21 +52,21 @@ function reducer(state: StateProps, action: ActionProps): StateProps {
         cart: JSON.stringify(state.cart).includes(action.payload._id)
           ? state.cart.map((product) =>
             product._id === action.payload._id
-                ? {
-                    ...product,
-                    quantity: Number(product.quantity) + 1,
-                size: product.productSize,
-                  }
-                : product
-            )
+              ? {
+                ...product,
+                quantity: Number(product.quantity) + 1,
+                size: [...product.size, action.payload.size],
+              }
+              : product
+          )
           : [
-              ...state.cart,
-              {
-                ...action.payload,
-                quantity: 1,
-                size: action.payload.productSize,
-              },
-            ],
+            ...state.cart,
+            {
+              ...action.payload,
+              quantity: 1,
+              size: [action.payload.size],
+            },
+          ],
       };
     case "REMOVE_FROM_CART":
       return {
