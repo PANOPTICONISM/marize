@@ -20,6 +20,11 @@
     font-weight: 700;
 }
 
+.shoppingArticle {
+    display: grid;
+    gap: 18px;
+}
+
 .shoppingArticle p {
     margin: 6px 0;
 }
@@ -33,10 +38,15 @@
     color: var(--white-colour);
 }
 
-.shoppingBag img {
+.shoppingBag .imageWrapper {
     width: 230px;
     height: 300px;
-    object-fit: contain;
+}
+
+.shoppingBag img {
+    width: 230px;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* SIDEBAR */

@@ -36,6 +36,7 @@ function Confirmation({
             </h1>
             {stateCart.cart?.map((product: any) => (
               <article key={product._id} className={style.shoppingArticle}>
+                <div className={style.imageWrapper}>
                 <Image
                   src={absoluteURLsForSanity(
                     product?.images[0].asset._ref
@@ -44,6 +45,7 @@ function Confirmation({
                   height={300}
                   alt={product.title}
                 />
+                </div>
                 <div className={style.fullSpace}>
                   <div className={style.descDetails}>
                     <div>
@@ -52,11 +54,15 @@ function Confirmation({
                           ? product.title[locale]
                           : product.title.pt}
                       </p>
-                      {product.size !== null ? (
+                      {product.size?.[0] === "Tamanho único" ?
                         <p>
-                          <span>Size:</span> {product.size}
+                          <span>Size:</span> {translations[locale].uniqueSize}
+                        </p> :
+                        <p >
+                          <span>Size:</span> {product.size.join(", ")}
                         </p>
-                      ) : null}
+
+                      }
                     </div>
                     <p>
                       {product.quantity} {translations[locale].pieces}
