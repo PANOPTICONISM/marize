@@ -93,14 +93,14 @@ export function GlobalProvider({ children }: { children?: React.ReactNode }) {
   };
 
   const [state, dispatch] = React.useReducer(reducer, [], () => {
-    if (process.browser) {
+    if (typeof window !== 'undefined') {
       const localData = localStorage.getItem("favourites");
       return localData ? JSON.parse(localData) : initialState;
     }
   });
 
   const [stateCart, dispatchCart] = React.useReducer(reducer, [], () => {
-    if (process.browser) {
+    if (typeof window !== 'undefined') {
       const localData = localStorage.getItem("cart");
       return localData ? JSON.parse(localData) : initialState;
     }
