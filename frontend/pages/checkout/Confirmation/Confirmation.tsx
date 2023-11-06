@@ -6,13 +6,14 @@ import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 import { useRouter } from "next/router";
 import { translations } from "../../../translations/common";
 import { PrimaryButton } from "../../../components/Buttons/Buttons";
+import { ShippingDataProps } from "../[id]";
 
 function Confirmation({
   shippingData,
   processOrder,
 }: {
-  shippingData?: any;
-  processOrder?: any;
+  shippingData: ShippingDataProps;
+  processOrder: () => void;
 }) {
   const { stateCart } = useContext(GlobalContext);
   const { locale } = useRouter();
@@ -20,23 +21,22 @@ function Confirmation({
   const cartTotal =
     stateCart?.cart?.length > 0
       ? stateCart.cart.reduce(
-          (accum, item) => Number(accum) + Number(item.quantity),
-          0
-        )
+        (accum, item) => Number(accum) + Number(item.quantity),
+        0
+      )
       : "";
 
-  if (shippingData) {
-    return (
-      <div className={style.confirmOrder}>
-        <main>
-          <div className={style.shoppingBag}>
-            <h1>
-              My Shopping Bag
-              <span> ({cartTotal} articles)</span>
-            </h1>
-            {stateCart.cart?.map((product: any) => (
-              <article key={product._id} className={style.shoppingArticle}>
-                <div className={style.imageWrapper}>
+  return (
+    <div className={style.confirmOrder}>
+      <main>
+        <div className={style.shoppingBag}>
+          <h1>
+            My Shopping Bag
+            <span> ({cartTotal} articles)</span>
+          </h1>
+          {stateCart.cart?.map((product: any) => (
+            <article key={product._id} className={style.shoppingArticle}>
+              <div className={style.imageWrapper}>
                 <Image
                   src={absoluteURLsForSanity(
                     product?.images[0].asset._ref
@@ -45,62 +45,59 @@ function Confirmation({
                   height={300}
                   alt={product.title}
                 />
-                </div>
-                <div className={style.fullSpace}>
-                  <div className={style.descDetails}>
-                    <div>
-                      <p>
-                        {product.title[locale]
-                          ? product.title[locale]
-                          : product.title.pt}
-                      </p>
-                      {product.size?.[0] === "Tamanho único" ?
-                        <p>
-                          <span>Size:</span> {translations[locale].uniqueSize}
-                        </p> :
-                        <p >
-                          <span>Size:</span> {product.size.join(", ")}
-                        </p>
-
-                      }
-                    </div>
+              </div>
+              <div className={style.fullSpace}>
+                <div className={style.descDetails}>
+                  <div>
                     <p>
-                      {product.quantity} {translations[locale].pieces}
+                      {product.title[locale]
+                        ? product.title[locale]
+                        : product.title.pt}
                     </p>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </main>
-        <aside>
-          <div>
-            <h2>Order details</h2>
-            <h3>Shipping Summary</h3>
-            <section>
-              <div>
-                <p>Name:</p>
-                <span>
-                  {shippingData.firstname + " " + shippingData.lastname}
-                </span>
-              </div>
-              <div>
-                <p>Phone-number:</p>
-                <span>{shippingData.phonenumber}</span>
-              </div>
-              <div>
-                <p>E-mail:</p>
-                <span>{shippingData.email}</span>
-              </div>
-            </section>
-          </div>
-          <PrimaryButton onClick={processOrder} text="Confirm Order" />
-        </aside>
-      </div>
-    );
-  }
+                    {product.size?.[0] === "Tamanho único" ?
+                      <p>
+                        <span>Size:</span> {translations[locale].uniqueSize}
+                      </p> :
+                      <p >
+                        <span>Size:</span> {product.size.join(", ")}
+                      </p>
 
-  return null;
+                    }
+                  </div>
+                  <p>
+                    {product.quantity} {translations[locale].pieces}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </main>
+      <aside>
+        <div>
+          <h2>Order details</h2>
+          <h3>Shipping Summary</h3>
+          <section>
+            <div>
+              <p>Name:</p>
+              <span>
+                {shippingData.firstname + " " + shippingData.lastname}
+              </span>
+            </div>
+            <div>
+              <p>Phone-number:</p>
+              <span>{shippingData.phonenumber}</span>
+            </div>
+            <div>
+              <p>E-mail:</p>
+              <span>{shippingData.email}</span>
+            </div>
+          </section>
+        </div>
+        <PrimaryButton onClick={processOrder} text="Confirm Order" />
+      </aside>
+    </div>
+  );
 }
 
 export default Confirmation;

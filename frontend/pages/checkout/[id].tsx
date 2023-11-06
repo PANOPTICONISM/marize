@@ -50,8 +50,7 @@ function CheckoutWrapper() {
   const [error, setError] = React.useState("");
   const [message, setMessage] = React.useState("");
 
-  const processOrder = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const processOrder = async () => {
     const userStructure = {
       id: uuid(),
       firstname: shippingData.firstname,
@@ -111,7 +110,7 @@ function CheckoutWrapper() {
           </Step>
         ))}
       </Stepper>
-      {activeStep === 0 && <ShoppingBag next={next} />}
+      {activeStep === 0 && <ShoppingBag nextStep={nextStep} />}
       {activeStep === 1 && <ShippingDetails back={backStep} next={next} />}
       {activeStep === 2 && (
         <Confirmation processOrder={processOrder} shippingData={shippingData} />

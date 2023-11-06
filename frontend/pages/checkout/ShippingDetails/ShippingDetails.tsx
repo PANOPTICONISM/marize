@@ -9,17 +9,14 @@ type FormValues = {
   lastname: string;
   email: string;
   phonenumber: number;
-  address: string;
-  zip: string;
 };
 
 export default function ShippingDetails({
   next,
   back,
 }: {
-  checkoutTokenId?: any;
-  next?: any;
-  back?: any;
+  next: (data: ShippingDataProps) => void;
+  back: () => void;
 }) {
   const { control, handleSubmit } = useForm<FormValues>();
 

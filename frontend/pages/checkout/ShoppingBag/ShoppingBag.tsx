@@ -17,7 +17,7 @@ import {
 import { useRouter } from "next/router";
 import { translations } from "../../../translations/common";
 
-export default function ShoppingBag({ next }: { next?: any }) {
+export default function ShoppingBag({ nextStep }: { nextStep: () => void }) {
   const { state, dispatch, stateCart, dispatchCart } =
     useContext(GlobalContext);
 
@@ -127,7 +127,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
               <p>
                 You can pick your preferred shipping option in the next step.
               </p>
-              <PrimaryButton onClick={next} text="continue" />
+              <PrimaryButton onClick={nextStep} text="continue" />
             </div>
           </div>
         </div>
