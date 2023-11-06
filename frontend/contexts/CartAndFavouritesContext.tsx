@@ -2,7 +2,7 @@ import React from "react";
 import { v4 as uuid } from "uuid";
 import { SingleProduct } from "../types/product";
 
-type StateExtraProps = {
+export type StateExtraProps = {
   size?: string[];
   quantity?: number;
 }

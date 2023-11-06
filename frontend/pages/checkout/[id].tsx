@@ -5,18 +5,21 @@ import ShippingDetails from "./ShippingDetails/ShippingDetails";
 import Confirmation from "./Confirmation/Confirmation";
 import Main from "../../containers/Main/Main";
 import OrderProcessed from "./OrderProcessed/OrderProcessed";
-import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
+import { GlobalContext, StateExtraProps } from "../../contexts/CartAndFavouritesContext";
 import { v4 as uuid } from "uuid";
 import { toast } from "react-toastify";
 import { translations } from "../../translations/toasts";
 import { useRouter } from "next/router";
+import { SingleProduct } from "../../types/product";
 
 export type ShippingDataProps = {
+  id: string;
   firstname: string;
   lastname: string;
   email: string;
   phonenumber: string;
-  cart: [];
+  cart: (SingleProduct & StateExtraProps)[];
+  user_id: string;
 };
 
 function CheckoutWrapper() {
@@ -24,11 +27,13 @@ function CheckoutWrapper() {
   const { stateCart } = React.useContext(GlobalContext);
 
   const [shippingData, setShippingData] = React.useState<ShippingDataProps>({
+    id: "",
     firstname: "",
     lastname: "",
     email: "",
     phonenumber: "",
     cart: [],
+    user_id: ""
   });
   const steps = ["Shopping Bag", "Shipping Details", "Confirmation"];
 
@@ -49,11 +54,10 @@ function CheckoutWrapper() {
     e.preventDefault();
     const userStructure = {
       id: uuid(),
-      firstName: shippingData.firstname,
-      lastName: shippingData.lastname,
+      firstname: shippingData.firstname,
+      lastname: shippingData.lastname,
       email: shippingData.email,
-      phoneNumber: shippingData.phonenumber,
-      created_at: new Date().toISOString(),
+      phonenumber: shippingData.phonenumber,
       cart: stateCart.cart,
       user_id: stateCart.userId,
     };
@@ -72,7 +76,7 @@ function CheckoutWrapper() {
     // const emailData = await emailResponse.json();
 
     if (userData.success) {
-      nextStep();
+      next(userStructure);
       return setMessage(userData.message);
     } else {
       return toast.error(translations[locale].purchaseError)

@@ -6,23 +6,23 @@ import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
 import { useRouter } from "next/router";
 import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 import { translations } from "../../../translations/common";
+import { ShippingDataProps } from "../[id]";
 
 export default function OrderProcessed({
   shippingData,
 }: {
-  shippingData?: any;
+    shippingData: ShippingDataProps;
 }) {
-  const { state, stateCart } = useContext(GlobalContext);
-  const orderID = state?.userId.slice(0, 8);
+  const { stateCart } = useContext(GlobalContext);
   const { locale } = useRouter();
 
   if (shippingData) {
     return (
       <main className={style.finalSummary}>
         <div className={style.shoppingBag}>
-          <p>Hi, {shippingData?.firstname}.</p>
+          <p>Hi, {shippingData.firstname}.</p>
           <p>
-            <IoMdCheckmarkCircle /> Your order number #{orderID} has been
+            <IoMdCheckmarkCircle /> Your order number #{shippingData.id} has been
             confirmed.
           </p>
           <p>
