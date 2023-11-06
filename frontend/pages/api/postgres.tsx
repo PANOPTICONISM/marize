@@ -26,7 +26,7 @@ export default async function handler(
 
 async function addUser(req: NextApiRequest, res: NextApiResponse) {
   const table =
-    process.env.NODE_ENV === "development" ? "staging" : "purchases";
+    process.env.NODE_ENV === "development" ? "staging" : "production";
 
   try {
     const data = JSON.parse(req.body);
@@ -55,7 +55,7 @@ async function addUser(req: NextApiRequest, res: NextApiResponse) {
 
 async function getUser(req: NextApiRequest, res: NextApiResponse) {
   const table =
-    process.env.NODE_ENV === "development" ? "staging" : "purchases";
+    process.env.NODE_ENV === "development" ? "staging" : "production";
   try {
     const response = await pool.query(`SELECT * from ${table}`);
     return res.status(200).json(response);

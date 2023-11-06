@@ -14,13 +14,12 @@ function Confirmation({
 }: {
   shippingData: ShippingDataProps;
   processOrder: () => void;
-}) {
-  const { stateCart } = useContext(GlobalContext);
+  }) {
   const { locale } = useRouter();
 
   const cartTotal =
-    stateCart?.cart?.length > 0
-      ? stateCart.cart.reduce(
+    shippingData.cart.length > 0
+      ? shippingData.cart.reduce(
         (accum, item) => Number(accum) + Number(item.quantity),
         0
       )
@@ -34,7 +33,7 @@ function Confirmation({
             My Shopping Bag
             <span> ({cartTotal} articles)</span>
           </h1>
-          {stateCart.cart?.map((product: any) => (
+          {shippingData.cart?.map((product: any) => (
             <article key={product._id} className={style.shoppingArticle}>
               <div className={style.imageWrapper}>
                 <Image

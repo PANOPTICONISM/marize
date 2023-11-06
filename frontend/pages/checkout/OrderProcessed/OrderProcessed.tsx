@@ -1,8 +1,8 @@
 import Image from "next/image";
-import React, { useContext } from "react";
+import React from "react";
 import style from "./orderprocessed.module.css";
 import { IoMdCheckmarkCircle } from "react-icons/io";
-import { GlobalContext, StateExtraProps } from "../../../contexts/CartAndFavouritesContext";
+import { StateExtraProps } from "../../../contexts/CartAndFavouritesContext";
 import { useRouter } from "next/router";
 import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
 import { translations } from "../../../translations/common";
