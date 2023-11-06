@@ -1,3 +1,7 @@
+.finalSummary {
+  padding: 30px 0;
+}
+
 .finalSummary svg {
   font-size: 24px;
 }
@@ -6,8 +10,8 @@
   display: flex;
 }
 
-.shoppingBag > p:nth-child(1),
-.shoppingBag > p:nth-child(2) {
+.shoppingBag>p:nth-child(1),
+.shoppingBag>p:nth-child(2) {
   font-weight: 700;
 }
 
@@ -28,6 +32,16 @@
   font-weight: 700;
 }
 
+.descDetails p span {
+  margin-right: 4px;
+}
+
+.shoppingArticle {
+  margin-bottom: 30px;
+  display: grid;
+  gap: 18px;
+}
+
 .shoppingArticle p {
   margin: 6px 0;
 }
@@ -38,8 +52,15 @@
   margin: 30px 0;
 }
 
+.imageWrapper {
+  width: 230px;
+  height: 300px;
+}
+
 .shoppingArticle img {
   max-width: 230px;
+  height: 100%;
+  object-fit: cover;
 }
 
 .finalMessage p:last-of-type {
@@ -51,6 +72,7 @@
 }
 
 @media screen and (min-width: 800px) {
+
   .shoppingBag,
   .priceWrapper,
   .finalMessage {
@@ -75,10 +97,6 @@
     margin-right: 18px;
   }
 
-  .shoppingArticle div {
-    width: 100%;
-  }
-
   .descDetails {
     display: flex;
     justify-content: space-between;
@@ -98,6 +116,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 100%;
   }
 
   .shoppingArticle .bagPrice {

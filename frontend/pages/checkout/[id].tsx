@@ -5,25 +5,35 @@ import ShippingDetails from "./ShippingDetails/ShippingDetails";
 import Confirmation from "./Confirmation/Confirmation";
 import Main from "../../containers/Main/Main";
 import OrderProcessed from "./OrderProcessed/OrderProcessed";
-import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
+import { GlobalContext, StateExtraProps } from "../../contexts/CartAndFavouritesContext";
+import { v4 as uuid } from "uuid";
+import { toast } from "react-toastify";
+import { translations } from "../../translations/toasts";
+import { useRouter } from "next/router";
+import { SingleProduct } from "../../types/product";
 
 export type ShippingDataProps = {
+  id: string;
   firstname: string;
   lastname: string;
   email: string;
   phonenumber: string;
-  cart: [];
+  cart: (SingleProduct & StateExtraProps)[];
+  user_id: string;
 };
 
 function CheckoutWrapper() {
-  const { stateCart } = React.useContext(GlobalContext);
+  const { locale } = useRouter()
+  const { stateCart, dispatchCart } = React.useContext(GlobalContext);
 
   const [shippingData, setShippingData] = React.useState<ShippingDataProps>({
+    id: "",
     firstname: "",
     lastname: "",
     email: "",
     phonenumber: "",
     cart: [],
+    user_id: ""
   });
   const steps = ["Shopping Bag", "Shipping Details", "Confirmation"];
 
@@ -31,45 +41,49 @@ function CheckoutWrapper() {
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
-  const next = (data: ShippingDataProps) => {
-    setShippingData(data);
-
+  const next = (shippingUpdate: Partial<ShippingDataProps>) => {
+    setShippingData((data) => ({ ...data, ...shippingUpdate }));
     nextStep();
   };
+
+  console.log(shippingData, 'ship')
 
   const [error, setError] = React.useState("");
   const [message, setMessage] = React.useState("");
 
-  const processOrder = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const processOrder = async () => {
     const userStructure = {
-      userId: stateCart.userId,
-      firstName: shippingData.firstname,
-      lastName: shippingData.lastname,
+      id: uuid(),
+      firstname: shippingData.firstname,
+      lastname: shippingData.lastname,
       email: shippingData.email,
-      phoneNumber: shippingData.phonenumber,
-      // createdAt: new Date().toISOString(),
+      phonenumber: shippingData.phonenumber,
       cart: stateCart.cart,
+      user_id: stateCart.userId,
     };
 
-    const baseResponse = await fetch("/api/supabase", {
+    const baseResponse = await fetch("/api/postgres", {
       method: "POST",
       body: JSON.stringify(userStructure),
     });
 
-    const emailResponse = await fetch("/api/email", {
-      method: "POST",
-      body: JSON.stringify(userStructure),
-    });
+    // const emailResponse = await fetch("/api/email", {
+    //   method: "POST",
+    //   body: JSON.stringify(userStructure),
+    // });
 
     const userData = await baseResponse.json();
-    const emailData = await emailResponse.json();
+    // const emailData = await emailResponse.json();
 
     if (userData.success) {
-      nextStep();
+      dispatchCart({
+        type: "REMOVE_CART",
+        payload: null
+      })
+      next(userStructure);
       return setMessage(userData.message);
     } else {
-      return setError(userData.message);
+      return toast.error(translations[locale].purchaseError)
     }
   };
 
@@ -104,7 +118,7 @@ function CheckoutWrapper() {
       {activeStep === 0 && <ShoppingBag next={next} />}
       {activeStep === 1 && <ShippingDetails back={backStep} next={next} />}
       {activeStep === 2 && (
-        <Confirmation processOrder={processOrder} shippingData={shippingData} />
+        <Confirmation shippingData={shippingData} processOrder={processOrder} />
       )}
       {activeStep === 3 && <OrderProcessed shippingData={shippingData} />}
     </Main>

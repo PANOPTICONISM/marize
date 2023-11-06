@@ -48,12 +48,16 @@ const NewArrivals = ({ title, products, locale }: ArrivalProps) => {
                 </Link>
               ) : null}
             </div>
-            {article.vendor ? (
-              <h2 className={style.brand}>{article.vendor?.title}</h2>
-            ) : null}
-            <h3>
-              {article.title[locale] ? article.title[locale] : article.title.pt}
-            </h3>
+            <div>
+              <h2>
+                {article.title[locale]
+                  ? article.title[locale]
+                  : article.title.pt}
+              </h2>
+              {article.vendor ? (
+                <h3 className={style.brand}>{article.vendor.title}</h3>
+              ) : null}
+            </div>
           </div>
         ))}
       </div>

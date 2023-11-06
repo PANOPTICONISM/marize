@@ -16,8 +16,9 @@ import {
 } from "../../../utils/CartFunctions";
 import { useRouter } from "next/router";
 import { translations } from "../../../translations/common";
+import { ShippingDataProps } from "../[id]";
 
-export default function ShoppingBag({ next }: { next?: any }) {
+export default function ShoppingBag({ next }: { next: (data: Partial<ShippingDataProps>) => void }) {
   const { state, dispatch, stateCart, dispatchCart } =
     useContext(GlobalContext);
 
@@ -45,6 +46,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
             </h1>
             {stateCart.cart.map((product: any) => (
               <article key={product._id} className={style.shoppingArticle}>
+                <div className={style.imageWrapper}>
                 <Image
                   src={absoluteURLsForSanity(
                     product?.images[0].asset._ref
@@ -53,6 +55,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                   height={300}
                   alt={product.title}
                 />
+                </div>
                 <div className={style.fullSpace}>
                   <div className={style.descDetails}>
                     <div>
@@ -61,11 +64,14 @@ export default function ShoppingBag({ next }: { next?: any }) {
                           ? product.title[locale]
                           : product.title.pt}
                       </p>
-                      {product.size !== null ? (
+                      {product.size?.[0] === "Tamanho único" ?
                         <p>
-                          <span>Size:</span> {product.size}
+                          <span>Size:</span> {translations[locale].uniqueSize}
+                        </p> :
+                        <p >
+                          <span>Size:</span> {product.size.join(", ")}
                         </p>
-                      ) : null}
+                      }
                     </div>
                     <select
                       onChange={(e: any) => {
@@ -90,7 +96,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                     <div className={style.moveFromCart}>
                       <span
                         onClick={() =>
-                          removeFromCart(dispatchCart, product._id)
+                          removeFromCart(dispatchCart, product)
                         }
                       >
                         <BsTrash /> Remove from shopping bag
@@ -122,7 +128,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
               <p>
                 You can pick your preferred shipping option in the next step.
               </p>
-              <PrimaryButton onClick={next} text="continue" />
+              <PrimaryButton onClick={() => next({ cart: stateCart.cart })} text="continue" />
             </div>
           </div>
         </div>

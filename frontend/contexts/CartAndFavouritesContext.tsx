@@ -1,29 +1,38 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React from "react";
 import { v4 as uuid } from "uuid";
+import { SingleProduct } from "../types/product";
 
-const customer_id = uuid();
+export type StateExtraProps = {
+  size?: string[];
+  quantity?: number;
+}
 
-interface IState {
-  favourites: Array<any>;
-  cart: Array<any>;
+export type StateProps = {
+  favourites: Array<SingleProduct>;
+  cart: Array<SingleProduct & StateExtraProps>;
   userId: string;
 }
 
-interface IAction {
-  type: string;
-  payload: any;
+type ActionExtraProps = {
+  size?: string;
+  quantity?: number;
 }
 
-const initialState: IState = {
-  favourites: [],
-  cart: [],
-  userId: customer_id,
-};
+export type ActionProps = {
+  type: string;
+  payload: SingleProduct & ActionExtraProps;
+}
 
-export const GlobalContext = createContext<IState | any>(initialState);
+type DefaultProps = {
+  state: StateProps,
+  dispatch: React.Dispatch<ActionProps>,
+  stateCart: StateProps,
+  dispatchCart: React.Dispatch<ActionProps>
+}
 
-function reducer(state: IState, action: IAction): IState {
+export const GlobalContext = React.createContext<DefaultProps | null>(null);
 
+function reducer(state: StateProps, action: ActionProps): StateProps {
   switch (action.type) {
     case "ADD_FAVOURITES":
       return {
@@ -34,43 +43,48 @@ function reducer(state: IState, action: IAction): IState {
       return {
         ...state,
         favourites: state.favourites.filter(
-          (item) => item._id !== action.payload
+          (item) => item._id !== action.payload._id
         ),
       };
     case "ADD_TO_CART":
       return {
         ...state,
-        cart: JSON.stringify(state.cart).includes(action.payload.product._id)
+        cart: JSON.stringify(state.cart).includes(action.payload._id)
           ? state.cart.map((product) =>
-              product._id === action.payload.product._id
-                ? {
-                    ...product,
-                    quantity: Number(product.quantity) + 1,
-                    size: action.payload.productSize === null ? null : product.size + " " + action.payload.productSize,
-                  }
-                : product
-            )
+            product._id === action.payload._id
+              ? {
+                ...product,
+                quantity: Number(product.quantity) + 1,
+                size: [...product.size, action.payload.size],
+              }
+              : product
+          )
           : [
-              ...state.cart,
-              {
-                ...action.payload.product,
-                quantity: 1,
-                size: action.payload.productSize,
-              },
-            ],
+            ...state.cart,
+            {
+              ...action.payload,
+              quantity: 1,
+              size: [action.payload.size],
+            },
+          ],
+      };
+    case "REMOVE_CART":
+      return {
+        ...state,
+        cart: [],
       };
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cart: state.cart.filter((item) => item._id !== action.payload),
+        cart: state.cart.filter((item) => item._id !== action.payload._id),
       };
     case "UPDATE_CART_QUANTITY":
       return {
         ...state,
         cart:
-          JSON.stringify(state.cart).includes(action.payload.product._id) &&
+          JSON.stringify(state.cart).includes(action.payload._id) &&
           state.cart.map((product) =>
-            product._id === action.payload.product._id
+            product._id === action.payload._id
               ? { ...product, quantity: action.payload.quantity }
               : product
           ),
@@ -81,25 +95,32 @@ function reducer(state: IState, action: IAction): IState {
 }
 
 export function GlobalProvider({ children }: { children?: React.ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, [], () => {
-    if (process.browser) {
+  const customer_id = uuid();
+  const initialState: StateProps = {
+    favourites: [],
+    cart: [],
+    userId: customer_id,
+  };
+
+  const [state, dispatch] = React.useReducer(reducer, [], () => {
+    if (typeof window !== 'undefined') {
       const localData = localStorage.getItem("favourites");
       return localData ? JSON.parse(localData) : initialState;
     }
   });
 
-  const [stateCart, dispatchCart] = useReducer(reducer, [], () => {
-    if (process.browser) {
+  const [stateCart, dispatchCart] = React.useReducer(reducer, [], () => {
+    if (typeof window !== 'undefined') {
       const localData = localStorage.getItem("cart");
       return localData ? JSON.parse(localData) : initialState;
     }
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     localStorage.setItem("favourites", JSON.stringify(state));
   }, [state]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(stateCart));
   }, [stateCart]);
 

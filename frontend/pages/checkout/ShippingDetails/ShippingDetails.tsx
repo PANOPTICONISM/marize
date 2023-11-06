@@ -1,5 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
-import { BackButton } from "../../../components/Buttons/Buttons";
+import { BackButton, PrimaryButton } from "../../../components/Buttons/Buttons";
 import style from "./shippingdetails.module.css";
 import { ShippingDataProps } from "../[id]";
 import { Button, Input, TextField } from "@mui/material";
@@ -9,17 +9,14 @@ type FormValues = {
   lastname: string;
   email: string;
   phonenumber: number;
-  address: string;
-  zip: string;
 };
 
 export default function ShippingDetails({
   next,
   back,
 }: {
-  checkoutTokenId?: any;
-  next?: any;
-  back?: any;
+  next: (data: ShippingDataProps) => void;
+  back: () => void;
 }) {
   const { control, handleSubmit } = useForm<FormValues>();
 
@@ -86,14 +83,7 @@ export default function ShippingDetails({
           )}
         />
         <BackButton text="Return" onClick={back} />
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth
-          sx={{ padding: "12px" }}
-        >
-          Next step
-        </Button>
+        <PrimaryButton type="submit" text="Next step" />
       </form>
     </section>
   );

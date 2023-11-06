@@ -2,7 +2,7 @@ import blockContent from "./blockContent";
 import category from "./category";
 import products from "./products";
 import vendor from "./vendor";
-import product from "./product";
+import product from "./product-variant";
 import colour from "./colour";
 import size from "./size";
 import homepage from "./homepage";
@@ -23,8 +23,7 @@ export default [
   about,
   homepage,
   productsPage,
-  // When added to this list, object types can be used as
-  // { type: 'typename' } in other document schemas
+
   blockContent,
   localeText,
   localeBlockContent,

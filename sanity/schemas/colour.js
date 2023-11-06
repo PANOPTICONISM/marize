@@ -4,7 +4,7 @@ const baseLanguage = supportedLanguages.find((l) => l.isDefault);
 
 export default {
   name: "colour",
-  title: "Colours",
+  title: "Colour",
   type: "document",
   fields: [
     {
