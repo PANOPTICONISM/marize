@@ -46,8 +46,6 @@ function CheckoutWrapper() {
     nextStep();
   };
 
-  console.log(shippingData, 'ship')
-
   const [error, setError] = React.useState("");
   const [message, setMessage] = React.useState("");
 
