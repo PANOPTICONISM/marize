@@ -108,7 +108,7 @@ export function ProductDetails({
           />
           {show ? (
             <AiFillHeart
-              onClick={() => removeFromFavourites(dispatch, product._id)}
+              onClick={() => removeFromFavourites(dispatch, product)}
               className={style.shoppingSVG}
             />
           ) : (

@@ -1,12 +1,15 @@
-export const addToFavourites = (dispatch: any, product: any) =>
+import { ActionProps } from "../contexts/CartAndFavouritesContext";
+import { SingleProduct } from "../types/product";
+
+export const addToFavourites = (dispatch: React.Dispatch<ActionProps>, product: SingleProduct) =>
   dispatch({
     type: "ADD_FAVOURITES",
     payload: product,
   });
 
-export const removeFromFavourites = (dispatch: any, _id: string) => {
+export const removeFromFavourites = (dispatch: React.Dispatch<ActionProps>, product: SingleProduct) => {
   dispatch({
     type: "REMOVE_FAVOURITES",
-    payload: _id,
+    payload: product,
   });
 };

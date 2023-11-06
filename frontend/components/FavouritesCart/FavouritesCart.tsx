@@ -47,7 +47,7 @@ export function ProductCard({ product }: { product: any }) {
           {product.vendor ? <h5>{product.vendor?.title}</h5> : null}
         </div>
         <div className={style.bottomProduct}>
-          <button onClick={() => removeFromFavourites(dispatch, product._id)}>
+          <button onClick={() => removeFromFavourites(dispatch, product)}>
             <BsTrash /> {translations[locale].remove_favorites}
           </button>
         </div>

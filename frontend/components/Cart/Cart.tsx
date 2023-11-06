@@ -38,6 +38,8 @@ export function ProductCard({ product }: { product: any }) {
   };
   const { locale } = useRouter();
 
+  console.log(product);
+
   return (
     <div className={style.fullCart}>
       <Image
@@ -54,7 +56,7 @@ export function ProductCard({ product }: { product: any }) {
         </div>
         <div className={style.bottomProduct}>
           <div>
-            <button onClick={() => removeFromCart(dispatchCart, product._id)}>
+            <button onClick={() => removeFromCart(dispatchCart, product)}>
               <BsTrash />
             </button>
             <span>||</span>
@@ -70,8 +72,8 @@ export function ProductCard({ product }: { product: any }) {
             )}
           </div>
           <select
-            onChange={(e: any) => {
-              updateCartQuantity(dispatchCart, product, e.target.value);
+            onChange={(e: { target: { value: string } }) => {
+              updateCartQuantity(dispatchCart, product, Number(e.target.value));
             }}
             value={product?.quantity}
             name="quantity"

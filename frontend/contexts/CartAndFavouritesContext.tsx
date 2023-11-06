@@ -1,29 +1,33 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React from "react";
 import { v4 as uuid } from "uuid";
+import { SingleProduct } from "../types/product";
 
-const customer_id = uuid();
+type ExtraProductProps = {
+  productSize?: string;
+  quantity?: number;
+}
 
-interface IState {
-  favourites: Array<any>;
-  cart: Array<any>;
+export type StateProps = {
+  favourites: Array<SingleProduct>;
+  cart: Array<SingleProduct & ExtraProductProps>;
   userId: string;
 }
 
-interface IAction {
+export type ActionProps = {
   type: string;
-  payload: any;
+  payload: SingleProduct & ExtraProductProps;
 }
 
-const initialState: IState = {
-  favourites: [],
-  cart: [],
-  userId: customer_id,
-};
+type DefaultProps = {
+  state: StateProps,
+  dispatch: React.Dispatch<ActionProps>,
+  stateCart: StateProps,
+  dispatchCart: React.Dispatch<ActionProps>
+}
 
-export const GlobalContext = createContext<IState | any>(initialState);
+export const GlobalContext = React.createContext<DefaultProps | null>(null);
 
-function reducer(state: IState, action: IAction): IState {
-
+function reducer(state: StateProps, action: ActionProps): StateProps {
   switch (action.type) {
     case "ADD_FAVOURITES":
       return {
@@ -34,26 +38,26 @@ function reducer(state: IState, action: IAction): IState {
       return {
         ...state,
         favourites: state.favourites.filter(
-          (item) => item._id !== action.payload
+          (item) => item._id !== action.payload._id
         ),
       };
     case "ADD_TO_CART":
       return {
         ...state,
-        cart: JSON.stringify(state.cart).includes(action.payload.product._id)
+        cart: JSON.stringify(state.cart).includes(action.payload._id)
           ? state.cart.map((product) =>
-              product._id === action.payload.product._id
+            product._id === action.payload._id
                 ? {
                     ...product,
                     quantity: Number(product.quantity) + 1,
-                    size: action.payload.productSize === null ? null : product.size + " " + action.payload.productSize,
+                size: product.productSize,
                   }
                 : product
             )
           : [
               ...state.cart,
               {
-                ...action.payload.product,
+                ...action.payload,
                 quantity: 1,
                 size: action.payload.productSize,
               },
@@ -62,15 +66,15 @@ function reducer(state: IState, action: IAction): IState {
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cart: state.cart.filter((item) => item._id !== action.payload),
+        cart: state.cart.filter((item) => item._id !== action.payload._id),
       };
     case "UPDATE_CART_QUANTITY":
       return {
         ...state,
         cart:
-          JSON.stringify(state.cart).includes(action.payload.product._id) &&
+          JSON.stringify(state.cart).includes(action.payload._id) &&
           state.cart.map((product) =>
-            product._id === action.payload.product._id
+            product._id === action.payload._id
               ? { ...product, quantity: action.payload.quantity }
               : product
           ),
@@ -81,25 +85,32 @@ function reducer(state: IState, action: IAction): IState {
 }
 
 export function GlobalProvider({ children }: { children?: React.ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, [], () => {
+  const customer_id = uuid();
+  const initialState: StateProps = {
+    favourites: [],
+    cart: [],
+    userId: customer_id,
+  };
+
+  const [state, dispatch] = React.useReducer(reducer, [], () => {
     if (process.browser) {
       const localData = localStorage.getItem("favourites");
       return localData ? JSON.parse(localData) : initialState;
     }
   });
 
-  const [stateCart, dispatchCart] = useReducer(reducer, [], () => {
+  const [stateCart, dispatchCart] = React.useReducer(reducer, [], () => {
     if (process.browser) {
       const localData = localStorage.getItem("cart");
       return localData ? JSON.parse(localData) : initialState;
     }
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     localStorage.setItem("favourites", JSON.stringify(state));
   }, [state]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(stateCart));
   }, [stateCart]);
 

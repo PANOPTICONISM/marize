@@ -104,7 +104,7 @@ export default function Products({ data, locale, mainPageContent }) {
           (favourite: { _id: string }) => favourite._id === article._id
         ) ? (
           <button
-            onClick={() => removeFromFavourites(dispatch, article._id)}
+            onClick={() => removeFromFavourites(dispatch, article)}
             className={style.shoppingSVG}
           >
             <AiFillHeart />

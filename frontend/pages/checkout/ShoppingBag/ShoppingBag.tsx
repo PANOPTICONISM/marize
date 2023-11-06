@@ -90,7 +90,7 @@ export default function ShoppingBag({ next }: { next?: any }) {
                     <div className={style.moveFromCart}>
                       <span
                         onClick={() =>
-                          removeFromCart(dispatchCart, product._id)
+                          removeFromCart(dispatchCart, product)
                         }
                       >
                         <BsTrash /> Remove from shopping bag
