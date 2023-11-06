@@ -38,8 +38,9 @@ async function addUser(req: NextApiRequest, res: NextApiResponse) {
       data.phoneNumber,
       data.created_at,
       JSON.stringify(data.cart),
+      data.user_id
     ];
-    const query = `INSERT INTO ${table} VALUES($1, $2, $3, $4, $5, $6, $7)`;
+    const query = `INSERT INTO ${table} VALUES($1, $2, $3, $4, $5, $6, $7, $8)`;
     await pool.query(query, values);
     return res.json({
       message: "Purchase completed successfully",

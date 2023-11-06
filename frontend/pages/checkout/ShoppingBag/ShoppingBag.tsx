@@ -70,7 +70,6 @@ export default function ShoppingBag({ next }: { next?: any }) {
                         <p >
                           <span>Size:</span> {product.size.join(", ")}
                         </p>
-
                       }
                     </div>
                     <select

@@ -5,6 +5,8 @@ import { ProductsProvider } from "../contexts/ProductsContext";
 import "../styles/index.css";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "../theme/Theme";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -16,6 +18,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             <link rel="icon" href="/assets/logo_icon.svg" />
           </Head>
           <Component {...pageProps} />
+          <ToastContainer position="bottom-right" />
         </ProductsProvider>
       </GlobalProvider>
     </ThemeProvider>

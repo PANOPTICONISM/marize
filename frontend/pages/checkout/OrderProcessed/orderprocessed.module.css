@@ -10,8 +10,8 @@
   display: flex;
 }
 
-.shoppingBag > p:nth-child(1),
-.shoppingBag > p:nth-child(2) {
+.shoppingBag>p:nth-child(1),
+.shoppingBag>p:nth-child(2) {
   font-weight: 700;
 }
 
@@ -50,8 +50,15 @@
   margin: 30px 0;
 }
 
+.imageWrapper {
+  width: 230px;
+  height: 300px;
+}
+
 .shoppingArticle img {
   max-width: 230px;
+  height: 100%;
+  object-fit: cover;
 }
 
 .finalMessage p:last-of-type {
@@ -63,6 +70,7 @@
 }
 
 @media screen and (min-width: 800px) {
+
   .shoppingBag,
   .priceWrapper,
   .finalMessage {

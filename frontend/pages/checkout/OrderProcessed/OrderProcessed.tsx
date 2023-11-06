@@ -5,6 +5,7 @@ import { IoMdCheckmarkCircle } from "react-icons/io";
 import { GlobalContext } from "../../../contexts/CartAndFavouritesContext";
 import { useRouter } from "next/router";
 import { absoluteURLsForSanity } from "../../../utils/SanityFunctions";
+import { translations } from "../../../translations/common";
 
 export default function OrderProcessed({
   shippingData,
@@ -33,6 +34,7 @@ export default function OrderProcessed({
             <h1>Order Summary</h1>
             {stateCart.cart?.map((product: any) => (
               <article key={product._id} className={style.shoppingArticle}>
+                <div className={style.imageWrapper}>
                 <Image
                   src={absoluteURLsForSanity(
                     product?.images[0].asset._ref
@@ -41,6 +43,7 @@ export default function OrderProcessed({
                   height={300}
                   alt={product.title}
                 />
+                </div>
                 <div className={style.fullSpace}>
                   <div className={style.descDetails}>
                     <div>
@@ -49,11 +52,14 @@ export default function OrderProcessed({
                           ? product.title[locale]
                           : product.title.pt}
                       </p>
-                      {product.size !== null ? (
+                      {product.size?.[0] === "Tamanho único" ?
                         <p>
-                          <span>Size:</span> {product.size}
+                          <span>Size:</span> {translations[locale].uniqueSize}
+                        </p> :
+                        <p >
+                          <span>Size:</span> {product.size.join(", ")}
                         </p>
-                      ) : null}
+                      }
                     </div>
                     <p>{product.quantity} pieces</p>
                   </div>

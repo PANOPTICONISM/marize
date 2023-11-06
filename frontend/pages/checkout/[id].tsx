@@ -6,6 +6,10 @@ import Confirmation from "./Confirmation/Confirmation";
 import Main from "../../containers/Main/Main";
 import OrderProcessed from "./OrderProcessed/OrderProcessed";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
+import { v4 as uuid } from "uuid";
+import { toast } from "react-toastify";
+import { translations } from "../../translations/toasts";
+import { useRouter } from "next/router";
 
 export type ShippingDataProps = {
   firstname: string;
@@ -16,6 +20,7 @@ export type ShippingDataProps = {
 };
 
 function CheckoutWrapper() {
+  const { locale } = useRouter()
   const { stateCart } = React.useContext(GlobalContext);
 
   const [shippingData, setShippingData] = React.useState<ShippingDataProps>({
@@ -43,16 +48,17 @@ function CheckoutWrapper() {
   const processOrder = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const userStructure = {
-      id: stateCart.userId,
+      id: uuid(),
       firstName: shippingData.firstname,
       lastName: shippingData.lastname,
       email: shippingData.email,
       phoneNumber: shippingData.phonenumber,
       created_at: new Date().toISOString(),
       cart: stateCart.cart,
+      user_id: stateCart.userId,
     };
 
-    const baseResponse = await fetch("/api/supabase", {
+    const baseResponse = await fetch("/api/postgres", {
       method: "POST",
       body: JSON.stringify(userStructure),
     });
@@ -69,7 +75,7 @@ function CheckoutWrapper() {
       nextStep();
       return setMessage(userData.message);
     } else {
-      return setError(userData.message);
+      return toast.error(translations[locale].purchaseError)
     }
   };
 
