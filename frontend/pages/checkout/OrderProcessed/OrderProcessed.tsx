@@ -16,7 +16,7 @@ export default function OrderProcessed({
   }) {
   const { locale } = useRouter();
 
-  return (
+  return shippingData ? (
     <main className={style.finalSummary}>
       <div className={style.shoppingBag}>
         <p>Hi, {shippingData.firstname}.</p>
@@ -78,5 +78,5 @@ export default function OrderProcessed({
         <p>Marizé</p>
       </div>
     </main>
-  );
+  ) : null;
 }

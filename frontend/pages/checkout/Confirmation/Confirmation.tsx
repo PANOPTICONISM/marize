@@ -16,7 +16,7 @@ function Confirmation({
   const { locale } = useRouter();
 
   const cartTotal =
-    shippingData.cart.length > 0
+    shippingData?.cart?.length > 0
       ? shippingData.cart.reduce(
         (accum, item) => Number(accum) + Number(item.quantity),
         0
