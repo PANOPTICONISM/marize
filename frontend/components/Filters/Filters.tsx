@@ -11,29 +11,8 @@ type FilterProps = {
       name: string,
     }
   }) => void,
-  categories: {
-    _id: string,
-    _type: string,
-    _updatedAt: string,
-    title: {
-      en: string,
-      pt: string,
-      _type: string,
-    }
-    parentVendor: {
-      _key: string,
-      _type: string,
-      _reference: string,
-    }[],
-    slug: {
-      _type: string,
-      current: string,
-    }
-  }[],
-  vendors: {
-    title: string,
-    _id: string,
-  }[],
+  categories: string[],
+  vendors: string[],
   discounts: boolean,
   mobileFilters: boolean,
 }
@@ -56,19 +35,19 @@ export function Filters({
       <h4 className={`${mobileFilters && style.mobile} ${style.brands}`}>
         {translations[locale].brands}
       </h4>
-      {vendors?.map((filter: { title: string; _id: any }) => (
+      {vendors?.map((filter) => (
         <div
           className={`${style.filters_products} ${
             mobileFilters && style.mobile
           }`}
-          key={filter._id}
+          key={filter}
         >
-          <label key={filter._id} className={style.container_checkbox}>
-            {filter.title}
+          <label key={filter} className={style.container_checkbox}>
+            {filter}
             <input
               type="checkbox"
               name="brands"
-              value={filter.title}
+              value={filter}
               onChange={onChange}
             />
             <span className={style.checkmark}></span>
@@ -99,14 +78,14 @@ export function Filters({
           className={`${style.filters_products} ${
             mobileFilters && style.mobile
           }`}
-          key={filter._id}
+          key={filter}
         >
-          <label key={filter._id} className={style.container_checkbox}>
-            {filter.title[locale]}
+          <label key={filter} className={style.container_checkbox}>
+            {filter}
             <input
               type="checkbox"
               name="categories"
-              value={filter.title[locale]}
+              value={filter}
               onChange={onChange}
             />
             <span className={style.checkmark}></span>

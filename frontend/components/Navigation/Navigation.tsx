@@ -1,5 +1,4 @@
 import style from "./navigation.module.css";
-import Image from "next/image";
 import Link from "next/link";
 import Hamburger from "hamburger-react";
 import SearchBar from "../SearchBar/SearchBar";

@@ -4,7 +4,7 @@ import style from "../../styles/products.module.css";
 import Main from "../../containers/Main/Main";
 import Image from "next/image";
 import FilterComponent from "../../components/Filters/Filters";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import Link from "next/link";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import {
@@ -14,6 +14,7 @@ import {
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import { translations } from "../../translations/common";
+import React from "react";
 
 export const addUrlParams = (router, cat) => {
   router.push({ pathname: "/products", query: cat }, undefined, {
@@ -22,20 +23,32 @@ export const addUrlParams = (router, cat) => {
 };
 
 export default function Products({ data, locale, mainPageContent }) {
-  const { products, vendors, categories } = data;
+  const { products } = data;
+  const categories = products.map((product) =>
+    product.category.title[locale]
+  ).filter(Boolean);
+  const categoriesNoDuplicates = [...new Set(categories)] as string[];
+  const vendors = products.map((product) =>
+    product.vendor && product.vendor.title
+  ).filter(Boolean);
+  const vendorsNoDuplicates = [...new Set(vendors)] as string[];
+  const { state, dispatch } = useContext(GlobalContext);
+
   const [filteredArticles, setFilteredArticles] = useState<any>(products);
   const [filters, setFilters] = useState({
     brands: [],
     categories: [],
     stateDiscount: false,
   });
-  const [mobileFilters, setMobileFilters] = useState(true);
   const [isDiscounts, setIsDiscounts] = useState(false);
+  const [mobileFilters, setMobileFilters] = useState(true);
 
   const handleChecked = (e: {
     target: { value: string; checked: boolean; name: string };
   }) => {
     const value = e.target.value;
+
+    console.log(e.target.name)
 
     const filterBrand =
       e.target.checked && e.target.name === "brands"
@@ -58,15 +71,15 @@ export default function Products({ data, locale, mainPageContent }) {
     });
   };
 
-  useEffect(() => {
-    const brandList = [];
+  React.useEffect(() => {
+    const productsFilteredByBrand = [];
     if (filters.brands.length > 0) {
       const filtered = products?.filter((product) =>
         filters?.brands?.some(
           (c: string) => product.vendor && product.vendor.title.includes(c)
         )
       );
-      brandList.push(...filtered);
+      productsFilteredByBrand.push(...filtered);
       setFilteredArticles(filtered);
     } else {
       setFilteredArticles(products);
@@ -74,11 +87,11 @@ export default function Products({ data, locale, mainPageContent }) {
 
     if (filters.categories.length > 0) {
       const filteredByCat = (
-        brandList.length > 0 ? brandList : products
+        productsFilteredByBrand.length > 0 ? productsFilteredByBrand : products
       )?.filter((product) =>
         filters?.categories?.some(
           (c: string) =>
-            product.category && product?.category?.title[locale].includes(c)
+            product.category && product?.category?.title[locale]?.includes(c)
         )
       );
       setFilteredArticles(filteredByCat);
@@ -94,8 +107,6 @@ export default function Products({ data, locale, mainPageContent }) {
     const discountState = products.map((product) => product.discounted);
     setIsDiscounts(discountState?.includes(true));
   }, [filters, isDiscounts, locale, products]);
-
-  const { state, dispatch } = useContext(GlobalContext);
 
   const articlesUI = filteredArticles?.map((article: any) => (
     <div className={style.card} key={article._id}>
@@ -181,8 +192,8 @@ export default function Products({ data, locale, mainPageContent }) {
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}
-            vendors={vendors}
-            categories={categories}
+            vendors={vendorsNoDuplicates}
+            categories={categoriesNoDuplicates}
             discounts={isDiscounts}
             mobileFilters={mobileFilters}
           />
@@ -213,8 +224,6 @@ export async function getServerSideProps(context) {
       title, 
       discounted,
       vendor->{_id, title}},
-      'vendors': *[_type == "vendor"]{title, _id},
-      'categories': *[_type == "category"]
     }`
   );
 
