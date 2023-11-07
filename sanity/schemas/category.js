@@ -21,19 +21,6 @@ export default {
         maxLength: 96,
       },
     },
-    {
-      name: "parentVendor",
-      title: "Categorias relacionadas",
-      description:
-        'Por exemplo - se "mochilas", aqui tem de se colocar "Caminatta"',
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "vendor" }],
-        },
-      ],
-    },
   ],
   preview: {
     select: {
