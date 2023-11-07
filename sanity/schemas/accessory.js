@@ -3,8 +3,8 @@ import supportedLanguages from "./locale/supportedLanguages";
 const baseLanguage = supportedLanguages.find((l) => l.isDefault);
 
 export default {
-  name: "category",
-  title: "Category",
+  name: "accessory",
+  title: "Acessórios",
   type: "document",
   fields: [
     {

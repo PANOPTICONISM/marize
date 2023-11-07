@@ -15,8 +15,20 @@ export default (S) =>
               S.divider(),
               S.listItem()
                 .title("Categorias")
-                .schemaType("category")
-                .child(S.documentTypeList("category").title("Lista de categorias")),
+                .child(
+                  S.list()
+                    .title("Categorias")
+                    .items([
+                      S.listItem()
+                        .title("Acessórios")
+                        .schemaType("accessory")
+                        .child(S.documentTypeList("accessory").title("Lista de acessórios")),
+                      S.listItem()
+                        .title("Roupas")
+                        .schemaType("clothing")
+                        .child(S.documentTypeList("clothing").title("Lista de roupas")),
+                    ])
+                ),
               S.listItem()
                 .title("Vendedores")
                 .schemaType("vendor")
