@@ -33,12 +33,13 @@ export default function Products({ data, locale, mainPageContent }) {
   const [mobileFilters, setMobileFilters] = React.useState(true);
 
   React.useEffect(() => {
-    if (query && !filters.categories.includes(query)) {
-      if (typeQuery === "categories") {
-        filters.categories.push(query)
+    if (query) {
+      const firstLetterUppercase = query.charAt(0).toUpperCase() + query.slice(1);
+      if (typeQuery === "categories" && !filters.categories.includes(firstLetterUppercase)) {
+        filters.categories.push(firstLetterUppercase)
       }
-      if (typeQuery === "brands" && !filters.brands.includes(query)) {
-        filters.categories.push(query)
+      if (typeQuery === "brands" && !filters.brands.includes(firstLetterUppercase)) {
+        filters.categories.push(firstLetterUppercase)
       }
     }
   }, [filters.brands, filters.categories, query, typeQuery])
@@ -171,6 +172,7 @@ export default function Products({ data, locale, mainPageContent }) {
             categories={[...categories.accessory, ...categories.clothing]}
             discounts={isDiscounts}
             mobileFilters={mobileFilters}
+            filters={filters}
           />
           <div className={style.products_wrapper}>{articlesUI}</div>
         </div>

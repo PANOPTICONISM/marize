@@ -21,6 +21,10 @@ type FilterProps = {
   }[],
   discounts: boolean,
   mobileFilters: boolean,
+  filters: {
+    brands: any[],
+    categories: any[],
+  }
 }
 
 export function Filters({
@@ -29,6 +33,7 @@ export function Filters({
   vendors,
   discounts,
   mobileFilters,
+  filters,
 }: FilterProps) {
   const { locale } = useRouter();
 
@@ -55,6 +60,7 @@ export function Filters({
               name="brands"
               value={filter.title}
               onChange={onChange}
+              checked={filters.brands.includes(filter.title)}
             />
             <span className={style.checkmark}></span>
           </label>
@@ -93,6 +99,7 @@ export function Filters({
               name="categories"
               value={filter.title[locale]}
               onChange={onChange}
+              checked={filters.categories.includes(filter.title[locale])}
             />
             <span className={style.checkmark}></span>
           </label>
@@ -108,6 +115,7 @@ export default function FilterComponent({
   vendors,
   discounts,
   mobileFilters,
+  filters,
 }: FilterProps) {
   return (
     <Filters
@@ -116,6 +124,7 @@ export default function FilterComponent({
       vendors={vendors}
       discounts={discounts}
       mobileFilters={mobileFilters}
+      filters={filters}
     />
   );
 }
