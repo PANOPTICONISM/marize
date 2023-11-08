@@ -21,10 +21,11 @@ export default function Products({ data, locale, mainPageContent }) {
   const searchParams = useSearchParams();
   const typeQuery = React.useMemo(() => searchParams.get('type'), [searchParams]);
   const query = React.useMemo(() => searchParams.get('q'), [searchParams]);
+  const groupQuery = React.useMemo(() => searchParams.get('group'), [searchParams]);
   const categories = useCategories();
   const { state, dispatch } = React.useContext(GlobalContext);
 
-  const [filteredArticles, setFilteredArticles] = React.useState<any>(products);
+  const [filteredArticles, setFilteredArticles] = React.useState<any>([]);
   const [filters, setFilters] = React.useState({
     brands: [],
     categories: [],
@@ -47,6 +48,28 @@ export default function Products({ data, locale, mainPageContent }) {
     }
   }, [query, typeQuery]);
 
+  const filterByBrandAndCategory = React.useCallback(() => {
+    const result = products.filter((product) =>
+      (filters?.categories?.every(
+        (c: string) =>
+          product.category && product?.category?.title[locale]?.includes(c) || c === "Discounts" && product.discounted
+      )) &&
+      filters?.brands?.every(
+        (c: string) => product.vendor && product.vendor.title.includes(c)));
+
+    const hasProductsWithDiscount = products.filter((product) => product.discounted);
+    setIsDiscounts(hasProductsWithDiscount.length > 0);
+
+    const filterByClothingOrAccessory = result.filter((product) => product.category._type === groupQuery)
+
+    setFilteredArticles(filterByClothingOrAccessory.length > 0 ? filterByClothingOrAccessory : result)
+
+  }, [filters?.brands, filters?.categories, groupQuery, locale, products])
+
+  React.useEffect(() => {
+    filterByBrandAndCategory()
+  }, [filterByBrandAndCategory]);
+
   const handleChecked = (e: {
     target: { value: string; checked: boolean; name: string };
   }) => {
@@ -67,27 +90,7 @@ export default function Products({ data, locale, mainPageContent }) {
     });
   };
 
-  const filterByBrandAndCategory = React.useCallback(() => {
-    const result = products.filter((product) =>
-      (filters?.categories?.every(
-        (c: string) =>
-          product.category && product?.category?.title[locale]?.includes(c) || c === "Discounts" && product.discounted
-      )) &&
-      filters?.brands?.every(
-        (c: string) => product.vendor && product.vendor.title.includes(c)));
-
-    const hasProductsWithDiscount = products.filter((product) => product.discounted);
-    setIsDiscounts(hasProductsWithDiscount.length > 0);
-
-    setFilteredArticles(result)
-
-  }, [filters?.brands, filters?.categories, locale, products])
-
-  React.useEffect(() => {
-    filterByBrandAndCategory()
-  }, [filterByBrandAndCategory]);
-
-  const articlesUI = filteredArticles?.map((article: any) => (
+  const articlesUI = filteredArticles.map((article: any) => (
     <div className={style.card} key={article._id}>
       <div className={style.blue_heart}>
         {state?.favourites.some(

@@ -24,7 +24,7 @@ function CategorySections({ body }) {
           text={firstBox[locale]}
           href={{
             pathname: "/products",
-            query: { q: "clothing" }
+            query: { group: "clothing" }
           }}
         />
       </div>
@@ -41,7 +41,7 @@ function CategorySections({ body }) {
           text={secondBox[locale]}
           href={{
             pathname: "/products",
-            query: { q: "accessory" },
+            query: { group: "accessory" },
           }}
         />
       </div>
