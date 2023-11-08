@@ -21,7 +21,7 @@ export default function MenuNav() {
                   <Link
                     href={{
                       pathname: "/products",
-                      query: { 0: cat.title[locale] },
+                      query: { type: "categories", q: cat.title[locale].toLowerCase() },
                     }}
                   >
                     {cat.title[locale]}
@@ -38,7 +38,7 @@ export default function MenuNav() {
                   <Link
                     href={{
                       pathname: "/products",
-                      query: { 0: vendor.title },
+                      query: { type: "brands", q: vendor.title.toLowerCase() },
                     }}
                   >
                     {vendor.title}

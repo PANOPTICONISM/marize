@@ -4,7 +4,6 @@ import style from "../../styles/products.module.css";
 import Main from "../../containers/Main/Main";
 import Image from "next/image";
 import FilterComponent from "../../components/Filters/Filters";
-import { useState, useContext } from "react";
 import Link from "next/link";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import {
@@ -13,28 +12,36 @@ import {
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
-import { translations } from "../../translations/common";
 import React from "react";
 import { useCategories } from "../../contexts/CategoriesContext";
-
-export const addUrlParams = (router, cat) => {
-  router.push({ pathname: "/products", query: cat }, undefined, {
-    shallow: true,
-  });
-};
+import { useSearchParams } from "next/navigation";
 
 export default function Products({ data, locale, mainPageContent }) {
   const { products } = data;
+  const searchParams = useSearchParams();
+  const typeQuery = searchParams.get('type');
+  const query = searchParams.get('q');
   const categories = useCategories();
-  const { state, dispatch } = useContext(GlobalContext);
+  const { state, dispatch } = React.useContext(GlobalContext);
 
-  const [filteredArticles, setFilteredArticles] = useState<any>(products);
-  const [filters, setFilters] = useState({
+  const [filteredArticles, setFilteredArticles] = React.useState<any>(products);
+  const [filters, setFilters] = React.useState({
     brands: [],
     categories: [],
   });
-  const [isDiscounts, setIsDiscounts] = useState(false);
-  const [mobileFilters, setMobileFilters] = useState(true);
+  const [isDiscounts, setIsDiscounts] = React.useState(false);
+  const [mobileFilters, setMobileFilters] = React.useState(true);
+
+  React.useEffect(() => {
+    if (query && !filters.categories.includes(query)) {
+      if (typeQuery === "categories") {
+        filters.categories.push(query)
+      }
+      if (typeQuery === "brands" && !filters.brands.includes(query)) {
+        filters.categories.push(query)
+      }
+    }
+  }, [filters.brands, filters.categories, query, typeQuery])
 
   const handleChecked = (e: {
     target: { value: string; checked: boolean; name: string };
