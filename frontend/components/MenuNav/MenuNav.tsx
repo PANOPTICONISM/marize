@@ -7,7 +7,7 @@ import React from "react";
 export default function MenuNav({
   data,
 }: {
-  data: { categories: any[]; vendors: any[] };
+    data: { vendors: any[], accessory: any[], clothing: any[] };
 }) {
   const { locale } = useRouter();
 
@@ -18,7 +18,7 @@ export default function MenuNav({
           <div>
             <h4>{translations[locale].categories}</h4>
             <ul className={style.menu_sections}>
-              {data.categories.map((cat) => (
+              {[...data.accessory, ...data.clothing].map((cat) => (
                 <li key={cat._id}>
                   <Link
                     href={{

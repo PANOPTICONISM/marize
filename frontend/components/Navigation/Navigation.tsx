@@ -39,12 +39,12 @@ export default function Navigation() {
     };
   }, [openCart, openFavouritesCart]);
 
-  const [data, setData] = React.useState({ categories: [], vendors: [] });
+  const [data, setData] = React.useState({ vendors: [], accessory: [], clothing: [] });
   React.useEffect(() => {
     async function fetchData() {
       const res = await fetch("/api/sanity/categories");
-      const data = await res.json();
-      setData(data.data);
+      const response = await res.json();
+      setData(response.data);
     }
     fetchData();
   }, []);

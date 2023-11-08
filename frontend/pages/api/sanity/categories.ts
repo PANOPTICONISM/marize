@@ -6,8 +6,9 @@ export default async function getCategories(
   res: NextApiResponse
 ) {
   const data = await sanity.fetch(
-    `{'vendors': *[_type == "vendor"]{title, _id},
-        'categories': *[_type == "category"]
+    `{'accessory': *[_type == "accessory"],
+        'clothing': *[_type == "clothing"],
+        'vendors': *[_type == "vendor"]{title, _id}
       }`
   );
 
