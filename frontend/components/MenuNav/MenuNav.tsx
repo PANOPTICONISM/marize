@@ -3,12 +3,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
 import React from "react";
+import { useCategories } from "../../contexts/CategoriesContext";
 
-export default function MenuNav({
-  data,
-}: {
-    data: { vendors: any[], accessory: any[], clothing: any[] };
-}) {
+export default function MenuNav() {
+  const data = useCategories();
   const { locale } = useRouter();
 
   return (

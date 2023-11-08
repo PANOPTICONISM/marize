@@ -39,16 +39,6 @@ export default function Navigation() {
     };
   }, [openCart, openFavouritesCart]);
 
-  const [data, setData] = React.useState({ vendors: [], accessory: [], clothing: [] });
-  React.useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("/api/sanity/categories");
-      const response = await res.json();
-      setData(response.data);
-    }
-    fetchData();
-  }, []);
-
   const cartTotal =
     stateCart?.cart?.length > 0
       ? stateCart.cart.reduce(
@@ -113,7 +103,7 @@ export default function Navigation() {
           </div>
         </div>
         <nav className={style.wrapper}>
-          {menuOpen && <MenuNav data={data} />}
+          {menuOpen && <MenuNav />}
         </nav>
       </header>
     );

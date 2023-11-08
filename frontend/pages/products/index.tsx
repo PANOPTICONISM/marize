@@ -15,6 +15,7 @@ import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
 import { translations } from "../../translations/common";
 import React from "react";
+import { useCategories } from "../../contexts/CategoriesContext";
 
 export const addUrlParams = (router, cat) => {
   router.push({ pathname: "/products", query: cat }, undefined, {
@@ -24,16 +25,7 @@ export const addUrlParams = (router, cat) => {
 
 export default function Products({ data, locale, mainPageContent }) {
   const { products } = data;
-  const categories = React.useMemo(() => {
-    return products.map((product) =>
-    product.category.title[locale]
-    ).filter(Boolean)
-  }, [locale, products]);
-  const categoriesNoDuplicates = [...new Set(categories)] as string[];
-  const vendors = React.useMemo(() => products.map((product) =>
-    product.vendor && product.vendor.title
-  ).filter(Boolean), [products]);
-  const vendorsNoDuplicates = [...new Set(vendors)] as string[];
+  const categories = useCategories();
   const { state, dispatch } = useContext(GlobalContext);
 
   const [filteredArticles, setFilteredArticles] = useState<any>(products);
@@ -168,8 +160,8 @@ export default function Products({ data, locale, mainPageContent }) {
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}
-            vendors={vendorsNoDuplicates}
-            categories={categoriesNoDuplicates}
+            vendors={categories.vendors}
+            categories={[...categories.accessory, ...categories.clothing]}
             discounts={isDiscounts}
             mobileFilters={mobileFilters}
           />

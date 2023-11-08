@@ -11,8 +11,14 @@ type FilterProps = {
       name: string,
     }
   }) => void,
-  categories: string[],
-  vendors: string[],
+  categories: {
+    title: { en: string, pt: string },
+    _id: string,
+  }[],
+  vendors: {
+    title: string,
+    _id: string,
+  }[],
   discounts: boolean,
   mobileFilters: boolean,
 }
@@ -40,14 +46,14 @@ export function Filters({
           className={`${style.filters_products} ${
             mobileFilters && style.mobile
           }`}
-          key={filter}
+          key={filter._id}
         >
-          <label key={filter} className={style.container_checkbox}>
-            {filter}
+          <label key={filter._id} className={style.container_checkbox}>
+            {filter.title}
             <input
               type="checkbox"
               name="brands"
-              value={filter}
+              value={filter.title}
               onChange={onChange}
             />
             <span className={style.checkmark}></span>
@@ -78,14 +84,14 @@ export function Filters({
           className={`${style.filters_products} ${
             mobileFilters && style.mobile
           }`}
-          key={filter}
+          key={filter._id}
         >
-          <label key={filter} className={style.container_checkbox}>
-            {filter}
+          <label key={filter._id} className={style.container_checkbox}>
+            {filter.title[locale]}
             <input
               type="checkbox"
               name="categories"
-              value={filter}
+              value={filter.title[locale]}
               onChange={onChange}
             />
             <span className={style.checkmark}></span>
