@@ -24,13 +24,15 @@ export const addUrlParams = (router, cat) => {
 
 export default function Products({ data, locale, mainPageContent }) {
   const { products } = data;
-  const categories = products.map((product) =>
+  const categories = React.useMemo(() => {
+    return products.map((product) =>
     product.category.title[locale]
-  ).filter(Boolean);
+    ).filter(Boolean)
+  }, [locale, products]);
   const categoriesNoDuplicates = [...new Set(categories)] as string[];
-  const vendors = products.map((product) =>
+  const vendors = React.useMemo(() => products.map((product) =>
     product.vendor && product.vendor.title
-  ).filter(Boolean);
+  ).filter(Boolean), [products]);
   const vendorsNoDuplicates = [...new Set(vendors)] as string[];
   const { state, dispatch } = useContext(GlobalContext);
 
@@ -38,7 +40,6 @@ export default function Products({ data, locale, mainPageContent }) {
   const [filters, setFilters] = useState({
     brands: [],
     categories: [],
-    stateDiscount: false,
   });
   const [isDiscounts, setIsDiscounts] = useState(false);
   const [mobileFilters, setMobileFilters] = useState(true);
@@ -48,65 +49,40 @@ export default function Products({ data, locale, mainPageContent }) {
   }) => {
     const value = e.target.value;
 
-    console.log(e.target.name)
-
     const filterBrand =
       e.target.checked && e.target.name === "brands"
         ? [...filters.brands, value]
-        : filters.brands.filter((prev: any) => prev !== value);
+        : filters.brands.filter((prev: string) => prev !== value);
     const filterCat =
       e.target.checked && e.target.name === "categories"
         ? [...filters.categories, value]
-        : filters.categories.filter((prev: any) => prev !== value);
-
-    const filterDiscounts =
-      e.target.checked && e.target.value === translations[locale].discount
-        ? true
-        : false;
+        : filters.categories.filter((prev: string) => prev !== value);
 
     setFilters({
       brands: filterBrand,
       categories: filterCat,
-      stateDiscount: filterDiscounts,
     });
   };
 
+  const filterByBrandAndCategory = React.useCallback(() => {
+    const result = products.filter((product) =>
+      (filters?.categories?.every(
+        (c: string) =>
+          product.category && product?.category?.title[locale]?.includes(c) || c === "Discounts" && product.discounted
+      )) &&
+      filters?.brands?.every(
+        (c: string) => product.vendor && product.vendor.title.includes(c)));
+
+    const hasProductsWithDiscount = products.filter((product) => product.discounted);
+    setIsDiscounts(hasProductsWithDiscount.length > 0);
+
+    setFilteredArticles(result)
+
+  }, [filters?.brands, filters?.categories, locale, products])
+
   React.useEffect(() => {
-    const productsFilteredByBrand = [];
-    if (filters.brands.length > 0) {
-      const filtered = products?.filter((product) =>
-        filters?.brands?.some(
-          (c: string) => product.vendor && product.vendor.title.includes(c)
-        )
-      );
-      productsFilteredByBrand.push(...filtered);
-      setFilteredArticles(filtered);
-    } else {
-      setFilteredArticles(products);
-    }
-
-    if (filters.categories.length > 0) {
-      const filteredByCat = (
-        productsFilteredByBrand.length > 0 ? productsFilteredByBrand : products
-      )?.filter((product) =>
-        filters?.categories?.some(
-          (c: string) =>
-            product.category && product?.category?.title[locale]?.includes(c)
-        )
-      );
-      setFilteredArticles(filteredByCat);
-    }
-
-    if (isDiscounts && filters.stateDiscount) {
-      const filteredByDiscount = products?.filter(
-        (product) => product.discounted
-      );
-      setFilteredArticles(filteredByDiscount);
-    }
-
-    const discountState = products.map((product) => product.discounted);
-    setIsDiscounts(discountState?.includes(true));
-  }, [filters, isDiscounts, locale, products]);
+    filterByBrandAndCategory()
+  }, [filterByBrandAndCategory]);
 
   const articlesUI = filteredArticles?.map((article: any) => (
     <div className={style.card} key={article._id}>
