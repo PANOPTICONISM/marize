@@ -19,8 +19,8 @@ import { useSearchParams } from "next/navigation";
 export default function Products({ data, locale, mainPageContent }) {
   const { products } = data;
   const searchParams = useSearchParams();
-  const typeQuery = searchParams.get('type');
-  const query = searchParams.get('q');
+  const typeQuery = React.useMemo(() => searchParams.get('type'), [searchParams]);
+  const query = React.useMemo(() => searchParams.get('q'), [searchParams]);
   const categories = useCategories();
   const { state, dispatch } = React.useContext(GlobalContext);
 
@@ -35,14 +35,17 @@ export default function Products({ data, locale, mainPageContent }) {
   React.useEffect(() => {
     if (query) {
       const firstLetterUppercase = query.charAt(0).toUpperCase() + query.slice(1);
-      if (typeQuery === "categories" && !filters.categories.includes(firstLetterUppercase)) {
-        filters.categories.push(firstLetterUppercase)
-      }
-      if (typeQuery === "brands" && !filters.brands.includes(firstLetterUppercase)) {
-        filters.categories.push(firstLetterUppercase)
-      }
+      setFilters((currentFilters) => {
+        if (typeQuery === "categories" && !currentFilters.categories.includes(firstLetterUppercase)) {
+          return { brands: [], categories: [firstLetterUppercase] };
+        }
+        if (typeQuery === "brands" && !currentFilters.brands.includes(firstLetterUppercase)) {
+          return { brands: [firstLetterUppercase], categories: [] };
+        }
+        return currentFilters;
+      })
     }
-  }, [filters.brands, filters.categories, query, typeQuery])
+  }, [query, typeQuery]);
 
   const handleChecked = (e: {
     target: { value: string; checked: boolean; name: string };
