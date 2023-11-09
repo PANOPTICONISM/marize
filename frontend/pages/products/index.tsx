@@ -35,7 +35,7 @@ export default function Products({ data, locale, mainPageContent }) {
 
   React.useEffect(() => {
     if (query) {
-      const firstLetterUppercase = query.charAt(0).toUpperCase() + query.slice(1);
+      const firstLetterUppercase = query.split(" ").map((q) => q.charAt(0).toUpperCase() + q.slice(1)).join(" ");
       setFilters((currentFilters) => {
         if (typeQuery === "categories" && !currentFilters.categories.includes(firstLetterUppercase)) {
           return { brands: [], categories: [firstLetterUppercase] };
