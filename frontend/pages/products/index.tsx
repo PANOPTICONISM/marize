@@ -98,9 +98,17 @@ export default function Products({ data, locale, mainPageContent }) {
     if (!groupQuery && filters.types.length === 0) {
       return;
     }
-    setFilteredArticles((currentProducts) => currentProducts.filter((product) => product.category._type === groupQuery ||
-      filters.types.some((c: string) => product.category._type === c)));
-  }, [filters.types, groupQuery])
+    setFilteredArticles((currentProducts) => {
+      if (filters.types.length > 0) {
+        const result = currentProducts.filter((product) =>
+          filters.types.includes(product.category._type));
+        return result;
+      }
+      return currentProducts;
+    });
+  }, [filters.types, groupQuery]);
+
+  console.log(filters)
 
   React.useEffect(() => {
     filterByBrandAndCategory();
