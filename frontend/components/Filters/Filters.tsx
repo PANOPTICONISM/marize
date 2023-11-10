@@ -85,6 +85,32 @@ export function Filters({
           <span className={style.checkmark}></span>
         </label>
       ) : null}
+      <label
+        className={`${style.container_checkbox} ${style.filters_products} ${mobileFilters && style.mobile
+          }`}
+      >
+        clothing
+        <input
+          type="checkbox"
+          name="type"
+          value="clothing"
+          onChange={onChange}
+        />
+        <span className={style.checkmark}></span>
+      </label>
+      <label
+        className={`${style.container_checkbox} ${style.filters_products} ${mobileFilters && style.mobile
+          }`}
+      >
+        accessory
+        <input
+          type="checkbox"
+          name="type"
+          value="accessory"
+          onChange={onChange}
+        />
+        <span className={style.checkmark}></span>
+      </label>
       {categories?.map((filter) => (
         <div
           className={`${style.filters_products} ${

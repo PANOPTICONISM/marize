@@ -29,6 +29,7 @@ export default function Products({ data, locale, mainPageContent }) {
   const [filters, setFilters] = React.useState({
     brands: [],
     categories: [],
+    type: []
   });
   const [isDiscounts, setIsDiscounts] = React.useState(false);
   const [mobileFilters, setMobileFilters] = React.useState(true);
@@ -38,15 +39,40 @@ export default function Products({ data, locale, mainPageContent }) {
       const firstLetterUppercase = query.split(" ").map((q) => q.charAt(0).toUpperCase() + q.slice(1)).join(" ");
       setFilters((currentFilters) => {
         if (typeQuery === "categories" && !currentFilters.categories.includes(firstLetterUppercase)) {
-          return { brands: [], categories: [firstLetterUppercase] };
+          return { brands: [], categories: [firstLetterUppercase], type: [] };
         }
         if (typeQuery === "brands" && !currentFilters.brands.includes(firstLetterUppercase)) {
-          return { brands: [firstLetterUppercase], categories: [] };
+          return { brands: [firstLetterUppercase], categories: [], type: [] };
         }
         return currentFilters;
       })
     }
   }, [query, typeQuery]);
+
+  const handleChecked = (e: {
+    target: { value: string; checked: boolean; name: string };
+  }) => {
+    const value = e.target.value;
+
+    const filterBrand =
+      e.target.checked && e.target.name === "brands"
+        ? [...filters.brands, value]
+        : filters.brands.filter((prev: string) => prev !== value);
+    const filterCat =
+      e.target.checked && e.target.name === "categories"
+        ? [...filters.categories, value]
+        : filters.categories.filter((prev: string) => prev !== value);
+    const filterType =
+      e.target.checked && e.target.name === "type"
+        ? [...filters.type, value]
+        : filters.type.filter((prev: string) => prev !== value);
+
+    setFilters({
+      brands: filterBrand,
+      categories: filterCat,
+      type: filterType
+    });
+  };
 
   const filterByBrandAndCategory = React.useCallback(() => {
     const hasProductsWithDiscount = products.filter((product) => product.discounted);
@@ -68,31 +94,20 @@ export default function Products({ data, locale, mainPageContent }) {
 
     setFilteredArticles(filterByClothingOrAccessory.length > 0 ? filterByClothingOrAccessory : result);
 
-  }, [filters?.brands, filters.categories, groupQuery, locale, products])
+  }, [filters?.brands, filters.categories, groupQuery, locale, products]);
+
+  const filterByClothingOrAccessory = React.useCallback(() => {
+    if (!groupQuery && filters.type.length === 0) {
+      return;
+    }
+    setFilteredArticles((currentProducts) => currentProducts.filter((product) => product.category._type === groupQuery ||
+      filters.type.some((c: string) => product.category._type === c)));
+  }, [filters.type, groupQuery])
 
   React.useEffect(() => {
-    filterByBrandAndCategory()
-  }, [filterByBrandAndCategory]);
-
-  const handleChecked = (e: {
-    target: { value: string; checked: boolean; name: string };
-  }) => {
-    const value = e.target.value;
-
-    const filterBrand =
-      e.target.checked && e.target.name === "brands"
-        ? [...filters.brands, value]
-        : filters.brands.filter((prev: string) => prev !== value);
-    const filterCat =
-      e.target.checked && e.target.name === "categories"
-        ? [...filters.categories, value]
-        : filters.categories.filter((prev: string) => prev !== value);
-
-    setFilters({
-      brands: filterBrand,
-      categories: filterCat,
-    });
-  };
+    filterByBrandAndCategory();
+    filterByClothingOrAccessory();
+  }, [filterByBrandAndCategory, filterByClothingOrAccessory]);
 
   const articlesUI = filteredArticles.map((article: any) => (
     <div className={style.card} key={article._id}>
