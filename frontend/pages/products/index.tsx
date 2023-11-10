@@ -29,7 +29,7 @@ export default function Products({ data, locale, mainPageContent }) {
   const [filters, setFilters] = React.useState({
     brands: [],
     categories: [],
-    type: []
+    types: []
   });
   const [isDiscounts, setIsDiscounts] = React.useState(false);
   const [mobileFilters, setMobileFilters] = React.useState(true);
@@ -39,10 +39,10 @@ export default function Products({ data, locale, mainPageContent }) {
       const firstLetterUppercase = query.split(" ").map((q) => q.charAt(0).toUpperCase() + q.slice(1)).join(" ");
       setFilters((currentFilters) => {
         if (typeQuery === "categories" && !currentFilters.categories.includes(firstLetterUppercase)) {
-          return { brands: [], categories: [firstLetterUppercase], type: [] };
+          return { brands: [], categories: [firstLetterUppercase], types: [] };
         }
         if (typeQuery === "brands" && !currentFilters.brands.includes(firstLetterUppercase)) {
-          return { brands: [firstLetterUppercase], categories: [], type: [] };
+          return { brands: [firstLetterUppercase], categories: [], types: [] };
         }
         return currentFilters;
       })
@@ -64,13 +64,13 @@ export default function Products({ data, locale, mainPageContent }) {
         : filters.categories.filter((prev: string) => prev !== value);
     const filterType =
       e.target.checked && e.target.name === "type"
-        ? [...filters.type, value]
-        : filters.type.filter((prev: string) => prev !== value);
+        ? [...filters.types, value]
+        : filters.types.filter((prev: string) => prev !== value);
 
     setFilters({
       brands: filterBrand,
       categories: filterCat,
-      type: filterType
+      types: filterType
     });
   };
 
@@ -97,12 +97,12 @@ export default function Products({ data, locale, mainPageContent }) {
   }, [filters?.brands, filters.categories, groupQuery, locale, products]);
 
   const filterByClothingOrAccessory = React.useCallback(() => {
-    if (!groupQuery && filters.type.length === 0) {
+    if (!groupQuery && filters.types.length === 0) {
       return;
     }
     setFilteredArticles((currentProducts) => currentProducts.filter((product) => product.category._type === groupQuery ||
-      filters.type.some((c: string) => product.category._type === c)));
-  }, [filters.type, groupQuery])
+      filters.types.some((c: string) => product.category._type === c)));
+  }, [filters.types, groupQuery])
 
   React.useEffect(() => {
     filterByBrandAndCategory();

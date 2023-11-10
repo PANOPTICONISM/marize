@@ -22,8 +22,9 @@ type FilterProps = {
   discounts: boolean,
   mobileFilters: boolean,
   filters: {
-    brands: any[],
-    categories: any[],
+    brands: string[],
+    categories: string[],
+    types: string[]
   }
 }
 
@@ -53,6 +54,7 @@ export function Filters({
           name="type"
           value="clothing"
           onChange={onChange}
+          checked={filters.types.includes("clothing")}
         />
         <span className={style.checkmark}></span>
       </label>
@@ -66,6 +68,7 @@ export function Filters({
           name="type"
           value="accessory"
           onChange={onChange}
+          checked={filters.types.includes("accessory")}
         />
         <span className={style.checkmark}></span>
       </label>
