@@ -35,19 +35,23 @@ export default function Products({ data, locale, mainPageContent }) {
   const [mobileFilters, setMobileFilters] = React.useState(true);
 
   React.useEffect(() => {
-    if (query) {
-      const firstLetterUppercase = query.split(" ").map((q) => q.charAt(0).toUpperCase() + q.slice(1)).join(" ");
-      setFilters((currentFilters) => {
+    setFilters((currentFilters) => {
+      if (query) {
+        const firstLetterUppercase = query.split(" ").map((q) => q.charAt(0).toUpperCase() + q.slice(1)).join(" ");
         if (typeQuery === "categories" && !currentFilters.categories.includes(firstLetterUppercase)) {
           return { brands: [], categories: [firstLetterUppercase], types: [] };
         }
         if (typeQuery === "brands" && !currentFilters.brands.includes(firstLetterUppercase)) {
           return { brands: [firstLetterUppercase], categories: [], types: [] };
         }
+      }
+      if (groupQuery && !currentFilters.types.includes(groupQuery)) {
+        return { brands: [], categories: [], types: [groupQuery] };
+      }
         return currentFilters;
       })
-    }
-  }, [query, typeQuery]);
+
+  }, [groupQuery, query, typeQuery]);
 
   const handleChecked = (e: {
     target: { value: string; checked: boolean; name: string };
@@ -107,8 +111,6 @@ export default function Products({ data, locale, mainPageContent }) {
       return currentProducts;
     });
   }, [filters.types, groupQuery]);
-
-  console.log(filters)
 
   React.useEffect(() => {
     filterByBrandAndCategory();
