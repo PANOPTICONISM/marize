@@ -79,10 +79,6 @@
   transform: rotate(45deg);
 }
 
-.brands {
-  margin-top: 0;
-}
-
 @media screen and (max-width: 600px) {
   .mobile {
     display: none;

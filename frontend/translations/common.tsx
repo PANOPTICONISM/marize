@@ -23,6 +23,9 @@ export const translations = {
     categories: "Categories",
     discount: "Discounts",
 
+    clothing: "Clothing",
+    accessory: "Accessories",
+
     pickSize: "Pick your size",
     uniqueSize: "Unique size",
     addToBag: "Add to shopping bag",
@@ -51,6 +54,9 @@ export const translations = {
     brands: "Marcas",
     categories: "Categorias",
     discount: "Saldos",
+
+    clothing: "Roupas",
+    accessory: "Accessórios",
 
     pickSize: "Escolha o tamanho",
     uniqueSize: "Tamanho unico",

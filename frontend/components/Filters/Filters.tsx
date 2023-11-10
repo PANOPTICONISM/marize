@@ -43,53 +43,11 @@ export function Filters({
         !mobileFilters && style.container_mobile
       }`}
     >
-      <h4 className={`${mobileFilters && style.mobile} ${style.brands}`}>
-        {translations[locale].brands}
-      </h4>
-      {vendors?.map((filter) => (
-        <div
-          className={`${style.filters_products} ${
-            mobileFilters && style.mobile
-          }`}
-          key={filter._id}
-        >
-          <label key={filter._id} className={style.container_checkbox}>
-            {filter.title}
-            <input
-              type="checkbox"
-              name="brands"
-              value={filter.title}
-              onChange={onChange}
-              checked={filters.brands.includes(filter.title)}
-            />
-            <span className={style.checkmark}></span>
-          </label>
-        </div>
-      ))}
-      <h4 className={`${mobileFilters && style.mobile}`}>
-        {translations[locale].categories}
-      </h4>
-      {discounts ? (
-        <label
-          className={`${style.container_checkbox} ${style.filters_products} ${
-            mobileFilters && style.mobile
-          }`}
-        >
-          {translations[locale].discount}
-          <input
-            type="checkbox"
-            name="categories"
-            value={translations[locale].discount}
-            onChange={onChange}
-          />
-          <span className={style.checkmark}></span>
-        </label>
-      ) : null}
       <label
         className={`${style.container_checkbox} ${style.filters_products} ${mobileFilters && style.mobile
           }`}
       >
-        clothing
+        {translations[locale].clothing}
         <input
           type="checkbox"
           name="type"
@@ -102,7 +60,7 @@ export function Filters({
         className={`${style.container_checkbox} ${style.filters_products} ${mobileFilters && style.mobile
           }`}
       >
-        accessory
+        {translations[locale].accessory}
         <input
           type="checkbox"
           name="type"
@@ -111,6 +69,24 @@ export function Filters({
         />
         <span className={style.checkmark}></span>
       </label>
+      <h4 className={`${mobileFilters && style.mobile}`}>
+        {translations[locale].categories}
+      </h4>
+      {discounts ? (
+        <label
+          className={`${style.container_checkbox} ${style.filters_products} ${mobileFilters && style.mobile
+          }`}
+        >
+          {translations[locale].discount}
+          <input
+            type="checkbox"
+            name="categories"
+            value={translations[locale].discount}
+            onChange={onChange}
+          />
+          <span className={style.checkmark}></span>
+        </label>
+      ) : null}
       {categories?.map((filter) => (
         <div
           className={`${style.filters_products} ${
@@ -126,6 +102,28 @@ export function Filters({
               value={filter.title[locale]}
               onChange={onChange}
               checked={filters.categories.includes(filter.title[locale])}
+            />
+            <span className={style.checkmark}></span>
+          </label>
+        </div>
+      ))}
+      <h4 className={`${mobileFilters && style.mobile} ${style.brands}`}>
+        {translations[locale].brands}
+      </h4>
+      {vendors?.map((filter) => (
+        <div
+          className={`${style.filters_products} ${mobileFilters && style.mobile
+            }`}
+          key={filter._id}
+        >
+          <label key={filter._id} className={style.container_checkbox}>
+            {filter.title}
+            <input
+              type="checkbox"
+              name="brands"
+              value={filter.title}
+              onChange={onChange}
+              checked={filters.brands.includes(filter.title)}
             />
             <span className={style.checkmark}></span>
           </label>
