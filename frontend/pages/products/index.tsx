@@ -29,7 +29,8 @@ export default function Products({ data, locale, mainPageContent }) {
   const [filters, setFilters] = React.useState({
     brands: [],
     categories: [],
-    types: []
+    types: [],
+    isDiscounted: [],
   });
   const [isDiscounts, setIsDiscounts] = React.useState(false);
   const [mobileFilters, setMobileFilters] = React.useState(true);
@@ -39,14 +40,14 @@ export default function Products({ data, locale, mainPageContent }) {
       if (query) {
         const firstLetterUppercase = query.split(" ").map((q) => q.charAt(0).toUpperCase() + q.slice(1)).join(" ");
         if (typeQuery === "categories" && !currentFilters.categories.includes(firstLetterUppercase)) {
-          return { brands: [], categories: [firstLetterUppercase], types: [] };
+          return { brands: [], categories: [firstLetterUppercase], types: [], isDiscounted: [] };
         }
         if (typeQuery === "brands" && !currentFilters.brands.includes(firstLetterUppercase)) {
-          return { brands: [firstLetterUppercase], categories: [], types: [] };
+          return { brands: [firstLetterUppercase], categories: [], types: [], isDiscounted: [] };
         }
       }
       if (groupQuery && !currentFilters.types.includes(groupQuery)) {
-        return { brands: [], categories: [], types: [groupQuery] };
+        return { brands: [], categories: [], types: [groupQuery], isDiscounted: [] };
       }
         return currentFilters;
       })
@@ -70,11 +71,16 @@ export default function Products({ data, locale, mainPageContent }) {
       e.target.checked && e.target.name === "type"
         ? [...filters.types, value]
         : filters.types.filter((prev: string) => prev !== value);
+    const filterDiscount =
+      e.target.checked && e.target.name === "discount"
+        ? [...filters.isDiscounted, value]
+        : filters.isDiscounted.filter((prev: string) => prev !== value);
 
     setFilters({
       brands: filterBrand,
       categories: filterCat,
-      types: filterType
+      types: filterType,
+      isDiscounted: filterDiscount
     });
   };
 
@@ -87,12 +93,8 @@ export default function Products({ data, locale, mainPageContent }) {
       return;
     }
     const result = products.filter((product) =>
-      (filters.categories.some(
-        (c: string) =>
-          product.category && product?.category?.title[locale]?.includes(c) || c === "Discounts" && product.discounted
-      )) ||
-      filters.brands.some(
-        (c: string) => product.vendor && product.vendor.title.includes(c)));
+      filters.categories.includes(product?.category?.title[locale]) ||
+      filters.brands.includes(product?.vendor?.title));
 
     setFilteredArticles(result);
 
@@ -112,10 +114,18 @@ export default function Products({ data, locale, mainPageContent }) {
     });
   }, [filters.types, groupQuery]);
 
+  const filterByDiscountedProducts = React.useCallback(() => {
+    if (filters.isDiscounted.length === 0) {
+      return;
+    }
+    setFilteredArticles((currentProducts) => currentProducts.filter((product) => product.discounted));
+  }, [filters.isDiscounted]);
+
   React.useEffect(() => {
     filterByBrandAndCategory();
     filterByClothingOrAccessory();
-  }, [filterByBrandAndCategory, filterByClothingOrAccessory]);
+    filterByDiscountedProducts();
+  }, [filterByBrandAndCategory, filterByClothingOrAccessory, filterByDiscountedProducts]);
 
   const articlesUI = filteredArticles.map((article: any) => (
     <div className={style.card} key={article._id}>

@@ -83,7 +83,7 @@ export function Filters({
           {translations[locale].discount}
           <input
             type="checkbox"
-            name="categories"
+            name="discount"
             value={translations[locale].discount}
             onChange={onChange}
           />
