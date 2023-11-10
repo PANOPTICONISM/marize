@@ -49,22 +49,26 @@ export default function Products({ data, locale, mainPageContent }) {
   }, [query, typeQuery]);
 
   const filterByBrandAndCategory = React.useCallback(() => {
-    const result = products.filter((product) =>
-      (filters?.categories?.every(
-        (c: string) =>
-          product.category && product?.category?.title[locale]?.includes(c) || c === "Discounts" && product.discounted
-      )) &&
-      filters?.brands?.every(
-        (c: string) => product.vendor && product.vendor.title.includes(c)));
-
     const hasProductsWithDiscount = products.filter((product) => product.discounted);
     setIsDiscounts(hasProductsWithDiscount.length > 0);
 
-    const filterByClothingOrAccessory = result.filter((product) => product.category._type === groupQuery)
+    if (filters.categories.length === 0 && filters.brands.length === 0) {
+      setFilteredArticles(products)
+      return;
+    }
+    const result = products.filter((product) =>
+      (filters?.categories?.some(
+        (c: string) =>
+          product.category && product?.category?.title[locale]?.includes(c) || c === "Discounts" && product.discounted
+      )) ||
+      filters?.brands?.some(
+        (c: string) => product.vendor && product.vendor.title.includes(c)));
 
-    setFilteredArticles(filterByClothingOrAccessory.length > 0 ? filterByClothingOrAccessory : result)
+    const filterByClothingOrAccessory = result.filter((product) => product.category._type === groupQuery);
 
-  }, [filters?.brands, filters?.categories, groupQuery, locale, products])
+    setFilteredArticles(filterByClothingOrAccessory.length > 0 ? filterByClothingOrAccessory : result);
+
+  }, [filters?.brands, filters.categories, groupQuery, locale, products])
 
   React.useEffect(() => {
     filterByBrandAndCategory()
