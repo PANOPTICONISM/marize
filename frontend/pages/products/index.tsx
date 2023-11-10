@@ -83,18 +83,16 @@ export default function Products({ data, locale, mainPageContent }) {
       return;
     }
     const result = products.filter((product) =>
-      (filters?.categories?.some(
+      (filters.categories.some(
         (c: string) =>
           product.category && product?.category?.title[locale]?.includes(c) || c === "Discounts" && product.discounted
       )) ||
-      filters?.brands?.some(
+      filters.brands.some(
         (c: string) => product.vendor && product.vendor.title.includes(c)));
 
-    const filterByClothingOrAccessory = result.filter((product) => product.category._type === groupQuery);
+    setFilteredArticles(result);
 
-    setFilteredArticles(filterByClothingOrAccessory.length > 0 ? filterByClothingOrAccessory : result);
-
-  }, [filters?.brands, filters.categories, groupQuery, locale, products]);
+  }, [filters.brands, filters.categories, locale, products]);
 
   const filterByClothingOrAccessory = React.useCallback(() => {
     if (!groupQuery && filters.types.length === 0) {
