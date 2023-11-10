@@ -19,9 +19,9 @@ import { useSearchParams } from "next/navigation";
 export default function Products({ data, locale, mainPageContent }) {
   const { products } = data;
   const searchParams = useSearchParams();
-  const typeQuery = React.useMemo(() => searchParams.get('type'), [searchParams]);
+  const sectionQuery = React.useMemo(() => searchParams.get('section'), [searchParams]);
   const query = React.useMemo(() => searchParams.get('q'), [searchParams]);
-  const groupQuery = React.useMemo(() => searchParams.get('group'), [searchParams]);
+  const typeQuery = React.useMemo(() => searchParams.get('type'), [searchParams]);
   const categories = useCategories();
   const { state, dispatch } = React.useContext(GlobalContext);
 
@@ -39,20 +39,20 @@ export default function Products({ data, locale, mainPageContent }) {
     setFilters((currentFilters) => {
       if (query) {
         const firstLetterUppercase = query.split(" ").map((q) => q.charAt(0).toUpperCase() + q.slice(1)).join(" ");
-        if (typeQuery === "categories" && !currentFilters.categories.includes(firstLetterUppercase)) {
+        if (sectionQuery === "categories" && !currentFilters.categories.includes(firstLetterUppercase)) {
           return { brands: [], categories: [firstLetterUppercase], types: [], isDiscounted: [] };
         }
-        if (typeQuery === "brands" && !currentFilters.brands.includes(firstLetterUppercase)) {
+        if (sectionQuery === "brands" && !currentFilters.brands.includes(firstLetterUppercase)) {
           return { brands: [firstLetterUppercase], categories: [], types: [], isDiscounted: [] };
         }
       }
-      if (groupQuery && !currentFilters.types.includes(groupQuery)) {
-        return { brands: [], categories: [], types: [groupQuery], isDiscounted: [] };
+      if (typeQuery && !currentFilters.types.includes(typeQuery)) {
+        return { brands: [], categories: [], types: [typeQuery], isDiscounted: [] };
       }
         return currentFilters;
       })
 
-  }, [groupQuery, query, typeQuery]);
+  }, [typeQuery, query, sectionQuery]);
 
   const handleChecked = (e: {
     target: { value: string; checked: boolean; name: string };
@@ -101,7 +101,7 @@ export default function Products({ data, locale, mainPageContent }) {
   }, [filters.brands, filters.categories, locale, products]);
 
   const filterByClothingOrAccessory = React.useCallback(() => {
-    if (!groupQuery && filters.types.length === 0) {
+    if (!typeQuery && filters.types.length === 0) {
       return;
     }
     setFilteredArticles((currentProducts) => {
@@ -112,7 +112,7 @@ export default function Products({ data, locale, mainPageContent }) {
       }
       return currentProducts;
     });
-  }, [filters.types, groupQuery]);
+  }, [filters.types, typeQuery]);
 
   const filterByDiscountedProducts = React.useCallback(() => {
     if (filters.isDiscounted.length === 0) {
