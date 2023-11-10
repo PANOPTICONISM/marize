@@ -159,10 +159,14 @@ export default function Products({ data, locale, mainPageContent }) {
           </Link>
         </div>
       ) : null}
-      <h2 className={style.brand}>{article.vendor?.title}</h2>
-      <h3 className={style.title}>
-        {article.title[locale] ? article.title[locale] : article.title.pt}
-      </h3>
+      <h2 className={style.title}>
+        {article.title[locale]
+          ? article.title[locale]
+          : article.title.pt}
+      </h2>
+      {article.vendor ? (
+        <h3 className={style.brand}>{article.vendor.title}</h3>
+      ) : null}
     </div>
   ));
 

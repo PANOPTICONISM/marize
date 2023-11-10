@@ -128,16 +128,16 @@
   border: none;
 }
 
-.brand {
-  font-size: 16px;
+.title {
+  font-size: 18px;
   font-weight: 300;
-  margin-bottom: 4px;
-  text-transform: capitalize;
+  margin: 0;
+  margin-top: 12px;
 }
 
-.title {
-  margin-top: 0;
-  text-transform: capitalize;
+.brand {
+  margin-top: 4px;
+  font-size: 16px;
 }
 
 .price {
