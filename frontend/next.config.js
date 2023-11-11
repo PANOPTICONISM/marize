@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ["cdn.chec.io", "images.ctfassets.net", "cdn.sanity.io"],
+    domains: ["cdn.sanity.io"],
   },
   reactStrictMode: true,
   i18n: {
