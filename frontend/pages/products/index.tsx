@@ -4,7 +4,6 @@ import style from "../../styles/products.module.css";
 import Main from "../../containers/Main/Main";
 import Image from "next/image";
 import FilterComponent from "../../components/Filters/Filters";
-import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { GlobalContext } from "../../contexts/CartAndFavouritesContext";
 import {
@@ -13,24 +12,47 @@ import {
 } from "../../utils/FavouritesFunctions";
 import { sanity } from "../api/lib/sanity";
 import { absoluteURLsForSanity } from "../../utils/SanityFunctions";
-import { translations } from "../../translations/common";
-
-export const addUrlParams = (router, cat) => {
-  router.push({ pathname: "/products", query: cat }, undefined, {
-    shallow: true,
-  });
-};
+import React from "react";
+import { useCategories } from "../../contexts/CategoriesContext";
+import { useSearchParams } from "next/navigation";
 
 export default function Products({ data, locale, mainPageContent }) {
-  const { products, vendors, categories } = data;
-  const [filteredArticles, setFilteredArticles] = useState<any>(products);
-  const [filters, setFilters] = useState({
+  const { products } = data;
+  const searchParams = useSearchParams();
+  const sectionQuery = React.useMemo(() => searchParams.get('section'), [searchParams]);
+  const query = React.useMemo(() => searchParams.get('q'), [searchParams]);
+  const typeQuery = React.useMemo(() => searchParams.get('type'), [searchParams]);
+  const categories = useCategories();
+  const { state, dispatch } = React.useContext(GlobalContext);
+
+  const [filteredArticles, setFilteredArticles] = React.useState<any>([]);
+  const [filters, setFilters] = React.useState({
     brands: [],
     categories: [],
-    stateDiscount: false,
+    types: [],
+    isDiscounted: [],
   });
-  const [mobileFilters, setMobileFilters] = useState(true);
-  const [isDiscounts, setIsDiscounts] = useState(false);
+  const [isDiscounts, setIsDiscounts] = React.useState(false);
+  const [mobileFilters, setMobileFilters] = React.useState(true);
+
+  React.useEffect(() => {
+    setFilters((currentFilters) => {
+      if (query) {
+        const firstLetterUppercase = query.split(" ").map((q) => q.charAt(0).toUpperCase() + q.slice(1)).join(" ");
+        if (sectionQuery === "categories" && !currentFilters.categories.includes(firstLetterUppercase)) {
+          return { brands: [], categories: [firstLetterUppercase], types: [], isDiscounted: [] };
+        }
+        if (sectionQuery === "brands" && !currentFilters.brands.includes(firstLetterUppercase)) {
+          return { brands: [firstLetterUppercase], categories: [], types: [], isDiscounted: [] };
+        }
+      }
+      if (typeQuery && !currentFilters.types.includes(typeQuery)) {
+        return { brands: [], categories: [], types: [typeQuery], isDiscounted: [] };
+      }
+        return currentFilters;
+      })
+
+  }, [typeQuery, query, sectionQuery]);
 
   const handleChecked = (e: {
     target: { value: string; checked: boolean; name: string };
@@ -40,64 +62,72 @@ export default function Products({ data, locale, mainPageContent }) {
     const filterBrand =
       e.target.checked && e.target.name === "brands"
         ? [...filters.brands, value]
-        : filters.brands.filter((prev: any) => prev !== value);
+        : filters.brands.filter((prev: string) => prev !== value);
     const filterCat =
       e.target.checked && e.target.name === "categories"
         ? [...filters.categories, value]
-        : filters.categories.filter((prev: any) => prev !== value);
-
-    const filterDiscounts =
-      e.target.checked && e.target.value === translations[locale].discount
-        ? true
-        : false;
+        : filters.categories.filter((prev: string) => prev !== value);
+    const filterType =
+      e.target.checked && e.target.name === "type"
+        ? [...filters.types, value]
+        : filters.types.filter((prev: string) => prev !== value);
+    const filterDiscount =
+      e.target.checked && e.target.name === "discount"
+        ? [...filters.isDiscounted, value]
+        : filters.isDiscounted.filter((prev: string) => prev !== value);
 
     setFilters({
       brands: filterBrand,
       categories: filterCat,
-      stateDiscount: filterDiscounts,
+      types: filterType,
+      isDiscounted: filterDiscount
     });
   };
 
-  useEffect(() => {
-    const brandList = [];
-    if (filters.brands.length > 0) {
-      const filtered = products?.filter((product) =>
-        filters?.brands?.some(
-          (c: string) => product.vendor && product.vendor.title.includes(c)
-        )
-      );
-      brandList.push(...filtered);
-      setFilteredArticles(filtered);
-    } else {
-      setFilteredArticles(products);
+  const filterByBrandAndCategory = React.useCallback(() => {
+    const hasProductsWithDiscount = products.filter((product) => product.discounted);
+    setIsDiscounts(hasProductsWithDiscount.length > 0);
+
+    if (filters.categories.length === 0 && filters.brands.length === 0) {
+      setFilteredArticles(products)
+      return;
     }
+    const result = products.filter((product) =>
+      filters.categories.includes(product?.category?.title[locale]) ||
+      filters.brands.includes(product?.vendor?.title));
 
-    if (filters.categories.length > 0) {
-      const filteredByCat = (
-        brandList.length > 0 ? brandList : products
-      )?.filter((product) =>
-        filters?.categories?.some(
-          (c: string) =>
-            product.category && product?.category?.title[locale].includes(c)
-        )
-      );
-      setFilteredArticles(filteredByCat);
+    setFilteredArticles(result);
+
+  }, [filters.brands, filters.categories, locale, products]);
+
+  const filterByClothingOrAccessory = React.useCallback(() => {
+    if (!typeQuery && filters.types.length === 0) {
+      return;
     }
+    setFilteredArticles((currentProducts) => {
+      if (filters.types.length > 0) {
+        const result = currentProducts.filter((product) =>
+          filters.types.includes(product.category._type));
+        return result;
+      }
+      return currentProducts;
+    });
+  }, [filters.types, typeQuery]);
 
-    if (isDiscounts && filters.stateDiscount) {
-      const filteredByDiscount = products?.filter(
-        (product) => product.discounted
-      );
-      setFilteredArticles(filteredByDiscount);
+  const filterByDiscountedProducts = React.useCallback(() => {
+    if (filters.isDiscounted.length === 0) {
+      return;
     }
+    setFilteredArticles((currentProducts) => currentProducts.filter((product) => product.discounted));
+  }, [filters.isDiscounted]);
 
-    const discountState = products.map((product) => product.discounted);
-    setIsDiscounts(discountState?.includes(true));
-  }, [filters, isDiscounts, locale, products]);
+  React.useEffect(() => {
+    filterByBrandAndCategory();
+    filterByClothingOrAccessory();
+    filterByDiscountedProducts();
+  }, [filterByBrandAndCategory, filterByClothingOrAccessory, filterByDiscountedProducts]);
 
-  const { state, dispatch } = useContext(GlobalContext);
-
-  const articlesUI = filteredArticles?.map((article: any) => (
+  const articlesUI = filteredArticles.map((article: any) => (
     <div className={style.card} key={article._id}>
       <div className={style.blue_heart}>
         {state?.favourites.some(
@@ -129,10 +159,14 @@ export default function Products({ data, locale, mainPageContent }) {
           </Link>
         </div>
       ) : null}
-      <h2 className={style.brand}>{article.vendor?.title}</h2>
-      <h3 className={style.title}>
-        {article.title[locale] ? article.title[locale] : article.title.pt}
-      </h3>
+      <h2 className={style.title}>
+        {article.title[locale]
+          ? article.title[locale]
+          : article.title.pt}
+      </h2>
+      {article.vendor ? (
+        <h3 className={style.brand}>{article.vendor.title}</h3>
+      ) : null}
     </div>
   ));
 
@@ -181,10 +215,11 @@ export default function Products({ data, locale, mainPageContent }) {
         <div className={style.containerProductSection}>
           <FilterComponent
             onChange={handleChecked}
-            vendors={vendors}
-            categories={categories}
+            vendors={categories.vendors}
+            categories={[...categories.accessory, ...categories.clothing]}
             discounts={isDiscounts}
             mobileFilters={mobileFilters}
+            filters={filters}
           />
           <div className={style.products_wrapper}>{articlesUI}</div>
         </div>
@@ -207,14 +242,12 @@ export async function getServerSideProps(context) {
     `{'products': *[_type == "product"]{
       _id, 
       body, 
-      category->{_id, title}, 
+      category->{_id, title, _type},
       images, 
       slug, 
       title, 
       discounted,
       vendor->{_id, title}},
-      'vendors': *[_type == "vendor"]{title, _id},
-      'categories': *[_type == "category"]
     }`
   );
 

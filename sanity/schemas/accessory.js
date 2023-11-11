@@ -3,8 +3,8 @@ import supportedLanguages from "./locale/supportedLanguages";
 const baseLanguage = supportedLanguages.find((l) => l.isDefault);
 
 export default {
-  name: "category",
-  title: "Category",
+  name: "accessory",
+  title: "Acessórios",
   type: "document",
   fields: [
     {
@@ -20,19 +20,6 @@ export default {
         source: "title",
         maxLength: 96,
       },
-    },
-    {
-      name: "parentVendor",
-      title: "Categorias relacionadas",
-      description:
-        'Por exemplo - se "mochilas", aqui tem de se colocar "Caminatta"',
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "vendor" }],
-        },
-      ],
     },
   ],
   preview: {

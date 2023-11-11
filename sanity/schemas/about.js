@@ -50,7 +50,7 @@ export default {
   ],
   preview: {
     select: {
-      title: `title.${baseLanguage.id}`,
+      title: `title`,
     },
   },
 };

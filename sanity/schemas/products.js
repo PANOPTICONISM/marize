@@ -45,7 +45,7 @@ export default {
       name: "category",
       title: "Categoria",
       type: "reference",
-      to: { type: "category" },
+      to: [{ type: "accessory" }, { type: "clothing" }],
     },
     {
       title: "Tamanhos e cores",
@@ -58,17 +58,6 @@ export default {
         },
       ],
     },
-    // {
-    //   name: "slug",
-    //   title: "Slug",
-    //   type: "slug",
-    //   description:
-    //     "Carrega o butão para gerar automaticamente (isto serve como url especifica para cada artigo)",
-    //   options: {
-    //     source: "title",
-    //     maxLength: 96,
-    //   },
-    // },
   ],
   preview: {
     select: {

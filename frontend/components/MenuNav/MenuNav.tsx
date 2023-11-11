@@ -3,12 +3,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { translations } from "../../translations/common";
 import React from "react";
+import { useCategories } from "../../contexts/CategoriesContext";
 
-export default function MenuNav({
-  data,
-}: {
-  data: { categories: any[]; vendors: any[] };
-}) {
+export default function MenuNav() {
+  const data = useCategories();
   const { locale } = useRouter();
 
   return (
@@ -18,12 +16,12 @@ export default function MenuNav({
           <div>
             <h4>{translations[locale].categories}</h4>
             <ul className={style.menu_sections}>
-              {data.categories.map((cat) => (
+              {[...data.accessory, ...data.clothing].map((cat) => (
                 <li key={cat._id}>
                   <Link
                     href={{
                       pathname: "/products",
-                      query: { 0: cat.title[locale] },
+                      query: { section: "categories", q: cat.title[locale].toLowerCase() },
                     }}
                   >
                     {cat.title[locale]}
@@ -40,7 +38,7 @@ export default function MenuNav({
                   <Link
                     href={{
                       pathname: "/products",
-                      query: { 0: vendor.title },
+                      query: { section: "brands", q: vendor.title.toLowerCase() },
                     }}
                   >
                     {vendor.title}

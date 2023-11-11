@@ -1,5 +1,4 @@
 import style from "./navigation.module.css";
-import Image from "next/image";
 import Link from "next/link";
 import Hamburger from "hamburger-react";
 import SearchBar from "../SearchBar/SearchBar";
@@ -39,16 +38,6 @@ export default function Navigation() {
       document.removeEventListener("click", handleClickOutside, true);
     };
   }, [openCart, openFavouritesCart]);
-
-  const [data, setData] = React.useState({ categories: [], vendors: [] });
-  React.useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("/api/sanity/categories");
-      const data = await res.json();
-      setData(data.data);
-    }
-    fetchData();
-  }, []);
 
   const cartTotal =
     stateCart?.cart?.length > 0
@@ -114,7 +103,7 @@ export default function Navigation() {
           </div>
         </div>
         <nav className={style.wrapper}>
-          {menuOpen && <MenuNav data={data} />}
+          {menuOpen && <MenuNav />}
         </nav>
       </header>
     );

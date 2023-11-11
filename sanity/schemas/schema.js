@@ -1,5 +1,4 @@
 import blockContent from "./blockContent";
-import category from "./category";
 import products from "./products";
 import vendor from "./vendor";
 import product from "./product-variant";
@@ -14,11 +13,15 @@ import localeText from "./locale/Text";
 import localeBlockContent from "./locale/BlockContent";
 
 import categorySections from "./blocks/categorySections";
+import clothing from "./clothing";
+import accessory from "./accessory";
 
 export default [
   products,
   vendor,
-  category,
+
+  clothing,
+  accessory,
 
   about,
   homepage,

@@ -12,23 +12,8 @@ type FilterProps = {
     }
   }) => void,
   categories: {
+    title: { en: string, pt: string },
     _id: string,
-    _type: string,
-    _updatedAt: string,
-    title: {
-      en: string,
-      pt: string,
-      _type: string,
-    }
-    parentVendor: {
-      _key: string,
-      _type: string,
-      _reference: string,
-    }[],
-    slug: {
-      _type: string,
-      current: string,
-    }
   }[],
   vendors: {
     title: string,
@@ -36,6 +21,11 @@ type FilterProps = {
   }[],
   discounts: boolean,
   mobileFilters: boolean,
+  filters: {
+    brands: string[],
+    categories: string[],
+    types: string[]
+  }
 }
 
 export function Filters({
@@ -44,6 +34,7 @@ export function Filters({
   vendors,
   discounts,
   mobileFilters,
+  filters,
 }: FilterProps) {
   const { locale } = useRouter();
 
@@ -53,41 +44,46 @@ export function Filters({
         !mobileFilters && style.container_mobile
       }`}
     >
-      <h4 className={`${mobileFilters && style.mobile} ${style.brands}`}>
-        {translations[locale].brands}
-      </h4>
-      {vendors?.map((filter: { title: string; _id: any }) => (
-        <div
-          className={`${style.filters_products} ${
-            mobileFilters && style.mobile
+      <label
+        className={`${style.container_checkbox} ${style.filters_products} ${mobileFilters && style.mobile
           }`}
-          key={filter._id}
-        >
-          <label key={filter._id} className={style.container_checkbox}>
-            {filter.title}
-            <input
-              type="checkbox"
-              name="brands"
-              value={filter.title}
-              onChange={onChange}
-            />
-            <span className={style.checkmark}></span>
-          </label>
-        </div>
-      ))}
+      >
+        {translations[locale].clothing}
+        <input
+          type="checkbox"
+          name="type"
+          value="clothing"
+          onChange={onChange}
+          checked={filters.types.includes("clothing")}
+        />
+        <span className={style.checkmark}></span>
+      </label>
+      <label
+        className={`${style.container_checkbox} ${style.filters_products} ${mobileFilters && style.mobile
+          }`}
+      >
+        {translations[locale].accessory}
+        <input
+          type="checkbox"
+          name="type"
+          value="accessory"
+          onChange={onChange}
+          checked={filters.types.includes("accessory")}
+        />
+        <span className={style.checkmark}></span>
+      </label>
       <h4 className={`${mobileFilters && style.mobile}`}>
         {translations[locale].categories}
       </h4>
       {discounts ? (
         <label
-          className={`${style.container_checkbox} ${style.filters_products} ${
-            mobileFilters && style.mobile
+          className={`${style.container_checkbox} ${style.filters_products} ${mobileFilters && style.mobile
           }`}
         >
           {translations[locale].discount}
           <input
             type="checkbox"
-            name="categories"
+            name="discount"
             value={translations[locale].discount}
             onChange={onChange}
           />
@@ -108,6 +104,29 @@ export function Filters({
               name="categories"
               value={filter.title[locale]}
               onChange={onChange}
+              checked={filters.categories.includes(filter.title[locale])}
+            />
+            <span className={style.checkmark}></span>
+          </label>
+        </div>
+      ))}
+      <h4 className={`${mobileFilters && style.mobile} ${style.brands}`}>
+        {translations[locale].brands}
+      </h4>
+      {vendors?.map((filter) => (
+        <div
+          className={`${style.filters_products} ${mobileFilters && style.mobile
+            }`}
+          key={filter._id}
+        >
+          <label key={filter._id} className={style.container_checkbox}>
+            {filter.title}
+            <input
+              type="checkbox"
+              name="brands"
+              value={filter.title}
+              onChange={onChange}
+              checked={filters.brands.includes(filter.title)}
             />
             <span className={style.checkmark}></span>
           </label>
@@ -123,6 +142,7 @@ export default function FilterComponent({
   vendors,
   discounts,
   mobileFilters,
+  filters,
 }: FilterProps) {
   return (
     <Filters
@@ -131,6 +151,7 @@ export default function FilterComponent({
       vendors={vendors}
       discounts={discounts}
       mobileFilters={mobileFilters}
+      filters={filters}
     />
   );
 }

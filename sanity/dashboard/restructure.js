@@ -2,29 +2,38 @@ export default (S) =>
   S.list()
     .title("Base")
     .items([
-      // Make a new list item
       S.listItem()
-        // Give it a title
         .title("Artigos")
         .child(
-          // Make a list in the second pane called Portfolio
           S.list()
             .title("Artigos")
             .items([
-              // Add the first list item
               S.listItem()
                 .title("Lista de Artigos")
-                // This automatically gives it properties from the project type
                 .schemaType("product")
                 .child(S.documentTypeList("product").title("Artigo")),
+              S.divider(),
               S.listItem()
                 .title("Categorias")
-                .schemaType("category")
-                .child(S.documentTypeList("category").title("Categories")),
+                .child(
+                  S.list()
+                    .title("Categorias")
+                    .items([
+                      S.listItem()
+                        .title("Acessórios")
+                        .schemaType("accessory")
+                        .child(S.documentTypeList("accessory").title("Lista de acessórios")),
+                      S.listItem()
+                        .title("Roupas")
+                        .schemaType("clothing")
+                        .child(S.documentTypeList("clothing").title("Lista de roupas")),
+                    ])
+                ),
               S.listItem()
                 .title("Vendedores")
                 .schemaType("vendor")
                 .child(S.documentTypeList("vendor").title("Vendedor")),
+              S.divider(),
               S.listItem()
                 .title("Tamanhos")
                 .schemaType("size")
