@@ -17,7 +17,7 @@ export default function SearchDropdown({
   if (searchedArticles.length > 0 && isOpen) {
     return (
       <div className={style.dropdown}>
-        {searchedArticles?.slice(0, 10).map((article) => (
+        {searchedArticles.slice(0, 10).map((article) => (
           <Link href={`/products/${article._id}`} key={article._id} passHref>
             <div className={style.item}>
               <Image
