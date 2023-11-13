@@ -44,6 +44,8 @@ const SearchBar = () => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
+      } else if (dropdownRef.current && dropdownRef.current.contains(event.target) && search.length > 0) {
+        setIsOpen(true);
       }
     };
 
@@ -51,7 +53,7 @@ const SearchBar = () => {
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
     };
-  }, []);
+  }, [search.length]);
 
   return (
     <div ref={dropdownRef}>
