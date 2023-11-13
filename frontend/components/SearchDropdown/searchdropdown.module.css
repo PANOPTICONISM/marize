@@ -6,7 +6,7 @@
     z-index: 3;
     border: 1px solid #000;
     max-height: 160px;
-    overflow: auto;
+    overflow-y: auto;
     display: grid;
     gap: 6px;
 }

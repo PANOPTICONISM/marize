@@ -18,11 +18,12 @@ const SearchBar = () => {
   const pathname = usePathname();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+    const value = e.target.value;
+    setSearch(value);
     const searchArticles = state.products?.filter((p) => {
-      return p.title[locale].toLowerCase().indexOf(search.toLowerCase()) > -1;
+      return p.title[locale].toLowerCase().indexOf(value.toLowerCase()) > -1;
     });
-    if (search.length > 0) {
+    if (value.length > 0) {
       setSearchedArticles(searchArticles);
     } else {
       setSearchedArticles([]);
