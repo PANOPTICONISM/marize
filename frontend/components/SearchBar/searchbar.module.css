@@ -1,0 +1,10 @@
+.search_bar {
+    height: 30px;
+    width: -webkit-fill-available;
+}
+
+@media screen and (min-width: 700px) {
+    .search_bar {
+        width: auto;
+    }
+}
