@@ -59,7 +59,7 @@ export default function Navigation() {
           />
         </div>
         <div className={style.search_bar_wrapper}>
-          <SearchBar className={style.search_bar} />
+          <SearchBar />
         </div>
         <div className={style.logo}>
           <Link href="/" passHref>

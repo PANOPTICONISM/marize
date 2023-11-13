@@ -1,19 +1,19 @@
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
-import { useState } from "react";
+import React from "react";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import SearchDropdown from "../SearchDropdown/SearchDropdown";
 import { usePathname } from "next/navigation";
+import style from "./searchbar.module.css"
 
-const SearchBar = ({ className }: { className: string }) => {
-  const [search, setSearch] = useState("");
+const SearchBar = () => {
+  const [search, setSearch] = React.useState("");
 
   const dropdownRef = React.useRef(null);
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const [searchedArticles, setSearchedArticles] = useState([]);
+  const [searchedArticles, setSearchedArticles] = React.useState([]);
 
-  const { state } = useContext(ProductsContext);
+  const { state } = React.useContext(ProductsContext);
   const { locale } = useRouter();
   const pathname = usePathname();
 
@@ -56,7 +56,7 @@ const SearchBar = ({ className }: { className: string }) => {
   return (
     <div ref={dropdownRef}>
       <input
-        className={className}
+        className={style.search_bar}
         type="text"
         value={search}
         placeholder="Search"

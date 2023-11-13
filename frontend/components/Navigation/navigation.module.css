@@ -12,15 +12,6 @@
     align-items: center;
 }
 
-.search_bar_wrapper {
-    position: relative;
-}
-
-.search_bar {
-    height: 30px;
-    width: -webkit-fill-available;
-}
-
 .left_nav {
     grid-area: a;
     grid-row: 2;
@@ -30,6 +21,7 @@
 }
 
 .search_bar_wrapper {
+    position: relative;
     grid-area: b;
     grid-row: 3;
 }
@@ -112,10 +104,6 @@
 }
 
 @media screen and (min-width: 700px) {
-    .search_bar {
-        width: auto;
-    }
-
     .header {
         grid-template-columns: 48px 1fr 1fr 1fr;
         grid-template-areas: "a b c d"
